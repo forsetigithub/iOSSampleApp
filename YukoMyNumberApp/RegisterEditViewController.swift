@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RegisterEditViewController.swift
 //  YukoMyNumberApp
 //
 //  Created by 木村正徳 on 2016/01/05.
@@ -8,18 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class RegisterEditViewController:UITableViewController{
+  
+  // MARK: - Table View
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
   }
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
-
+  
 }
-

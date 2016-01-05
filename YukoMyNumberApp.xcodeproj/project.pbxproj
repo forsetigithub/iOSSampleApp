@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0364F50E1C3B46B000EA4A37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */; };
-		0364F5101C3B46B000EA4A37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F50F1C3B46B000EA4A37 /* ViewController.swift */; };
+		0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */; };
 		0364F5131C3B46B000EA4A37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0364F5111C3B46B000EA4A37 /* Main.storyboard */; };
 		0364F5151C3B46B000EA4A37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0364F5141C3B46B000EA4A37 /* Assets.xcassets */; };
 		0364F5181C3B46B000EA4A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */; };
 		0364F5231C3B46B000EA4A37 /* YukoMyNumberAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F5221C3B46B000EA4A37 /* YukoMyNumberAppTests.swift */; };
 		0364F52E1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F52D1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift */; };
+		03CF96F21C3B64E7004E11F0 /* RegisterEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CF96F11C3B64E7004E11F0 /* RegisterEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 /* Begin PBXFileReference section */
 		0364F50A1C3B46B000EA4A37 /* YukoMyNumberApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YukoMyNumberApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0364F50F1C3B46B000EA4A37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredListViewController.swift; sourceTree = "<group>"; };
 		0364F5121C3B46B000EA4A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0364F5141C3B46B000EA4A37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0364F5171C3B46B000EA4A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		0364F5291C3B46B000EA4A37 /* YukoMyNumberAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YukoMyNumberAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0364F52D1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YukoMyNumberAppUITests.swift; sourceTree = "<group>"; };
 		0364F52F1C3B46B000EA4A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03CF96F11C3B64E7004E11F0 /* RegisterEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */,
-				0364F50F1C3B46B000EA4A37 /* ViewController.swift */,
+				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
+				03CF96F11C3B64E7004E11F0 /* RegisterEditViewController.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
 				0364F5141C3B46B000EA4A37 /* Assets.xcassets */,
 				0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */,
@@ -256,8 +259,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0364F5101C3B46B000EA4A37 /* ViewController.swift in Sources */,
+				0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */,
 				0364F50E1C3B46B000EA4A37 /* AppDelegate.swift in Sources */,
+				03CF96F21C3B64E7004E11F0 /* RegisterEditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +407,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -414,6 +419,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -484,6 +490,7 @@
 				0364F5341C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0364F5351C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberAppTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +499,7 @@
 				0364F5371C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0364F5381C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +508,7 @@
 				0364F53A1C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
