@@ -12,7 +12,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="GdB-tq-SaT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RegisteredCell" id="fjc-cg-Pox">
                                 <rect key="frame" x="0.0" y="114" width="600" height="44"/>
@@ -21,6 +21,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="dHf-Ro-Tdz" kind="show" identifier="showRegisterEdit" id="Qp3-DI-Wal"/>
                                 </connections>
@@ -34,13 +35,140 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="登録者一覧" id="SvJ-A6-S5P">
                         <barButtonItem key="leftBarButtonItem" tag="1" title="編集" id="Taw-RY-15Y"/>
-                        <barButtonItem key="rightBarButtonItem" tag="2" title="追加" id="0B2-pg-lq4"/>
+                        <barButtonItem key="rightBarButtonItem" tag="2" title="追加" id="0B2-pg-lq4">
+                            <connections>
+                                <segue destination="LFD-c2-Q8h" kind="show" identifier="showNewRegister" action="showDetailViewController:sender:" id="4M4-r9-bLI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuH-GY-T1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-377" y="450"/>
+            <point key="canvasLocation" x="-377" y="596"/>
+        </scene>
+        <!--新規登録-->
+        <scene sceneID="V10-w0-5iN">
+            <objects>
+                <tableViewController id="glt-Rc-m74" customClass="RegisterAddNewViewController" customModule="YukoMyNumberApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="r0x-8P-o3U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="※社員番号・姓・名を入力したあと、保存をタップしてください" id="CWK-aY-cJA">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Nw9-Du-Pen">
+                                        <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nw9-Du-Pen" id="FRp-He-acc">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="社員番号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e91-A4-RIW">
+                                                    <rect key="frame" x="20" y="7" width="550" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="e91-A4-RIW" secondAttribute="trailing" constant="30" id="IjR-L1-RfJ"/>
+                                                <constraint firstItem="e91-A4-RIW" firstAttribute="centerY" secondItem="FRp-He-acc" secondAttribute="centerY" id="Tbn-Sz-Asz"/>
+                                                <constraint firstItem="e91-A4-RIW" firstAttribute="leading" secondItem="FRp-He-acc" secondAttribute="leading" constant="20" id="fNC-j5-CdQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="uWf-CI-Nbv">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Fgi-u6-52h">
+                                        <rect key="frame" x="0.0" y="194" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fgi-u6-52h" id="zz6-eq-5kS">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="姓" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qH2-mz-yzV">
+                                                    <rect key="frame" x="20" y="7" width="550" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="qH2-mz-yzV" secondAttribute="trailing" constant="30" id="ffg-9l-hX2"/>
+                                                <constraint firstItem="qH2-mz-yzV" firstAttribute="centerY" secondItem="zz6-eq-5kS" secondAttribute="centerY" id="gJN-QU-maZ"/>
+                                                <constraint firstItem="qH2-mz-yzV" firstAttribute="leading" secondItem="zz6-eq-5kS" secondAttribute="leading" constant="20" id="sai-ju-Eun"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="By7-sP-urN">
+                                        <rect key="frame" x="0.0" y="238" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="By7-sP-urN" id="7Ah-aJ-pUB">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="icP-M7-zlg">
+                                                    <rect key="frame" x="20" y="7" width="550" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="icP-M7-zlg" firstAttribute="centerY" secondItem="7Ah-aJ-pUB" secondAttribute="centerY" id="7qE-Qa-IEp"/>
+                                                <constraint firstAttribute="trailing" secondItem="icP-M7-zlg" secondAttribute="trailing" constant="30" id="UMg-lb-5jK"/>
+                                                <constraint firstItem="icP-M7-zlg" firstAttribute="leading" secondItem="7Ah-aJ-pUB" secondAttribute="leading" constant="20" id="yL5-TI-jvO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="glt-Rc-m74" id="JnI-gt-xgq"/>
+                            <outlet property="delegate" destination="glt-Rc-m74" id="5Ot-i4-e3Q"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="新規登録" id="LOP-A9-IEY">
+                        <barButtonItem key="leftBarButtonItem" title="キャンセル" id="ZRQ-cD-0eT">
+                            <connections>
+                                <segue destination="Kbw-qs-XVq" kind="show" identifier="showRegisterList" action="showDetailViewController:sender:" id="QgR-QX-z8W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="LEZ-z4-VUj">
+                            <connections>
+                                <action selector="tapSaveButton:" destination="glt-Rc-m74" id="i83-pE-dQE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="EmployeeCode" destination="e91-A4-RIW" id="eOu-TP-A8O"/>
+                        <outlet property="EmployeeFamilyName" destination="qH2-mz-yzV" id="YgC-of-GAb"/>
+                        <outlet property="EmployeeFirstName" destination="icP-M7-zlg" id="aup-Ry-tWY"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b6x-yL-bZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="259" y="-231"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wVz-Uu-zpF">
+            <objects>
+                <navigationController id="LFD-c2-Q8h" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ckL-8w-r0l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="glt-Rc-m74" kind="relationship" relationship="rootViewController" id="HTq-sF-lMT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6sL-KD-G6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-440" y="-231"/>
         </scene>
         <!--登録者を編集-->
         <scene sceneID="v8W-92-2FT">
@@ -69,7 +197,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKh-k0-dMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="369" y="450"/>
+            <point key="canvasLocation" x="358" y="829"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Mm-xD-43Q">

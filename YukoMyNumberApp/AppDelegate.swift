@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
+  let realm = try! Realm()
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    
+    //generateTestData()
     return true
   }
 
@@ -41,6 +45,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
 
+
+  // MARK: テストデータ作成
+  func generateTestData(){
+
+    try! realm.write({ () -> Void in
+      
+      realm.deleteAll()
+      
+      var testEmployee : EmployeeData
+      
+      testEmployee = EmployeeData()
+      testEmployee.EmployeeCode = "1000001"
+      testEmployee.EmployeeName = "広又　太郎"
+      testEmployee.EmployeeMN = "12345678901"
+      self.realm.add(testEmployee)
+      
+      testEmployee = EmployeeData()
+      testEmployee.EmployeeCode = "1000002"
+      testEmployee.EmployeeName = "合川　次郎"
+      testEmployee.EmployeeMN = "12345678902"
+      self.realm.add(testEmployee)
+      
+      testEmployee = EmployeeData()
+      testEmployee.EmployeeCode = "1000003"
+      testEmployee.EmployeeName = "国分　花子"
+      testEmployee.EmployeeMN = "12345678903"
+      self.realm.add(testEmployee)
+    })
+  }
 
 }
 

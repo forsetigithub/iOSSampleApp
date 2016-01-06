@@ -1,0 +1,78 @@
+//
+//  RegisterAddNewViewController.swift
+//  YukoMyNumberApp
+//
+//  Created by 木村正徳 on 2016/01/06.
+//  Copyright © 2016年 yukobex. All rights reserved.
+//
+
+import UIKit
+import RealmSwift
+
+class RegisterAddNewViewController : UITableViewController,UITextFieldDelegate {
+  
+  @IBOutlet weak var EmployeeCode: UITextField!
+
+  @IBOutlet weak var EmployeeFamilyName: UITextField!
+  
+  @IBOutlet weak var EmployeeFirstName: UITextField!
+  
+  let realm = try! Realm()
+  
+  
+  
+  // MARK: - Table View
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    EmployeeCode.delegate = self
+    EmployeeFamilyName.delegate = self
+    EmployeeFirstName.delegate = self
+    
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  func textFieldDidEndEditing(textField: UITextField) {
+    switch textField{
+    case EmployeeCode:
+      //print(EmployeeCode.text)
+      
+      break
+      
+    case EmployeeFamilyName:
+      //print(EmployeeFamilyName.text)
+      break
+    
+    case EmployeeFirstName:
+      //print(EmployeeFirstName.text)
+      
+      break
+    default:
+      break
+    }
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    return textField.resignFirstResponder()
+  }
+
+  @IBAction func tapSaveButton(sender: UIBarButtonItem) {
+    
+    try! realm.write({ () -> Void in
+      let NewEmployeeData = EmployeeData()
+      NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
+      NewEmployeeData.EmployeeName = self.EmployeeFamilyName.text! + "　" + self.EmployeeFirstName.text!
+      self.realm.add(NewEmployeeData)
+      
+      self.performSegueWithIdentifier("showRegisterList", sender: self)
+    })
+    
+  }
+  
+  
+}
