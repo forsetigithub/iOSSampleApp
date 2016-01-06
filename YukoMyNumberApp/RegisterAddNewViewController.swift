@@ -38,23 +38,7 @@ class RegisterAddNewViewController : UITableViewController,UITextFieldDelegate {
   }
   
   func textFieldDidEndEditing(textField: UITextField) {
-    switch textField{
-    case EmployeeCode:
-      //print(EmployeeCode.text)
-      
-      break
-      
-    case EmployeeFamilyName:
-      //print(EmployeeFamilyName.text)
-      break
-    
-    case EmployeeFirstName:
-      //print(EmployeeFirstName.text)
-      
-      break
-    default:
-      break
-    }
+
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -67,6 +51,7 @@ class RegisterAddNewViewController : UITableViewController,UITextFieldDelegate {
       let NewEmployeeData = EmployeeData()
       NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
       NewEmployeeData.EmployeeName = self.EmployeeFamilyName.text! + "　" + self.EmployeeFirstName.text!
+      NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       
       self.performSegueWithIdentifier("showRegisterList", sender: self)

@@ -17,6 +17,7 @@ class EmployeeData : Object {
   dynamic var EmployeeName = ""
   dynamic var EmployeeRSCode = "00"
   dynamic var EmployeeMN = ""
+  dynamic var CreateDateTime = NSDate()
   let families = List<EmployeeFamilyData>()
 }
 

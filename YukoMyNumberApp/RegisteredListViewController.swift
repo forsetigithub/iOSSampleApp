@@ -11,15 +11,14 @@ import RealmSwift
 
 class RegisteredListViewController: UITableViewController {
 
-  // MARK: テストデータ
-  //let registerList = ["広又　太郎","合川　次郎","国分　花子"]
   
   let realm = try! Realm()
   
   // MARK: - Segues
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "showRegisterEdit" {
-    
+      let regedit = segue.destinationViewController as? RegisterEditViewController
+      regedit?.EmployeeEditData = self.realm.objects(EmployeeData)[(self.tableView.indexPathForSelectedRow?.row)!]
     }
   }
   
