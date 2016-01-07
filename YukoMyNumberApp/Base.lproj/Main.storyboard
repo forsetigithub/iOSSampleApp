@@ -36,10 +36,10 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="登録者一覧" id="SvJ-A6-S5P">
-                        <barButtonItem key="leftBarButtonItem" tag="1" title="編集" id="Taw-RY-15Y"/>
+                        <barButtonItem key="leftBarButtonItem" tag="1" title="削除" id="Taw-RY-15Y"/>
                         <barButtonItem key="rightBarButtonItem" tag="2" title="追加" id="0B2-pg-lq4">
                             <connections>
-                                <segue destination="LFD-c2-Q8h" kind="show" identifier="showNewRegister" action="showDetailViewController:sender:" id="4M4-r9-bLI"/>
+                                <segue destination="LFD-c2-Q8h" kind="showDetail" identifier="showNewRegister" action="showViewController:sender:" id="4M4-r9-bLI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -136,7 +136,7 @@
                     <navigationItem key="navigationItem" title="新規登録" id="LOP-A9-IEY">
                         <barButtonItem key="leftBarButtonItem" title="キャンセル" id="ZRQ-cD-0eT">
                             <connections>
-                                <segue destination="Kbw-qs-XVq" kind="show" identifier="showRegisterList" action="showDetailViewController:sender:" id="QgR-QX-z8W"/>
+                                <segue destination="Kbw-qs-XVq" kind="showDetail" identifier="showRegisterList" id="QgR-QX-z8W"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="LEZ-z4-VUj">

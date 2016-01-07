@@ -12,14 +12,10 @@ import RealmSwift
 class RegisterAddNewViewController : UITableViewController,UITextFieldDelegate {
   
   @IBOutlet weak var EmployeeCode: UITextField!
-
   @IBOutlet weak var EmployeeFamilyName: UITextField!
-  
   @IBOutlet weak var EmployeeFirstName: UITextField!
   
   let realm = try! Realm()
-  
-  
   
   // MARK: - Table View
   override func viewDidLoad() {
@@ -29,7 +25,6 @@ class RegisterAddNewViewController : UITableViewController,UITextFieldDelegate {
     EmployeeCode.delegate = self
     EmployeeFamilyName.delegate = self
     EmployeeFirstName.delegate = self
-    
   }
   
   override func didReceiveMemoryWarning() {
