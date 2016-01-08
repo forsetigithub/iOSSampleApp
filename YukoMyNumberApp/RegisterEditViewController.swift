@@ -10,11 +10,21 @@ import UIKit
 
 class RegisterEditViewController:UITableViewController{
   
-  var EmployeeEditData = EmployeeData()
+  private var employeeeditdata:EmployeeData = EmployeeData()
   
-  @IBOutlet weak var EmployeeCode: UITextField!
-  @IBOutlet weak var EmployeeName: UITextField!
-  @IBOutlet weak var EmployeeMN: UITextField!
+  var EmployeeEditData:EmployeeData{
+    set(newValue){
+      employeeeditdata = newValue
+    }
+    get{
+      return employeeeditdata
+    }
+  }
+  
+  @IBOutlet weak var EmployeeCodeTextField: UITextField!
+  @IBOutlet weak var EmployeeNameTextField: UITextField!
+  @IBOutlet weak var EmployeeMNTextField: UITextField!
+  
   
   // MARK: - Table View
   override func viewDidLoad() {
@@ -26,15 +36,20 @@ class RegisterEditViewController:UITableViewController{
   }
   
   func loadEmployeeData(){
-    self.EmployeeCode.text = self.EmployeeEditData.EmployeeCode
-    self.EmployeeName.text = self.EmployeeEditData.EmployeeName
     
-    if(self.EmployeeEditData.EmployeeMN.characters.count == 12){
-      self.EmployeeMN.text = "登録済"
-      self.EmployeeMN.textColor = UIColor.blueColor()
+    print(employeeeditdata.EmployeeMN)
+    
+    self.EmployeeCodeTextField.text = employeeeditdata.EmployeeCode
+    self.EmployeeNameTextField.text = employeeeditdata.EmployeeName
+    
+    if(employeeeditdata.EmployeeMN.characters.count ==
+      YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
+      
+      self.EmployeeMNTextField.text = "登録済"
+      self.EmployeeMNTextField.textColor = UIColor.blueColor()
     }else{
-      self.EmployeeMN.text = "未登録"
-      self.EmployeeMN.textColor = UIColor.redColor()
+      self.EmployeeMNTextField.text = "未登録"
+      self.EmployeeMNTextField.textColor = UIColor.redColor()
     }
   }
   
@@ -43,6 +58,13 @@ class RegisterEditViewController:UITableViewController{
     // Dispose of any resources that can be recreated.
   }
   
-  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if(segue.identifier == "showGetMyNumber") {
+      let dest = (segue.destinationViewController as! UINavigationController).topViewController as! GetMyNumberTestViewController
+      dest.EmployeeEditData = employeeeditdata
+      
+    
+    }
+  }
   
 }
