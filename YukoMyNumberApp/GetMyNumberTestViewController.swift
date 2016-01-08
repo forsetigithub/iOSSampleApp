@@ -32,10 +32,17 @@ class GetMyNumberTestViewController : UIViewController,UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    self.MyNumberTextField.delegate = self
-    self.MyNumberTextField.text = employeeeditdata.EmployeeMN
+    
   }
   
+  override func viewWillAppear(animated: Bool) {
+    
+    self.title = "マイナンバー取得"
+    
+    self.MyNumberTextField.delegate = self
+    self.MyNumberTextField.text = employeeeditdata.EmployeeMN
+    
+  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -59,15 +66,16 @@ class GetMyNumberTestViewController : UIViewController,UITextFieldDelegate{
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
-    if(segue.identifier == "returnRegisterEdit") {
-      
-      try! realm.write { () -> Void in
-        employeeeditdata.EmployeeMN = self.MyNumberTextField.text!
-      }
-      
-      let dest = segue.destinationViewController as! RegisterEditViewController
-      dest.EmployeeEditData = employeeeditdata
-      
+
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+   
+    try! realm.write { () -> Void in
+      employeeeditdata.EmployeeMN = self.MyNumberTextField.text!
     }
   }
+  
+
+  
 }

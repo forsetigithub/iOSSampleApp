@@ -31,9 +31,14 @@ class RegisterEditViewController:UITableViewController{
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    loadEmployeeData()
+    //loadEmployeeData()
     
   }
+  
+  override func viewWillAppear(animated: Bool) {
+    loadEmployeeData()
+  }
+  
   
   func loadEmployeeData(){
     
@@ -60,11 +65,15 @@ class RegisterEditViewController:UITableViewController{
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if(segue.identifier == "showGetMyNumber") {
-      let dest = (segue.destinationViewController as! UINavigationController).topViewController as! GetMyNumberTestViewController
+      let dest = segue.destinationViewController as! GetMyNumberTestViewController
       dest.EmployeeEditData = employeeeditdata
-      
-    
     }
   }
+  
+  @IBAction func tapGetMyNumber(sender: UIButton) {
+    performSegueWithIdentifier("showGetMyNumber", sender: self)
+  
+  }
+  
   
 }
