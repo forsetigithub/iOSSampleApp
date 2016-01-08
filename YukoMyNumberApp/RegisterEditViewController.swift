@@ -14,14 +14,28 @@ class RegisterEditViewController:UITableViewController{
   
   @IBOutlet weak var EmployeeCode: UITextField!
   @IBOutlet weak var EmployeeName: UITextField!
+  @IBOutlet weak var EmployeeMN: UITextField!
   
   // MARK: - Table View
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
+    loadEmployeeData()
+    
+  }
+  
+  func loadEmployeeData(){
     self.EmployeeCode.text = self.EmployeeEditData.EmployeeCode
     self.EmployeeName.text = self.EmployeeEditData.EmployeeName
+    
+    if(self.EmployeeEditData.EmployeeMN.characters.count == 12){
+      self.EmployeeMN.text = "登録済"
+      self.EmployeeMN.textColor = UIColor.blueColor()
+    }else{
+      self.EmployeeMN.text = "未登録"
+      self.EmployeeMN.textColor = UIColor.redColor()
+    }
   }
   
   override func didReceiveMemoryWarning() {
