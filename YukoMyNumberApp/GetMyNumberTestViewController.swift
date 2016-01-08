@@ -32,16 +32,12 @@ class GetMyNumberTestViewController : UIViewController,UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    
+    self.MyNumberTextField.delegate = self
+    self.title = "マイナンバー取得"
   }
   
   override func viewWillAppear(animated: Bool) {
-    
-    self.title = "マイナンバー取得"
-    
-    self.MyNumberTextField.delegate = self
     self.MyNumberTextField.text = employeeeditdata.EmployeeMN
-    
   }
   
   override func didReceiveMemoryWarning() {
