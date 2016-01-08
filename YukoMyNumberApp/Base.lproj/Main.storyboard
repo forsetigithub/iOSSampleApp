@@ -39,11 +39,14 @@
                         <barButtonItem key="leftBarButtonItem" tag="1" title="削除" id="Taw-RY-15Y"/>
                         <barButtonItem key="rightBarButtonItem" tag="2" title="追加" id="0B2-pg-lq4">
                             <connections>
-                                <segue destination="LFD-c2-Q8h" kind="showDetail" identifier="showNewRegister" action="showViewController:sender:" id="4M4-r9-bLI"/>
+                                <action selector="tapAddNewButton:" destination="wcb-bB-MEP" id="RFd-bL-yZb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="glt-Rc-m74" kind="show" identifier="showAddNewEmployee" id="ymC-hw-GXG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuH-GY-T1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -136,6 +139,7 @@
                     <navigationItem key="navigationItem" title="新規登録" id="LOP-A9-IEY">
                         <barButtonItem key="leftBarButtonItem" title="キャンセル" id="ZRQ-cD-0eT">
                             <connections>
+                                <action selector="tapCancelButton:" destination="glt-Rc-m74" id="L2l-lS-Iwp"/>
                                 <segue destination="Kbw-qs-XVq" kind="showDetail" identifier="showRegisterList" id="QgR-QX-z8W"/>
                             </connections>
                         </barButtonItem>
@@ -155,22 +159,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6x-yL-bZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="259" y="-231"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="wVz-Uu-zpF">
-            <objects>
-                <navigationController id="LFD-c2-Q8h" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ckL-8w-r0l">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="glt-Rc-m74" kind="relationship" relationship="rootViewController" id="HTq-sF-lMT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6sL-KD-G6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-440" y="-231"/>
         </scene>
         <!--登録者を編集-->
         <scene sceneID="v8W-92-2FT">
@@ -377,7 +365,6 @@
         <!--Get My Number Test View Controller-->
         <scene sceneID="X66-WV-ORj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ze-fT-zW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Faf-O9-mpe" customClass="GetMyNumberTestViewController" customModule="YukoMyNumberApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fav-H4-wYx"/>
@@ -417,6 +404,7 @@
                         <outlet property="MyNumberTextField" destination="ebv-ml-9cj" id="05e-y6-l2a"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ze-fT-zW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1353" y="719"/>
         </scene>

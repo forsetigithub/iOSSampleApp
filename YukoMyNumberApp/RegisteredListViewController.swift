@@ -63,5 +63,12 @@ class RegisteredListViewController: UITableViewController {
     view?.textLabel?.text = "※このアプリで登録した社員のみが表示されます\n※初回登録から1ヶ月経過した登録者は削除されます"
     return view
   }
+  
+  @IBAction func tapAddNewButton(sender: UIBarButtonItem) {
+  
+    performSegueWithIdentifier("showAddNewEmployee", sender: self)
+  }
+  
+  
 }
 
