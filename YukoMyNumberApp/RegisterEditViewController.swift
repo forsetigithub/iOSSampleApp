@@ -129,7 +129,7 @@ class RegisterEditViewController:UITableViewController{
                 cell.accessoryType = UITableViewCellAccessoryType.None
                 if(employeeItemData[indexPath.row].characters.count == YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
                   label?.text = "取得済"
-                  label?.textColor = UIColor.blueColor()
+                  label?.textColor = UIColor.lightGrayColor()
                 }else{
                   label?.text = "未取得"
                   label?.textColor = UIColor.redColor()
