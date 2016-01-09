@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class RegisterAddNewViewController : UITableViewController,UITextFieldDelegate {
+class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate {
   
   @IBOutlet weak var EmployeeCode: UITextField!
   @IBOutlet weak var EmployeeFamilyName: UITextField!

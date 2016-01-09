@@ -17,7 +17,7 @@ class RegisteredListViewController: UITableViewController {
   // MARK: - Segues
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "showRegisterEdit" {
-      let regedit = segue.destinationViewController as? RegisterEditViewController
+      let regedit = segue.destinationViewController as? EditEmployeeViewController
       regedit?.EmployeeEditData = self.realm.objects(EmployeeData)[(self.tableView.indexPathForSelectedRow?.row)!]
     }
   }

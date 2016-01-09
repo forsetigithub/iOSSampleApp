@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterEditViewController:UITableViewController{
+class EditEmployeeViewController:UITableViewController{
 
   // MARK: TableView定義
   private let sectionTitles = ["","家族情報"]
@@ -155,11 +155,11 @@ class RegisterEditViewController:UITableViewController{
   }
   
   func getMyNumberBtn(sender:UIButton){
-     performSegueWithIdentifier("showGetMyNumber", sender: self)
+    performSegueWithIdentifier("showGetMyNumber", sender: self)
   }
   
   func addFamilyBtn(sender:UIButton){
-    print("addFamily...")
+    performSegueWithIdentifier("showAddNewFamily", sender: self)
   }
   
   func loadEmployeeData(){
