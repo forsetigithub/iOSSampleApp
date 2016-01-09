@@ -30,11 +30,6 @@ class RegisterEditViewController:UITableViewController{
     }
   }
   
-  @IBOutlet weak var EmployeeCodeTextField: UITextField!
-  @IBOutlet weak var EmployeeNameTextField: UITextField!
-  @IBOutlet weak var EmployeeMNTextField: UITextField!
-  
-  
   // MARK: - Table View
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -159,7 +154,6 @@ class RegisterEditViewController:UITableViewController{
     return cell
   }
   
-  
   func getMyNumberBtn(sender:UIButton){
      performSegueWithIdentifier("showGetMyNumber", sender: self)
   }
@@ -187,11 +181,7 @@ class RegisterEditViewController:UITableViewController{
       dest.EmployeeEditData = employeeeditdata
     }
   }
-  
-  @IBAction func tapGetMyNumber(sender: UIButton) {
-    performSegueWithIdentifier("showGetMyNumber", sender: self)
-  
-  }
+
   
   
   
