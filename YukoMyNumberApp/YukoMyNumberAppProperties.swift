@@ -11,16 +11,21 @@ import Foundation
 final class YukoMyNumberAppProperties {
   static let sharedInstance = YukoMyNumberAppProperties()
   
-   static private var dict:NSDictionary{
+  private init(){}
+  
+  static private var dict:NSDictionary{
     get{
       let prop = NSBundle.mainBundle().pathForResource("YukoMyNumberApp", ofType: "plist")
       return NSDictionary(contentsOfFile: prop!)!
     }
   }
   
-  private init(){}
+
   
   let MyNumberCharactersCount:NSNumber = (dict.objectForKey("MyNumberCharactersCount") as? NSNumber)!
+  let EmployeeCodeLabelName = dict.objectForKey("EmployeeCodeLabelName")
+  let EmployeeNameLabelName = dict.objectForKey("EmployeeNameLabelName")
+  let EmployeeMNLabelName = dict.objectForKey("EmployeeMNLabelName")
   
 }
 

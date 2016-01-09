@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>EmployeeCodeLabelName</key>
+	<string>社員番号</string>
+	<key>EmployeeNameLabelName</key>
+	<string>氏名</string>
+	<key>EmployeeMNLabelName</key>
+	<string>マイナンバー</string>
 	<key>MyNumberCharactersCount</key>
 	<integer>12</integer>
 </dict>
