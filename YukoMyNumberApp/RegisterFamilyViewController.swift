@@ -8,14 +8,14 @@
 
 import Foundation
 
-class RegisterFamilyViewController : UITableViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource {
   // MARK: - Table View
   
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
 
   @IBOutlet weak var RelationName: UILabel!
   
-  private let pickerItems = ["--続柄--","妻","子","父","母","祖母"]
+  private let pickerItems = ["続柄を選択","妻","子","父","母","祖母"]
   private var rowOpenFlag = false
   
   override func viewDidLoad() {
