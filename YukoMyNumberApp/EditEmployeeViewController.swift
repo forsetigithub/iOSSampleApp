@@ -34,7 +34,7 @@ class EditEmployeeViewController:UITableViewController{
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    
+  
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -67,20 +67,19 @@ class EditEmployeeViewController:UITableViewController{
     
     switch section {
       case 0: //本人
-        let getMyNumberBtn = UIButton()
+        let getMyNumberBtn = UIButton(type: UIButtonType.System)
         getMyNumberBtn.setTitle("マイナンバーを取得", forState: UIControlState.Normal)
         getMyNumberBtn.addTarget(self, action: "getMyNumberBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        getMyNumberBtn.frame = CGRectMake(self.view.bounds.width / 2 - 90, 5, 200, 30)
-        getMyNumberBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+      
+        getMyNumberBtn.frame = CGRectMake(self.view.frame.width / 2 - 100, 5, 200, 30)
         footerView.addSubview(getMyNumberBtn)
         break
     
       case 1: //家族情報
-        let addFamilyBtn = UIButton()
+        let addFamilyBtn = UIButton(type: UIButtonType.System)
         addFamilyBtn.setTitle("家族を追加", forState: UIControlState.Normal)
         addFamilyBtn.addTarget(self, action: "addFamilyBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        addFamilyBtn.frame = CGRectMake(self.view.bounds.width / 2 - 90, 5, 200, 30)
-        addFamilyBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        addFamilyBtn.frame = CGRectMake(self.view.frame.width / 2 - 100, 5, 200, 30)
         footerView.addSubview(addFamilyBtn)
       default:
         break
