@@ -27,8 +27,15 @@ class RegisteredListViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.leftBarButtonItem = editButtonItem()
+    
+    
   }
   
+  override func setEditing(editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    tableView.editing = editing
+  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -64,11 +71,24 @@ class RegisteredListViewController: UITableViewController {
     return view
   }
   
+  override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    return true
+  }
+  
+  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+   let delitem = self.realm.objects(EmployeeData)[indexPath.row]
+    
+    try! realm.write({ () -> Void in
+      realm.delete(delitem)
+    })
+    
+    
+    tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+  }
+  
   @IBAction func tapAddNewButton(sender: UIBarButtonItem) {
   
     performSegueWithIdentifier("showAddNewEmployee", sender: self)
   }
-  
-  
 }
 

@@ -62,6 +62,10 @@ class EditEmployeeViewController:UITableViewController{
   
   override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     let footerView = UIView()
+    footerView.autoresizingMask = [.FlexibleLeftMargin,
+                                  .FlexibleRightMargin,
+                                  .FlexibleTopMargin,
+                                  .FlexibleBottomMargin]
     
     footerView.backgroundColor = UIColor.whiteColor()
     
@@ -70,8 +74,7 @@ class EditEmployeeViewController:UITableViewController{
         let getMyNumberBtn = UIButton(type: UIButtonType.System)
         getMyNumberBtn.setTitle("マイナンバーを取得", forState: UIControlState.Normal)
         getMyNumberBtn.addTarget(self, action: "getMyNumberBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-      
-        getMyNumberBtn.frame = CGRectMake(self.view.frame.width / 2 - 100, 5, 200, 30)
+        getMyNumberBtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
         footerView.addSubview(getMyNumberBtn)
         break
     
@@ -79,7 +82,7 @@ class EditEmployeeViewController:UITableViewController{
         let addFamilyBtn = UIButton(type: UIButtonType.System)
         addFamilyBtn.setTitle("家族を追加", forState: UIControlState.Normal)
         addFamilyBtn.addTarget(self, action: "addFamilyBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        addFamilyBtn.frame = CGRectMake(self.view.frame.width / 2 - 100, 5, 200, 30)
+        addFamilyBtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
         footerView.addSubview(addFamilyBtn)
       default:
         break
