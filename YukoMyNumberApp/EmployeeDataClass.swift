@@ -23,6 +23,7 @@ class EmployeeData : Object {
 
 class EmployeeFamilyData : Object {
   dynamic var Name = ""
+  dynamic var RSName = ""
   dynamic var RSCode = ""
   dynamic var FamilyMN = ""
 

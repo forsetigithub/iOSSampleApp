@@ -21,6 +21,7 @@
 		0364F5181C3B46B000EA4A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */; };
 		0364F5231C3B46B000EA4A37 /* YukoMyNumberAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F5221C3B46B000EA4A37 /* YukoMyNumberAppTests.swift */; };
 		0364F52E1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F52D1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift */; };
+		03670A8C1C436B4C003F3CCC /* EditFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */; };
 		03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */; };
 		03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */; };
 		03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */; };
@@ -78,6 +79,7 @@
 		0364F5291C3B46B000EA4A37 /* YukoMyNumberAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YukoMyNumberAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0364F52D1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YukoMyNumberAppUITests.swift; sourceTree = "<group>"; };
 		0364F52F1C3B46B000EA4A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFamilyViewController.swift; sourceTree = "<group>"; };
 		03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeDataClass.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */,
 				03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */,
 				03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */,
+				03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
 				0364F5141C3B46B000EA4A37 /* Assets.xcassets */,
 				0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */,
@@ -407,6 +410,7 @@
 			files = (
 				03F6318D1C40D9BD0083F33F /* RegisterFamilyViewController.swift in Sources */,
 				03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */,
+				03670A8C1C436B4C003F3CCC /* EditFamilyViewController.swift in Sources */,
 				035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */,
 				03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */,
 				0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */,

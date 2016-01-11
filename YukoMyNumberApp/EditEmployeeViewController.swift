@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class EditEmployeeViewController:UITableViewController{
 
+  
+  let realm = try! Realm()
+  
   // MARK: TableView定義
   private let sectionTitles = ["","家族情報"]
   private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.EmployeeCodeLabelName,
@@ -17,6 +21,7 @@ class EditEmployeeViewController:UITableViewController{
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeMNLabelName]
   
   private var employeeItemData:[String] = [String]()
+  private var familyItemData:[String] = [String]()
 
   
   private var employeeeditdata:EmployeeData = EmployeeData()
@@ -147,7 +152,23 @@ class EditEmployeeViewController:UITableViewController{
         }
         
         break
-      case 1:  //家族情報
+      case 1:  //家族情報        
+        for subview in cell.contentView.subviews{
+          switch subview.tag {
+            case 1: //氏名
+              let label = subview as? UILabel
+              label?.text = familyItemData[indexPath.row]
+              
+              break
+            case 2:
+              let label = subview as? UILabel
+              label?.text?.removeAll()
+              
+            default:
+              break
+          }
+        }
+        
         break
       default:
         break
@@ -169,6 +190,11 @@ class EditEmployeeViewController:UITableViewController{
     employeeItemData.append(employeeeditdata.EmployeeCode)
     employeeItemData.append(employeeeditdata.EmployeeName)
     employeeItemData.append(employeeeditdata.EmployeeMN)
+    
+    familyItemData.removeAll()
+    for family in employeeeditdata.families{
+      familyItemData.append(family.Name)
+    }
 
   }
   
@@ -181,6 +207,16 @@ class EditEmployeeViewController:UITableViewController{
     if(segue.identifier == "showGetMyNumber") {
       let dest = segue.destinationViewController as! GetMyNumberTestViewController
       dest.EmployeeEditData = employeeeditdata
+    }
+    
+    if(segue.identifier == "showAddNewFamily"){
+      let dest = segue.destinationViewController as! RegisterFamilyViewController
+      dest.EmployeeEditData = employeeeditdata
+    }
+    
+    if(segue.identifier == "showEditFamily") {
+      let dest = segue.destinationViewController as! EditFamilyViewController
+      dest.FamilyItemData = employeeeditdata.families[(self.tableView.indexPathForSelectedRow!.row)]
     }
   }
 

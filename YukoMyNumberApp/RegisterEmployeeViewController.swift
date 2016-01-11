@@ -11,13 +11,13 @@ import RealmSwift
 
 class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate {
   
+  let realm = try! Realm()
+  
+  // MARK: - Table View  
   @IBOutlet weak var EmployeeCode: UITextField!
   @IBOutlet weak var EmployeeFamilyName: UITextField!
   @IBOutlet weak var EmployeeFirstName: UITextField!
   
-  let realm = try! Realm()
-  
-  // MARK: - Table View
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
