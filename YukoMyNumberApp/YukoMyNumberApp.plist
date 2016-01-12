@@ -119,5 +119,9 @@
 		<key>その他</key>
 		<string>97</string>
 	</dict>
+	<key>ButtonInTableViewFontType</key>
+	<string>System</string>
+	<key>ButtonInTableViewFontSize</key>
+	<integer>17</integer>
 </dict>
 </plist>

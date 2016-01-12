@@ -93,39 +93,44 @@ class EditEmployeeViewController:UITableViewController{
     
     footerView.backgroundColor = UIColor.whiteColor()
     
-    
-    let rect = CGRectMake(self.view.center.x - 100, 5, 200, 30)
+    var tableButton:UIButton = UIButton()
     
     switch section {
       case 0: //本人
-        let getMyNumberBtn = UIButton(type: UIButtonType.System)
-        getMyNumberBtn.setTitle("マイナンバーを取得", forState: UIControlState.Normal)
-        getMyNumberBtn.addTarget(self, action: "getMyNumberBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        getMyNumberBtn.frame = rect
-        footerView.addSubview(getMyNumberBtn)
+        tableButton = makeButtonInTableView("マイナンバーを取得",actionName: "getMyNumberBtn:")
+
         break
     
       case 1: //家族情報
-        let addFamilyBtn = UIButton(type: UIButtonType.System)
-        addFamilyBtn.setTitle("家族を追加", forState: UIControlState.Normal)
-        addFamilyBtn.addTarget(self, action: "addFamilyBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        addFamilyBtn.frame = rect
-        footerView.addSubview(addFamilyBtn)
+        tableButton = makeButtonInTableView("家族を追加",actionName: "addFamilyBtn:")
+
         break
       
       case 2:
-        let sendDataBtn = UIButton(type: UIButtonType.System)
-        sendDataBtn.setTitle("データ送信", forState: UIControlState.Normal)
-        sendDataBtn.addTarget(self, action: "sendDataBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        sendDataBtn.frame = rect
-        footerView.addSubview(sendDataBtn)
+        tableButton = makeButtonInTableView("データ送信",actionName: "sendDataBtn:")
+
         break
       
       default:
         break
     }
     
+    footerView.addSubview(tableButton)
+    
     return footerView
+  }
+  
+  /* 
+    テーブルに表示させるボタンを作成する
+  */
+  func makeButtonInTableView(title:String,actionName action:Selector) -> UIButton{
+    let makebtn = UIButton(type: UIButtonType.System)
+    makebtn.setTitle(title, forState: UIControlState.Normal)
+    makebtn.titleLabel?.font = UIFont(name: "System", size: 17)
+    makebtn.addTarget(self, action: action , forControlEvents: UIControlEvents.TouchUpInside)
+    makebtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
+
+    return makebtn
   }
   
   /*

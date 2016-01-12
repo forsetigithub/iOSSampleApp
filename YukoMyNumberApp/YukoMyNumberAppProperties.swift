@@ -26,7 +26,6 @@ final class YukoMyNumberAppProperties {
   let EmployeeNameLabelName = dict.objectForKey("EmployeeNameLabelName")
   let EmployeeMNLabelName = dict.objectForKey("EmployeeMNLabelName")
   let RelationItems:[String:String] = dict.objectForKey("RelationItems") as! [String:String]
-  
 }
 
 final class TestPropList {
