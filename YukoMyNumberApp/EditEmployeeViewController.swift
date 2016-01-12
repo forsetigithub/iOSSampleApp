@@ -15,7 +15,7 @@ class EditEmployeeViewController:UITableViewController{
   let realm = try! Realm()
   
   // MARK: TableView定義
-  private let sectionTitles = ["","家族情報"]
+  private let sectionTitles = ["","家族情報",""]
   private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.EmployeeCodeLabelName,
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeNameLabelName,
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeMNLabelName]
@@ -65,6 +65,25 @@ class EditEmployeeViewController:UITableViewController{
     return 44
   }
   
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    switch(indexPath.section){
+    case 0: //本人
+      if(indexPath.row < 2){
+        performSegueWithIdentifier("showModifyEmployee", sender: self)
+      }
+      
+      break
+    case 1: //家族情報
+      performSegueWithIdentifier("showEditFamily", sender: self)
+
+      break
+    default:
+      break
+    }
+
+  }
+  
   override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     let footerView = UIView()
     footerView.autoresizingMask = [.FlexibleLeftMargin,
@@ -74,12 +93,15 @@ class EditEmployeeViewController:UITableViewController{
     
     footerView.backgroundColor = UIColor.whiteColor()
     
+    
+    let rect = CGRectMake(self.view.center.x - 100, 5, 200, 30)
+    
     switch section {
       case 0: //本人
         let getMyNumberBtn = UIButton(type: UIButtonType.System)
         getMyNumberBtn.setTitle("マイナンバーを取得", forState: UIControlState.Normal)
         getMyNumberBtn.addTarget(self, action: "getMyNumberBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        getMyNumberBtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
+        getMyNumberBtn.frame = rect
         footerView.addSubview(getMyNumberBtn)
         break
     
@@ -87,8 +109,18 @@ class EditEmployeeViewController:UITableViewController{
         let addFamilyBtn = UIButton(type: UIButtonType.System)
         addFamilyBtn.setTitle("家族を追加", forState: UIControlState.Normal)
         addFamilyBtn.addTarget(self, action: "addFamilyBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-        addFamilyBtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
+        addFamilyBtn.frame = rect
         footerView.addSubview(addFamilyBtn)
+        break
+      
+      case 2:
+        let sendDataBtn = UIButton(type: UIButtonType.System)
+        sendDataBtn.setTitle("データ送信", forState: UIControlState.Normal)
+        sendDataBtn.addTarget(self, action: "sendDataBtn:", forControlEvents: UIControlEvents.TouchUpInside)
+        sendDataBtn.frame = rect
+        footerView.addSubview(sendDataBtn)
+        break
+      
       default:
         break
     }
@@ -123,6 +155,7 @@ class EditEmployeeViewController:UITableViewController{
     
     switch indexPath.section {
       case 0:  //本人
+        
         for subview in cell.contentView.subviews {
           switch subview.tag {
             case 1: //ラベル
@@ -134,7 +167,8 @@ class EditEmployeeViewController:UITableViewController{
               if(indexPath.row == 2) {
                 //マイナンバー取得状況
                 cell.accessoryType = UITableViewCellAccessoryType.None
-                if(employeeItemData[indexPath.row].characters.count == YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
+                if(employeeItemData[indexPath.row].characters.count ==
+                    YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
                   label?.text = "取得済"
                   label?.textColor = UIColor.lightGrayColor()
                 }else{
@@ -170,6 +204,9 @@ class EditEmployeeViewController:UITableViewController{
         }
         
         break
+      case 2:
+        
+        break
       default:
         break
     }
@@ -185,15 +222,20 @@ class EditEmployeeViewController:UITableViewController{
     performSegueWithIdentifier("showAddNewFamily", sender: self)
   }
   
+  func sendDataBtn(sender:UIButton){
+    print("データ送信・・・")
+  }
+  
   func loadEmployeeData(){
     employeeItemData.removeAll()
     employeeItemData.append(employeeeditdata.EmployeeCode)
-    employeeItemData.append(employeeeditdata.EmployeeName)
+    employeeItemData.append(employeeeditdata.EmployeeFamilyName + "　" +
+      employeeeditdata.EmployeeFirstName)
     employeeItemData.append(employeeeditdata.EmployeeMN)
     
     familyItemData.removeAll()
     for family in employeeeditdata.families{
-      familyItemData.append(family.Name)
+      familyItemData.append(family.FamilyName + "　" + family.FirstName)
     }
 
   }
@@ -214,14 +256,31 @@ class EditEmployeeViewController:UITableViewController{
       dest.EmployeeEditData = employeeeditdata
     }
     
+    if(segue.identifier == "showModifyEmployee"){
+      let dest = segue.destinationViewController as! ModifyEmployeeDataViewController
+      
+      switch (self.tableView.indexPathForSelectedRow!.row){
+        case 0:
+          dest.navigationItem.title = "社員番号"
+          dest.ModifyMode = ModifyEmployeeDataViewController.ModifyModeEnum.Employee
+          break
+        case 1:
+          dest.navigationItem.title = "氏名"
+           dest.ModifyMode = ModifyEmployeeDataViewController.ModifyModeEnum.Name
+          break
+        default:
+          break
+      }
+      
+      dest.EmployeeEditData = employeeeditdata
+    
+    }
+    
     if(segue.identifier == "showEditFamily") {
-      let dest = segue.destinationViewController as! EditFamilyViewController
-      dest.FamilyItemData = employeeeditdata.families[(self.tableView.indexPathForSelectedRow!.row)]
+      if(familyItemData.count > 0){
+        let dest = segue.destinationViewController as! EditFamilyViewController
+        dest.FamilyItemData = employeeeditdata.families[(self.tableView.indexPathForSelectedRow!.row)]
+      }
     }
   }
-
-  
-  
-  
-  
 }

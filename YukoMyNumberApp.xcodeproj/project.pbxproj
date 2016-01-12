@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */; };
 		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
 		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyEmployeeDataViewController.swift; sourceTree = "<group>"; };
 		03313FD41C3DF006004D3F9F /* bkpublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bkpublic.h; sourceTree = "<group>"; };
 		03313FD51C3DF006004D3F9F /* cspublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cspublic.h; sourceTree = "<group>"; };
 		03313FD61C3DF006004D3F9F /* cstypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cstypes.h; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				03313FD31C3DF006004D3F9F /* SQLClient */,
 				0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */,
 				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
+				032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */,
 				03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */,
 				03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */,
 				03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */,
@@ -416,6 +419,7 @@
 				0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */,
 				0364F50E1C3B46B000EA4A37 /* AppDelegate.swift in Sources */,
 				03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */,
+				032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */,
 				03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */,
 				035976CA1C3F59E3004AA479 /* GetMyNumberTestViewController.swift in Sources */,
 			);

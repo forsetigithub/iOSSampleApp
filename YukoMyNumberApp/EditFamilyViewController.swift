@@ -36,11 +36,9 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   }
   
   override func viewWillAppear(animated: Bool) {
-    let separatename =  self.FamilyItemData.Name.characters.split("　").map{ String($0)}
 
-    FamilyNameTextField.text = separatename[0]
-    FirstNameTextField.text = separatename[1]
-    
+    FamilyNameTextField.text = self.FamilyItemData.FamilyName
+    FirstNameTextField.text = self.FamilyItemData.FirstName
     RelationNameLabel.text = self.FamilyItemData.RSName
   
   }
@@ -51,7 +49,8 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
   func tapSaveButton(sender:UIBarButtonItem){
     try! realm.write({ () -> Void in
-      FamilyItemData.Name = FamilyNameTextField.text! + "　" + FirstNameTextField.text!
+      FamilyItemData.FamilyName = FamilyNameTextField.text!
+      FamilyItemData.FirstName =  FirstNameTextField.text!
       self.navigationController?.popViewControllerAnimated(true)
     })
   }
@@ -59,4 +58,10 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     return textField.resignFirstResponder()
   }
+  
+  @IBAction func tapGetMyNumber(sender: UIButton) {
+    performSegueWithIdentifier("showGetFamilyMyNumber", sender: self)
+  
+  }
+  
 }

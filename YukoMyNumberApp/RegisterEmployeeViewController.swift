@@ -45,7 +45,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     try! realm.write({ () -> Void in
       let NewEmployeeData = EmployeeData()
       NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
-      NewEmployeeData.EmployeeName = self.EmployeeFamilyName.text! + "　" + self.EmployeeFirstName.text!
+      NewEmployeeData.EmployeeFamilyName = self.EmployeeFamilyName.text!
+      NewEmployeeData.EmployeeFirstName = self.EmployeeFirstName.text!
       NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       

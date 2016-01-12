@@ -52,7 +52,8 @@ class RegisteredListViewController: UITableViewController {
   
   override func tableView(tableView:UITableView,cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("RegisteredCell",forIndexPath:indexPath) as UITableViewCell
-    cell.textLabel!.text = self.realm.objects(EmployeeData)[indexPath.row].EmployeeName
+    let employee = self.realm.objects(EmployeeData)[indexPath.row]
+    cell.textLabel!.text = employee.EmployeeFamilyName + "　" + employee.EmployeeFirstName
     return cell
   }
   
