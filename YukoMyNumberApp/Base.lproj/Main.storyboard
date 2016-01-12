@@ -158,7 +158,7 @@
             </objects>
             <point key="canvasLocation" x="617" y="-101"/>
         </scene>
-        <!--登録者を編集-->
+        <!--登録者編集-->
         <scene sceneID="v8W-92-2FT">
             <objects>
                 <tableViewController id="dHf-Ro-Tdz" customClass="EditEmployeeViewController" customModule="YukoMyNumberApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -203,7 +203,7 @@
                             <outlet property="delegate" destination="dHf-Ro-Tdz" id="kln-ki-kAZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="登録者を編集" id="i2o-5d-qzi"/>
+                    <navigationItem key="navigationItem" title="登録者編集" id="i2o-5d-qzi"/>
                     <connections>
                         <segue destination="Faf-O9-mpe" kind="show" identifier="showGetMyNumber" id="jyL-AX-C3r"/>
                         <segue destination="IMb-uP-VPN" kind="show" identifier="showAddNewFamily" id="F8X-5l-I3x"/>
@@ -722,6 +722,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jyL-AX-C3r"/>
+        <segue reference="yxj-FF-AnP"/>
     </inferredMetricsTieBreakers>
 </document>

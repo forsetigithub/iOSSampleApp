@@ -26,7 +26,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = "家族情報編集"
+    self.navigationItem.title = "家族情報を編集"
     let saveButton = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.Plain, target: self, action: "tapSaveButton:")
     self.navigationItem.rightBarButtonItem = saveButton
     
