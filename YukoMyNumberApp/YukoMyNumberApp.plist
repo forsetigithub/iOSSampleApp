@@ -125,5 +125,16 @@
 	<integer>17</integer>
 	<key>TableViewCellDefaultHeight</key>
 	<integer>44</integer>
+	<key>ServerInfo</key>
+	<dict>
+		<key>IPAddress</key>
+		<string>10.1.4.48</string>
+		<key>UserName</key>
+		<string>MNAdmin</string>
+		<key>Password</key>
+		<string>admin</string>
+		<key>DataBaseName</key>
+		<string>YukoMN</string>
+	</dict>
 </dict>
 </plist>

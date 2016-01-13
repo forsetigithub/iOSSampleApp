@@ -8,11 +8,13 @@
 
 import UIKit
 import RealmSwift
+import Foundation
 
-class EditEmployeeViewController:UITableViewController{
 
-  
+class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
+
   let realm = try! Realm()
+  let client:SQLClient = SQLClient()
   
   // MARK: TableView定義
   private let sectionTitles = ["","家族情報",""]
@@ -23,8 +25,9 @@ class EditEmployeeViewController:UITableViewController{
   private var employeeItemData:[String] = [String]()
   private var familyItemData:[String] = [String]()
 
-  
   private var employeeeditdata:EmployeeData = EmployeeData()
+  
+  private var myActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
 
   var EmployeeEditData:EmployeeData{
     set(newValue){
@@ -39,6 +42,13 @@ class EditEmployeeViewController:UITableViewController{
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    client.delegate = self
+   
+    myActivityIndicator.frame = CGRectMake(0, 0, 50, 50)
+    myActivityIndicator.center = self.view.center
+    myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+    
+    self.view.addSubview(myActivityIndicator)
   
   }
   
@@ -227,8 +237,70 @@ class EditEmployeeViewController:UITableViewController{
     performSegueWithIdentifier("showAddNewFamily", sender: self)
   }
   
+  
   func sendDataBtn(sender:UIButton){
-    print("データ送信・・・")
+    
+    let AlertView = UIAlertController(title: "確認", message: "送信します。よろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    
+    let OKAction = UIAlertAction(title: "送信", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+      
+      self.myActivityIndicator.startAnimating()
+      self.uploadData()
+    }
+    
+    let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (cancel:UIAlertAction) -> Void in
+      
+    }
+    
+    AlertView.addAction(OKAction)
+    AlertView.addAction(CancelAction)
+    
+    presentViewController(AlertView, animated: true, completion: nil)
+  }
+  
+  func uploadData(){
+    let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
+    
+    client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"], database: info["DataBaseName"]) { (success:Bool) -> Void in
+      
+      if(success){
+        
+        print("Connection Successed!")
+        
+        let sqlstring = "insert into T_Employee(SeqNo,EmployeeCode,EmployeeFamilyName,EmployeeFirstName,EmployeeMyNumber) values (NEWID(),'\(self.employeeeditdata.EmployeeCode)','\(self.employeeeditdata.EmployeeFamilyName)','\(self.employeeeditdata.EmployeeFirstName)','\(self.employeeeditdata.EmployeeMN)')"
+        
+        print(sqlstring)
+        
+        self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
+          self.client.disconnect()
+          self.myActivityIndicator.stopAnimating()
+          
+          let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
+          
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+            
+            self.navigationController?.popViewControllerAnimated(true)
+          })
+          
+          messageAlert.addAction(OKAction)
+          
+          self.presentViewController(messageAlert, animated: true, completion: nil)
+          
+          print("Disconnected")
+        })
+        
+      }else{
+        self.myActivityIndicator.stopAnimating()
+        print("Error Connect")
+        return
+      }
+    }
+  
+  }
+  
+  
+  @objc func error(error: String!, code: Int32, severity: Int32) {
+    print("error=\(error),code=\(code)")
   }
   
   func loadEmployeeData(){
@@ -287,7 +359,6 @@ class EditEmployeeViewController:UITableViewController{
         let dest = segue.destinationViewController as! EditFamilyViewController
         let familydata = employeeeditdata.families.filter("DeleteFlag = false")
         dest.FamilyItemData = familydata[(self.tableView.indexPathForSelectedRow!.row)]
-        //dest.FamilyItemData = employeeeditdata.families[(self.tableView.indexPathForSelectedRow!.row)]
       }
     }
   }

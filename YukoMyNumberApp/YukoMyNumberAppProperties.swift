@@ -27,6 +27,8 @@ final class YukoMyNumberAppProperties {
   let EmployeeMNLabelName = dict.objectForKey("EmployeeMNLabelName")
   let RelationItems:[String:String] = dict.objectForKey("RelationItems") as! [String:String]
   let TableViewCellDefaultHeight:CGFloat = (dict.objectForKey("TableViewCellDefaultHeight") as? CGFloat)!
+  let ServerInfo:[String:String] = dict.objectForKey("ServerInfo") as! [String:String]
+
 }
 
 final class TestPropList {

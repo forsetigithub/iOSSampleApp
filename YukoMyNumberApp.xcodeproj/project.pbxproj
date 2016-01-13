@@ -177,13 +177,13 @@
 				03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */,
 				03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */,
 				0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */,
+				035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
 				0364F5141C3B46B000EA4A37 /* Assets.xcassets */,
 				0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */,
 				0364F5191C3B46B000EA4A37 /* Info.plist */,
 				035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */,
 				0341D2841C3F709F0095D2EC /* TestPropList.plist */,
-				035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */,
 				035976C91C3F59E3004AA479 /* GetMyNumberTestViewController.swift */,
 			);
 			path = YukoMyNumberApp;

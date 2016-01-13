@@ -50,9 +50,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       
-  self.performSegueWithIdentifier("showRegisterList", sender: self)
-    })
-    
+      self.performSegueWithIdentifier("showRegisterList", sender: self)
+    })    
   }
   
   @IBAction func tapCancelButton(sender: UIBarButtonItem) {
