@@ -237,7 +237,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     performSegueWithIdentifier("showAddNewFamily", sender: self)
   }
   
-  
+  /* 
+    送信ボタン押下時処理
+  */
   func sendDataBtn(sender:UIButton){
     
     let AlertView = UIAlertController(title: "確認", message: "送信します。よろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -258,7 +260,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     presentViewController(AlertView, animated: true, completion: nil)
   }
   
+  /*
+  * データをSQLServerへ登録する
+  */
   func uploadData(){
+    
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
     client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"], database: info["DataBaseName"]) { (success:Bool) -> Void in
