@@ -67,9 +67,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    var height:CGFloat = 44
+    var height:CGFloat = YukoMyNumberAppProperties.sharedInstance.TableViewCellDefaultHeight
     if(indexPath.row == 3){
-      height =  120
+      height =  150
     }
     
     return height

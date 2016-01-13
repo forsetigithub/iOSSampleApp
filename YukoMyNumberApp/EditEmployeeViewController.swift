@@ -143,7 +143,7 @@ class EditEmployeeViewController:UITableViewController{
         rowcount = employeeItemLabels.count
         break
       case 1: //家族情報
-        rowcount = employeeeditdata.families.count
+        rowcount = familyItemData.count
         break
       default:
         break
@@ -240,9 +240,10 @@ class EditEmployeeViewController:UITableViewController{
     
     familyItemData.removeAll()
     for family in employeeeditdata.families{
-      familyItemData.append(family.FamilyName + "　" + family.FirstName)
+      if(!family.DeleteFlag){
+        familyItemData.append(family.FamilyName + "　" + family.FirstName)
+      }
     }
-
   }
   
   override func didReceiveMemoryWarning() {
@@ -284,7 +285,9 @@ class EditEmployeeViewController:UITableViewController{
     if(segue.identifier == "showEditFamily") {
       if(familyItemData.count > 0){
         let dest = segue.destinationViewController as! EditFamilyViewController
-        dest.FamilyItemData = employeeeditdata.families[(self.tableView.indexPathForSelectedRow!.row)]
+        let familydata = employeeeditdata.families.filter("DeleteFlag = false")
+        dest.FamilyItemData = familydata[(self.tableView.indexPathForSelectedRow!.row)]
+        //dest.FamilyItemData = employeeeditdata.families[(self.tableView.indexPathForSelectedRow!.row)]
       }
     }
   }

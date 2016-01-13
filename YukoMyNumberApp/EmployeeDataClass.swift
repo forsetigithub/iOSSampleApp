@@ -40,6 +40,7 @@ class EmployeeFamilyData : Object {
   dynamic var RSName = ""
   dynamic var RSCode = ""
   dynamic var FamilyMN = ""
+  dynamic var DeleteFlag = false
   dynamic var ReserveItem1 = ""
   dynamic var ReserveItem2 = ""
   dynamic var ReserveItem3 = ""

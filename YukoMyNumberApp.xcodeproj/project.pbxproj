@@ -12,6 +12,7 @@
 		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
 		0341D2851C3F709F0095D2EC /* TestPropList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0341D2841C3F709F0095D2EC /* TestPropList.plist */; };
+		0358DAC31C45D23F008F2FD0 /* ModifyRelationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */; };
 		035976C61C3F4283004AA479 /* YukoMyNumberApp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */; };
 		035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */; };
 		035976CA1C3F59E3004AA479 /* GetMyNumberTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035976C91C3F59E3004AA479 /* GetMyNumberTestViewController.swift */; };
@@ -65,6 +66,7 @@
 		03313FE11C3DF006004D3F9F /* tds_sysdep_public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tds_sysdep_public.h; sourceTree = "<group>"; };
 		03313FE41C3DF032004D3F9F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		0341D2841C3F709F0095D2EC /* TestPropList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestPropList.plist; sourceTree = "<group>"; };
+		0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationViewController.swift; sourceTree = "<group>"; };
 		035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YukoMyNumberApp.plist; sourceTree = "<group>"; };
 		035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YukoMyNumberAppProperties.swift; sourceTree = "<group>"; };
 		035976C91C3F59E3004AA479 /* GetMyNumberTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMyNumberTestViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */,
 				03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */,
 				03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */,
+				0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
 				0364F5141C3B46B000EA4A37 /* Assets.xcassets */,
 				0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */,
@@ -417,6 +420,7 @@
 				035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */,
 				03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */,
 				0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */,
+				0358DAC31C45D23F008F2FD0 /* ModifyRelationViewController.swift in Sources */,
 				0364F50E1C3B46B000EA4A37 /* AppDelegate.swift in Sources */,
 				03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */,
 				032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */,

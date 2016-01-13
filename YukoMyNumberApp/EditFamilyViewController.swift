@@ -59,9 +59,35 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     return textField.resignFirstResponder()
   }
   
-  @IBAction func tapGetMyNumber(sender: UIButton) {
-    performSegueWithIdentifier("showGetFamilyMyNumber", sender: self)
-  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if(segue.identifier == "showModifyRelation"){
+      let dest = segue.destinationViewController as! ModifyRelationViewController
+      dest.FamilyItemData = self.FamilyItemData
+    }
   }
   
+  @IBAction func tapGetMyNumber(sender: UIButton) {
+    performSegueWithIdentifier("showGetFamilyMyNumber", sender: self)
+  }
+  
+  @IBAction func tapDeleteBtn(sender: AnyObject) {
+    let deleteName = FamilyNameTextField.text! + "　" + FirstNameTextField.text!
+    let myAlert:UIAlertController = UIAlertController(title: "確認", message: "\(deleteName) を削除します。よろしいですか？", preferredStyle: UIAlertControllerStyle.Alert)
+    
+    let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+      try! self.realm.write({ () -> Void in
+        self.FamilyItemData.DeleteFlag = true
+        self.navigationController?.popViewControllerAnimated(true)
+      })
+    }
+    
+    let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction) -> Void in
+      
+    }
+  
+    myAlert.addAction(OkAction)
+    myAlert.addAction(CancelAction)
+    
+    presentViewController(myAlert, animated: true, completion: nil)
+  }
 }

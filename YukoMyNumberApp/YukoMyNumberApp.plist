@@ -123,5 +123,7 @@
 	<string>System</string>
 	<key>ButtonInTableViewFontSize</key>
 	<integer>17</integer>
+	<key>TableViewCellDefaultHeight</key>
+	<integer>44</integer>
 </dict>
 </plist>
