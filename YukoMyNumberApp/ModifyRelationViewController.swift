@@ -15,11 +15,10 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
   
   let realm = try! Realm()
   
-  var FamilyItemData:EmployeeFamilyData = EmployeeFamilyData()
+  var FamilyItemData:EmployeeData = EmployeeData()
   
   @IBOutlet weak var RelationName: UILabel!
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
-  
   
   let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
   var pickerKeys:[String] = [String]()
@@ -43,10 +42,13 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
   }
   
   override func viewWillAppear(animated: Bool) {
+    
     super.viewWillAppear(animated)
     
     self.RelationName.text = FamilyItemData.RSName
     
+    let selectrow = pickerKeys.indexOf(FamilyItemData.RSCode)
+    self.RelationNamesPickerView.selectRow(selectrow!, inComponent: 0, animated: true)
   
   }
   

@@ -28,20 +28,5 @@ final class YukoMyNumberAppProperties {
   let RelationItems:[String:String] = dict.objectForKey("RelationItems") as! [String:String]
   let TableViewCellDefaultHeight:CGFloat = (dict.objectForKey("TableViewCellDefaultHeight") as? CGFloat)!
   let ServerInfo:[String:String] = dict.objectForKey("ServerInfo") as! [String:String]
-
-}
-
-final class TestPropList {
-  static let sharedInstance = TestPropList()
-  
-  private init(){}
-  
-  static private var dict : NSDictionary {
-    get{
-      let prop = NSBundle.mainBundle().pathForResource("TestPropList", ofType: "plist")
-      return NSDictionary(contentsOfFile: prop!)!
-    }
-  }
-  
-  let TestMyNumber = dict.objectForKey("TestMyNumber")
+  let ButtonInTableViewFontSize = (dict.objectForKey("ButtonInTableViewFontSize") as? CGFloat)!
 }

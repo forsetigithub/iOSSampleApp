@@ -107,7 +107,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     switch section {
       case 0: //本人
-        tableButton = makeButtonInTableView("マイナンバーを取得",actionName: "getMyNumberBtn:")
+        tableButton = makeButtonInTableView("マイナンバーを登録",actionName: "getMyNumberBtn:")
 
         break
     
@@ -117,7 +117,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         break
       
       case 2:
-        tableButton = makeButtonInTableView("データ送信",actionName: "sendDataBtn:")
+        tableButton = makeButtonInTableView("データを送信",actionName: "sendDataBtn:")
 
         break
       
@@ -136,7 +136,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   func makeButtonInTableView(title:String,actionName action:Selector) -> UIButton{
     let makebtn = UIButton(type: UIButtonType.System)
     makebtn.setTitle(title, forState: UIControlState.Normal)
-    makebtn.titleLabel?.font = UIFont(name: "System", size: 17)
+    makebtn.titleLabel?.font = UIFont(name: "System", size: YukoMyNumberAppProperties.sharedInstance.ButtonInTableViewFontSize)
     makebtn.addTarget(self, action: action , forControlEvents: UIControlEvents.TouchUpInside)
     makebtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
 
@@ -182,8 +182,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
               if(indexPath.row == 2) {
                 //マイナンバー取得状況
                 cell.accessoryType = UITableViewCellAccessoryType.None
+                
                 if(employeeItemData[indexPath.row].characters.count ==
                     YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
+                  
                   label?.text = "取得済"
                   label?.textColor = UIColor.lightGrayColor()
                 }else{
@@ -267,13 +269,14 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
-    client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"], database: info["DataBaseName"]) { (success:Bool) -> Void in
+    client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
+      database: info["DataBaseName"]) { (success:Bool) -> Void in
       
       if(success){
         
         print("Connection Successed!")
         
-        let sqlstring = "insert into T_Employee(SeqNo,EmployeeCode,EmployeeFamilyName,EmployeeFirstName,EmployeeMyNumber) values (NEWID(),'\(self.employeeeditdata.EmployeeCode)','\(self.employeeeditdata.EmployeeFamilyName)','\(self.employeeeditdata.EmployeeFirstName)','\(self.employeeeditdata.EmployeeMN)')"
+        let sqlstring = "insert into T_Employee(SeqNo,EmployeeCode,EmployeeFamilyName,EmployeeFirstName,EmployeeMyNumber) values (NEWID(),'\(self.employeeeditdata.EmployeeCode)','\(self.employeeeditdata.FamilyName)','\(self.employeeeditdata.FirstName)','\(self.employeeeditdata.MyNumber)')"
         
         print(sqlstring)
         
@@ -312,12 +315,14 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   func loadEmployeeData(){
     employeeItemData.removeAll()
     employeeItemData.append(employeeeditdata.EmployeeCode)
-    employeeItemData.append(employeeeditdata.EmployeeFamilyName + "　" +
-      employeeeditdata.EmployeeFirstName)
-    employeeItemData.append(employeeeditdata.EmployeeMN)
+    employeeItemData.append(employeeeditdata.FamilyName + "　" +
+      employeeeditdata.FirstName)
+    employeeItemData.append(employeeeditdata.MyNumber)
     
     familyItemData.removeAll()
-    for family in employeeeditdata.families{
+    
+    let families = realm.objects(EmployeeData).filter("EmployeeCode = '\(employeeeditdata.EmployeeCode)' and RSCode != '00'")
+    for family in families{
       if(!family.DeleteFlag){
         familyItemData.append(family.FamilyName + "　" + family.FirstName)
       }
@@ -331,8 +336,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if(segue.identifier == "showGetMyNumber") {
-      let dest = segue.destinationViewController as! GetMyNumberTestViewController
-      dest.EmployeeEditData = employeeeditdata
+      let dest = segue.destinationViewController as! GetMyNumberViewController
+
+      dest.MyNumberEditData = employeeeditdata
     }
     
     if(segue.identifier == "showAddNewFamily"){
@@ -363,7 +369,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     if(segue.identifier == "showEditFamily") {
       if(familyItemData.count > 0){
         let dest = segue.destinationViewController as! EditFamilyViewController
-        let familydata = employeeeditdata.families.filter("DeleteFlag = false")
+        let familydata = realm.objects(EmployeeData).filter("EmployeeCode = '\(employeeeditdata.EmployeeCode)' and RSCode != '00' and DeleteFlag = false")
         dest.FamilyItemData = familydata[(self.tableView.indexPathForSelectedRow!.row)]
       }
     }

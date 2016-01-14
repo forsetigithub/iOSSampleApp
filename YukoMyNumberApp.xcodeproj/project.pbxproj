@@ -11,11 +11,10 @@
 		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
 		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
-		0341D2851C3F709F0095D2EC /* TestPropList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0341D2841C3F709F0095D2EC /* TestPropList.plist */; };
 		0358DAC31C45D23F008F2FD0 /* ModifyRelationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */; };
 		035976C61C3F4283004AA479 /* YukoMyNumberApp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */; };
 		035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */; };
-		035976CA1C3F59E3004AA479 /* GetMyNumberTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035976C91C3F59E3004AA479 /* GetMyNumberTestViewController.swift */; };
+		035976CA1C3F59E3004AA479 /* GetMyNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035976C91C3F59E3004AA479 /* GetMyNumberViewController.swift */; };
 		0364F50E1C3B46B000EA4A37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */; };
 		0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */; };
 		0364F5131C3B46B000EA4A37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0364F5111C3B46B000EA4A37 /* Main.storyboard */; };
@@ -66,11 +65,10 @@
 		03313FE01C3DF006004D3F9F /* sybfront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sybfront.h; sourceTree = "<group>"; };
 		03313FE11C3DF006004D3F9F /* tds_sysdep_public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tds_sysdep_public.h; sourceTree = "<group>"; };
 		03313FE41C3DF032004D3F9F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		0341D2841C3F709F0095D2EC /* TestPropList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestPropList.plist; sourceTree = "<group>"; };
 		0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationViewController.swift; sourceTree = "<group>"; };
 		035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YukoMyNumberApp.plist; sourceTree = "<group>"; };
 		035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YukoMyNumberAppProperties.swift; sourceTree = "<group>"; };
-		035976C91C3F59E3004AA479 /* GetMyNumberTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMyNumberTestViewController.swift; sourceTree = "<group>"; };
+		035976C91C3F59E3004AA479 /* GetMyNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMyNumberViewController.swift; sourceTree = "<group>"; };
 		0364F50A1C3B46B000EA4A37 /* YukoMyNumberApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YukoMyNumberApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredListViewController.swift; sourceTree = "<group>"; };
@@ -172,22 +170,21 @@
 				037D0B0E1C4627B3009B0D61 /* Resources */,
 				03313FD31C3DF006004D3F9F /* SQLClient */,
 				0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */,
-				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
-				032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */,
 				03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */,
+				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
 				03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */,
 				03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */,
+				032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */,
 				03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */,
 				03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */,
 				0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */,
+				035976C91C3F59E3004AA479 /* GetMyNumberViewController.swift */,
 				035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
 				0364F5141C3B46B000EA4A37 /* Assets.xcassets */,
 				0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */,
 				0364F5191C3B46B000EA4A37 /* Info.plist */,
 				035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */,
-				0341D2841C3F709F0095D2EC /* TestPropList.plist */,
-				035976C91C3F59E3004AA479 /* GetMyNumberTestViewController.swift */,
 			);
 			path = YukoMyNumberApp;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				0364F5131C3B46B000EA4A37 /* Main.storyboard in Resources */,
 				037D0B101C4627FA009B0D61 /* launchimage.gif in Resources */,
 				035976C61C3F4283004AA479 /* YukoMyNumberApp.plist in Resources */,
-				0341D2851C3F709F0095D2EC /* TestPropList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,7 +433,7 @@
 				03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */,
 				032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */,
 				03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */,
-				035976CA1C3F59E3004AA479 /* GetMyNumberTestViewController.swift in Sources */,
+				035976CA1C3F59E3004AA479 /* GetMyNumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

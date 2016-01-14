@@ -42,8 +42,8 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     super.viewWillAppear(animated)
     
     self.EmployeeCodeTextField.text = EmployeeEditData.EmployeeCode
-    self.FamilyNameTextField.text = EmployeeEditData.EmployeeFamilyName
-    self.FirstNameTextField.text = EmployeeEditData.EmployeeFirstName
+    self.FamilyNameTextField.text = EmployeeEditData.FamilyName
+    self.FirstNameTextField.text = EmployeeEditData.FirstName
     
     if(ModifyMode == ModifyModeEnum.Employee){
       self.FamilyNameTextField.enabled = false
@@ -64,8 +64,8 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   @IBAction func tapSaveButton(sender: UIBarButtonItem) {
     try! realm.write({ () -> Void in
       EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
-      EmployeeEditData.EmployeeFamilyName = self.FamilyNameTextField.text!
-      EmployeeEditData.EmployeeFirstName = self.FirstNameTextField.text!
+      EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
+      EmployeeEditData.FirstName = self.FirstNameTextField.text!
       
       self.navigationController?.popViewControllerAnimated(true)
     })

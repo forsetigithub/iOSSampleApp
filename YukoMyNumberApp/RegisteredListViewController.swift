@@ -14,11 +14,13 @@ class RegisteredListViewController: UITableViewController {
   
   let realm = try! Realm()
   
+  private let employeefilter = NSPredicate(format: "RSCode = '00'")
+  
   // MARK: - Segues
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "showRegisterEdit" {
       let regedit = segue.destinationViewController as? EditEmployeeViewController
-      regedit?.EmployeeEditData = self.realm.objects(EmployeeData)[(self.tableView.indexPathForSelectedRow?.row)!]
+      regedit?.EmployeeEditData = self.realm.objects(EmployeeData).filter(employeefilter)[(self.tableView.indexPathForSelectedRow?.row)!]
     }
   }
   
@@ -45,13 +47,13 @@ class RegisteredListViewController: UITableViewController {
   }
 
   override func tableView(tableView:UITableView,numberOfRowsInSection section:Int) -> Int {
-    return self.realm.objects(EmployeeData).count
+    return self.realm.objects(EmployeeData).filter(employeefilter).count
   }
   
   override func tableView(tableView:UITableView,cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("RegisteredCell",forIndexPath:indexPath) as UITableViewCell
-    let employee = self.realm.objects(EmployeeData)[indexPath.row]
-    cell.textLabel!.text = employee.EmployeeFamilyName + "　" + employee.EmployeeFirstName
+    let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
+    cell.textLabel!.text = employee.FamilyName + "　" + employee.FirstName
     return cell
   }
   
@@ -75,7 +77,7 @@ class RegisteredListViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-   let delitem = self.realm.objects(EmployeeData)[indexPath.row]
+   let delitem = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     
     try! realm.write({ () -> Void in
       realm.delete(delitem)

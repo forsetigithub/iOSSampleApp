@@ -25,6 +25,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     EmployeeCode.delegate = self
     EmployeeFamilyName.delegate = self
     EmployeeFirstName.delegate = self
+    
+    self.navigationItem.title = "新規登録"
   }
   
   override func didReceiveMemoryWarning() {
@@ -45,8 +47,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     try! realm.write({ () -> Void in
       let NewEmployeeData = EmployeeData()
       NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
-      NewEmployeeData.EmployeeFamilyName = self.EmployeeFamilyName.text!
-      NewEmployeeData.EmployeeFirstName = self.EmployeeFirstName.text!
+      NewEmployeeData.FamilyName = self.EmployeeFamilyName.text!
+      NewEmployeeData.FirstName = self.EmployeeFirstName.text!
+      NewEmployeeData.RSCode = "00"
       NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       
@@ -55,8 +58,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   @IBAction func tapCancelButton(sender: UIBarButtonItem) {
-  
-    self.performSegueWithIdentifier("showRegisterList", sender: self)
+     self.performSegueWithIdentifier("showRegisterList", sender: self)
   }
   
 }

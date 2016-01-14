@@ -14,12 +14,14 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
   let realm = try! Realm()
   
-  var FamilyItemData:EmployeeFamilyData = EmployeeFamilyData()
+  var FamilyItemData:EmployeeData = EmployeeData()
   
   @IBOutlet weak var FamilyNameTextField: UITextField!
   @IBOutlet weak var FirstNameTextField: UITextField!
   @IBOutlet weak var RelationNameLabel: UILabel!
+  @IBOutlet weak var MyNumberGetStateLabel: UILabel!
 
+  
   let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
   var pickerKeys:[String] = [String]()
   var pickerValues:[String] = [String]()
@@ -40,7 +42,16 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     FamilyNameTextField.text = self.FamilyItemData.FamilyName
     FirstNameTextField.text = self.FamilyItemData.FirstName
     RelationNameLabel.text = self.FamilyItemData.RSName
-  
+    
+    if(FamilyItemData.MyNumber.characters.count ==
+      YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
+        
+        MyNumberGetStateLabel.text = "取得済"
+        MyNumberGetStateLabel.textColor = UIColor.lightGrayColor()
+    }else{
+      MyNumberGetStateLabel.text = "未取得"
+      MyNumberGetStateLabel.textColor = UIColor.redColor()
+    }
   }
   
   override func didReceiveMemoryWarning() {
@@ -63,6 +74,12 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     if(segue.identifier == "showModifyRelation"){
       let dest = segue.destinationViewController as! ModifyRelationViewController
       dest.FamilyItemData = self.FamilyItemData
+    }
+    
+    if(segue.identifier == "showGetFamilyMyNumber"){
+      let dest = segue.destinationViewController as! GetMyNumberViewController
+      
+      dest.MyNumberEditData = self.FamilyItemData
     }
   }
   

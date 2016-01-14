@@ -86,12 +86,14 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   @IBAction func tapSaveButton(sender: UIBarButtonItem) {
     
     try! realm.write({ () -> Void in
-      let family = EmployeeFamilyData()
+      let family = EmployeeData()
       family.FamilyName = self.FamilyNameTextField.text!
       family.FirstName = self.FirstNameTextField.text!
       family.RSName = self.RelationName.text!
       family.RSCode = self.pickerItems[self.RelationName.text!]!
-      eployeeeditdata.families.append(family)
+      family.EmployeeCode = eployeeeditdata.EmployeeCode
+      
+      realm.add(family)
       
       self.navigationController?.popViewControllerAnimated(true)
       
