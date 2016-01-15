@@ -28,6 +28,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   private var employeeeditdata:EmployeeData = EmployeeData()
   
   private var myActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
+  
+  private var FirstCallFlag:Bool = true
 
   var EmployeeEditData:EmployeeData{
     set(newValue){
@@ -53,9 +55,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     showPassCodeAlert()
   }
 
+  
   override func viewWillAppear(animated: Bool) {
-
-
+    if(!FirstCallFlag){
+      loadEmployeeData()
+    }
   }
   
   
@@ -63,8 +67,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     let myAlert:UIAlertController = UIAlertController(title: "暗証番号入力", message: "暗証番号(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
     
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+      
+      self.FirstCallFlag = false
       self.loadEmployeeData()
-      self.tableView.reloadData()
+  
     })
     
     let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
@@ -76,6 +82,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     myAlert.addTextFieldWithConfigurationHandler({ (textField:UITextField) -> Void in
       
       textField.secureTextEntry = true
+      textField.keyboardType = UIKeyboardType.NumberPad
       let myNotificationCenter = NSNotificationCenter.defaultCenter()
       
       myNotificationCenter.addObserver(self, selector: "changeTextField:", name: UITextFieldTextDidChangeNotification, object: nil)
@@ -355,6 +362,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   }
   
   func loadEmployeeData(){
+
+    myActivityIndicator.startAnimating()
+    
     employeeItemData.removeAll()
     employeeItemData.append(employeeeditdata.EmployeeCode)
     employeeItemData.append(employeeeditdata.FamilyName + "　" +
@@ -369,6 +379,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         familyItemData.append(family.FamilyName + "　" + family.FirstName)
       }
     }
+    
+    self.tableView.reloadData()
+    
+    myActivityIndicator.stopAnimating()
   }
   
   override func didReceiveMemoryWarning() {
