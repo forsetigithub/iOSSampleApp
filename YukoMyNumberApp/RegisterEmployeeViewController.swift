@@ -42,21 +42,23 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     return textField.resignFirstResponder()
   }
 
-  @IBAction func tapSaveButton(sender: UIBarButtonItem) {
-    
+  
+  @IBAction func tapRegisterButton(sender: UIButton) {
     try! realm.write({ () -> Void in
       let NewEmployeeData = EmployeeData()
       NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
       NewEmployeeData.FamilyName = self.EmployeeFamilyName.text!
       NewEmployeeData.FirstName = self.EmployeeFirstName.text!
+      NewEmployeeData.FamilySeqNo = 0
       NewEmployeeData.RSCode = "00"
       NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       
       self.performSegueWithIdentifier("showRegisterList", sender: self)
-    })    
-  }
+    })
   
+  }
+
   @IBAction func tapCancelButton(sender: UIBarButtonItem) {
      self.performSegueWithIdentifier("showRegisterList", sender: self)
   }

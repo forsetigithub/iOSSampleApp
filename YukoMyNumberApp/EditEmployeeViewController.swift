@@ -49,16 +49,56 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
     
     self.view.addSubview(myActivityIndicator)
-  
+    
+    showPassCodeAlert()
+  }
+
+  override func viewWillAppear(animated: Bool) {
+
+
   }
   
-  override func viewWillAppear(animated: Bool) {
-    loadEmployeeData()
-    self.tableView.reloadData()
+  
+  func showPassCodeAlert(){
+    let myAlert:UIAlertController = UIAlertController(title: "暗証番号入力", message: "暗証番号(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
+    
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+      self.loadEmployeeData()
+      self.tableView.reloadData()
+    })
+    
+    let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
+      
+      self.navigationController?.popViewControllerAnimated(true)
+      
+    })
+    
+    myAlert.addTextFieldWithConfigurationHandler({ (textField:UITextField) -> Void in
+      
+      textField.secureTextEntry = true
+      let myNotificationCenter = NSNotificationCenter.defaultCenter()
+      
+      myNotificationCenter.addObserver(self, selector: "changeTextField:", name: UITextFieldTextDidChangeNotification, object: nil)
+    })
+    
+    myAlert.addAction(OKAction)
+    myAlert.addAction(CancelAction)
+    
+    self.presentViewController(myAlert, animated: true, completion: nil)
   }
   
   /*
-  セクションの数を返す.
+  textFieldに変更が会った時に通知されるメソッド.
+  */
+  internal func changeTextField (sender: NSNotification) {
+    let textField = sender.object as! UITextField
+    
+    // 入力された文字を表示.
+    print(textField.text)
+  }
+  
+  /*
+  セクションの数を返す
   */
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return sectionTitles.count
@@ -183,7 +223,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                 //マイナンバー取得状況
                 cell.accessoryType = UITableViewCellAccessoryType.None
                 
-                if(employeeItemData[indexPath.row].characters.count ==
+                if(employeeItemData.count != 0 && employeeItemData[indexPath.row].characters.count ==
                     YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
                   
                   label?.text = "取得済"
@@ -193,7 +233,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                   label?.textColor = UIColor.redColor()
                 }
               }else{
-                label?.text = employeeItemData[indexPath.row]
+                if(self.employeeItemData.count != 0){
+                  label?.text = self.employeeItemData[indexPath.row]
+                }
               }
              
               break

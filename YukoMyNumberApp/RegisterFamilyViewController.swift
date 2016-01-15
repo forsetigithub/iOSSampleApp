@@ -93,6 +93,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       family.RSCode = self.pickerItems[self.RelationName.text!]!
       family.EmployeeCode = eployeeeditdata.EmployeeCode
       
+      family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
+        ascending: true).first?.FamilySeqNo)! + 1
+      
       realm.add(family)
       
       self.navigationController?.popViewControllerAnimated(true)

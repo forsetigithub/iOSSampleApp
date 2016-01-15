@@ -14,6 +14,7 @@ import RealmSwift
 **********************************************/
 class EmployeeData : Object {
   dynamic var EmployeeCode = ""
+  dynamic var FamilySeqNo = 0
   dynamic var FamilyName = ""
   dynamic var FirstName = ""
   dynamic var RSCode = ""
@@ -21,6 +22,7 @@ class EmployeeData : Object {
   dynamic var MyNumber = ""
   dynamic var CreateDateTime = NSDate()
   dynamic var DeleteFlag = false
+  dynamic var PassCode = 0
   dynamic var ReserveItem1 = ""
   dynamic var ReserveItem2 = ""
   dynamic var ReserveItem3 = ""
@@ -31,4 +33,5 @@ class EmployeeData : Object {
   dynamic var ReserveItem8 = ""
   dynamic var ReserveItem9 = ""
   dynamic var ReserveItem10 = ""
+  
 }

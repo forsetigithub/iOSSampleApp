@@ -16,20 +16,13 @@ class RegisteredListViewController: UITableViewController {
   
   private let employeefilter = NSPredicate(format: "RSCode = '00'")
   
-  // MARK: - Segues
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "showRegisterEdit" {
-      let regedit = segue.destinationViewController as? EditEmployeeViewController
-      regedit?.EmployeeEditData = self.realm.objects(EmployeeData).filter(employeefilter)[(self.tableView.indexPathForSelectedRow?.row)!]
-    }
-  }
-  
   // MARK: - Table View
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = editButtonItem()
+    
   }
   
   override func setEditing(editing: Bool, animated: Bool) {
@@ -40,6 +33,10 @@ class RegisteredListViewController: UITableViewController {
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  override func viewDidLayoutSubviews() {
+
   }
   
   override func numberOfSectionsInTableView(tableView:UITableView) -> Int{
@@ -87,9 +84,37 @@ class RegisteredListViewController: UITableViewController {
     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
   }
   
+  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    
+    return indexPath
+  }
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+
+  }
+  
+  
   @IBAction func tapAddNewButton(sender: UIBarButtonItem) {
   
     performSegueWithIdentifier("showAddNewEmployee", sender: self)
+  }
+  
+  // MARK: - Segues
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "showRegisterEdit" {
+      let employeedata = self.realm.objects(EmployeeData).filter(self.employeefilter)[(self.tableView.indexPathForSelectedRow?.row)!]
+     
+      let regedit = segue.destinationViewController as? EditEmployeeViewController
+      regedit?.EmployeeEditData = employeedata
+    }
+  }
+  
+  internal func changeTextField(sender:NSNotification){
+    
+    let textField = sender.object as! UITextField
+    
+    print(textField.text)
   }
 }
 

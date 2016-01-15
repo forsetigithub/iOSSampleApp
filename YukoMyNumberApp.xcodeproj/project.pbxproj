@@ -28,6 +28,7 @@
 		03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */; };
 		03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */; };
 		03F6318D1C40D9BD0083F33F /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */; };
+		03FC62D91C48857A00008D80 /* ShowPassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FC62D81C48857A00008D80 /* ShowPassCodeViewController.swift */; };
 		E95412BD01010B5A66EF5B3C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F4A60FAF985F630A287FEA /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeDataClass.swift; sourceTree = "<group>"; };
 		03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
+		03FC62D81C48857A00008D80 /* ShowPassCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPassCodeViewController.swift; sourceTree = "<group>"; };
 		9D6BCA32ABDBA21829B2BC19 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D0F4A60FAF985F630A287FEA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08FFD70C8053BE19AD8EFAF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */,
 				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
 				03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */,
+				03FC62D81C48857A00008D80 /* ShowPassCodeViewController.swift */,
 				03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */,
 				032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */,
 				03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */,
@@ -433,6 +436,7 @@
 				03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */,
 				032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */,
 				03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */,
+				03FC62D91C48857A00008D80 /* ShowPassCodeViewController.swift in Sources */,
 				035976CA1C3F59E3004AA479 /* GetMyNumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
