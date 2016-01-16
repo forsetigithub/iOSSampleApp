@@ -29,9 +29,10 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = "家族情報を編集"
+ /*
     let saveButton = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.Plain, target: self, action: "tapSaveButton:")
     self.navigationItem.rightBarButtonItem = saveButton
-    
+ */
     FamilyNameTextField.delegate = self
     FirstNameTextField.delegate = self
     
@@ -58,12 +59,19 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     super.didReceiveMemoryWarning()
   }
   
-  func tapSaveButton(sender:UIBarButtonItem){
+  override func viewDidDisappear(animated: Bool) {
+
+  }
+  override func viewWillDisappear(animated: Bool) {
     try! realm.write({ () -> Void in
       FamilyItemData.FamilyName = FamilyNameTextField.text!
       FamilyItemData.FirstName =  FirstNameTextField.text!
-      self.navigationController?.popViewControllerAnimated(true)
+    
     })
+  }
+  
+  func tapSaveButton(sender:UIBarButtonItem){
+
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -93,7 +101,9 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     
     let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       try! self.realm.write({ () -> Void in
+        
         self.FamilyItemData.DeleteFlag = true
+        
         self.navigationController?.popViewControllerAnimated(true)
       })
     }

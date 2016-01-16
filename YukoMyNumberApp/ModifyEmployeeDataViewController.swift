@@ -54,6 +54,15 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     }
   }
   
+  override func viewWillDisappear(animated: Bool) {
+    try! realm.write({ () -> Void in
+      EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
+      EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
+      EmployeeEditData.FirstName = self.FirstNameTextField.text!
+      
+    })
+  }
+  
   func changeTextAttribute(textField:UITextField){
     if let cell = textField.superview?.superview as? UITableViewCell{
       cell.userInteractionEnabled = false
@@ -64,13 +73,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   }
   
   @IBAction func tapSaveButton(sender: UIBarButtonItem) {
-    try! realm.write({ () -> Void in
-      EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
-      EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
-      EmployeeEditData.FirstName = self.FirstNameTextField.text!
-      
-      self.navigationController?.popViewControllerAnimated(true)
-    })
+
   }
   
 }

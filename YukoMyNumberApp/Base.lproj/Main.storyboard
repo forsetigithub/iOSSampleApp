@@ -346,7 +346,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GpX-Kt-6Lq">
-                                                    <rect key="frame" x="60" y="0.0" width="390" height="43"/>
+                                                    <rect key="frame" x="60" y="0.0" width="440" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
@@ -354,7 +354,7 @@
                                             <constraints>
                                                 <constraint firstItem="M0j-sK-Kac" firstAttribute="leading" secondItem="b7j-Y7-A7d" secondAttribute="leading" constant="20" id="0xz-8T-kcH"/>
                                                 <constraint firstItem="GpX-Kt-6Lq" firstAttribute="top" secondItem="b7j-Y7-A7d" secondAttribute="top" id="48e-kg-2iC"/>
-                                                <constraint firstAttribute="trailing" secondItem="GpX-Kt-6Lq" secondAttribute="trailing" constant="150" id="RXn-NN-TUq"/>
+                                                <constraint firstAttribute="trailing" secondItem="GpX-Kt-6Lq" secondAttribute="trailing" constant="100" id="RXn-NN-TUq"/>
                                                 <constraint firstItem="M0j-sK-Kac" firstAttribute="top" secondItem="b7j-Y7-A7d" secondAttribute="top" id="Twg-dG-FzR"/>
                                                 <constraint firstItem="GpX-Kt-6Lq" firstAttribute="leading" secondItem="M0j-sK-Kac" secondAttribute="trailing" constant="10" id="V0r-js-K7m"/>
                                                 <constraint firstAttribute="bottom" secondItem="M0j-sK-Kac" secondAttribute="bottom" id="VkP-Iu-Hbx"/>
@@ -380,7 +380,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bC1-Pp-JU1">
-                                                    <rect key="frame" x="60" y="0.0" width="390" height="43"/>
+                                                    <rect key="frame" x="60" y="0.0" width="440" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad"/>
                                                 </textField>
@@ -392,7 +392,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="MBh-HH-opk" secondAttribute="bottom" id="PS7-X2-BUG"/>
                                                 <constraint firstItem="bC1-Pp-JU1" firstAttribute="top" secondItem="ZG0-3z-gPf" secondAttribute="top" id="UeJ-sQ-NaN"/>
                                                 <constraint firstItem="MBh-HH-opk" firstAttribute="top" secondItem="ZG0-3z-gPf" secondAttribute="top" id="jXK-wi-6z2"/>
-                                                <constraint firstAttribute="trailing" secondItem="bC1-Pp-JU1" secondAttribute="trailing" constant="150" id="txv-yo-gvd"/>
+                                                <constraint firstAttribute="trailing" secondItem="bC1-Pp-JU1" secondAttribute="trailing" constant="100" id="txv-yo-gvd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -767,8 +767,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="bce-3T-714"/>
                                                     <exclude reference="YV1-Jm-t2v"/>
+                                                    <exclude reference="bce-3T-714"/>
                                                     <exclude reference="cdO-2B-UDp"/>
                                                 </mask>
                                             </variation>
@@ -889,6 +889,41 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="nO7-6J-akn">
+                                        <rect key="frame" x="0.0" y="275" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nO7-6J-akn" id="X8T-42-Zhw">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dH7-xk-SvM">
+                                        <rect key="frame" x="0.0" y="319" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dH7-xk-SvM" id="GAJ-SZ-ZmS">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dba-hW-9pj">
+                                                    <rect key="frame" x="250" y="8" width="100" height="27"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="DGA-hd-qaE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="登録"/>
+                                                    <connections>
+                                                        <action selector="tapRegisterButton:" destination="IMb-uP-VPN" eventType="touchUpInside" id="OSb-Zp-RzV"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dba-hW-9pj" firstAttribute="centerY" secondItem="GAJ-SZ-ZmS" secondAttribute="centerY" id="6e5-4R-ApY"/>
+                                                <constraint firstItem="dba-hW-9pj" firstAttribute="top" secondItem="GAJ-SZ-ZmS" secondAttribute="topMargin" id="7g5-fQ-DaC"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dba-hW-9pj" secondAttribute="bottom" id="8PE-Aw-LAb"/>
+                                                <constraint firstItem="dba-hW-9pj" firstAttribute="centerX" secondItem="GAJ-SZ-ZmS" secondAttribute="centerX" id="cE0-md-Mce"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -897,13 +932,7 @@
                             <outlet property="delegate" destination="IMb-uP-VPN" id="pBI-7M-xfb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="家族を追加" id="sX5-e5-jjK">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="mg2-ws-5DG">
-                            <connections>
-                                <action selector="tapSaveButton:" destination="IMb-uP-VPN" id="oPx-Ic-Gpa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="家族を追加" id="sX5-e5-jjK"/>
                     <connections>
                         <outlet property="FamilyNameTextField" destination="uN1-Un-6dr" id="9t3-1Y-pG5"/>
                         <outlet property="FirstNameTextField" destination="ixd-ED-0lT" id="moj-YS-SQN"/>
@@ -968,17 +997,17 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="氏名" id="Kpq-mm-ENo">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="yaQ-od-ZfC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="yaQ-od-ZfC">
                                         <rect key="frame" x="0.0" y="209" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yaQ-od-ZfC" id="4ER-MV-Hhd">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="yaQ-od-ZfC" id="4ER-MV-Hhd">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="姓" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZAi-kD-7kt">
                                                     <rect key="frame" x="20" y="0.0" width="430" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" keyboardType="namePhonePad"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -989,17 +1018,17 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="C9b-i8-qaX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="C9b-i8-qaX">
                                         <rect key="frame" x="0.0" y="253" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C9b-i8-qaX" id="Qag-5h-EDU">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="C9b-i8-qaX" id="Qag-5h-EDU">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kZR-p9-FQm">
                                                     <rect key="frame" x="20" y="0.0" width="430" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1019,13 +1048,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="JNQ-GX-vyS">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="LuI-65-ICs">
-                            <connections>
-                                <action selector="tapSaveButton:" destination="1TS-kW-aAA" id="Btm-wu-8Dc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="JNQ-GX-vyS"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="EmployeeCodeTextField" destination="L4h-Xo-S5u" id="Tq8-jH-6Ud"/>

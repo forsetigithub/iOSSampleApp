@@ -32,8 +32,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   
   private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
 
-  var pickerKeys:[String] = [String]()
-  var pickerValues:[String] = [String]()
+  private var pickerKeys:[String] = [String]()
+  private var pickerValues:[String] = [String]()
+  private var selectedPickerRow:Int = 0
   
   // MARK: - Table View
   override func viewDidLoad() {
@@ -44,12 +45,12 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     self.FamilyNameTextField.delegate = self
     self.FirstNameTextField.delegate = self
     
-    pickerKeys = Array(pickerItems.values).sort()
+    pickerKeys = Array(pickerItems.keys).sort()
     
     for pikcerkey in pickerKeys {
       for (key,val) in pickerItems{
-        if(pikcerkey == val){
-           pickerValues.append(key)
+        if(pikcerkey == key){
+           pickerValues.append(val)
         }
       }
     }
@@ -84,21 +85,21 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     return textField.resignFirstResponder()
   }
   
-  @IBAction func tapSaveButton(sender: UIBarButtonItem) {
-    
+  
+  
+  @IBAction func tapRegisterButton(sender: AnyObject) {
     if(self.FamilyNameTextField.text?.characters.count == 0 ||
       self.FirstNameTextField.text?.characters.count == 0 ||
       self.RelationName.text == pickerValues[0]){
-    
-      //必須未入力エラー
+        
+        //必須未入力エラー
     }
     
     try! realm.write({ () -> Void in
       let family = EmployeeData()
       family.FamilyName = self.FamilyNameTextField.text!
       family.FirstName = self.FirstNameTextField.text!
-      family.RSName = self.RelationName.text!
-      family.RSCode = self.pickerItems[self.RelationName.text!]!
+      family.RSCode = self.pickerKeys[selectedPickerRow]
       family.EmployeeCode = eployeeeditdata.EmployeeCode
       
       family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
@@ -109,6 +110,8 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       self.navigationController?.popViewControllerAnimated(true)
       
     })
+
+  
   }
   
   //MARK: UIPickerView
@@ -129,6 +132,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
 
     if(row != 0){
       self.RelationName.text = pickerValues[row]
+      selectedPickerRow = row
     }
   }
 }

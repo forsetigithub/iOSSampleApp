@@ -20,9 +20,10 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
   @IBOutlet weak var RelationName: UILabel!
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
   
-  let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
-  var pickerKeys:[String] = [String]()
-  var pickerValues:[String] = [String]()
+  private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
+  private var pickerKeys:[String] = [String]()
+  private var pickerValues:[String] = [String]()
+  private var selectedPickerRow:Int = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,12 +31,12 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     
     self.RelationNamesPickerView.delegate = self
     
-    pickerKeys = Array(pickerItems.values).sort()
+    pickerKeys = Array(pickerItems.keys).sort()
     
     for pikcerkey in pickerKeys {
       for (key,val) in pickerItems{
-        if(pikcerkey == val){
-          pickerValues.append(key)
+        if(pikcerkey == key){
+          pickerValues.append(val)
         }
       }
     }
@@ -47,8 +48,8 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     
     self.RelationName.text = FamilyItemData.RSName
     
-    let selectrow = pickerKeys.indexOf(FamilyItemData.RSCode)
-    self.RelationNamesPickerView.selectRow(selectrow!, inComponent: 0, animated: true)
+    selectedPickerRow = pickerKeys.indexOf(FamilyItemData.RSCode)!
+    self.RelationNamesPickerView.selectRow(selectedPickerRow, inComponent: 0, animated: true)
   
   }
   
@@ -56,9 +57,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     super.viewWillDisappear(animated)
     
     try! realm.write({ () -> Void in
-      
-      self.FamilyItemData.RSName = self.RelationName.text!
-      self.FamilyItemData.RSCode = YukoMyNumberAppProperties.sharedInstance.RelationItems[self.FamilyItemData.RSName]!
+      self.FamilyItemData.RSCode = pickerKeys[selectedPickerRow]
     })
   }
   
@@ -95,6 +94,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     
     if(row != 0){
       self.RelationName.text = pickerValues[row]
+      self.selectedPickerRow = row
     }
   }
 

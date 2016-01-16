@@ -70,7 +70,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       self.FirstCallFlag = false
       self.loadEmployeeData()
-  
     })
     
     let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
@@ -165,7 +164,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       case 2:
         tableButton = makeButtonInTableView("データを送信",actionName: "sendDataBtn:")
-
         break
       
       default:
@@ -300,7 +298,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     let OKAction = UIAlertAction(title: "送信", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       
       self.myActivityIndicator.startAnimating()
-      self.uploadData()
+      
+      self.uploadData(self.employeeeditdata)
+
     }
     
     let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (cancel:UIAlertAction) -> Void in
@@ -316,7 +316,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   /*
   * データをSQLServerへ登録する
   */
-  func uploadData(){
+  func uploadData(uploaddata:EmployeeData){
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
@@ -327,13 +327,29 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
         print("Connection Successed!")
     
-        let sqlstring = "insert into T_Employee(" +
-                        "SeqNo,EmployeeCode,EmployeeFamilyName,EmployeeFirstName,EmployeeMyNumber" +
-                        ") values (NEWID(),'\(self.employeeeditdata.EmployeeCode)','\(self.employeeeditdata.FamilyName)','\(self.employeeeditdata.FirstName)','\(self.employeeeditdata.MyNumber)')"
+        let list = self.realm.objects(EmployeeData).filter("EmployeeCode = '\(uploaddata.EmployeeCode)'").sorted("FamilySeqNo")
         
-        print(sqlstring)
+        var sqlstringlist:String = ""
         
-        self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
+        for data in list {
+          let sqlstring = "insert into T_Employee(" +
+            "SeqNo,EmployeeCode,RelationCode,FamilyName,FirstName,MyNumber,TimeStamp" +
+            ") values " +
+            "(NEWID()," +
+            "'\(data.EmployeeCode)'," +
+            "'\(data.RSCode)'," +
+            "'\(data.FamilyName)'," +
+            "'\(data.FirstName)'," +
+            "'\(data.MyNumber)'," +
+            "SYSDATETIME()" +
+          ")"
+          
+          sqlstringlist = sqlstringlist + sqlstring
+        }
+        
+        print(sqlstringlist)
+        
+        self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
           self.client.disconnect()
           self.myActivityIndicator.stopAnimating()
           
@@ -377,13 +393,19 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     familyItemData.removeAll()
     
-    let families = realm.objects(EmployeeData).filter("EmployeeCode = '\(employeeeditdata.EmployeeCode)' and RSCode != '00'")
+    let families = realm.objects(EmployeeData).filter("EmployeeCode = '\(employeeeditdata.EmployeeCode)' and RSCode != '00' and DeleteFlag = false")
     for family in families{
-      if(!family.DeleteFlag){
-        familyItemData.append(family.FamilyName + "　" + family.FirstName)
-      }
+      familyItemData.append(family.FamilyName + "　" + family.FirstName)
     }
-    
+
+    try! realm.write({ () -> Void in
+      let delitem = realm.objects(EmployeeData).filter("EmployeeCode = '\(self.employeeeditdata.EmployeeCode)' and RSCode != '00' and DeleteFlag = true")
+      self.realm.delete(delitem)
+      print("Delete!")
+    })
+
+
+
     self.tableView.reloadData()
     
     myActivityIndicator.stopAnimating()

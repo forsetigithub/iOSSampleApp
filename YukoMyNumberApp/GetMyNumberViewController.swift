@@ -113,11 +113,24 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
         " and RSCode = '\(MyNumberEditData.RSCode)'")
 
       if(result.count == 1){
+        
         result[0].MyNumber = self.MyNumberTextField.text!
         
         self.myActivityIndicatior.stopAnimating()
         
         self.navigationController?.popViewControllerAnimated(true)
+        
+      }else{
+        let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄が\(result.count)件登録されているためマイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          self.myActivityIndicatior.stopAnimating()
+          self.MyNumberTextField.resignFirstResponder()
+        })
+        
+        myAlert.addAction(OKAction)
+        
+        presentViewController(myAlert, animated: true, completion: nil)
       }
     }
   }
