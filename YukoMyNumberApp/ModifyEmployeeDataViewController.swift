@@ -46,18 +46,20 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     self.FirstNameTextField.text = EmployeeEditData.FirstName
     
     if(ModifyMode == ModifyModeEnum.Employee){
-      self.FamilyNameTextField.enabled = false
-      self.FirstNameTextField.enabled = false
-      changeTextColor(FamilyNameTextField)
-      changeTextColor(FirstNameTextField)
+      changeTextAttribute(FamilyNameTextField)
+      changeTextAttribute(FirstNameTextField)
 
     }else{
-      self.EmployeeCodeTextField.enabled = false
-      changeTextColor(EmployeeCodeTextField)
+      changeTextAttribute(EmployeeCodeTextField)
     }
   }
   
-  func changeTextColor(textField:UITextField){
+  func changeTextAttribute(textField:UITextField){
+    if let cell = textField.superview?.superview as? UITableViewCell{
+      cell.userInteractionEnabled = false
+    }
+    
+    textField.enabled = false
     textField.textColor = UIColor.lightGrayColor()
   }
   

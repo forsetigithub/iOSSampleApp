@@ -41,8 +41,6 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     // Do any additional setup after loading the view, typically from a nib.
     
     self.RelationNamesPickerView.delegate = self
-    self.RelationName.text = "続柄"
-    
     self.FamilyNameTextField.delegate = self
     self.FirstNameTextField.delegate = self
     
@@ -55,6 +53,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
         }
       }
     }
+    
+    self.RelationName.text = pickerValues[0]
+
   }
   
   override func didReceiveMemoryWarning() {
@@ -63,7 +64,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   }
   
   override func viewDidAppear(animated: Bool) {
-
+    self.FamilyNameTextField.becomeFirstResponder()
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -84,6 +85,13 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   }
   
   @IBAction func tapSaveButton(sender: UIBarButtonItem) {
+    
+    if(self.FamilyNameTextField.text?.characters.count == 0 ||
+      self.FirstNameTextField.text?.characters.count == 0 ||
+      self.RelationName.text == pickerValues[0]){
+    
+      //必須未入力エラー
+    }
     
     try! realm.write({ () -> Void in
       let family = EmployeeData()

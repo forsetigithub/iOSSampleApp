@@ -31,7 +31,6 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     self.MyNumberTextField.delegate = self
     self.title = "マイナンバー登録"
     self.subjectName.text = MyNumberEditData.FamilyName + "　" + MyNumberEditData.FirstName
-
     
     myActivityIndicatior.frame = CGRectMake(0, 0, 50, 50)
     myActivityIndicatior.center = self.view.center
@@ -41,7 +40,11 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   }
   
   override func viewWillAppear(animated: Bool) {
-    self.MyNumberTextField.text = MyNumberEditData.MyNumber    
+    self.MyNumberTextField.text = MyNumberEditData.MyNumber
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    self.MyNumberTextField.becomeFirstResponder()
   }
   
   override func didReceiveMemoryWarning() {
@@ -89,6 +92,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   }
   
   @IBAction func changeShowMyNumberSwitch(sender: UISwitch) {
+    self.MyNumberTextField.resignFirstResponder()
     if(sender.on){
       self.showMyNumberLabel.text = "表示"
       
@@ -107,6 +111,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     try! realm.write { () -> Void in
       let result = realm.objects(EmployeeData).filter("EmployeeCode = '\(MyNumberEditData.EmployeeCode)'" +
         " and RSCode = '\(MyNumberEditData.RSCode)'")
+
       if(result.count == 1){
         result[0].MyNumber = self.MyNumberTextField.text!
         

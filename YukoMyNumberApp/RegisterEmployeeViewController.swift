@@ -27,6 +27,12 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     EmployeeFirstName.delegate = self
     
     self.navigationItem.title = "新規登録"
+    
+
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    self.EmployeeCode.becomeFirstResponder()
   }
   
   override func didReceiveMemoryWarning() {

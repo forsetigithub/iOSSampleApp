@@ -226,9 +226,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
               break
             case 2: //値
               let label = subview as? UILabel
+              
               if(indexPath.row == 2) {
                 //マイナンバー取得状況
                 cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.userInteractionEnabled = false
                 
                 if(employeeItemData.count != 0 && employeeItemData[indexPath.row].characters.count ==
                     YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
@@ -324,8 +326,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       if(success){
         
         print("Connection Successed!")
-        
-        let sqlstring = "insert into T_Employee(SeqNo,EmployeeCode,EmployeeFamilyName,EmployeeFirstName,EmployeeMyNumber) values (NEWID(),'\(self.employeeeditdata.EmployeeCode)','\(self.employeeeditdata.FamilyName)','\(self.employeeeditdata.FirstName)','\(self.employeeeditdata.MyNumber)')"
+    
+        let sqlstring = "insert into T_Employee(" +
+                        "SeqNo,EmployeeCode,EmployeeFamilyName,EmployeeFirstName,EmployeeMyNumber" +
+                        ") values (NEWID(),'\(self.employeeeditdata.EmployeeCode)','\(self.employeeeditdata.FamilyName)','\(self.employeeeditdata.FirstName)','\(self.employeeeditdata.MyNumber)')"
         
         print(sqlstring)
         

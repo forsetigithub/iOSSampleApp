@@ -89,7 +89,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
   @IBAction func tapDeleteBtn(sender: AnyObject) {
     let deleteName = FamilyNameTextField.text! + "　" + FirstNameTextField.text!
-    let myAlert:UIAlertController = UIAlertController(title: "確認", message: "\(deleteName) を削除します。よろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let myAlert:UIAlertController = UIAlertController(title: "確認", message: "「\(deleteName) 」を削除します。\nよろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
     
     let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       try! self.realm.write({ () -> Void in
