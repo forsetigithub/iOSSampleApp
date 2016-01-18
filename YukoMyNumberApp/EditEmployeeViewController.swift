@@ -401,10 +401,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     try! realm.write({ () -> Void in
       let delitem = realm.objects(EmployeeData).filter("EmployeeCode = '\(self.employeeeditdata.EmployeeCode)' and RSCode != '00' and DeleteFlag = true")
       self.realm.delete(delitem)
-      print("Delete!")
     })
-
-
 
     self.tableView.reloadData()
     

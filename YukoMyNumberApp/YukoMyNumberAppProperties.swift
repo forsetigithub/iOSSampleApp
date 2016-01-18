@@ -29,4 +29,5 @@ final class YukoMyNumberAppProperties {
   let TableViewCellDefaultHeight:CGFloat = (dict.objectForKey("TableViewCellDefaultHeight") as? CGFloat)!
   let ServerInfo:[String:String] = dict.objectForKey("ServerInfo") as! [String:String]
   let ButtonInTableViewFontSize = (dict.objectForKey("ButtonInTableViewFontSize") as? CGFloat)!
+  let AppDefaultFontSize = (dict.objectForKey("AppDefaultFontSize") as? CGFloat)!
 }

@@ -169,6 +169,8 @@
 	<string>System</string>
 	<key>ButtonInTableViewFontSize</key>
 	<integer>17</integer>
+	<key>AppDefaultFontSize</key>
+	<integer>17</integer>
 	<key>TableViewCellDefaultHeight</key>
 	<integer>44</integer>
 	<key>ServerInfo</key>

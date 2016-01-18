@@ -45,6 +45,8 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     self.FamilyNameTextField.delegate = self
     self.FirstNameTextField.delegate = self
     
+    
+    
     pickerKeys = Array(pickerItems.keys).sort()
     
     for pikcerkey in pickerKeys {
@@ -117,6 +119,16 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   //MARK: UIPickerView
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
+  }
+  
+  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+  
+    let pickerLabel = UILabel()
+    pickerLabel.font = UIFont(name:"", size:YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
+    pickerLabel.text = pickerValues[row]
+    pickerLabel.textAlignment = NSTextAlignment.Center
+    
+    return pickerLabel
   }
   
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
