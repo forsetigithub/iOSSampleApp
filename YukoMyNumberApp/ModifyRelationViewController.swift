@@ -81,6 +81,15 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     return 1
   }
   
+  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    let pickerLabel = UILabel()
+    pickerLabel.font = UIFont(name:"", size:YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
+    pickerLabel.text = pickerValues[row]
+    pickerLabel.textAlignment = NSTextAlignment.Center
+    
+    return pickerLabel
+  }
+  
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return pickerItems.count
   }
