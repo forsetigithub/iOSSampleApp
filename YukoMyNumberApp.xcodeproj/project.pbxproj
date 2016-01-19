@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */; };
+		03282CDE1C4DFF5A002C4042 /* MyNumberCheckDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */; };
 		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
 		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyEmployeeDataViewController.swift; sourceTree = "<group>"; };
+		03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNumberCheckDigit.swift; sourceTree = "<group>"; };
 		03313FD41C3DF006004D3F9F /* bkpublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bkpublic.h; sourceTree = "<group>"; };
 		03313FD51C3DF006004D3F9F /* cspublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cspublic.h; sourceTree = "<group>"; };
 		03313FD61C3DF006004D3F9F /* cstypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cstypes.h; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */,
 				0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */,
 				035976C91C3F59E3004AA479 /* GetMyNumberViewController.swift */,
+				03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */,
 				03E99D711C4DB127004C3788 /* RelationPickerViewController.swift */,
 				035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03F6318D1C40D9BD0083F33F /* RegisterFamilyViewController.swift in Sources */,
+				03282CDE1C4DFF5A002C4042 /* MyNumberCheckDigit.swift in Sources */,
 				03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */,
 				03670A8C1C436B4C003F3CCC /* EditFamilyViewController.swift in Sources */,
 				035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */,

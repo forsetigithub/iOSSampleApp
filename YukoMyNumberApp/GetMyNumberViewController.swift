@@ -16,6 +16,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   @IBOutlet weak var MyNumberTextField: UITextField!
   @IBOutlet weak var showMyNumberLabel: UILabel!
   @IBOutlet weak var subjectName: UILabel!
+
   
   private let myActivityIndicatior:UIActivityIndicatorView = UIActivityIndicatorView()
   
@@ -57,9 +58,8 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     let str:String = textField.text! + string
     
-    if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount as Int){
+    if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount as Int ){
       
-      myNumberCheckDigit()
       ret = false
     }
     
@@ -70,16 +70,6 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     return true
   }
-  
-  func myNumberCheckDigit() -> Bool{
-    
-    var checkReturn = true
-    
-    
-    
-    return checkReturn
-  }
-  
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
@@ -106,6 +96,19 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
 
   @IBAction func tapRegisterButton(sender: UIButton) {
     
+    if((self.MyNumberTextField.text?.isValidMyNumber())! == false){
+      
+      let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に誤りがあります。", preferredStyle: UIAlertControllerStyle.Alert)
+      
+      let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        
+      })
+      
+      myAlert.addAction(OKAction)
+      presentViewController(myAlert, animated: true, completion: nil)
+      return
+    }
+    
     self.myActivityIndicatior.startAnimating()
     
     try! realm.write { () -> Void in
@@ -117,7 +120,6 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
         result[0].MyNumber = self.MyNumberTextField.text!
         
         self.myActivityIndicatior.stopAnimating()
-        
         self.navigationController?.popViewControllerAnimated(true)
         
       }else{

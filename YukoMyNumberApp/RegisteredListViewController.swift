@@ -74,12 +74,13 @@ class RegisteredListViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-   let delitem = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
+   let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
+   let families = self.realm.objects(EmployeeData).filter("EmployeeCode = '\(employee.EmployeeCode)'")
     
     try! realm.write({ () -> Void in
-      realm.delete(delitem)
+      realm.delete(employee)
+      realm.delete(families)
     })
-    
     
     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
   }
