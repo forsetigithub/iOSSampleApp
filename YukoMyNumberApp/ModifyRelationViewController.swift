@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
-  UIPickerViewDataSource{
+class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   
   let realm = try! Realm()
   
@@ -20,26 +19,17 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
   @IBOutlet weak var RelationName: UILabel!
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
   
-  private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
-  private var pickerKeys:[String] = [String]()
-  private var pickerValues:[String] = [String]()
-  private var selectedPickerRow:Int = 0
+  
+  private let RelationPicker = RelationPickerViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = "続柄"
     
-    self.RelationNamesPickerView.delegate = self
+    self.RelationNamesPickerView.delegate = RelationPicker
     
-    pickerKeys = Array(pickerItems.keys).sort()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatePickerValue:", name: "updatePickerNotification", object: nil)
     
-    for pikcerkey in pickerKeys {
-      for (key,val) in pickerItems{
-        if(pikcerkey == key){
-          pickerValues.append(val)
-        }
-      }
-    }
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -47,17 +37,16 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     super.viewWillAppear(animated)
     
     self.RelationName.text = FamilyItemData.RSName
-    
-    selectedPickerRow = pickerKeys.indexOf(FamilyItemData.RSCode)!
-    self.RelationNamesPickerView.selectRow(selectedPickerRow, inComponent: 0, animated: true)
-  
+    RelationPicker.selectedRSCode = FamilyItemData.RSCode
+    let row = RelationPicker.pickerKeys.indexOf(RelationPicker.selectedRSCode)
+    self.RelationNamesPickerView!.selectRow(row!, inComponent: 0, animated: true)
   }
   
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     
     try! realm.write({ () -> Void in
-      self.FamilyItemData.RSCode = pickerKeys[selectedPickerRow]
+      self.FamilyItemData.RSCode = self.RelationPicker.selectedRSCode
     })
   }
   
@@ -76,25 +65,9 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate,
     return height
   }
   
-  //MARK: UIPickerView
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-    return 1
-  }
-  
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return pickerItems.count
-  }
-  
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    
-    return pickerValues[row] as String
-  }
-  
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    
-    if(row != 0){
-      self.RelationName.text = pickerValues[row]
-      self.selectedPickerRow = row
+  func updatePickerValue(notification:NSNotification){
+    if(notification.name == "updatePickerNotification"){
+      self.RelationName.text = self.RelationPicker.selectedRSName
     }
   }
 

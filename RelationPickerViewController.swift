@@ -11,19 +11,31 @@ import UIKit
 
 class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDataSource{
   
-  let RelationPickerView:UIPickerView
-  //var SelectedRelation:String
-  
+  var RelationPickerView:UIPickerView?
+
   private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
   
   var pickerKeys:[String] = [String]()
   var pickerValues:[String] = [String]()
+  
   var selectedPickerRow:Int = 0
   
+  private var selectedrscode:String?
+  var selectedRSCode:String{
+    set{
+      selectedrscode = newValue
+      selectedRSName = pickerItems[selectedrscode!]
+    }
+    get{
+      return selectedrscode!
+    }
+  }
+  
+  var selectedRSName:String?
+
   override init(){
+    super.init()
     RelationPickerView = UIPickerView()
-    //SelectedRelation = ""
-    
     pickerKeys = Array(pickerItems.keys).sort()
     
     for pikcerkey in pickerKeys {
@@ -33,10 +45,15 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
         }
       }
     }
+    
+    RelationPickerView?.delegate = self
+    
   }
+
+  
   
   //MARK: UIPickerView
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+  @objc func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
   }
   
@@ -50,7 +67,7 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
     return pickerLabel
   }
   
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+  @objc func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return pickerItems.count
   }
   
@@ -58,12 +75,16 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
     
     return pickerValues[row] as String
   }
-  
+ 
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     
     if(row != 0){
-      //SelectedRelation = pickerValues[row]
       selectedPickerRow = row
+      selectedRSCode = pickerKeys[row]
+      
+print("updatePickerNotification")
+      
+      NSNotificationCenter.defaultCenter().postNotificationName("updatePickerNotification", object: nil)
     }
   }
 

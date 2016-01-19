@@ -27,16 +27,10 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   
   @IBOutlet weak var FamilyNameTextField: UITextField!
   @IBOutlet weak var FirstNameTextField: UITextField!
-  @IBOutlet weak var RelationNamesPickerView: UIPickerView!
   @IBOutlet weak var RelationName: UILabel!
+  @IBOutlet weak var RelationPickerCell: UITableViewCell!
+  @IBOutlet weak var RelationPickerView: UIPickerView!
   
-/*
-  private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
-
-  private var pickerKeys:[String] = [String]()
-  private var pickerValues:[String] = [String]()
-  private var selectedPickerRow:Int = 0
-*/
   
   private let RelationPicker:RelationPickerViewController = RelationPickerViewController()
   
@@ -44,26 +38,18 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    RelationPicker.RelationPickerView.delegate = self
-    self.RelationNamesPickerView.delegate = self
+
     self.FamilyNameTextField.delegate = self
     self.FirstNameTextField.delegate = self
-    self.RelationNamesPickerView = RelationPicker.RelationPickerView
+  
+    self.RelationPickerView.delegate = RelationPicker
+    RelationPicker.selectedRSCode = RelationPicker.pickerKeys[0]
+    self.RelationName.text = RelationPicker.selectedRSName
     
-/*
-    pickerKeys = Array(pickerItems.keys).sort()
-    
-    for pikcerkey in pickerKeys {
-      for (key,val) in pickerItems{
-        if(pikcerkey == key){
-           pickerValues.append(val)
-        }
-      }
-    }
-*/
-    self.RelationName.text = RelationPicker.pickerValues[0]
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatePickerValue:", name: "updatePickerNotification", object: nil)
 
   }
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -105,7 +91,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       let family = EmployeeData()
       family.FamilyName = self.FamilyNameTextField.text!
       family.FirstName = self.FirstNameTextField.text!
-      family.RSCode = RelationPicker.pickerKeys[RelationPicker.selectedPickerRow]
+      family.RSCode = RelationPicker.selectedRSCode
       family.EmployeeCode = eployeeeditdata.EmployeeCode
       
       family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
@@ -116,41 +102,12 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       self.navigationController?.popViewControllerAnimated(true)
       
     })
-
-  
-  }
-  
-  //MARK: UIPickerView
-/*
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-    return 1
-  }
-  
-  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-  
-    let pickerLabel = UILabel()
-    pickerLabel.font = UIFont(name:"", size:YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
-    pickerLabel.text = pickerValues[row]
-    pickerLabel.textAlignment = NSTextAlignment.Center
-    
-    return pickerLabel
-  }
-  
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return pickerItems.count
-  }
-  
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    
-    return pickerValues[row] as String
   }
 
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-    if(row != 0){
-      self.RelationName.text = pickerValues[row]
-      selectedPickerRow = row
+  func updatePickerValue(notification:NSNotification?){
+    if(notification?.name == "updatePickerNotification"){
+      self.RelationName.text = RelationPicker.pickerValues[RelationPicker.selectedPickerRow]
     }
   }
-*/
+
 }
