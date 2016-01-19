@@ -9,22 +9,31 @@
 import Foundation
 import UIKit
 
-class RelationPickerViewController:NSObject,UIPickerViewDelegate{
+class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDataSource{
   
   let RelationPickerView:UIPickerView
-  var SelectedRelation:String
+  //var SelectedRelation:String
   
   private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
   
-  private var pickerKeys:[String] = [String]()
-  private var pickerValues:[String] = [String]()
-  private var selectedPickerRow:Int = 0
+  var pickerKeys:[String] = [String]()
+  var pickerValues:[String] = [String]()
+  var selectedPickerRow:Int = 0
   
   override init(){
     RelationPickerView = UIPickerView()
-    SelectedRelation = ""
+    //SelectedRelation = ""
+    
+    pickerKeys = Array(pickerItems.keys).sort()
+    
+    for pikcerkey in pickerKeys {
+      for (key,val) in pickerItems{
+        if(pikcerkey == key){
+          pickerValues.append(val)
+        }
+      }
+    }
   }
-  
   
   //MARK: UIPickerView
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -53,7 +62,7 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate{
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     
     if(row != 0){
-      SelectedRelation = pickerValues[row]
+      //SelectedRelation = pickerValues[row]
       selectedPickerRow = row
     }
   }

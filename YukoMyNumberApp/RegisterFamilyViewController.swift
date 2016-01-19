@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
-                                    UIPickerViewDelegate,UIPickerViewDataSource {
+                                    UIPickerViewDelegate {
   
   let realm = try! Realm()
 
@@ -30,23 +30,27 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
   @IBOutlet weak var RelationName: UILabel!
   
+/*
   private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
 
   private var pickerKeys:[String] = [String]()
   private var pickerValues:[String] = [String]()
   private var selectedPickerRow:Int = 0
+*/
+  
+  private let RelationPicker:RelationPickerViewController = RelationPickerViewController()
   
   // MARK: - Table View
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    
+    RelationPicker.RelationPickerView.delegate = self
     self.RelationNamesPickerView.delegate = self
     self.FamilyNameTextField.delegate = self
     self.FirstNameTextField.delegate = self
+    self.RelationNamesPickerView = RelationPicker.RelationPickerView
     
-    
-    
+/*
     pickerKeys = Array(pickerItems.keys).sort()
     
     for pikcerkey in pickerKeys {
@@ -56,8 +60,8 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
         }
       }
     }
-    
-    self.RelationName.text = pickerValues[0]
+*/
+    self.RelationName.text = RelationPicker.pickerValues[0]
 
   }
   
@@ -92,7 +96,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   @IBAction func tapRegisterButton(sender: AnyObject) {
     if(self.FamilyNameTextField.text?.characters.count == 0 ||
       self.FirstNameTextField.text?.characters.count == 0 ||
-      self.RelationName.text == pickerValues[0]){
+      self.RelationName.text == RelationPicker.pickerValues[0]){
         
         //必須未入力エラー
     }
@@ -101,7 +105,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       let family = EmployeeData()
       family.FamilyName = self.FamilyNameTextField.text!
       family.FirstName = self.FirstNameTextField.text!
-      family.RSCode = self.pickerKeys[selectedPickerRow]
+      family.RSCode = RelationPicker.pickerKeys[RelationPicker.selectedPickerRow]
       family.EmployeeCode = eployeeeditdata.EmployeeCode
       
       family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
@@ -117,6 +121,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   }
   
   //MARK: UIPickerView
+/*
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -139,7 +144,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     
     return pickerValues[row] as String
   }
-  
+
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
     if(row != 0){
@@ -147,4 +152,5 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       selectedPickerRow = row
     }
   }
+*/
 }
