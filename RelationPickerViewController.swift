@@ -50,8 +50,6 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
     
   }
 
-  
-  
   //MARK: UIPickerView
   @objc func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
@@ -82,10 +80,7 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
       selectedPickerRow = row
       selectedRSCode = pickerKeys[row]
       
-print("updatePickerNotification")
-      
       NSNotificationCenter.defaultCenter().postNotificationName("updatePickerNotification", object: nil)
     }
   }
-
 }

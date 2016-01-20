@@ -84,7 +84,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="社員番号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="e91-A4-RIW">
                                                     <rect key="frame" x="20" y="0.0" width="550" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -146,10 +146,41 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="入社年月日" id="wb1-BC-xND">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="GeY-C5-mVy">
+                                        <rect key="frame" x="0.0" y="348" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GeY-C5-mVy" id="696-zN-3If">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入社年月日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bY-XH-KgB">
+                                                    <rect key="frame" x="20" y="0.0" width="150" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="UgF-U7-aMu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5bY-XH-KgB" firstAttribute="top" secondItem="696-zN-3If" secondAttribute="top" id="9wu-Yr-pob"/>
+                                                <constraint firstItem="5bY-XH-KgB" firstAttribute="centerY" secondItem="696-zN-3If" secondAttribute="centerY" id="ibK-as-Ad3"/>
+                                                <constraint firstItem="5bY-XH-KgB" firstAttribute="leading" secondItem="696-zN-3If" secondAttribute="leading" constant="20" id="uwe-dX-WYB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cTv-em-wVF" kind="show" identifier="showSelectDate" id="WEP-ZU-yEd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="暗証番号(数字4桁）" id="g0w-g7-8dD">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FwJ-q8-OZu">
-                                        <rect key="frame" x="0.0" y="348" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="443" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FwJ-q8-OZu" id="cOg-9j-7lU">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -173,7 +204,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Uaa-r4-o7e">
-                                        <rect key="frame" x="0.0" y="392" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="487" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uaa-r4-o7e" id="lVT-1Q-PvJ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -198,35 +229,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="wb1-BC-xND">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="GeY-C5-mVy">
-                                        <rect key="frame" x="0.0" y="472" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GeY-C5-mVy" id="696-zN-3If">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-TJ-e4S">
-                                                    <rect key="frame" x="250" y="5" width="100" height="33"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="jRk-EU-YX3"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="登録"/>
-                                                    <connections>
-                                                        <action selector="tapRegisterButton:" destination="glt-Rc-m74" eventType="touchUpInside" id="KBy-Sb-8rD"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="WNV-TJ-e4S" firstAttribute="centerY" secondItem="696-zN-3If" secondAttribute="centerY" id="YDk-c9-91b"/>
-                                                <constraint firstItem="WNV-TJ-e4S" firstAttribute="centerX" secondItem="696-zN-3If" secondAttribute="centerX" id="pL3-an-hcg"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="glt-Rc-m74" id="JnI-gt-xgq"/>
@@ -240,6 +242,11 @@
                                 <action selector="tapCancelButton:" destination="glt-Rc-m74" id="L2l-lS-Iwp"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="登録" style="done" id="cqt-4A-mIb">
+                            <connections>
+                                <action selector="tapRegisterButton:" destination="glt-Rc-m74" id="Km9-lN-9uo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -247,12 +254,63 @@
                         <outlet property="EmployeeCode" destination="e91-A4-RIW" id="eOu-TP-A8O"/>
                         <outlet property="EmployeeFamilyName" destination="qH2-mz-yzV" id="YgC-of-GAb"/>
                         <outlet property="EmployeeFirstName" destination="icP-M7-zlg" id="aup-Ry-tWY"/>
+                        <outlet property="EmployeeJoinedDateLabel" destination="5bY-XH-KgB" id="rqw-CT-KHm"/>
                         <segue destination="Kbw-qs-XVq" kind="presentation" identifier="showRegisterList" id="mYv-2G-Ee8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6x-yL-bZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-255" y="-57"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="Pcs-W2-z1V">
+            <objects>
+                <tableViewController id="cTv-em-wVF" customClass="DatePickerViewController" customModule="YukoMyNumberApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="QLC-Ig-as1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="1XG-0D-bF3">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EZy-J4-TPZ">
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EZy-J4-TPZ" id="ykI-oR-jcZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZJf-WI-y0U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="474949323.75930601">
+                                                        <!--2016-01-20 02:22:03 +0000-->
+                                                    </date>
+                                                    <locale key="locale" localeIdentifier="ja_JP"/>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZJf-WI-y0U" firstAttribute="top" secondItem="ykI-oR-jcZ" secondAttribute="top" id="1hW-gH-DXW"/>
+                                                <constraint firstItem="ZJf-WI-y0U" firstAttribute="leading" secondItem="ykI-oR-jcZ" secondAttribute="leading" id="6Gz-rA-jPa"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZJf-WI-y0U" secondAttribute="trailing" id="Znp-El-Jfa"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZJf-WI-y0U" secondAttribute="bottom" id="g19-ov-7xd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="cTv-em-wVF" id="p9f-Kh-fez"/>
+                            <outlet property="delegate" destination="cTv-em-wVF" id="wz1-zO-nUG"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="myDatePicker" destination="ZJf-WI-y0U" id="h2V-iO-SI1"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dIB-F8-EM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="461" y="-57"/>
         </scene>
         <!--登録者情報-->
         <scene sceneID="v8W-92-2FT">
@@ -316,7 +374,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKh-k0-dMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="587"/>
+            <point key="canvasLocation" x="461" y="590"/>
         </scene>
         <!--Edit Family View Controller-->
         <scene sceneID="iU1-dU-hwP">
@@ -1064,6 +1122,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bBv-4R-2WZ"/>
+        <segue reference="rAQ-cR-PZM"/>
     </inferredMetricsTieBreakers>
 </document>

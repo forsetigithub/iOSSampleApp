@@ -30,6 +30,7 @@ class EmployeeData : Object {
   dynamic var CreateDateTime = NSDate()
   dynamic var DeleteFlag = false
   dynamic var PassCode = 0
+  dynamic var JoinedDate = NSDate()
   dynamic var ReserveItem1 = ""
   dynamic var ReserveItem2 = ""
   dynamic var ReserveItem3 = ""

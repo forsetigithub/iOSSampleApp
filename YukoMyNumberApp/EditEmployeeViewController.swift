@@ -297,8 +297,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let OKAction = UIAlertAction(title: "送信", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       
-      self.myActivityIndicator.startAnimating()
-      
       self.uploadData(self.employeeeditdata)
 
     }
@@ -318,6 +316,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   */
   func uploadData(uploaddata:EmployeeData){
     
+    self.myActivityIndicator.startAnimating()
+    
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
     client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
@@ -332,6 +332,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         var sqlstringlist:String = ""
         
         for data in list {
+
           let sqlstring = "insert into T_Employee(" +
             "SeqNo,EmployeeCode,RelationCode,FamilyName,FirstName,MyNumber,TimeStamp" +
             ") values " +
@@ -343,7 +344,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             "'\(data.MyNumber)'," +
             "SYSDATETIME()" +
           ")"
-          
+
           sqlstringlist = sqlstringlist + sqlstring
         }
         
