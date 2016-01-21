@@ -338,9 +338,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJg-DL-aZD">
-                                            <rect key="frame" x="407" y="22" width="150" height="0.0"/>
+                                            <rect key="frame" x="357" y="22" width="200" height="0.0"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="150" id="3uE-22-7r5"/>
+                                                <constraint firstAttribute="width" constant="200" id="3uE-22-7r5"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -739,10 +739,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="マイナンバー" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gEK-Lz-Jz3">
-                                                    <rect key="frame" x="20" y="0.0" width="480" height="43"/>
+                                                    <rect key="frame" x="20" y="0.0" width="500" height="43"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="非表示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yha-RH-Gpz">
                                                     <rect key="frame" x="530" y="0.0" width="60" height="43"/>
@@ -755,7 +755,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="gEK-Lz-Jz3" secondAttribute="trailing" constant="100" id="1Fw-0P-ery"/>
+                                                <constraint firstAttribute="trailing" secondItem="gEK-Lz-Jz3" secondAttribute="trailing" constant="80" id="1Fw-0P-ery"/>
                                                 <constraint firstAttribute="bottom" secondItem="yha-RH-Gpz" secondAttribute="bottom" id="GQu-Dx-0EU"/>
                                                 <constraint firstItem="yha-RH-Gpz" firstAttribute="centerY" secondItem="iuP-yO-Tqq" secondAttribute="centerY" id="Pph-Tg-vRp"/>
                                                 <constraint firstItem="gEK-Lz-Jz3" firstAttribute="leading" secondItem="iuP-yO-Tqq" secondAttribute="leading" constant="20" id="Y7l-V3-1PB"/>
@@ -774,7 +774,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Nw-q1-UGX">
+                                                <switch opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Nw-q1-UGX">
                                                     <rect key="frame" x="531" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="changeShowMyNumberSwitch:" destination="jW7-Y3-kfK" eventType="valueChanged" id="YN9-Ew-JAp"/>
@@ -843,6 +843,7 @@
                     <connections>
                         <outlet property="MyNumberTextField" destination="gEK-Lz-Jz3" id="Ypp-B5-sTr"/>
                         <outlet property="showMyNumberLabel" destination="yha-RH-Gpz" id="K2H-Gp-ThI"/>
+                        <outlet property="showMyNumberSwitch" destination="5Nw-q1-UGX" id="FKf-rl-CXJ"/>
                         <outlet property="subjectName" destination="V6M-qr-rvt" id="3BT-ho-Q28"/>
                     </connections>
                 </tableViewController>
@@ -956,7 +957,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dH7-xk-SvM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="dH7-xk-SvM">
                                         <rect key="frame" x="0.0" y="319" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dH7-xk-SvM" id="GAJ-SZ-ZmS">
@@ -1031,7 +1032,7 @@
                         <sections>
                             <tableViewSection headerTitle="社員番号" id="TsO-bP-RiP">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="i9Y-nX-2Md">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="i9Y-nX-2Md">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i9Y-nX-2Md" id="tJt-A8-5le">

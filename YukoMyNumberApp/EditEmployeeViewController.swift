@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 import Foundation
-
+import SVProgressHUD
 
 class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
 
@@ -17,7 +17,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   let client:SQLClient = SQLClient()
   
   // MARK: TableView定義
-  private let sectionTitles = ["","家族情報",""]
+  private let sectionTitles = ["本人情報","家族情報","送信情報"]
   private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.EmployeeCodeLabelName,
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeNameLabelName,
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeMNLabelName]
@@ -27,9 +27,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
 
   private var employeeeditdata:EmployeeData = EmployeeData()
   
-  private var myActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
-  
   private var FirstCallFlag:Bool = true
+  
+  private let dateFormatter:NSDateFormatter = NSDateFormatter()
 
   var EmployeeEditData:EmployeeData{
     set(newValue){
@@ -45,37 +45,35 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     client.delegate = self
-   
-    myActivityIndicator.frame = CGRectMake(0, 0, 50, 50)
-    myActivityIndicator.center = self.view.center
-    myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-    
-    self.view.addSubview(myActivityIndicator)
+  
+    dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
     
     showPassCodeAlert()
+    
   }
 
-  
   override func viewWillAppear(animated: Bool) {
+
     if(!FirstCallFlag){
       loadEmployeeData()
     }
   }
-  
   
   func showPassCodeAlert(){
     let myAlert:UIAlertController = UIAlertController(title: "暗証番号入力", message: "暗証番号(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
     
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
       
+      SVProgressHUD.show()
+      
       self.FirstCallFlag = false
       self.loadEmployeeData()
+      
+      SVProgressHUD.dismiss()
     })
     
     let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
-      
       self.navigationController?.popViewControllerAnimated(true)
-      
     })
     
     myAlert.addTextFieldWithConfigurationHandler({ (textField:UITextField) -> Void in
@@ -200,6 +198,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       case 1: //家族情報
         rowcount = familyItemData.count
         break
+      case 2: //送信状況
+        rowcount = 1
+        break
       default:
         break
     }
@@ -217,21 +218,19 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       case 0:  //本人
         
         for subview in cell.contentView.subviews {
+          let label = subview as? UILabel
           switch subview.tag {
             case 1: //ラベル
-              let label = subview as? UILabel
               label?.text = employeeItemLabels[indexPath.row] as? String
               break
             case 2: //値
-              let label = subview as? UILabel
               
               if(indexPath.row == 2) {
                 //マイナンバー取得状況
                 cell.accessoryType = UITableViewCellAccessoryType.None
                 cell.userInteractionEnabled = false
                 
-                if(employeeItemData.count != 0 && employeeItemData[indexPath.row].characters.count ==
-                    YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount){
+                if(employeeItemData.count != 0 && self.employeeeditdata.MyNumberCheckDigitResult){
                   
                   label?.text = "取得済"
                   label?.textColor = UIColor.lightGrayColor()
@@ -244,7 +243,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                   label?.text = self.employeeItemData[indexPath.row]
                 }
               }
-             
+        
               break
             default:
               break
@@ -254,14 +253,13 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         break
       case 1:  //家族情報        
         for subview in cell.contentView.subviews{
+          let label = subview as? UILabel
           switch subview.tag {
             case 1: //氏名
-              let label = subview as? UILabel
               label?.text = familyItemData[indexPath.row]
               
               break
             case 2:
-              let label = subview as? UILabel
               label?.text?.removeAll()
               
             default:
@@ -270,8 +268,31 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         }
         
         break
-      case 2:
+      case 2: //送信状況
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.accessoryType = UITableViewCellAccessoryType.None
         
+        for subview in cell.contentView.subviews{
+          let label = subview as? UILabel
+          switch subview.tag{
+            case 1:
+
+              label?.text = "最終送信日時"
+              break
+            case 2:
+              if(employeeItemData.count != 0){
+                if(self.employeeeditdata.LastUploadDate.characters.count == 0){
+                  label?.text = "未送信"
+                }else{
+                  label?.text = self.employeeeditdata.LastUploadDate
+                }
+              }
+              
+              break
+            default:
+              break
+          }
+        }
         break
       default:
         break
@@ -298,7 +319,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     let OKAction = UIAlertAction(title: "送信", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       
       self.uploadData(self.employeeeditdata)
-
+      
     }
     
     let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (cancel:UIAlertAction) -> Void in
@@ -316,7 +337,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   */
   func uploadData(uploaddata:EmployeeData){
     
-    self.myActivityIndicator.startAnimating()
+    SVProgressHUD.showWithStatus("送信中・・・")
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
@@ -341,7 +362,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             "'\(data.RSCode)'," +
             "'\(data.FamilyName)'," +
             "'\(data.FirstName)'," +
-            "'\(data.MyNumber)'," +
+            "'\(data.MyNumber.stringByReplacingOccurrencesOfString(" ", withString: ""))'," +
             "SYSDATETIME()" +
           ")"
 
@@ -351,8 +372,14 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         print(sqlstringlist)
         
         self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
+          
           self.client.disconnect()
-          self.myActivityIndicator.stopAnimating()
+          
+          try! self.realm.write({ () -> Void in
+            self.employeeeditdata.LastUploadDate = self.dateFormatter.stringFromDate(NSDate())
+          })
+          
+          SVProgressHUD.dismiss()
           
           let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
           
@@ -369,7 +396,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         })
         
       }else{
-        self.myActivityIndicator.stopAnimating()
+        SVProgressHUD.dismiss()
         print("Error Connect")
         return
       }
@@ -383,8 +410,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   }
   
   func loadEmployeeData(){
-
-    myActivityIndicator.startAnimating()
     
     employeeItemData.removeAll()
     employeeItemData.append(employeeeditdata.EmployeeCode)
@@ -406,7 +431,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
 
     self.tableView.reloadData()
     
-    myActivityIndicator.stopAnimating()
   }
   
   override func didReceiveMemoryWarning() {

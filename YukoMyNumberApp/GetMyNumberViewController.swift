@@ -9,20 +9,21 @@
 import Foundation
 import UIKit
 import RealmSwift
-
+import SVProgressHUD
 
 class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   
   @IBOutlet weak var MyNumberTextField: UITextField!
   @IBOutlet weak var showMyNumberLabel: UILabel!
   @IBOutlet weak var subjectName: UILabel!
-
-  
-  private let myActivityIndicatior:UIActivityIndicatorView = UIActivityIndicatorView()
+  @IBOutlet weak var showMyNumberSwitch: UISwitch!
   
   private let realm = try! Realm()
-    
+  
   var MyNumberEditData:EmployeeData = EmployeeData()
+  
+  private var previousTextFieldContent:String?
+  private var previousSelection:UITextRange?
 
   // MARK: - Table View
   
@@ -31,17 +32,21 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     // Do any additional setup after loading the view, typically from a nib.
     self.MyNumberTextField.delegate = self
     self.title = "マイナンバー登録"
+    
     self.subjectName.text = MyNumberEditData.FamilyName + "　" + MyNumberEditData.FirstName
     
-    myActivityIndicatior.frame = CGRectMake(0, 0, 50, 50)
-    myActivityIndicatior.center = self.view.center
-    myActivityIndicatior.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-    
-    self.view.addSubview(myActivityIndicatior)
+    self.MyNumberTextField.addTarget(self, action: "reformatAsAddSpaceNumber:", forControlEvents: UIControlEvents.EditingChanged)
   }
   
   override func viewWillAppear(animated: Bool) {
+    if(MyNumberEditData.MyNumberCheckDigitResult){
+      self.showMyNumberSwitch.on = false
+    }else{
+      self.showMyNumberSwitch.on = true
+    }
+    
     self.MyNumberTextField.text = MyNumberEditData.MyNumber
+    changeShowMyNumberSwitch(showMyNumberSwitch)
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -54,16 +59,12 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   }
   
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-    var ret = true
     
-    let str:String = textField.text! + string
+    self.previousTextFieldContent = textField.text
+    self.previousSelection = textField.selectedTextRange
     
-    if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount as Int ){
-      
-      ret = false
-    }
-    
-    return ret
+    return true
+
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -71,26 +72,61 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     return true
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
-
-  }
-  
   override func viewWillDisappear(animated: Bool) {
   
 
   }
   
-  @IBAction func changeShowMyNumberSwitch(sender: UISwitch) {
-    self.MyNumberTextField.resignFirstResponder()
-    if(sender.on){
-      self.showMyNumberLabel.text = "表示"
-      
-    }else{
-      self.showMyNumberLabel.text = "非表示"
+  // MARK: MyNumberTextFieldFormatt
+  func reformatAsAddSpaceNumber(textField:UITextField){
+
+    var targetCursorPosition = textField.offsetFromPosition(textField.beginningOfDocument, toPosition: (textField.selectedTextRange?.start)!)
+    
+    let NumberWithoutSpaces = textField.text?.stringByReplacingOccurrencesOfString(" ", withString: "")
+    
+    if(NumberWithoutSpaces?.characters.count > (YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount) as Int){
+      textField.text = previousTextFieldContent
+      textField.selectedTextRange = previousSelection
+      return
     }
     
-    self.MyNumberTextField.secureTextEntry = !(self.MyNumberTextField.secureTextEntry)
+    let NumberWithSpaces = insertSpacesEveryFourDigitsIntoString(NumberWithoutSpaces!, CursorPosition: &targetCursorPosition)
+    textField.text = NumberWithSpaces
+    
+    let targetPosition = textField.positionFromPosition(textField.beginningOfDocument, inDirection: UITextLayoutDirection.Right,offset: targetCursorPosition)
+    textField.selectedTextRange = textField.textRangeFromPosition(targetPosition!, toPosition: targetPosition!)
+  }
+  
+  private func insertSpacesEveryFourDigitsIntoString(string:String,inout CursorPosition cursorPosition:Int) -> String{
+    
+    var stringWithAddedSpaces:String = ""
+    let cursorPositionInSpacelessString = cursorPosition
+    
+    for (var i = 0; i < string.characters.count;i++){
+      if((i > 0) && ((i % 4) == 0)){
+        stringWithAddedSpaces = stringWithAddedSpaces + " "
+        if(i < cursorPositionInSpacelessString){
+          cursorPosition++
+        }
+      }
+      let range = NSRange(location: i, length: 1)
+      stringWithAddedSpaces = stringWithAddedSpaces + ((string as NSString).substringWithRange(range))
+    }
+    
+    return stringWithAddedSpaces
+  }
+  
+  @IBAction func changeShowMyNumberSwitch(sender: UISwitch) {
+    
+    self.MyNumberTextField.resignFirstResponder()
+    
+    if(sender.on){
+      self.showMyNumberLabel.text = "表示"
+      self.MyNumberTextField.secureTextEntry = false
+    }else{
+      self.showMyNumberLabel.text = "非表示"
+      self.MyNumberTextField.secureTextEntry = true
+    }
   
   }
 
@@ -107,9 +143,8 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
       myAlert.addAction(OKAction)
       presentViewController(myAlert, animated: true, completion: nil)
       return
-    }
     
-    self.myActivityIndicatior.startAnimating()
+    }
     
     try! realm.write { () -> Void in
       let result = realm.objects(EmployeeData).filter("EmployeeCode = '\(MyNumberEditData.EmployeeCode)'" +
@@ -119,15 +154,15 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
         
         result[0].MyNumber = self.MyNumberTextField.text!
         
-        self.myActivityIndicatior.stopAnimating()
         self.navigationController?.popViewControllerAnimated(true)
         
       }else{
         let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄が\(result.count)件登録されているためマイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.Alert)
         
         let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-          self.myActivityIndicatior.stopAnimating()
+          
           self.MyNumberTextField.resignFirstResponder()
+          
         })
         
         myAlert.addAction(OKAction)

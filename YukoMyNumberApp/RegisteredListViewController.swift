@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 
 class RegisteredListViewController: UITableViewController {
-
   
   let realm = try! Realm()
   

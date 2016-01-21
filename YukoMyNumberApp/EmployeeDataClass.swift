@@ -20,17 +20,20 @@ class EmployeeData : Object {
   dynamic var RSCode = ""
   
   var RSName:String{
-    print(self.RSCode)
-
     return YukoMyNumberAppProperties.sharedInstance.RelationItems[self.RSCode]!
-    
   }
   
   dynamic var MyNumber = ""
+  
+  var MyNumberCheckDigitResult:Bool{
+    return self.MyNumber.isValidMyNumber()
+  }
+  
   dynamic var CreateDateTime = NSDate()
   dynamic var DeleteFlag = false
   dynamic var PassCode = 0
   dynamic var JoinedDate = NSDate()
+  dynamic var LastUploadDate = ""
   dynamic var ReserveItem1 = ""
   dynamic var ReserveItem2 = ""
   dynamic var ReserveItem3 = ""

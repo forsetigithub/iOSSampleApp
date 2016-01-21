@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SVProgressHUD
 
 class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate {
   
@@ -19,9 +20,6 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   @IBOutlet weak var EmployeeFamilyName: UITextField!
   @IBOutlet weak var EmployeeFirstName: UITextField!
   @IBOutlet weak var EmployeeJoinedDateLabel: UILabel!
-  
-  
-  let myActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
   
   var JoinedDate:NSDate?
   let formatter = NSDateFormatter()
@@ -36,12 +34,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     self.navigationItem.title = "新規登録"
     formatter.dateFormat = "yyyy年 MM月 dd日"
-    
-    myActivityIndicator.frame = CGRectMake(0, 0, 50, 50)
-    myActivityIndicator.center = self.view.center
-    myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-    
-    self.view.addSubview(myActivityIndicator)
+  
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -110,7 +103,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   */
   func uploadData(uploaddata:EmployeeData){
     
-    myActivityIndicator.startAnimating()
+    SVProgressHUD.show()
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
@@ -150,7 +143,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           
           self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
             self.client.disconnect()
-            self.myActivityIndicator.stopAnimating()
+            
+            SVProgressHUD.dismiss()
             
             let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
             
@@ -167,7 +161,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           })
           
         }else{
-          self.myActivityIndicator.stopAnimating()
+          SVProgressHUD.dismiss()
           print("Error Connect")
           return
         }
