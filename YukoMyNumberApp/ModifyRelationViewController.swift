@@ -37,7 +37,8 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
     super.viewWillAppear(animated)
     
     self.RelationName.text = FamilyItemData.RSName
-    RelationPicker.selectedRSCode = FamilyItemData.RSCode
+    self.RelationPicker.selectedRSCode = FamilyItemData.RSCode
+    
     let row = RelationPicker.pickerKeys.indexOf(RelationPicker.selectedRSCode)
     self.RelationNamesPickerView!.selectRow(row!, inComponent: 0, animated: true)
   }

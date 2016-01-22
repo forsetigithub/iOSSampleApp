@@ -24,6 +24,10 @@ class RegisteredListViewController: UITableViewController {
     
   }
   
+  override func viewWillAppear(animated: Bool) {
+    
+  }
+  
   override func setEditing(editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
     tableView.editing = editing
@@ -48,8 +52,11 @@ class RegisteredListViewController: UITableViewController {
   
   override func tableView(tableView:UITableView,cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("RegisteredCell",forIndexPath:indexPath) as UITableViewCell
+    
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
-    cell.textLabel!.text = employee.FamilyName + "　" + employee.FirstName
+    
+    cell.textLabel?.text = employee.FamilyName + "　" + employee.FirstName
+    
     return cell
   }
   
@@ -73,15 +80,14 @@ class RegisteredListViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-   let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
-   let families = self.realm.objects(EmployeeData).filter("EmployeeCode = '\(employee.EmployeeCode)'")
+    
+    let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     
     try! realm.write({ () -> Void in
       realm.delete(employee)
-      realm.delete(families)
+      tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
     })
-    
-    tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+
   }
   
   override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -90,8 +96,7 @@ class RegisteredListViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
-
+  
   }
   
   

@@ -31,6 +31,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   private let dateFormatter:NSDateFormatter = NSDateFormatter()
 
+  private let myToolbar = UIToolbar()
+  
   var EmployeeEditData:EmployeeData{
     set(newValue){
       employeeeditdata = newValue
@@ -44,6 +46,24 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.tableView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)
+    
+    myToolbar.frame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44.0)
+    
+    myToolbar.barStyle = UIBarStyle.Default
+    myToolbar.backgroundColor = UIColor.whiteColor()
+    myToolbar.translucent = false
+    
+    let uploadDataBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "tapUploadDataBarButtonItem:")
+    
+    let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
+    
+    toolbarSpace.width = self.view.bounds.size.width - 60
+    myToolbar.items = [toolbarSpace,uploadDataBarButtonItem]
+    
+    self.view.addSubview(myToolbar)
+    
     client.delegate = self
   
     dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
@@ -57,6 +77,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     if(!FirstCallFlag){
       loadEmployeeData()
     }
+    self.view.bringSubviewToFront(myToolbar)
   }
   
   func showPassCodeAlert(){
@@ -68,6 +89,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       self.FirstCallFlag = false
       self.loadEmployeeData()
+      self.view.bringSubviewToFront(self.myToolbar)
       
       SVProgressHUD.dismiss()
     })
@@ -100,6 +122,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     // 入力された文字を表示.
     print(textField.text)
   }
+  
   
   /*
   セクションの数を返す
@@ -145,7 +168,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                                   .FlexibleTopMargin,
                                   .FlexibleBottomMargin]
     
-    footerView.backgroundColor = UIColor.whiteColor()
+    if(section != 2){
+      footerView.backgroundColor = UIColor.whiteColor()
+    }
     
     var tableButton:UIButton = UIButton()
     
@@ -161,7 +186,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         break
       
       case 2:
-        tableButton = makeButtonInTableView("データを送信",actionName: "sendDataBtn:")
+        //tableButton = makeButtonInTableView("データを送信",actionName: "sendDataBtn:")
         break
       
       default:
@@ -214,6 +239,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath)
     
+    cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+    
     switch indexPath.section {
       case 0:  //本人
         
@@ -253,7 +280,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         break
       case 1:  //家族情報        
         for subview in cell.contentView.subviews{
+
           let label = subview as? UILabel
+          
           switch subview.tag {
             case 1: //氏名
               label?.text = familyItemData[indexPath.row]
@@ -309,12 +338,17 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     performSegueWithIdentifier("showAddNewFamily", sender: self)
   }
   
+  
+  func tapUploadDataBarButtonItem(sender:UIButton){
+    self.sendDataBtn(sender)
+  }
+  
   /* 
     送信ボタン押下時処理
   */
   func sendDataBtn(sender:UIButton){
     
-    let AlertView = UIAlertController(title: "確認", message: "送信します。よろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let AlertView = UIAlertController(title: "データを送信", message: "データを送信します。よろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
     
     let OKAction = UIAlertAction(title: "送信", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       

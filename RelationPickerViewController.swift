@@ -58,7 +58,10 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
   func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
     
     let pickerLabel = UILabel()
-    pickerLabel.font = UIFont(name:"", size:YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
+    pickerLabel.font = UIFont(name:"", size:YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize)
+
+print("size:YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize = \(YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize ) pickerLabel.font=\(pickerLabel.font)")
+    
     pickerLabel.text = pickerValues[row]
     pickerLabel.textAlignment = NSTextAlignment.Center
     

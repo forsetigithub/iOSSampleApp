@@ -20,7 +20,6 @@ final class YukoMyNumberAppProperties {
     }
   }
   
-  
   let MyNumberCharactersCount:NSNumber = (dict.objectForKey("MyNumberCharactersCount") as? NSNumber)!
   let EmployeeCodeLabelName = dict.objectForKey("EmployeeCodeLabelName")
   let EmployeeNameLabelName = dict.objectForKey("EmployeeNameLabelName")
@@ -30,4 +29,5 @@ final class YukoMyNumberAppProperties {
   let ServerInfo:[String:String] = dict.objectForKey("ServerInfo") as! [String:String]
   let ButtonInTableViewFontSize = (dict.objectForKey("ButtonInTableViewFontSize") as? CGFloat)!
   let AppDefaultFontSize = (dict.objectForKey("AppDefaultFontSize") as? CGFloat)!
+  let PickerLabelFontSize = (dict.objectForKey("PickerLabelFontSize") as? CGFloat)!
 }

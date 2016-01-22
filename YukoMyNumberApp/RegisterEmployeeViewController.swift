@@ -80,8 +80,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       self.realm.add(NewEmployeeData)
       
       uploadData(NewEmployeeData)
-      
-      self.performSegueWithIdentifier("showRegisterList", sender: self)
+
+
     })
     
   }
@@ -143,21 +143,12 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           
           self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
             self.client.disconnect()
+            print("Disconnected")
             
             SVProgressHUD.dismiss()
             
-            let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-              
-              self.navigationController?.popViewControllerAnimated(true)
-            })
-            
-            messageAlert.addAction(OKAction)
-            
-            self.presentViewController(messageAlert, animated: true, completion: nil)
-            
-            print("Disconnected")
+            self.performSegueWithIdentifier("showRegisterList", sender: self)
+
           })
           
         }else{
@@ -166,8 +157,5 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           return
         }
     }
-    
   }
-
-  
 }
