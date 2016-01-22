@@ -89,6 +89,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       self.FirstCallFlag = false
       self.loadEmployeeData()
+      
       self.view.bringSubviewToFront(self.myToolbar)
       
       SVProgressHUD.dismiss()

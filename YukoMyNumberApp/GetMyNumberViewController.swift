@@ -78,6 +78,9 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   }
   
   // MARK: MyNumberTextFieldFormatt
+  /* 
+  * 番号4桁ごとにスペースを挿入する
+  */
   func reformatAsAddSpaceNumber(textField:UITextField){
 
     var targetCursorPosition = textField.offsetFromPosition(textField.beginningOfDocument, toPosition: (textField.selectedTextRange?.start)!)

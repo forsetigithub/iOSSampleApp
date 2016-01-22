@@ -35,6 +35,7 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
 
   override init(){
     super.init()
+    
     RelationPickerView = UIPickerView()
     pickerKeys = Array(pickerItems.keys).sort()
     
@@ -58,10 +59,8 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
   func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
     
     let pickerLabel = UILabel()
-    pickerLabel.font = UIFont(name:"", size:YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize)
-
-print("size:YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize = \(YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize ) pickerLabel.font=\(pickerLabel.font)")
     
+    pickerLabel.font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize)
     pickerLabel.text = pickerValues[row]
     pickerLabel.textAlignment = NSTextAlignment.Center
     

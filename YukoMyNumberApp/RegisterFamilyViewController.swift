@@ -43,6 +43,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     self.FirstNameTextField.delegate = self
   
     self.RelationPickerView.delegate = RelationPicker
+    
     RelationPicker.selectedRSCode = RelationPicker.pickerKeys[0]
     self.RelationName.text = RelationPicker.selectedRSName
     
