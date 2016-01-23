@@ -67,7 +67,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   func textFieldDidEndEditing(textField: UITextField) {
   
     if((textField.tag == 1 || textField.tag == 2) &&
-      textField.text?.characters.count != YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+      textField.text?.characters.count != 0 && textField.text?.characters.count != YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
     
         let myAlert = UIAlertController(title: "", message: "暗証番号は\((YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)!)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
         

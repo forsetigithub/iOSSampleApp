@@ -25,7 +25,8 @@ class RegisteredListViewController: UITableViewController {
   }
   
   override func viewWillAppear(animated: Bool) {
-    
+    self.tableView.reloadData()
+    self.navigationController?.toolbarHidden = true
   }
   
   override func setEditing(editing: Bool, animated: Bool) {
@@ -51,11 +52,29 @@ class RegisteredListViewController: UITableViewController {
   }
   
   override func tableView(tableView:UITableView,cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
+    
     let cell = tableView.dequeueReusableCellWithIdentifier("RegisteredCell",forIndexPath:indexPath) as UITableViewCell
     
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     
-    cell.textLabel?.text = employee.FamilyName + "　" + employee.FirstName
+    for subview in cell.contentView.subviews{
+      switch subview.tag{
+        case 1:
+          let label = subview as? UILabel
+          label?.text = employee.FamilyName + "　" + employee.FirstName
+          break
+        case 2:
+          let image = subview as? UIImageView
+          
+          if(employee.LastUploadDate.characters.count != 0){
+            image?.image = UIImage(named: "checkmark.png")
+          }
+      
+          break
+        default:
+          break
+      }
+    }
     
     return cell
   }

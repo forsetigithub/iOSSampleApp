@@ -27,7 +27,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   private var employeeeditdata:EmployeeData = EmployeeData()
   private var FirstCallFlag:Bool = true
   private let dateFormatter:NSDateFormatter = NSDateFormatter()
-  private let myToolbar = UIToolbar()
+
   private var InputPassCode:String?
   
   var EmployeeEditData:EmployeeData{
@@ -43,25 +43,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    
-    self.tableView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)
-    
-    myToolbar.frame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44.0)
-    
-    myToolbar.barStyle = UIBarStyle.Default
-    myToolbar.backgroundColor = UIColor.whiteColor()
-    myToolbar.translucent = false
-    
-    let uploadDataBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "tapUploadDataBarButtonItem:")
-    
-    let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
-    
-    toolbarSpace.width = self.view.bounds.size.width / 2 - 30
-    
-    myToolbar.items = [toolbarSpace,uploadDataBarButtonItem]
-    
-    self.view.addSubview(myToolbar)
-    
+  
     client.delegate = self
   
     dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
@@ -75,7 +57,17 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     if(!FirstCallFlag){
       loadEmployeeData()
     }
-    self.view.bringSubviewToFront(myToolbar)
+    
+    let uploadDataBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "tapUploadDataBarButtonItem:")
+    
+    let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
+    
+    toolbarSpace.width = self.view.bounds.size.width / 2 - 27
+    
+    
+    self.toolbarItems = [toolbarSpace,uploadDataBarButtonItem]
+    self.navigationController?.setToolbarHidden(false, animated: false)
+   
   }
   
   func showPassCodeAlert(){
@@ -102,8 +94,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       self.FirstCallFlag = false
       self.loadEmployeeData()
-      
-      self.view.bringSubviewToFront(self.myToolbar)
       
       SVProgressHUD.dismiss()
     })
@@ -358,14 +348,15 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   * UIToolbarのActionボタン押下時
   */
   func tapUploadDataBarButtonItem(sender:UIButton){
-    let AlertView = UIAlertController(title: "メニューを選択", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let AlertView = UIAlertController(title: "メニューを選択してください", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
     
     let SendData = UIAlertAction(title: "データを送信", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in
       
       let SendAlertView = UIAlertController(title:"データ送信",message: "データを送信します。よろしいですか？",preferredStyle: UIAlertControllerStyle.Alert)
       
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-        self.sendDataBtn(sender)
+        //self.sendDataBtn(sender)
+        self.uploadData(self.employeeeditdata)
       })
       
       let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
@@ -382,8 +373,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       self.performSegueWithIdentifier("showChangePassCode", sender: self)
     }
     
+    let AlertCancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: nil)
+    
     AlertView.addAction(SendData)
     AlertView.addAction(ChangePassword)
+    AlertView.addAction(AlertCancelAction)
     
     presentViewController(AlertView, animated: true, completion: nil)
     

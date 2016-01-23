@@ -21,6 +21,31 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fjc-cg-Pox" id="Id0-Xi-wdp">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lec-cY-86o">
+                                            <rect key="frame" x="5" y="10" width="30" height="23"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="bDS-wJ-BeG"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGI-8i-bGJ">
+                                            <rect key="frame" x="40" y="0.0" width="477" height="43"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="RGI-8i-bGJ" firstAttribute="centerY" secondItem="Id0-Xi-wdp" secondAttribute="centerY" id="456-bc-b0W"/>
+                                        <constraint firstItem="lec-cY-86o" firstAttribute="top" secondItem="Id0-Xi-wdp" secondAttribute="top" constant="10" id="AUn-6D-Ug9"/>
+                                        <constraint firstAttribute="bottom" secondItem="lec-cY-86o" secondAttribute="bottom" constant="10" id="Dlt-To-0hU"/>
+                                        <constraint firstItem="lec-cY-86o" firstAttribute="centerY" secondItem="Id0-Xi-wdp" secondAttribute="centerY" id="Fmx-a8-5Nv"/>
+                                        <constraint firstItem="RGI-8i-bGJ" firstAttribute="top" secondItem="Id0-Xi-wdp" secondAttribute="top" id="SJ8-WU-bxf"/>
+                                        <constraint firstItem="lec-cY-86o" firstAttribute="leading" secondItem="Id0-Xi-wdp" secondAttribute="leading" constant="5" id="k8N-mE-d5B"/>
+                                        <constraint firstAttribute="bottom" secondItem="RGI-8i-bGJ" secondAttribute="bottom" id="pQL-Za-mkT"/>
+                                        <constraint firstItem="RGI-8i-bGJ" firstAttribute="leading" secondItem="lec-cY-86o" secondAttribute="trailing" constant="5" id="uVZ-OO-t2E"/>
+                                        <constraint firstAttribute="trailing" secondItem="RGI-8i-bGJ" secondAttribute="trailing" constant="50" id="y65-3c-37v"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -366,8 +391,8 @@
                             <outlet property="delegate" destination="dHf-Ro-Tdz" id="kln-ki-kAZ"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="登録者情報" id="i2o-5d-qzi"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="IMb-uP-VPN" kind="show" identifier="showAddNewFamily" id="F8X-5l-I3x"/>
                         <segue destination="kIA-Rf-2EZ" kind="show" identifier="showEditFamily" id="bHX-TA-bk9"/>
@@ -877,7 +902,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="5dA-0L-lvP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="9yx-Li-0HQ">
                                 <cells>
@@ -1048,9 +1073,6 @@
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waC-Sy-JYq">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="600" id="v7h-ZC-jGt"/>
-                                                    </constraints>
                                                 </pickerView>
                                             </subviews>
                                             <constraints>
