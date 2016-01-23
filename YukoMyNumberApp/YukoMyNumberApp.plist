@@ -10,6 +10,8 @@
 	<string>マイナンバー</string>
 	<key>MyNumberCharactersCount</key>
 	<integer>12</integer>
+	<key>PassCodeCharactersCount</key>
+	<integer>4</integer>
 	<key>RelationItems</key>
 	<dict>
 		<key>-1</key>

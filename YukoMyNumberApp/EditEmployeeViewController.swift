@@ -24,14 +24,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   private var employeeItemData:[String] = [String]()
   private var familyItemData:[String] = [String]()
-
   private var employeeeditdata:EmployeeData = EmployeeData()
-  
   private var FirstCallFlag:Bool = true
-  
   private let dateFormatter:NSDateFormatter = NSDateFormatter()
-
   private let myToolbar = UIToolbar()
+  private var InputPassCode:String?
   
   var EmployeeEditData:EmployeeData{
     set(newValue){
@@ -59,7 +56,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
     
-    toolbarSpace.width = self.view.bounds.size.width - 60
+    toolbarSpace.width = self.view.bounds.size.width / 2 - 30
+    
     myToolbar.items = [toolbarSpace,uploadDataBarButtonItem]
     
     self.view.addSubview(myToolbar)
@@ -84,6 +82,21 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     let myAlert:UIAlertController = UIAlertController(title: "暗証番号入力", message: "暗証番号(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
     
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+      
+      if(self.InputPassCode != self.employeeeditdata.PassCode){
+        let unmatchAlert = UIAlertController(title: "暗証番号入力エラー", message: "暗証番号が正しくありません。\n正しい暗証番号を入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let unmatchOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) -> Void in
+          self.navigationController?.popViewControllerAnimated(true)
+        })
+        
+        unmatchAlert.addAction(unmatchOK)
+        
+        self.presentViewController(unmatchAlert, animated: true, completion: nil)
+        
+        return
+        
+      }
       
       SVProgressHUD.show()
       
@@ -119,6 +132,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   */
   internal func changeTextField (sender: NSNotification) {
     let textField = sender.object as! UITextField
+    
+    self.InputPassCode = textField.text
     
     // 入力された文字を表示.
     print(textField.text)
@@ -339,9 +354,39 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     performSegueWithIdentifier("showAddNewFamily", sender: self)
   }
   
-  
+  /* 
+  * UIToolbarのActionボタン押下時
+  */
   func tapUploadDataBarButtonItem(sender:UIButton){
-    self.sendDataBtn(sender)
+    let AlertView = UIAlertController(title: "メニューを選択", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    
+    let SendData = UIAlertAction(title: "データを送信", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in
+      
+      let SendAlertView = UIAlertController(title:"データ送信",message: "データを送信します。よろしいですか？",preferredStyle: UIAlertControllerStyle.Alert)
+      
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        self.sendDataBtn(sender)
+      })
+      
+      let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
+        
+      })
+      
+      SendAlertView.addAction(OKAction)
+      SendAlertView.addAction(CancelAction)
+      
+      self.presentViewController(SendAlertView, animated: true, completion: nil)
+    }
+    
+    let ChangePassword = UIAlertAction(title: "暗証番号を変更", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+      self.performSegueWithIdentifier("showChangePassCode", sender: self)
+    }
+    
+    AlertView.addAction(SendData)
+    AlertView.addAction(ChangePassword)
+    
+    presentViewController(AlertView, animated: true, completion: nil)
+    
   }
   
   /* 

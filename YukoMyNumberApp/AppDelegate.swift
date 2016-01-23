@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     
 
+    UILabel.appearance().font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
     
     return true
   }

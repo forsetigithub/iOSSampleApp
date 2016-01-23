@@ -20,9 +20,14 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   @IBOutlet weak var EmployeeFamilyName: UITextField!
   @IBOutlet weak var EmployeeFirstName: UITextField!
   @IBOutlet weak var EmployeeJoinedDateLabel: UILabel!
+  @IBOutlet weak var PassCodeTextField: UITextField!
+  @IBOutlet weak var RePassCodeTextField: UITextField!
+  
   
   var JoinedDate:NSDate?
   let formatter = NSDateFormatter()
+  
+  private var InputPassCode:String? //暗証番号(初回)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,6 +36,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     EmployeeCode.delegate = self
     EmployeeFamilyName.delegate = self
     EmployeeFirstName.delegate = self
+    PassCodeTextField.delegate = self
+    RePassCodeTextField.delegate = self
     
     self.navigationItem.title = "新規登録"
     formatter.dateFormat = "yyyy年 MM月 dd日"
@@ -58,16 +65,88 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   func textFieldDidEndEditing(textField: UITextField) {
-
+  
+    if((textField.tag == 1 || textField.tag == 2) &&
+      textField.text?.characters.count != YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+    
+        let myAlert = UIAlertController(title: "", message: "暗証番号は\((YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)!)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          textField.text?.removeAll()
+          textField.becomeFirstResponder()
+          
+        })
+        
+        myAlert.addAction(OKAction)
+        presentViewController(myAlert, animated: true, completion: nil)
+    }
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     return textField.resignFirstResponder()
   }
+  
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    
+    //暗証番号の桁数しか入力できないようにする
+    if(textField.tag == 1 || textField.tag == 2){
+      let str = textField.text! + string
+      if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+        return false
+      }else if(textField.tag == 2 && str.characters.count ==
+        YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount && str != self.InputPassCode){
+          
+          let myAlert = UIAlertController(title: "エラー", message: "入力した暗証番号が一致していません！", preferredStyle: UIAlertControllerStyle.Alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+            textField.text?.removeAll()
+          })
+          
+          myAlert.addAction(OKAction)
+          
+          presentViewController(myAlert, animated: true, completion: nil)
+        
+      }else{
+        if(textField.tag == 1){
+          self.InputPassCode = str
+        }
+      }
+    }
+    
+    return true
+  }
+
 
   
   @IBAction func tapRegisterButton(sender: UIBarButtonItem) {
     
+    //入力チェック
+#if DEBUG
+#else
+    //必須入力チェック
+    if(self.EmployeeCode.text?.characters.count == 0 ||
+      self.EmployeeFamilyName.text?.characters.count == 0 ||
+      self.EmployeeFirstName.text?.characters.count == 0 ||
+      self.JoinedDate == nil ||
+      self.PassCodeTextField.text?.characters.count == 0){
+        
+        let myAlert = UIAlertController(title: "必須項目入力エラー", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          
+         
+        })
+        
+        myAlert.addAction(OKAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
+        
+        self.resignFirstResponder()
+        
+        return
+    }
+  
+#endif
+    
+    //データ登録
     try! realm.write({ () -> Void in
       let NewEmployeeData = EmployeeData()
       NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
@@ -75,12 +154,17 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       NewEmployeeData.FirstName = self.EmployeeFirstName.text!
       NewEmployeeData.FamilySeqNo = 0
       NewEmployeeData.RSCode = "00"
-      NewEmployeeData.JoinedDate = self.JoinedDate!
+      if let joineddate = self.JoinedDate{
+        NewEmployeeData.JoinedDate = joineddate
+      }else{
+      
+      }
+      
+      NewEmployeeData.PassCode = self.PassCodeTextField.text!
       NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       
       uploadData(NewEmployeeData)
-
 
     })
     

@@ -12,6 +12,7 @@
 		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
 		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
+		03564DFB1C530CD800166397 /* ChangePassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */; };
 		0358DAC31C45D23F008F2FD0 /* ModifyRelationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */; };
 		035976C61C3F4283004AA479 /* YukoMyNumberApp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */; };
 		035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */; };
@@ -69,6 +70,7 @@
 		03313FE01C3DF006004D3F9F /* sybfront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sybfront.h; sourceTree = "<group>"; };
 		03313FE11C3DF006004D3F9F /* tds_sysdep_public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tds_sysdep_public.h; sourceTree = "<group>"; };
 		03313FE41C3DF032004D3F9F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePassCodeViewController.swift; sourceTree = "<group>"; };
 		0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationViewController.swift; sourceTree = "<group>"; };
 		035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YukoMyNumberApp.plist; sourceTree = "<group>"; };
 		035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YukoMyNumberAppProperties.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
 				03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */,
 				03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */,
+				03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */,
 				032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */,
 				03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */,
 				03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */,
@@ -435,6 +438,7 @@
 				03282CDE1C4DFF5A002C4042 /* MyNumberCheckDigit.swift in Sources */,
 				03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */,
 				03670A8C1C436B4C003F3CCC /* EditFamilyViewController.swift in Sources */,
+				03564DFB1C530CD800166397 /* ChangePassCodeViewController.swift in Sources */,
 				035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */,
 				03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */,
 				03E99D721C4DB127004C3788 /* RelationPickerViewController.swift in Sources */,
@@ -594,6 +598,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/YukoMyNumberApp/SQLClient";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$PRODUCT_NAME-Bridging-Header.h";

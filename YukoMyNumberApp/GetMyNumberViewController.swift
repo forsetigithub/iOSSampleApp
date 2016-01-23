@@ -135,7 +135,10 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
 
   @IBAction func tapRegisterButton(sender: UIButton) {
     
-    if((self.MyNumberTextField.text?.isValidMyNumber())! == false){
+    let inputMyNumber:String = self.MyNumberTextField.text!
+    
+    //チェックデジット
+    if((inputMyNumber.isValidMyNumber()) == false){
       
       let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に誤りがあります。", preferredStyle: UIAlertControllerStyle.Alert)
       
@@ -149,6 +152,22 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     }
     
+    //重複チェック
+#if DEBUG
+#else
+  
+    let result = realm.objects(EmployeeData).filter("MyNumber = '\(inputMyNumber)'")
+    if(result.count != 0){
+      let myAlert = UIAlertController(title: "マイナンバー入力エラー", message: "入力したマイナンバーはすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+      
+      myAlert.addAction(OKAction)
+      
+      presentViewController(myAlert,animated: true,completion: nil)
+      return
+    }
+#endif
+
     try! realm.write { () -> Void in
       let result = realm.objects(EmployeeData).filter("EmployeeCode = '\(MyNumberEditData.EmployeeCode)'" +
         " and RSCode = '\(MyNumberEditData.RSCode)'")
