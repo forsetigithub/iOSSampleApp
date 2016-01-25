@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     UILabel.appearance().font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
     
+    UITextField.appearance().font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
     return true
   }
 

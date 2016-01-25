@@ -9,7 +9,12 @@
 import XCTest
 
 class YukoMyNumberAppUITests: XCTestCase {
-        
+  
+  private let testEmployeeCode:String = "1000136"
+  private let testEmployeeFamilyName = "木村"
+  private let testEmployeeFirstName = "正徳"
+  private let testPassCode = "1234"
+  
     override func setUp() {
         super.setUp()
         
@@ -29,8 +34,128 @@ class YukoMyNumberAppUITests: XCTestCase {
     }
     
     func testExample() {
+
+      
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+  
+  func testYukoMyNumberApp(){
     
+
+    
+  
+  }
+  
+  /* 
+  * 新規登録
+  */
+  func testRegisterEmployee(){
+    
+    let app = XCUIApplication()
+    let navigationBar = app.navigationBars["登録者一覧"]
+    navigationBar.buttons["追加"].tap()
+    
+    let tablesQuery = app.tables
+    
+    
+    //正常パターン
+    let clearTextTextField = tablesQuery.textFields.containingType(.Button, identifier:"Clear text").element
+    
+    let textField3 = tablesQuery.textFields["社員番号"]
+    textField3.typeText(testEmployeeCode)
+
+    let textField = tablesQuery.textFields["姓"]
+    textField.tap()
+    textField.typeText(testEmployeeFamilyName)
+
+    let textField2 = tablesQuery.textFields["名"]
+    textField2.tap()
+    textField2.typeText(testEmployeeFirstName)
+    
+    tablesQuery.staticTexts["入社年月日"].tap()
+    let dateformatter = NSDateFormatter()
+    dateformatter.dateFormat = "yyyy年"
+    
+    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017年")
+    
+    dateformatter.dateFormat = "M月"
+    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("4月")
+    
+    dateformatter.dateFormat = "d日"
+    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1日")
+    
+    app.navigationBars["入社年月日"].buttons["新規登録"].tap()
+    
+    tablesQuery.secureTextFields["暗証番号"].tap()
+    //正常値
+    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(4).childrenMatchingType(.SecureTextField).element.typeText(testPassCode)
+    
+    //桁数エラー
+    //tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(4).childrenMatchingType(.SecureTextField).element.typeText("123")
+    
+    
+    let secureTextField = tablesQuery.secureTextFields["暗証番号(再入力)"]
+    secureTextField.tap()
+    
+    //正常値
+    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(5).childrenMatchingType(.SecureTextField).element.typeText(testPassCode)
+    
+    //アンマッチ
+    //tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(5).childrenMatchingType(.SecureTextField).element.typeText("1235")
+    
+    //桁数3桁
+    
+    
+    
+    let button = app.navigationBars["新規登録"].buttons["登録"]
+    button.tap()
+    
+  }
+  
+  
+  
+  /* 
+  * 登録者削除
+  */
+  func testRegisterListDelete(){
+  
+    let app = XCUIApplication()
+    let navigationBar = app.navigationBars["登録者一覧"]
+    navigationBar.buttons["編集"].tap()
+    
+    let tablesQuery = app.tables
+    tablesQuery.buttons.elementBoundByIndex(0).tap()
+    tablesQuery.buttons["削除"].tap()
+    navigationBar.buttons["完了"].tap()
+    
+  }
+  
+  
+  
+  func testChangePassCode(){
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["登録者情報"].tap()
+    app.sheets["メニューを選択してください"].collectionViews.buttons["暗証番号を変更"].tap()
+    
+    let tablesQuery2 = app.tables
+    let tablesQuery = tablesQuery2
+    
+    tablesQuery2.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.SecureTextField).element.typeText("1234")
+    
+    tablesQuery2.childrenMatchingType(.Cell).elementBoundByIndex(1).childrenMatchingType(.SecureTextField).element.typeText("1235")
+
+    tablesQuery2.childrenMatchingType(.Cell).elementBoundByIndex(2).childrenMatchingType(.SecureTextField).element.typeText("1235")
+    app.navigationBars["変更"].tap()
+    app.alerts["暗証番号変更"].collectionViews.buttons["OK"].tap()
+  
+  }
+  
+  func testShowEmployeeEdit(){
+    
+  
+  
+  }
+  
 }

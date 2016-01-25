@@ -48,7 +48,10 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
       MyNumberGetStateLabel.text = "未取得"
       MyNumberGetStateLabel.textColor = UIColor.redColor()
     }
+    
+    self.navigationController?.toolbarHidden = true
   }
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

@@ -66,17 +66,20 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     
     self.toolbarItems = [toolbarSpace,uploadDataBarButtonItem]
-    self.navigationController?.setToolbarHidden(false, animated: false)
+    self.navigationController?.toolbarHidden = false
    
   }
   
   func showPassCodeAlert(){
-    let myAlert:UIAlertController = UIAlertController(title: "暗証番号入力", message: "暗証番号(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
+    
+    let labelTitle = YukoMyNumberAppProperties.sharedInstance.PassCodeLabelName
+    
+    let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle)入力", message: "\(labelTitle)(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
     
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
       
       if(self.InputPassCode != self.employeeeditdata.PassCode){
-        let unmatchAlert = UIAlertController(title: "暗証番号入力エラー", message: "暗証番号が正しくありません。\n正しい暗証番号を入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        let unmatchAlert = UIAlertController(title: "\(labelTitle)入力エラー", message: "\(labelTitle)が正しくありません。\n正しい\(labelTitle)を入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
         
         let unmatchOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) -> Void in
           self.navigationController?.popViewControllerAnimated(true)
@@ -355,8 +358,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       let SendAlertView = UIAlertController(title:"データ送信",message: "データを送信します。よろしいですか？",preferredStyle: UIAlertControllerStyle.Alert)
       
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-        //self.sendDataBtn(sender)
+        
         self.uploadData(self.employeeeditdata)
+        
       })
       
       let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
@@ -550,6 +554,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         let familydata = realm.objects(EmployeeData).filter("EmployeeCode = '\(employeeeditdata.EmployeeCode)' and RSCode != '00' and DeleteFlag = false")
         dest.FamilyItemData = familydata[(self.tableView.indexPathForSelectedRow!.row)]
       }
+    }
+    
+    if(segue.identifier == "showChangePassCode"){
+      let dest = segue.destinationViewController as? ChangePassCodeViewController
+      dest?.EmployeeEditData = employeeeditdata
     }
   }
 }

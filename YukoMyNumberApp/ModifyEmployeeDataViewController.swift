@@ -39,7 +39,6 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   }
   
   override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
     
     self.EmployeeCodeTextField.text = EmployeeEditData.EmployeeCode
     self.FamilyNameTextField.text = EmployeeEditData.FamilyName
@@ -52,6 +51,8 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     }else{
       changeTextAttribute(EmployeeCodeTextField)
     }
+    
+    self.navigationController?.toolbarHidden = true
   }
   
   override func viewWillDisappear(animated: Bool) {

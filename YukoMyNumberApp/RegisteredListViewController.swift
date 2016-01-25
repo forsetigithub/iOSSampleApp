@@ -27,6 +27,7 @@ class RegisteredListViewController: UITableViewController {
   override func viewWillAppear(animated: Bool) {
     self.tableView.reloadData()
     self.navigationController?.toolbarHidden = true
+
   }
   
   override func setEditing(editing: Bool, animated: Bool) {

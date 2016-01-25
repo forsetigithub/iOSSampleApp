@@ -34,13 +34,13 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   
   override func viewWillAppear(animated: Bool) {
     
-    super.viewWillAppear(animated)
-    
     self.RelationName.text = FamilyItemData.RSName
     self.RelationPicker.selectedRSCode = FamilyItemData.RSCode
     
     let row = RelationPicker.pickerKeys.indexOf(RelationPicker.selectedRSCode)
     self.RelationNamesPickerView!.selectRow(row!, inComponent: 0, animated: true)
+    
+    self.navigationController?.toolbarHidden = true
   }
   
   override func viewWillDisappear(animated: Bool) {

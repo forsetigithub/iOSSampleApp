@@ -47,6 +47,8 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     self.MyNumberTextField.text = MyNumberEditData.MyNumber
     changeShowMyNumberSwitch(showMyNumberSwitch)
+    
+    self.navigationController?.toolbarHidden = true
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -169,6 +171,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
 #endif
 
     try! realm.write { () -> Void in
+      
       let result = realm.objects(EmployeeData).filter("EmployeeCode = '\(MyNumberEditData.EmployeeCode)'" +
         " and RSCode = '\(MyNumberEditData.RSCode)'")
 
@@ -179,7 +182,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
         self.navigationController?.popViewControllerAnimated(true)
         
       }else{
-        let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄が\(result.count)件登録されているためマイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄がすでに登録されているため、マイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.Alert)
         
         let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           

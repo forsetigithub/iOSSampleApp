@@ -45,8 +45,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-  
+    
+    self.navigationController?.toolbarHidden = true
+    
     if(JoinedDate != nil){
       EmployeeJoinedDateLabel.text = formatter.stringFromDate(JoinedDate!)
       self.resignFirstResponder()
@@ -92,7 +93,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     if(textField.tag == 1 || textField.tag == 2){
       let str = textField.text! + string
       if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+        
         return false
+        
       }else if(textField.tag == 2 && str.characters.count ==
         YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount && str != self.InputPassCode){
           
@@ -164,7 +167,11 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       NewEmployeeData.CreateDateTime = NSDate()
       self.realm.add(NewEmployeeData)
       
+#if DEBUG
+#else
       uploadData(NewEmployeeData)
+#endif
+      
 
     })
     

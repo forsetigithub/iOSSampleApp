@@ -51,6 +51,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
 
   }
   
+  override func viewWillAppear(animated: Bool) {
+    self.navigationController?.toolbarHidden = true
+  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

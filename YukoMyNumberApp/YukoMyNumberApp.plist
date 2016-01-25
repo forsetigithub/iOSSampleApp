@@ -10,6 +10,8 @@
 	<string>マイナンバー</string>
 	<key>MyNumberCharactersCount</key>
 	<integer>12</integer>
+	<key>PassCodeLabelName</key>
+	<string>暗証番号</string>
 	<key>PassCodeCharactersCount</key>
 	<integer>4</integer>
 	<key>RelationItems</key>
