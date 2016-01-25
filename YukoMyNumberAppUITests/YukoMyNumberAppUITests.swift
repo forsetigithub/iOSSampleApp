@@ -60,7 +60,7 @@ class YukoMyNumberAppUITests: XCTestCase {
     
     
     //正常パターン
-    let clearTextTextField = tablesQuery.textFields.containingType(.Button, identifier:"Clear text").element
+    //let clearTextTextField = tablesQuery.textFields.containingType(.Button, identifier:"Clear text").element
     
     let textField3 = tablesQuery.textFields["社員番号"]
     textField3.typeText(testEmployeeCode)
@@ -140,8 +140,7 @@ class YukoMyNumberAppUITests: XCTestCase {
     app.sheets["メニューを選択してください"].collectionViews.buttons["暗証番号を変更"].tap()
     
     let tablesQuery2 = app.tables
-    let tablesQuery = tablesQuery2
-    
+    //let tablesQuery = tablesQuery2
     tablesQuery2.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.SecureTextField).element.typeText("1234")
     
     tablesQuery2.childrenMatchingType(.Cell).elementBoundByIndex(1).childrenMatchingType(.SecureTextField).element.typeText("1235")

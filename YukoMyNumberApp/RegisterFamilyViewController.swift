@@ -84,13 +84,46 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   
   
   @IBAction func tapRegisterButton(sender: AnyObject) {
+    
+    //必須項目チェック
     if(self.FamilyNameTextField.text?.characters.count == 0 ||
       self.FirstNameTextField.text?.characters.count == 0 ||
       self.RelationName.text == RelationPicker.pickerValues[0]){
         
-        //必須未入力エラー
+        let myAlert = UIAlertController(title: "登録できません", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          
+        })
+        
+        myAlert.addAction(OKAction)
+        
+        presentViewController(myAlert, animated: true, completion: nil)
+        
+        return
     }
     
+    //続柄重複エラーチェック
+    let rscodecheck = realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)' and RSCode = '\(RelationPicker.selectedRSCode)'")
+    
+    if(rscodecheck.count != 0){
+      
+      let myAlert = UIAlertController(title: "登録できません", message: "「\(self.RelationName.text!)」はすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
+      
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        
+        
+        
+      })
+      
+      myAlert.addAction(OKAction)
+      
+      presentViewController(myAlert, animated: true, completion: nil)
+    
+      return
+      
+    }
+  
     try! realm.write({ () -> Void in
       let family = EmployeeData()
       family.FamilyName = self.FamilyNameTextField.text!
@@ -106,6 +139,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       self.navigationController?.popViewControllerAnimated(true)
       
     })
+    
   }
 
   func updatePickerValue(notification:NSNotification?){

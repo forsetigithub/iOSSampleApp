@@ -14,6 +14,7 @@ import RealmSwift
 **********************************************/
 class EmployeeData : Object {
   dynamic var EmployeeCode = ""
+  dynamic var RecKindNo = 0
   dynamic var FamilySeqNo = 0
   dynamic var FamilyName = ""
   dynamic var FirstName = ""

@@ -215,10 +215,11 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           for data in list {
             
             let sqlstring = "insert into T_Employee(" +
-              "SeqNo,EmployeeCode,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
+              "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
               ") values " +
               "(NEWID()," +
               "'\(data.EmployeeCode)'," +
+              "1," +
               "'\(data.RSCode)'," +
               "'\(data.FamilyName)'," +
               "'\(data.FirstName)'," +

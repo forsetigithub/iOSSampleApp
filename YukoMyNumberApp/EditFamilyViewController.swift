@@ -83,6 +83,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     }
     
     if(segue.identifier == "showGetFamilyMyNumber"){
+      
       let dest = segue.destinationViewController as! GetMyNumberViewController
       
       dest.MyNumberEditData = self.FamilyItemData

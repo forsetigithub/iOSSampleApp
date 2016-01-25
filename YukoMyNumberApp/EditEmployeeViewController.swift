@@ -433,10 +433,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         for data in list {
 
           let sqlstring = "insert into T_Employee(" +
-            "SeqNo,EmployeeCode,RelationCode,FamilyName,FirstName,MyNumber,TimeStamp" +
+            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,MyNumber,TimeStamp" +
             ") values " +
             "(NEWID()," +
             "'\(data.EmployeeCode)'," +
+            "2," +
             "'\(data.RSCode)'," +
             "'\(data.FamilyName)'," +
             "'\(data.FirstName)'," +
