@@ -15,11 +15,13 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   let realm = try! Realm()
   let client:SQLClient = SQLClient()
   
-  // MARK: - Table View  
+  // MARK: - Table View
   @IBOutlet weak var EmployeeCode: UITextField!
   @IBOutlet weak var EmployeeFamilyName: UITextField!
   @IBOutlet weak var EmployeeFirstName: UITextField!
   @IBOutlet weak var EmployeeJoinedDateLabel: UILabel!
+  
+  @IBOutlet weak var JoinedDatePicker: UIDatePicker!
   @IBOutlet weak var PassCodeTextField: UITextField!
   @IBOutlet weak var RePassCodeTextField: UITextField!
   
@@ -28,6 +30,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   let formatter = NSDateFormatter()
   
   private var InputPassCode:String? //暗証番号(初回)
+  
+  private var JoinedDateTappedFlag:Bool = false
+  private var SelectedJoinedDate:String?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,20 +46,14 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     self.navigationItem.title = "新規登録"
     formatter.dateFormat = "yyyy年 MM月 dd日"
-  
+    
+    let tapgesture = UITapGestureRecognizer(target: self, action: "EmployeeJoinedDateLabel:")
+    self.EmployeeJoinedDateLabel.addGestureRecognizer(tapgesture)
   }
   
   override func viewWillAppear(animated: Bool) {
     
     self.navigationController?.toolbarHidden = true
-    let joindatecell = self.EmployeeJoinedDateLabel.superview?.superview as? UITableViewCell
-    
-    if(JoinedDate != nil){
-      EmployeeJoinedDateLabel.text = formatter.stringFromDate(JoinedDate!)
-      joindatecell?.selectionStyle = UITableViewCellSelectionStyle.None
-    }else{
-      joindatecell?.selectionStyle = UITableViewCellSelectionStyle.Default
-    }
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -70,6 +69,21 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
 
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 3
+  }
+  
+  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    var height:CGFloat = 44.0
+    
+    if(indexPath.section == 2 && indexPath.row == 1){
+      if(self.JoinedDateTappedFlag == true){
+        height = 150
+        self.EmployeeJoinedDateLabel.text = formatter.stringFromDate(self.JoinedDatePicker.date)
+      }else{
+        height = 0
+      }
+    }
+    
+    return height
   }
 
   func textFieldDidEndEditing(textField: UITextField) {
@@ -124,6 +138,27 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     return true
   }
+  
+  func EmployeeJoinedDateLabel(sender: UILabel) {
+    self.JoinedDateTappedFlag = !(self.JoinedDateTappedFlag)
+    
+    if(self.JoinedDateTappedFlag == true){
+      self.EmployeeJoinedDateLabel.textColor = UIColor.blueColor()
+      
+    }else{
+      self.EmployeeJoinedDateLabel.textColor = UIColor.blackColor()
+    }
+    
+    self.tableView.reloadData()
+
+  }
+  
+  @IBAction func changeDatePickerValue(sender: UIDatePicker) {
+    
+    self.EmployeeJoinedDateLabel.text = self.formatter.stringFromDate(sender.date)
+    
+  }
+  
   
   @IBAction func tapRegisterButton(sender: UIBarButtonItem) {
     
@@ -185,11 +220,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if(segue.identifier == "showSelectDate"){
-      let dest = segue.destinationViewController as? DatePickerViewController
-      dest!.sourceViewController = self
-      
-    }
+
   }
   
   /*
