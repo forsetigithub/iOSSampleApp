@@ -23,7 +23,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeMNLabelName]
   
   private var employeeItemData:[String] = [String]()
-  private var familyItemData:[String] = [String]()
+  private var familyItemData:[EmployeeData] = [EmployeeData]()
   private var employeeeditdata:EmployeeData = EmployeeData()
   private var FirstCallFlag:Bool = true
   private let dateFormatter:NSDateFormatter = NSDateFormatter()
@@ -48,8 +48,12 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
     dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
     
-    showPassCodeAlert()
-    
+    if(EmployeeEditData.PassCode.characters.count != 0){
+      showPassCodeAlert()
+    }else{
+      FirstCallFlag = false
+      loadEmployeeData()
+    }
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -289,17 +293,24 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         break
       case 1:  //家族情報        
         for subview in cell.contentView.subviews{
-
+          
+          let familyitem = familyItemData[indexPath.row]
+          
+          if(familyitem.MyNumberCheckDigitResult){
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+          }
+          
           let label = subview as? UILabel
           
           switch subview.tag {
             case 1: //氏名
-              label?.text = familyItemData[indexPath.row]
+              label?.text = familyitem.FamilyName + "　" + familyitem.FirstName
               
               break
             case 2:
               label?.text?.removeAll()
-              
+      
+              break
             default:
               break
           }
@@ -355,7 +366,18 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let SendData = UIAlertAction(title: "データを送信", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in
       
-      let SendAlertView = UIAlertController(title:"データ送信",message: "データを送信します。よろしいですか？",preferredStyle: UIAlertControllerStyle.Alert)
+      //本人・家族のマイナンバーが全て登録されているかをチェックし、未登録の場合はメッセージを表示
+      let numbercheck = self.realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)' and MyNumber == ''")
+      
+      let SendAlertView = UIAlertController(title: "データ送信", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+      
+      if(numbercheck.count == 0){
+        
+        SendAlertView.message = "データを送信します。よろしいですか？"
+      }else{
+
+        SendAlertView.message = "未登録のマイナンバーがあります。\n送信してもよろしいですか？"
+      }
       
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
         
@@ -387,35 +409,12 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
   }
   
-  /* 
-    送信ボタン押下時処理
-  */
-  func sendDataBtn(sender:UIButton){
-    
-    let AlertView = UIAlertController(title: "データを送信", message: "データを送信します。よろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
-    
-    let OKAction = UIAlertAction(title: "送信", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
-      
-      self.uploadData(self.employeeeditdata)
-      
-    }
-    
-    let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (cancel:UIAlertAction) -> Void in
-      
-    }
-    
-    AlertView.addAction(OKAction)
-    AlertView.addAction(CancelAction)
-    
-    presentViewController(AlertView, animated: true, completion: nil)
-  }
-  
   /*
   * データをSQLServerへ登録する
   */
   func uploadData(uploaddata:EmployeeData){
     
-    SVProgressHUD.showWithStatus("送信中・・・")
+    SVProgressHUD.showWithStatus("送信しています")
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
@@ -500,7 +499,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let families = realm.objects(EmployeeData).filter("EmployeeCode = '\(employeeeditdata.EmployeeCode)' and RSCode != '00' and DeleteFlag = false")
     for family in families{
-      familyItemData.append(family.FamilyName + "　" + family.FirstName)
+      familyItemData.append(family)
     }
 
     try! realm.write({ () -> Void in

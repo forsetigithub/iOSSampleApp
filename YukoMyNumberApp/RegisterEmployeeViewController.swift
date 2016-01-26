@@ -47,10 +47,13 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   override func viewWillAppear(animated: Bool) {
     
     self.navigationController?.toolbarHidden = true
+    let joindatecell = self.EmployeeJoinedDateLabel.superview?.superview as? UITableViewCell
     
     if(JoinedDate != nil){
       EmployeeJoinedDateLabel.text = formatter.stringFromDate(JoinedDate!)
-      self.resignFirstResponder()
+      joindatecell?.selectionStyle = UITableViewCellSelectionStyle.None
+    }else{
+      joindatecell?.selectionStyle = UITableViewCellSelectionStyle.Default
     }
   }
   
@@ -64,7 +67,11 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
+
+  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 3
+  }
+
   func textFieldDidEndEditing(textField: UITextField) {
   
     if((textField.tag == 1 || textField.tag == 2) &&
@@ -93,7 +100,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     if(textField.tag == 1 || textField.tag == 2){
       let str = textField.text! + string
       if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
-        
+    
         return false
         
       }else if(textField.tag == 2 && str.characters.count ==
@@ -117,8 +124,6 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     return true
   }
-
-
   
   @IBAction func tapRegisterButton(sender: UIBarButtonItem) {
     
@@ -129,8 +134,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     if(self.EmployeeCode.text?.characters.count == 0 ||
       self.EmployeeFamilyName.text?.characters.count == 0 ||
       self.EmployeeFirstName.text?.characters.count == 0 ||
-      self.JoinedDate == nil ||
-      self.PassCodeTextField.text?.characters.count == 0){
+      self.JoinedDate == nil){
         
         let myAlert = UIAlertController(title: "必須項目入力エラー", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
@@ -157,10 +161,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       NewEmployeeData.FirstName = self.EmployeeFirstName.text!
       NewEmployeeData.FamilySeqNo = 0
       NewEmployeeData.RSCode = "00"
+      
       if let joineddate = self.JoinedDate{
         NewEmployeeData.JoinedDate = joineddate
-      }else{
-      
       }
       
       NewEmployeeData.PassCode = self.PassCodeTextField.text!
@@ -168,13 +171,13 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       self.realm.add(NewEmployeeData)
       
 #if DEBUG
+  
+      self.performSegueWithIdentifier("showRegisterList", sender: self)
 #else
       uploadData(NewEmployeeData)
 #endif
       
-
     })
-    
   }
 
   @IBAction func tapCancelButton(sender: UIBarButtonItem) {

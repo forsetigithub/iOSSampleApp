@@ -39,7 +39,7 @@ class ChangePassCodeViewController:UITableViewController{
   
   func tapSavePassCodeButton(sender:UIBarButtonItem){
     
-    if(self.PassCodeBefore.text?.characters.count == 0 ||
+    if((self.EmployeeEditData?.PassCode.characters.count != 0 && self.PassCodeBefore.text?.characters.count == 0) ||
       self.PassCodeAfter.text?.characters.count == 0 ||
       self.PassCodeAfterReEnter.text?.characters.count == 0){
     

@@ -58,12 +58,17 @@ class RegisteredListViewController: UITableViewController {
     
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     
+    if(employee.LastUploadDate.characters.count != 0){
+      cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+    }
+    
     for subview in cell.contentView.subviews{
       switch subview.tag{
         case 1:
           let label = subview as? UILabel
           label?.text = employee.FamilyName + "　" + employee.FirstName
           break
+ /*
         case 2:
           let image = subview as? UIImageView
           
@@ -72,6 +77,7 @@ class RegisteredListViewController: UITableViewController {
           }
       
           break
+*/
         default:
           break
       }
@@ -102,9 +108,14 @@ class RegisteredListViewController: UITableViewController {
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
+    let delemployeecode = employee.EmployeeCode
     
     try! realm.write({ () -> Void in
       realm.delete(employee)
+      
+      let families = self.realm.objects(EmployeeData).filter("EmployeeCode='\(delemployeecode)'")
+      realm.delete(families)
+      
       tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
     })
 
