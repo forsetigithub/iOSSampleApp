@@ -426,6 +426,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   func uploadData(uploaddata:EmployeeData){
     
     SVProgressHUD.showWithStatus("送信しています")
+    let dateformatter = NSDateFormatter()
+    dateformatter.dateFormat = "yyyy-MM-dd"
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
@@ -443,7 +445,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         for data in list {
 
           let sqlstring = "insert into T_Employee(" +
-            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,MyNumber,TimeStamp" +
+            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
             ") values " +
             "(NEWID()," +
             "'\(data.EmployeeCode)'," +
@@ -451,6 +453,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             "'\(data.RSCode)'," +
             "'\(data.FamilyName)'," +
             "'\(data.FirstName)'," +
+            "'\(dateformatter.stringFromDate(data.JoinedDate))'," +
             "'\(data.MyNumber.stringByReplacingOccurrencesOfString(" ", withString: ""))'," +
             "SYSDATETIME()" +
           ")"

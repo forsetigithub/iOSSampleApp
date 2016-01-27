@@ -30,9 +30,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   let formatter = NSDateFormatter()
   
   private var InputPassCode:String? //暗証番号(初回)
+  private var InitialJoinedDateLabel:String!
   
   private var JoinedDateTappedFlag:Bool = false
-  private var SelectedJoinedDate:String?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,6 +46,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     self.navigationItem.title = "新規登録"
     formatter.dateFormat = "yyyy年 MM月 dd日"
+    self.InitialJoinedDateLabel = self.EmployeeJoinedDateLabel.text
     
     let tapgesture = UITapGestureRecognizer(target: self, action: "EmployeeJoinedDateLabel:")
     self.EmployeeJoinedDateLabel.addGestureRecognizer(tapgesture)
@@ -149,13 +150,15 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       self.EmployeeJoinedDateLabel.textColor = UIColor.blackColor()
     }
     
+    self.JoinedDate = self.JoinedDatePicker.date
     self.tableView.reloadData()
 
   }
   
   @IBAction func changeDatePickerValue(sender: UIDatePicker) {
     
-    self.EmployeeJoinedDateLabel.text = self.formatter.stringFromDate(sender.date)
+    self.JoinedDate = sender.date
+    self.EmployeeJoinedDateLabel.text = self.formatter.stringFromDate(self.JoinedDate!)
     
   }
   
@@ -169,7 +172,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     if(self.EmployeeCode.text?.characters.count == 0 ||
       self.EmployeeFamilyName.text?.characters.count == 0 ||
       self.EmployeeFirstName.text?.characters.count == 0 ||
-      self.JoinedDate == nil){
+      self.EmployeeJoinedDateLabel.text == self.InitialJoinedDateLabel ){
         
         let myAlert = UIAlertController(title: "必須項目入力エラー", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
@@ -207,7 +210,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       
 #if DEBUG
   
-      self.performSegueWithIdentifier("showRegisterList", sender: self)
+      self.dismissViewControllerAnimated(true, completion: nil)
 #else
       uploadData(NewEmployeeData)
 #endif
@@ -216,7 +219,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
 
   @IBAction func tapCancelButton(sender: UIBarButtonItem) {
-     self.performSegueWithIdentifier("showRegisterList", sender: self)
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -273,7 +276,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
             
             SVProgressHUD.dismiss()
             
-            self.performSegueWithIdentifier("showRegisterList", sender: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
 
           })
           
