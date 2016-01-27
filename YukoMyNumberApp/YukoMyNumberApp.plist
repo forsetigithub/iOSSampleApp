@@ -6,6 +6,8 @@
 	<string>社員番号</string>
 	<key>EmployeeNameLabelName</key>
 	<string>氏名</string>
+	<key>EmployeeJoinedDateLabelName</key>
+	<string>入社年月日</string>
 	<key>EmployeeMNLabelName</key>
 	<string>マイナンバー</string>
 	<key>MyNumberCharactersCount</key>

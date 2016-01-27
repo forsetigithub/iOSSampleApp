@@ -20,12 +20,14 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   private let sectionTitles = ["本人情報","家族情報","送信情報"]
   private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.EmployeeCodeLabelName,
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeNameLabelName,
+                                    YukoMyNumberAppProperties.sharedInstance.EmployeeJoinedDateLabelName,
                                     YukoMyNumberAppProperties.sharedInstance.EmployeeMNLabelName]
   
   private var employeeItemData:[String] = [String]()
   private var familyItemData:[EmployeeData] = [EmployeeData]()
   private var employeeeditdata:EmployeeData = EmployeeData()
   private var FirstCallFlag:Bool = true
+  private var JoinedDateLabelTopFlag:Bool = false
   private let dateFormatter:NSDateFormatter = NSDateFormatter()
 
   private var InputPassCode:String?
@@ -45,8 +47,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     // Do any additional setup after loading the view, typically from a nib.
   
     client.delegate = self
-  
-    dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
     
     if(EmployeeEditData.PassCode.characters.count != 0){
       showPassCodeAlert()
@@ -161,6 +161,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     case 0: //本人
       if(indexPath.row < 2){
         performSegueWithIdentifier("showModifyEmployee", sender: self)
+      }else if(indexPath.row == 2){
+        performSegueWithIdentifier("showModifyJoinedDate", sender: self)
       }
       
       break
@@ -196,10 +198,6 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       case 1: //家族情報
         tableButton = makeButtonInTableView("家族を追加",actionName: "addFamilyBtn:")
 
-        break
-      
-      case 2:
-        //tableButton = makeButtonInTableView("データを送信",actionName: "sendDataBtn:")
         break
       
       default:
@@ -245,6 +243,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     return rowcount
   }
+
   
   /*
   Cellに値を設定する.
@@ -264,26 +263,33 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
               label?.text = employeeItemLabels[indexPath.row] as? String
               break
             case 2: //値
-              
-              if(indexPath.row == 2) {
-                //マイナンバー取得状況
-                cell.accessoryType = UITableViewCellAccessoryType.None
-                cell.userInteractionEnabled = false
-                
-                if(employeeItemData.count != 0 && self.employeeeditdata.MyNumberCheckDigitResult){
-                  
-                  label?.text = "取得済"
-                  label?.textColor = UIColor.lightGrayColor()
-                }else{
-                  label?.text = "未取得"
-                  label?.textColor = UIColor.redColor()
-                }
-              }else{
-                if(self.employeeItemData.count != 0){
-                  label?.text = self.employeeItemData[indexPath.row]
-                }
+              if(employeeItemData.count == 0){
+                continue
               }
-        
+              
+              switch (indexPath.row){
+                //マイナンバー取得状況
+                case 3:
+                  
+                  cell.accessoryType = UITableViewCellAccessoryType.None
+                  cell.userInteractionEnabled = false
+                  
+                  if(self.employeeeditdata.MyNumberCheckDigitResult){
+                    
+                    label?.text = "取得済"
+                    label?.textColor = UIColor.lightGrayColor()
+                  }else{
+                    label?.text = "未取得"
+                    label?.textColor = UIColor.redColor()
+                  }
+                  break
+                
+                default:
+                  label?.text = self.employeeItemData[indexPath.row]
+
+                  break
+              }
+              
               break
             default:
               break
@@ -395,7 +401,12 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       self.presentViewController(SendAlertView, animated: true, completion: nil)
     }
     
-    let ChangePassword = UIAlertAction(title: "暗証番号を変更", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+    var title = "暗証番号を登録"
+    if(self.employeeeditdata.PassCode.characters.count != 0){
+      title = "暗証番号を変更"
+    }
+    
+    let ChangePassword = UIAlertAction(title: title, style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       self.performSegueWithIdentifier("showChangePassCode", sender: self)
     }
     
@@ -454,6 +465,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
           self.client.disconnect()
           
           try! self.realm.write({ () -> Void in
+            self.dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
             self.employeeeditdata.LastUploadDate = self.dateFormatter.stringFromDate(NSDate())
           })
           
@@ -493,6 +505,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     employeeItemData.append(employeeeditdata.EmployeeCode)
     employeeItemData.append(employeeeditdata.FamilyName + "　" +
       employeeeditdata.FirstName)
+
+    dateFormatter.dateFormat = "yyyy年MM月dd日"
+    employeeItemData.append(dateFormatter.stringFromDate(employeeeditdata.JoinedDate))
+    
     employeeItemData.append(employeeeditdata.MyNumber)
     
     familyItemData.removeAll()
@@ -546,6 +562,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       dest.EmployeeEditData = employeeeditdata
     
+    }
+    
+    if(segue.identifier == "showModifyJoinedDate"){
+      let dest = segue.destinationViewController as! ModifyJoinedDateViewController
+      dest.EmployeeEditData = self.employeeeditdata
     }
     
     if(segue.identifier == "showEditFamily") {

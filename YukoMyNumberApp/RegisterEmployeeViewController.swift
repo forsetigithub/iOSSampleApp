@@ -72,7 +72,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    var height:CGFloat = 44.0
+    var height:CGFloat = YukoMyNumberAppProperties.sharedInstance.TableViewCellDefaultHeight
     
     if(indexPath.section == 2 && indexPath.row == 1){
       if(self.JoinedDateTappedFlag == true){
@@ -91,7 +91,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     if((textField.tag == 1 || textField.tag == 2) &&
       textField.text?.characters.count != 0 && textField.text?.characters.count != YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
     
-        let myAlert = UIAlertController(title: "", message: "暗証番号は\((YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)!)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: "", message: "暗証番号は\(YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
         
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           textField.text?.removeAll()
