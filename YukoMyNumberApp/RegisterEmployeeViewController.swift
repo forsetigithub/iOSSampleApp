@@ -89,7 +89,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
 
   func textFieldDidEndEditing(textField: UITextField) {
   
-    if((textField.tag == 1 || textField.tag == 2) &&
+    if((textField.tag == 4 || textField.tag == 5) &&
       textField.text?.characters.count != 0 && textField.text?.characters.count != YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
     
         let myAlert = UIAlertController(title: "", message: "暗証番号は\(YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
@@ -111,30 +111,50 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
     
-    //暗証番号の桁数しか入力できないようにする
-    if(textField.tag == 1 || textField.tag == 2){
-      let str = textField.text! + string
-      if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+    let str = textField.text! + string
     
-        return false
-        
-      }else if(textField.tag == 2 && str.characters.count ==
-        YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount && str != self.InputPassCode){
-          
-          let myAlert = UIAlertController(title: "エラー", message: "入力した暗証番号が一致していません！", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-            textField.text?.removeAll()
-          })
-          
-          myAlert.addAction(OKAction)
-          
-          presentViewController(myAlert, animated: true, completion: nil)
-        
-      }else{
-        if(textField.tag == 1){
-          self.InputPassCode = str
+    switch textField.tag {
+      //社員番号
+      case 1:
+        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
+          return false
         }
-      }
+        break
+        
+      //姓・名
+      case 2,3:
+        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeNameCharactersCount){
+          return false
+        }
+        break
+        
+      //暗証番号の桁数しか入力できないようにする
+      case 4,5:
+
+        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+          
+          return false
+          
+        }else if(textField.tag == 2 && str.characters.count ==
+          YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount && str != self.InputPassCode){
+            
+            let myAlert = UIAlertController(title: "エラー", message: "入力した暗証番号が一致していません！", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+              textField.text?.removeAll()
+            })
+            
+            myAlert.addAction(OKAction)
+            
+            presentViewController(myAlert, animated: true, completion: nil)
+            
+        }else{
+          if(textField.tag == 1){
+            self.InputPassCode = str
+          }
+        }
+        break
+      default:
+        break
     }
     
     return true

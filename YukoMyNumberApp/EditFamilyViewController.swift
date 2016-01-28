@@ -76,6 +76,23 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     return textField.resignFirstResponder()
   }
   
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    
+    let str = textField.text! + string
+    
+    switch (textField.tag) {
+    case 1,2:
+      if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeNameCharactersCount){
+        return false
+      }
+      break
+    default:
+      break
+    }
+    
+    return true
+  }
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if(segue.identifier == "showModifyRelation"){
       let dest = segue.destinationViewController as! ModifyRelationViewController

@@ -4,8 +4,12 @@
 <dict>
 	<key>EmployeeCodeLabelName</key>
 	<string>社員番号</string>
+	<key>EmployeeCodeCharactersCount</key>
+	<integer>7</integer>
 	<key>EmployeeNameLabelName</key>
 	<string>氏名</string>
+	<key>EmployeeNameCharactersCount</key>
+	<integer>10</integer>
 	<key>EmployeeJoinedDateLabelName</key>
 	<string>入社年月日</string>
 	<key>EmployeeMNLabelName</key>

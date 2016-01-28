@@ -31,7 +31,9 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-  
+    EmployeeCodeTextField.delegate = self
+    FamilyNameTextField.delegate = self
+    FirstNameTextField.delegate = self
   }
   
   override func didReceiveMemoryWarning() {
@@ -62,6 +64,28 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
       EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
       EmployeeEditData.FirstName = self.FirstNameTextField.text!
     })
+  }
+  
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    
+    let str = textField.text! + string
+    
+    switch textField.tag{
+      case 1:
+        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
+          return false
+        }
+        break
+      case 2,3:
+        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeNameCharactersCount){
+          return false
+        }
+        break
+      default:
+        break
+    }
+    
+    return true
   }
   
   func changeTextAttribute(textField:UITextField){

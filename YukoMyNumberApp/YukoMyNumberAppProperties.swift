@@ -20,9 +20,11 @@ final class YukoMyNumberAppProperties {
     }
   }
   
-  let MyNumberCharactersCount:NSNumber = (dict.objectForKey("MyNumberCharactersCount") as? NSNumber)!
+  let MyNumberCharactersCount:Int = (dict.objectForKey("MyNumberCharactersCount") as? Int)!
   let EmployeeCodeLabelName = dict.objectForKey("EmployeeCodeLabelName")
+  let EmployeeCodeCharactersCount:Int = (dict.objectForKey("EmployeeCodeCharactersCount") as? Int)!
   let EmployeeNameLabelName = dict.objectForKey("EmployeeNameLabelName")
+  let EmployeeNameCharactersCount:Int = (dict.objectForKey("EmployeeNameCharactersCount") as? Int)!
   let EmployeeJoinedDateLabelName = dict.objectForKey("EmployeeJoinedDateLabelName")
   let EmployeeMNLabelName = dict.objectForKey("EmployeeMNLabelName")
   let RelationItems:[String:String] = dict.objectForKey("RelationItems") as! [String:String]
