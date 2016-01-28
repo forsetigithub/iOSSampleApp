@@ -302,15 +302,16 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
           
           let familyitem = familyItemData[indexPath.row]
           
-          if(familyitem.MyNumberCheckDigitResult){
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-          }
-          
           let label = subview as? UILabel
           
           switch subview.tag {
             case 1: //氏名
-              label?.text = familyitem.FamilyName + "　" + familyitem.FirstName
+              label?.text =  familyitem.FamilyName + "　" + familyitem.FirstName
+              if(familyitem.MyNumberCheckDigitResult){
+                label?.text = "\u{2713}" + " " + (label?.text)!
+              }else{
+                label?.text = "\u{0020}\u{0020}\u{0020}" + " " + (label?.text)!
+              }
               
               break
             case 2:

@@ -58,26 +58,19 @@ class RegisteredListViewController: UITableViewController {
     
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     
-    if(employee.LastUploadDate.characters.count != 0){
-      cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-    }
-    
     for subview in cell.contentView.subviews{
       switch subview.tag{
         case 1:
           let label = subview as? UILabel
           label?.text = employee.FamilyName + "　" + employee.FirstName
-          break
- /*
-        case 2:
-          let image = subview as? UIImageView
-          
           if(employee.LastUploadDate.characters.count != 0){
-            image?.image = UIImage(named: "checkmark.png")
+            label?.text = "\u{2713}" + " " + (label?.text)!
+          }else{
+            label?.text = "\u{0020}\u{0020}\u{0020}" + " " + (label?.text)!
           }
-      
+          
           break
-*/
+
         default:
           break
       }
