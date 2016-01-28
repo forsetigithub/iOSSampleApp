@@ -247,7 +247,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           var sqlstringlist:String = ""
           
           let dateformatter = NSDateFormatter()
-          dateformatter.dateFormat = "yyyy-MM-dd"
+          dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+          
+          let timestamp = dateformatter.stringFromDate(NSDate())
           
           for data in list {
             
@@ -262,7 +264,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
               "'\(data.FirstName)'," +
               "'\(dateformatter.stringFromDate(data.JoinedDate))'," +
               "'\(data.MyNumber)'," +
-              "SYSDATETIME()" +
+              "'\(timestamp)'" +
               ")"
             
             sqlstringlist = sqlstringlist + sqlstring

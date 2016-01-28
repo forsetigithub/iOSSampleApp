@@ -28,7 +28,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   private var employeeeditdata:EmployeeData = EmployeeData()
   private var FirstCallFlag:Bool = true
   private var JoinedDateLabelTopFlag:Bool = false
-  private let dateFormatter:NSDateFormatter = NSDateFormatter()
+  private var dateFormatter:NSDateFormatter = NSDateFormatter()
 
   private var InputPassCode:String?
   
@@ -427,8 +427,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   func uploadData(uploaddata:EmployeeData){
     
     SVProgressHUD.showWithStatus("送信しています")
-    let dateformatter = NSDateFormatter()
-    dateformatter.dateFormat = "yyyy-MM-dd"
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
     let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
     
@@ -443,6 +443,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
         var sqlstringlist:String = ""
         
+        let timestamp = self.dateFormatter.stringFromDate(NSDate())
+        
         for data in list {
 
           let sqlstring = "insert into T_Employee(" +
@@ -454,9 +456,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             "'\(data.RSCode)'," +
             "'\(data.FamilyName)'," +
             "'\(data.FirstName)'," +
-            "'\(dateformatter.stringFromDate(data.JoinedDate))'," +
+            "'\(self.dateFormatter.stringFromDate(data.JoinedDate))'," +
             "'\(data.MyNumber.stringByReplacingOccurrencesOfString(" ", withString: ""))'," +
-            "SYSDATETIME()" +
+            "'\(timestamp)'" +
           ")"
 
           sqlstringlist = sqlstringlist + sqlstring

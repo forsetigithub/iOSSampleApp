@@ -14,14 +14,14 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   
   let realm = try! Realm()
 
-  private var eployeeeditdata:EmployeeData = EmployeeData()
+  private var employeeeditdata:EmployeeData = EmployeeData()
   
   var EmployeeEditData:EmployeeData {
     set(newValue){
-      eployeeeditdata = newValue
+      employeeeditdata = newValue
     }
     get{
-      return eployeeeditdata
+      return employeeeditdata
     }
   }
   
@@ -129,7 +129,8 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       family.FamilyName = self.FamilyNameTextField.text!
       family.FirstName = self.FirstNameTextField.text!
       family.RSCode = RelationPicker.selectedRSCode
-      family.EmployeeCode = eployeeeditdata.EmployeeCode
+      family.EmployeeCode = employeeeditdata.EmployeeCode
+      family.JoinedDate = employeeeditdata.JoinedDate
       
       family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
         ascending: true).first?.FamilySeqNo)! + 1
@@ -147,5 +148,4 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       self.RelationName.text = RelationPicker.pickerValues[RelationPicker.selectedPickerRow]
     }
   }
-
 }
