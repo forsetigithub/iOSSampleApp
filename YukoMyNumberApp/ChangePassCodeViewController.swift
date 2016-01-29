@@ -90,8 +90,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
   func tapSavePassCodeButton(sender:UIBarButtonItem){
     
     if(self.changePassCodeMode == CHANGEPASSCODEMODE.NEW){
-      if(self.PassCodeBefore.text?.characters.count == 0 ||
-        self.PassCodeAfter.text?.characters.count == 0){
+      if(self.PassCodeBefore.text?.isEmpty == true ||
+        self.PassCodeAfter.text?.isEmpty == true){
       
           //必須入力エラー
           let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
@@ -120,9 +120,9 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       }
       
     }else{
-      if((self.EmployeeEditData?.PassCode.characters.count != 0 && self.PassCodeBefore.text?.characters.count == 0) ||
-        self.PassCodeAfter.text?.characters.count == 0 ||
-        self.PassCodeAfterReEnter.text?.characters.count == 0){
+      if((self.EmployeeEditData?.PassCode.isEmpty == false && self.PassCodeBefore.text?.isEmpty == true) ||
+        self.PassCodeAfter.text?.isEmpty == true ||
+        self.PassCodeAfterReEnter.text?.isEmpty == true){
       
           //必須入力エラー
           let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)

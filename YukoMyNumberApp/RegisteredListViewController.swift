@@ -16,19 +16,33 @@ class RegisteredListViewController: UITableViewController {
   private let employeefilter = NSPredicate(format: "RSCode = '00'")
   
   // MARK: - Table View
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = editButtonItem()
-    
+
+  }
+
+  override func viewWillLayoutSubviews() {
+
   }
   
   override func viewWillAppear(animated: Bool) {
+    
     self.tableView.reloadData()
     self.navigationController?.toolbarHidden = true
-
+    
+    if(!CheckNetworkConnect().CheckNetworkConnection(YukoMyNumberAppProperties.sharedInstance.ServerInfo["IPAddress"]!)){
+      let myAlert = UIAlertController(title: "ネットワークに接続されていません", message: "ネットワークに接続されていないため、このアプリを開くことはできません", preferredStyle: UIAlertControllerStyle.Alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        return
+      })
+      
+      myAlert.addAction(OKAction)
+      self.view.window?.rootViewController!.presentViewController(myAlert, animated: true, completion: nil)
+    }
   }
+  
   
   override func setEditing(editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
@@ -64,7 +78,7 @@ class RegisteredListViewController: UITableViewController {
           let label = subview as? UILabel
           label?.text = employee.FamilyName + "　" + employee.FirstName
           if(employee.LastUploadDate.characters.count != 0){
-            label?.text = "\u{2713}" + " " + (label?.text)!
+            label?.text = "\u{2714}" + " " + (label?.text)!
           }else{
             label?.text = "\u{0020}\u{0020}\u{0020}" + " " + (label?.text)!
           }

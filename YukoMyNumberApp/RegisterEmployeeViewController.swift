@@ -58,7 +58,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   override func viewDidAppear(animated: Bool) {
-    if(self.EmployeeCode.text?.characters.count == 0){
+    if(self.EmployeeCode.text?.isEmpty == true){
       self.EmployeeCode.becomeFirstResponder()
     }
   }
@@ -189,9 +189,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
 #if DEBUG
 #else
     //必須入力チェック
-    if(self.EmployeeCode.text?.characters.count == 0 ||
-      self.EmployeeFamilyName.text?.characters.count == 0 ||
-      self.EmployeeFirstName.text?.characters.count == 0 ||
+    if(self.EmployeeCode.text?.isEmpty == true ||
+      self.EmployeeFamilyName.text?.isEmpty == true ||
+      self.EmployeeFirstName.text?.isEmpty == true  ||
       self.EmployeeJoinedDateLabel.text == self.InitialJoinedDateLabel ){
         
         let myAlert = UIAlertController(title: "必須項目入力エラー", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
@@ -293,6 +293,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           print(sqlstringlist)
           
           self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
+            
             self.client.disconnect()
             print("Disconnected")
             

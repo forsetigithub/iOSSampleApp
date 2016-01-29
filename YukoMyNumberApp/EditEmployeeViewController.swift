@@ -337,7 +337,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
               break
             case 2:
               if(employeeItemData.count != 0){
-                if(self.employeeeditdata.LastUploadDate.characters.count == 0){
+                if(self.employeeeditdata.LastUploadDate.isEmpty){
                   label?.text = "未送信"
                 }else{
                   label?.text = self.employeeeditdata.LastUploadDate

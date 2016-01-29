@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UILabel.appearance().font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
     
     UITextField.appearance().font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
+    
+    
+    
     return true
   }
 
@@ -40,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationWillEnterForeground(application: UIApplication) {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
