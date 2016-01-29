@@ -24,13 +24,12 @@
 		0364F5181C3B46B000EA4A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */; };
 		0364F5231C3B46B000EA4A37 /* YukoMyNumberAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F5221C3B46B000EA4A37 /* YukoMyNumberAppTests.swift */; };
 		0364F52E1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F52D1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift */; };
-		036573301C5363C8008BC348 /* checkmark1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0365732F1C5363C8008BC348 /* checkmark1.png */; };
 		03670A8C1C436B4C003F3CCC /* EditFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */; };
 		037D0B101C4627FA009B0D61 /* launchimage.gif in Resources */ = {isa = PBXBuildFile; fileRef = 037D0B0F1C4627FA009B0D61 /* launchimage.gif */; };
 		039966BA1C4F25E300494B17 /* ModifyJoinedDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039966B91C4F25E300494B17 /* ModifyJoinedDateViewController.swift */; };
 		03C4E3951C5ADFBC003427BE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C4E3941C5ADFBC003427BE /* SystemConfiguration.framework */; };
 		03C4E3971C5ADFF4003427BE /* CheckNetworkConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C4E3961C5ADFF4003427BE /* CheckNetworkConnect.swift */; };
-		03C4E3991C5B02EA003427BE /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C4E3981C5B02EA003427BE /* checkmark.png */; };
+		03C4E39B1C5B0B90003427BE /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C4E39A1C5B0B90003427BE /* checkmark.png */; };
 		03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */; };
 		03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */; };
 		03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */; };
@@ -91,13 +90,12 @@
 		0364F5241C3B46B000EA4A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0364F5291C3B46B000EA4A37 /* YukoMyNumberAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YukoMyNumberAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0364F52D1C3B46B000EA4A37 /* YukoMyNumberAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YukoMyNumberAppUITests.swift; sourceTree = "<group>"; };
-		0365732F1C5363C8008BC348 /* checkmark1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark1.png; sourceTree = "<group>"; };
 		03670A8B1C436B4C003F3CCC /* EditFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFamilyViewController.swift; sourceTree = "<group>"; };
 		037D0B0F1C4627FA009B0D61 /* launchimage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchimage.gif; sourceTree = "<group>"; };
 		039966B91C4F25E300494B17 /* ModifyJoinedDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyJoinedDateViewController.swift; sourceTree = "<group>"; };
 		03C4E3941C5ADFBC003427BE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		03C4E3961C5ADFF4003427BE /* CheckNetworkConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckNetworkConnect.swift; sourceTree = "<group>"; };
-		03C4E3981C5B02EA003427BE /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = ../../../../../../Desktop/checkmark.png; sourceTree = "<group>"; };
+		03C4E39A1C5B0B90003427BE /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = ../../../../../../Desktop/checkmark.png; sourceTree = "<group>"; };
 		03CF96F11C3B64E7004E11F0 /* EditEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeDataClass.swift; sourceTree = "<group>"; };
@@ -230,8 +228,7 @@
 		037D0B0E1C4627B3009B0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0365732F1C5363C8008BC348 /* checkmark1.png */,
-				03C4E3981C5B02EA003427BE /* checkmark.png */,
+				03C4E39A1C5B0B90003427BE /* checkmark.png */,
 				037D0B0F1C4627FA009B0D61 /* launchimage.gif */,
 			);
 			name = Resources;
@@ -370,10 +367,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0364F5181C3B46B000EA4A37 /* LaunchScreen.storyboard in Resources */,
+				03C4E39B1C5B0B90003427BE /* checkmark.png in Resources */,
 				0364F5151C3B46B000EA4A37 /* Assets.xcassets in Resources */,
 				0364F5131C3B46B000EA4A37 /* Main.storyboard in Resources */,
-				03C4E3991C5B02EA003427BE /* checkmark.png in Resources */,
-				036573301C5363C8008BC348 /* checkmark1.png in Resources */,
 				037D0B101C4627FA009B0D61 /* launchimage.gif in Resources */,
 				035976C61C3F4283004AA479 /* YukoMyNumberApp.plist in Resources */,
 			);

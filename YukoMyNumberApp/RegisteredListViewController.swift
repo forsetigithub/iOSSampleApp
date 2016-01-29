@@ -15,6 +15,7 @@ class RegisteredListViewController: UITableViewController {
   
   private let employeefilter = NSPredicate(format: "RSCode = '00'")
   
+  
   // MARK: - Table View
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -77,14 +78,13 @@ class RegisteredListViewController: UITableViewController {
         case 1:
           let label = subview as? UILabel
           label?.text = employee.FamilyName + "　" + employee.FirstName
-          if(employee.LastUploadDate.characters.count != 0){
-            label?.text = "\u{2714}" + " " + (label?.text)!
-          }else{
-            label?.text = "\u{0020}\u{0020}\u{0020}" + " " + (label?.text)!
-          }
           
           break
-
+      case 2:
+        if(employee.LastUploadDate.characters.count != 0){
+          let imageview = (subview as? UIImageView)!
+          imageview.image = UIImage(named:"checkmark.png")
+        }
         default:
           break
       }
