@@ -16,6 +16,10 @@
 		<string>暗証番号</string>
 		<key>Relation</key>
 		<string>続柄</string>
+		<key>FamilyName</key>
+		<string>姓</string>
+		<key>FirstName</key>
+		<string>名</string>
 	</dict>
 	<key>EmployeeCodeCharactersCount</key>
 	<integer>7</integer>
@@ -204,9 +208,9 @@
 	<key>NavigationTitles</key>
 	<dict>
 		<key>RegisteredListViewController</key>
-		<string>登録者一覧(TEST)</string>
+		<string>RegisteredList</string>
 		<key>RegisterEmployeeViewController</key>
-		<string>新規登録</string>
+		<string>NewEmployee</string>
 		<key>EditEmployeeViewController</key>
 		<string>登録者情報</string>
 		<key>ChangePassCodeViewController</key>
@@ -216,11 +220,43 @@
 		<key>EditFamilyViewController</key>
 		<string>家族情報を編集</string>
 	</dict>
-	<key>ButtonTitleRegister</key>
-	<string>登録</string>
-	<key>ButtonTitleModify</key>
-	<string>変更</string>
+	<key>ButtonTitles</key>
+	<dict>
+		<key>Register</key>
+		<string>Done</string>
+		<key>Modify</key>
+		<string>Edit</string>
+		<key>AddNew</key>
+		<string>Add</string>
+		<key>Cancel</key>
+		<string>Cancel</string>
+	</dict>
 	<key>DateFormatStringJapanese</key>
 	<string>yyyy年MM月dd日</string>
+	<key>DateFormatStringSeparetedJapanese</key>
+	<string>yyyy年 MM月 dd日</string>
+	<key>JoinedDateLabelTapComment</key>
+	<string>tap to select</string>
+	<key>AlertMessages</key>
+	<dict>
+		<key>OK</key>
+		<string>OK</string>
+		<key>Cancel</key>
+		<string>キャンセル</string>
+		<key>RequiredItemValidError</key>
+		<dict>
+			<key>Title</key>
+			<string>必須項目入力エラー</string>
+			<key>Message</key>
+			<string>入力されていない項目があります。</string>
+		</dict>
+		<key>UploadNotCompleteError</key>
+		<dict>
+			<key>Title</key>
+			<string>登録エラー</string>
+			<key>Message</key>
+			<string>登録できませんでした。\n再度登録ボタンをタップしてください。</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

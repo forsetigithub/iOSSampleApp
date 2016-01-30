@@ -47,6 +47,12 @@ class YukoMyNumberAppUITests: XCTestCase {
   
   }
   
+  
+  func testRegisterEmployee2(){
+    
+
+  }
+  
   /* 
   * 新規登録
   */

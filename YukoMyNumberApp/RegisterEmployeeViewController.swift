@@ -15,6 +15,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   let realm = try! Realm()
   let client:SQLClient = SQLClient()
   
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  
   // MARK: - Table View
   @IBOutlet weak var EmployeeCode: UITextField!
   @IBOutlet weak var EmployeeFamilyName: UITextField!
@@ -44,12 +46,22 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     PassCodeTextField.delegate = self
     RePassCodeTextField.delegate = self
     
-    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["RegisterEmployeeViewController"]
-    formatter.dateFormat = "yyyy年 MM月 dd日"
+    self.navigationItem.title = Properties.NavigationTitles["RegisterEmployeeViewController"]
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Register"], style: UIBarButtonItemStyle.Done, target: self, action: "tapRegisterButton:")
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Cancel"], style: UIBarButtonItemStyle.Plain, target: self, action: "tapCancelButton:")
+    
+    
+    self.EmployeeCode.placeholder = Properties.LabelItems["EmployeeCode"]
+    self.EmployeeFamilyName.placeholder = Properties.LabelItems["FamilyName"]
+    self.EmployeeFirstName.placeholder = Properties.LabelItems["FirstName"]
+    
+    formatter.dateFormat = Properties.DateFormatStringSeparetedJapanese
     self.InitialJoinedDateLabel = self.EmployeeJoinedDateLabel.text
+    self.JoinedDatePicker.locale = NSLocale(localeIdentifier: "Japanese")
     
     let tapgesture = UITapGestureRecognizer(target: self, action: "EmployeeJoinedDateLabel:")
     self.EmployeeJoinedDateLabel.addGestureRecognizer(tapgesture)
+    self.EmployeeJoinedDateLabel.text = Properties.JoinedDateLabelTapComment
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -73,7 +85,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    var height:CGFloat = YukoMyNumberAppProperties.sharedInstance.TableViewCellDefaultHeight
+    var height:CGFloat = Properties.TableViewCellDefaultHeight
     
     if(indexPath.section == 2 && indexPath.row == 1){
       if(self.JoinedDateTappedFlag == true){
@@ -90,9 +102,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   func textFieldDidEndEditing(textField: UITextField) {
   
     if((textField.tag == 4 || textField.tag == 5) &&
-      textField.text?.characters.count != 0 && textField.text?.characters.count != YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+      textField.text?.characters.count != 0 && textField.text?.characters.count != Properties.PassCodeCharactersCount){
     
-        let myAlert = UIAlertController(title: "", message: "暗証番号は\(YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: "", message: "暗証番号は\(Properties.PassCodeCharactersCount)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
         
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           textField.text?.removeAll()
@@ -116,14 +128,14 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     switch textField.tag {
       //社員番号
       case 1:
-        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
+        if(str.characters.count > Properties.EmployeeCodeCharactersCount){
           return false
         }
         break
         
       //姓・名
       case 2,3:
-        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeNameCharactersCount){
+        if(str.characters.count > Properties.EmployeeNameCharactersCount){
           return false
         }
         break
@@ -131,12 +143,12 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       //暗証番号の桁数しか入力できないようにする
       case 4,5:
 
-        if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+        if(str.characters.count > Properties.PassCodeCharactersCount){
           
           return false
           
         }else if(textField.tag == 2 && str.characters.count ==
-          YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount && str != self.InputPassCode){
+          Properties.PassCodeCharactersCount && str != self.InputPassCode){
             
             let myAlert = UIAlertController(title: "エラー", message: "入力した暗証番号が一致していません！", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
@@ -191,7 +203,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       self.EmployeeFirstName.text?.isEmpty == true  ||
       self.EmployeeJoinedDateLabel.text == self.InitialJoinedDateLabel ){
         
-        let myAlert = UIAlertController(title: "必須項目入力エラー", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
+        let requiredvalid:[String:String] = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
+        
+        let myAlert = UIAlertController(title: requiredvalid["Title"], message: requiredvalid["Message"], preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           
          
@@ -253,7 +267,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     SVProgressHUD.show()
     
-    let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
+    let info = Properties.ServerInfo
     
     client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
       database: info["DataBaseName"]) { (success:Bool) -> Void in
@@ -303,7 +317,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
                 
               }else{
                 
-                let messageAlert = UIAlertController(title: "登録エラー", message: "登録できませんでした。\n再度登録ボタンをタップしてください。", preferredStyle: UIAlertControllerStyle.Alert)
+                let uploaderror:[String:String] = self.Properties.AlertMessages["UploadNotCompleteError"] as! [String:String]
+                let messageAlert = UIAlertController(title: uploaderror["Title"], message: uploaderror["Message"], preferredStyle: UIAlertControllerStyle.Alert)
                 
                 let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
                   

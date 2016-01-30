@@ -15,6 +15,7 @@ class RegisteredListViewController: UITableViewController {
   
   let realm = try! Realm()
   
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
   private let employeefilter = NSPredicate(format: "RSCode = '00'")
   
   
@@ -22,8 +23,9 @@ class RegisteredListViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["RegisteredListViewController"]
+    self.navigationItem.title = Properties.NavigationTitles["RegisteredListViewController"]
     self.navigationItem.leftBarButtonItem = editButtonItem()
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["AddNew"], style: UIBarButtonItemStyle.Plain, target: self, action: "tapAddNewButton:")
   }
 
   override func viewWillLayoutSubviews() {
@@ -32,6 +34,8 @@ class RegisteredListViewController: UITableViewController {
   
   override func viewDidAppear(animated: Bool) {
   
+    SVProgressHUD.show()
+    
 #if DEBUG
   let alert = UIAlertController(title: "デバッグモード", message: "", preferredStyle: UIAlertControllerStyle.Alert)
   let okaction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
@@ -39,9 +43,7 @@ class RegisteredListViewController: UITableViewController {
   self.view.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
 #endif
     
-    SVProgressHUD.show()
-
-    let connectioncheck = CheckNetworkConnect(host: YukoMyNumberAppProperties.sharedInstance.ServerInfo["IPAddress"]!)
+    let connectioncheck = CheckNetworkConnect(host: Properties.ServerInfo["IPAddress"]!)
     
     if(!connectioncheck.isConnection()) {
       self.navigationItem.rightBarButtonItem?.enabled = false

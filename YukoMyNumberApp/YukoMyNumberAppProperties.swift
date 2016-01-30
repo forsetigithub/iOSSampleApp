@@ -33,9 +33,12 @@ final class YukoMyNumberAppProperties {
   let PassCodeCharactersCount = (dict.objectForKey("PassCodeCharactersCount") as? Int)!
   let PingCheckCounter:Int = (dict.objectForKey("PingCheckCounter") as? Int)!
   let NavigationTitles:[String:String] = dict.objectForKey("NavigationTitles") as! [String:String]
-  let ButtonTitleRegister:String = dict.objectForKey("ButtonTitleRegister") as! String
-  let ButtonTitleModify:String = dict.objectForKey("ButtonTitleModify") as! String
+  //let ButtonTitleRegister:String = dict.objectForKey("ButtonTitleRegister") as! String
+  //let ButtonTitleModify:String = dict.objectForKey("ButtonTitleModify") as! String
+  let ButtonTitles:[String:String] = dict.objectForKey("ButtonTitles") as! [String:String]
   let DateFormatStringJapanese:String = dict.objectForKey("DateFormatStringJapanese") as! String
+  let JoinedDateLabelTapComment:String = dict.objectForKey("JoinedDateLabelTapComment") as! String
   
-  
+  let DateFormatStringSeparetedJapanese:String = dict.objectForKey("DateFormatStringSeparetedJapanese") as! String
+  let AlertMessages:[String:AnyObject] = dict.objectForKey("AlertMessages") as! [String:AnyObject]
 }
