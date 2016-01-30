@@ -87,27 +87,6 @@ class YukoMyNumberAppUITests: XCTestCase {
     
     app.navigationBars["入社年月日"].buttons["新規登録"].tap()
     
-  /*
-    tablesQuery.secureTextFields["暗証番号"].tap()
-    //正常値
-    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(4).childrenMatchingType(.SecureTextField).element.typeText(testPassCode)
-    
-    //桁数エラー
-    //tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(4).childrenMatchingType(.SecureTextField).element.typeText("123")
-    
-    
-    let secureTextField = tablesQuery.secureTextFields["暗証番号(再入力)"]
-    secureTextField.tap()
-    
-    //正常値
-    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(5).childrenMatchingType(.SecureTextField).element.typeText(testPassCode)
-    
-    //アンマッチ
-    //tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(5).childrenMatchingType(.SecureTextField).element.typeText("1235")
-    
-    //桁数3桁
-*/
-    
     
     let button = app.navigationBars["新規登録"].buttons["登録"]
     button.tap()

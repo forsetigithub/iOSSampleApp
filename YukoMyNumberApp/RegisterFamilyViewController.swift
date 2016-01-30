@@ -44,6 +44,8 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   
     self.RelationPickerView.delegate = RelationPicker
     
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["RegisterFamilyViewController"]
+    
     RelationPicker.selectedRSCode = RelationPicker.pickerKeys[0]
     self.RelationName.text = RelationPicker.selectedRSName
     

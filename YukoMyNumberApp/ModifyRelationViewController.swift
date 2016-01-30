@@ -24,7 +24,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = "続柄"
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["Relation"]
     
     self.RelationNamesPickerView.delegate = RelationPicker
     

@@ -25,11 +25,11 @@ class ModifyJoinedDateViewController:UITableViewController{
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.title = "入社年月日"
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeJoinedDate"]
     
     self.joinedDateLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapJoinedDateLabel:"))
-
-    self.formatter.dateFormat = "yyyy年MM月dd日"
+    
+    self.formatter.dateFormat = YukoMyNumberAppProperties.sharedInstance.DateFormatStringJapanese
   }
   
   override func viewWillAppear(animated: Bool) {

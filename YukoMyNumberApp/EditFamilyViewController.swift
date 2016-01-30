@@ -28,7 +28,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = "家族情報を編集"
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["EditFamilyViewController"]
 
     FamilyNameTextField.delegate = self
     FirstNameTextField.delegate = self

@@ -18,10 +18,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   // MARK: TableView定義
   private let sectionTitles = ["本人情報","家族情報","送信情報"]
-  private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.EmployeeCodeLabelName,
-                                    YukoMyNumberAppProperties.sharedInstance.EmployeeNameLabelName,
-                                    YukoMyNumberAppProperties.sharedInstance.EmployeeJoinedDateLabelName,
-                                    YukoMyNumberAppProperties.sharedInstance.EmployeeMNLabelName]
+  private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeCode"],
+                                    YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeName"],
+                                    YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeJoinedDate"],
+                                    YukoMyNumberAppProperties.sharedInstance.LabelItems["MyNumber"]]
   
   private var employeeItemData:[String] = [String]()
   private var familyItemData:[EmployeeData] = [EmployeeData]()
@@ -54,6 +54,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       FirstCallFlag = false
       loadEmployeeData()
     }
+    
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["EditEmployeeViewController"]
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -76,7 +78,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   func showPassCodeAlert(){
     
-    let labelTitle = YukoMyNumberAppProperties.sharedInstance.PassCodeLabelName
+    let labelTitle = YukoMyNumberAppProperties.sharedInstance.LabelItems["PassCode"]
     
     let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle)入力", message: "\(labelTitle)(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
     
@@ -260,7 +262,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
           let label = subview as? UILabel
           switch subview.tag {
             case 1: //ラベル
-              label?.text = employeeItemLabels[indexPath.row] as? String
+              label?.text = employeeItemLabels[indexPath.row]
               break
             case 2: //値
               if(employeeItemData.count == 0){
@@ -587,11 +589,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       switch (self.tableView.indexPathForSelectedRow!.row){
         case 0:
-          dest.navigationItem.title = "社員番号"
+          dest.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeCode"]
           dest.ModifyMode = ModifyEmployeeDataViewController.ModifyModeEnum.Employee
           break
         case 1:
-          dest.navigationItem.title = "氏名"
+          dest.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeName"]
            dest.ModifyMode = ModifyEmployeeDataViewController.ModifyModeEnum.Name
           break
         default:

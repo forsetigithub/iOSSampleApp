@@ -44,7 +44,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     PassCodeTextField.delegate = self
     RePassCodeTextField.delegate = self
     
-    self.navigationItem.title = "新規登録"
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["RegisterEmployeeViewController"]
     formatter.dateFormat = "yyyy年 MM月 dd日"
     self.InitialJoinedDateLabel = self.EmployeeJoinedDateLabel.text
     

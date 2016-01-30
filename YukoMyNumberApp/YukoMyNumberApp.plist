@@ -2,22 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>EmployeeCodeLabelName</key>
-	<string>社員番号</string>
+	<key>LabelItems</key>
+	<dict>
+		<key>EmployeeCode</key>
+		<string>社員番号</string>
+		<key>EmployeeName</key>
+		<string>氏名</string>
+		<key>EmployeeJoinedDate</key>
+		<string>入社年月日</string>
+		<key>MyNumber</key>
+		<string>マイナンバー</string>
+		<key>PassCode</key>
+		<string>暗証番号</string>
+		<key>Relation</key>
+		<string>続柄</string>
+	</dict>
 	<key>EmployeeCodeCharactersCount</key>
 	<integer>7</integer>
-	<key>EmployeeNameLabelName</key>
-	<string>氏名</string>
 	<key>EmployeeNameCharactersCount</key>
 	<integer>10</integer>
-	<key>EmployeeJoinedDateLabelName</key>
-	<string>入社年月日</string>
-	<key>EmployeeMNLabelName</key>
-	<string>マイナンバー</string>
 	<key>MyNumberCharactersCount</key>
 	<integer>12</integer>
-	<key>PassCodeLabelName</key>
-	<string>暗証番号</string>
 	<key>PassCodeCharactersCount</key>
 	<integer>4</integer>
 	<key>RelationItems</key>
@@ -196,5 +201,26 @@
 	</dict>
 	<key>PingCheckCounter</key>
 	<integer>10</integer>
+	<key>NavigationTitles</key>
+	<dict>
+		<key>RegisteredListViewController</key>
+		<string>登録者一覧(TEST)</string>
+		<key>RegisterEmployeeViewController</key>
+		<string>新規登録</string>
+		<key>EditEmployeeViewController</key>
+		<string>登録者情報</string>
+		<key>ChangePassCodeViewController</key>
+		<string>暗証番号</string>
+		<key>RegisterFamilyViewController</key>
+		<string>家族を追加</string>
+		<key>EditFamilyViewController</key>
+		<string>家族情報を編集</string>
+	</dict>
+	<key>ButtonTitleRegister</key>
+	<string>登録</string>
+	<key>ButtonTitleModify</key>
+	<string>変更</string>
+	<key>DateFormatStringJapanese</key>
+	<string>yyyy年MM月dd日</string>
 </dict>
 </plist>

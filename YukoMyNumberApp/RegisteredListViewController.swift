@@ -22,9 +22,8 @@ class RegisteredListViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["RegisteredListViewController"]
     self.navigationItem.leftBarButtonItem = editButtonItem()
-    
-
   }
 
   override func viewWillLayoutSubviews() {

@@ -31,7 +31,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     self.MyNumberTextField.delegate = self
-    self.title = "マイナンバー登録"
+    self.title = "\(YukoMyNumberAppProperties.sharedInstance.LabelItems["MyNumber"])\(YukoMyNumberAppProperties.sharedInstance.ButtonTitleRegister)"
     
     self.subjectName.text = MyNumberEditData.FamilyName + "　" + MyNumberEditData.FirstName
     

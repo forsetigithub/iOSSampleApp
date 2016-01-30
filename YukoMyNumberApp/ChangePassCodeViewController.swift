@@ -36,14 +36,21 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     self.PassCodeBefore.delegate = self
     self.PassCodeAfter.delegate = self
     self.PassCodeAfterReEnter.delegate = self
-   
-    var title = "暗証番号を登録"
-    buttontitle = "登録"
+    
+    let regstring = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["ButtonTitleRegister"]!
+    let modstring = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["ButtonTitleModify"]!
+    let titlestring  = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["ChangePassCodeViewController"]!
+    
+    var title = "\(titlestring)\(regstring)"
+    
+    buttontitle = regstring
+    
     changePassCodeMode = CHANGEPASSCODEMODE.NEW
     
     if(EmployeeEditData?.PassCode.characters.count != 0){
-      title = "暗証番号を変更"
-      buttontitle = "変更"
+      title = "\(titlestring)\(modstring)"
+      buttontitle = modstring
+      
       changePassCodeMode = CHANGEPASSCODEMODE.MODIFY
     }
     self.navigationItem.title = title
@@ -169,7 +176,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       self.EmployeeEditData!.PassCode = self.PassCodeAfter.text!
       
-      let labeltitle = YukoMyNumberAppProperties.sharedInstance.PassCodeLabelName
+      let labeltitle = YukoMyNumberAppProperties.sharedInstance.LabelItems["PassCode"]
       
       let myAlert = UIAlertController(title: "\(labeltitle)変更", message: "\(labeltitle)を変更しました", preferredStyle: UIAlertControllerStyle.Alert)
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,
