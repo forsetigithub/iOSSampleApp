@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0318EF1C1C5C78100076D0E6 /* RelationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0318EF1B1C5C78100076D0E6 /* RelationPickerViewController.swift */; };
 		032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */; };
 		03282CDE1C4DFF5A002C4042 /* MyNumberCheckDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */; };
 		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
@@ -35,7 +36,6 @@
 		03D757B31C5B4B7B00E28C1F /* launchimage.gif in Resources */ = {isa = PBXBuildFile; fileRef = 03D757B11C5B4B7B00E28C1F /* launchimage.gif */; };
 		03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */; };
 		03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */; };
-		03E99D721C4DB127004C3788 /* RelationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E99D711C4DB127004C3788 /* RelationPickerViewController.swift */; };
 		03F6318D1C40D9BD0083F33F /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */; };
 		E95412BD01010B5A66EF5B3C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F4A60FAF985F630A287FEA /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0318EF1B1C5C78100076D0E6 /* RelationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationPickerViewController.swift; sourceTree = "<group>"; };
 		032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyEmployeeDataViewController.swift; sourceTree = "<group>"; };
 		03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNumberCheckDigit.swift; sourceTree = "<group>"; };
 		03313FD41C3DF006004D3F9F /* bkpublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bkpublic.h; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		03D757B11C5B4B7B00E28C1F /* launchimage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchimage.gif; sourceTree = "<group>"; };
 		03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeDataClass.swift; sourceTree = "<group>"; };
-		03E99D711C4DB127004C3788 /* RelationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationPickerViewController.swift; path = ../RelationPickerViewController.swift; sourceTree = "<group>"; };
 		03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		9D6BCA32ABDBA21829B2BC19 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D0F4A60FAF985F630A287FEA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,7 +203,7 @@
 				0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */,
 				035976C91C3F59E3004AA479 /* GetMyNumberViewController.swift */,
 				03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */,
-				03E99D711C4DB127004C3788 /* RelationPickerViewController.swift */,
+				0318EF1B1C5C78100076D0E6 /* RelationPickerViewController.swift */,
 				035976C71C3F42CE004AA479 /* YukoMyNumberAppProperties.swift */,
 				03C4E3961C5ADFF4003427BE /* CheckNetworkConnect.swift */,
 				0364F5111C3B46B000EA4A37 /* Main.storyboard */,
@@ -469,8 +469,8 @@
 				03C4E3971C5ADFF4003427BE /* CheckNetworkConnect.swift in Sources */,
 				03564DFB1C530CD800166397 /* ChangePassCodeViewController.swift in Sources */,
 				035976C81C3F42CE004AA479 /* YukoMyNumberAppProperties.swift in Sources */,
+				0318EF1C1C5C78100076D0E6 /* RelationPickerViewController.swift in Sources */,
 				03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */,
-				03E99D721C4DB127004C3788 /* RelationPickerViewController.swift in Sources */,
 				0364F5101C3B46B000EA4A37 /* RegisteredListViewController.swift in Sources */,
 				0358DAC31C45D23F008F2FD0 /* ModifyRelationViewController.swift in Sources */,
 				0364F50E1C3B46B000EA4A37 /* AppDelegate.swift in Sources */,
