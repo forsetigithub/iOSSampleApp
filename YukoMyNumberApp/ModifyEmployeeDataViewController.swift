@@ -97,8 +97,4 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     textField.textColor = UIColor.lightGrayColor()
   }
   
-  @IBAction func tapSaveButton(sender: UIBarButtonItem) {
-
-  }
-  
 }

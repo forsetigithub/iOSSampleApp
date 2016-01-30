@@ -186,7 +186,7 @@
 	<key>ServerInfo</key>
 	<dict>
 		<key>IPAddress</key>
-		<string>10.1.4.48</string>
+		<string>10.1.4.42</string>
 		<key>UserName</key>
 		<string>MNAdmin</string>
 		<key>Password</key>
@@ -194,5 +194,7 @@
 		<key>DataBaseName</key>
 		<string>YukoMN</string>
 	</dict>
+	<key>PingCheckCounter</key>
+	<integer>10</integer>
 </dict>
 </plist>

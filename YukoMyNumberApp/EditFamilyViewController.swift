@@ -124,7 +124,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
       })
     }
     
-    let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction) -> Void in
       
     }
   

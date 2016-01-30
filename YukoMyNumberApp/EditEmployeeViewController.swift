@@ -371,6 +371,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   * UIToolbarのActionボタン押下時
   */
   func tapUploadDataBarButtonItem(sender:UIButton){
+    
     let AlertView = UIAlertController(title: "メニューを選択してください", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
     
     let SendData = UIAlertAction(title: "データを送信", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in

@@ -35,4 +35,5 @@ final class YukoMyNumberAppProperties {
   let PickerLabelFontSize = (dict.objectForKey("PickerLabelFontSize") as? CGFloat)!
   let PassCodeCharactersCount = (dict.objectForKey("PassCodeCharactersCount") as? Int)!
   let PassCodeLabelName = dict.objectForKey("PassCodeLabelName") as! String
+  let PingCheckCounter = (dict.objectForKey("PingCheckCounter") as? Int)!
 }

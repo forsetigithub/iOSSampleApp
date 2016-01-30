@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import SVProgressHUD
+
 
 class RegisteredListViewController: UITableViewController {
   
@@ -21,6 +23,7 @@ class RegisteredListViewController: UITableViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = editButtonItem()
+    
 
   }
 
@@ -28,22 +31,57 @@ class RegisteredListViewController: UITableViewController {
 
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewDidAppear(animated: Bool) {
+  
+    SVProgressHUD.show()
     
-    self.tableView.reloadData()
-    self.navigationController?.toolbarHidden = true
+    var checkcounter = 0
+    var checkresult:Bool = false
+    let pingcheck = CheckNetworkConnect(host: YukoMyNumberAppProperties.sharedInstance.ServerInfo["IPAddress"]!)
     
-    if(!CheckNetworkConnect().CheckNetworkConnection(YukoMyNumberAppProperties.sharedInstance.ServerInfo["IPAddress"]!)){
+    pingcheck.start()
+    
+    repeat{
+      NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+      
+      print("check.status = \(pingcheck.status)")
+      
+      if(pingcheck.status == Status.Success){
+        checkresult = true
+        pingcheck.stop()
+      }else{
+        checkcounter++
+      }
+    
+      if(checkcounter > YukoMyNumberAppProperties.sharedInstance.PingCheckCounter){
+        pingcheck.stop()
+      }
+      
+    }while(pingcheck.running)
+
+    if(!checkresult) {
+      self.navigationItem.rightBarButtonItem?.enabled = false
+      self.navigationItem.leftBarButtonItem?.enabled = false
+      self.tableView.userInteractionEnabled = false
+      
       let myAlert = UIAlertController(title: "ネットワークに接続されていません", message: "ネットワークに接続されていないため、このアプリを開くことはできません", preferredStyle: UIAlertControllerStyle.Alert)
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-        return
+        
       })
       
       myAlert.addAction(OKAction)
-      self.view.window?.rootViewController!.presentViewController(myAlert, animated: true, completion: nil)
+      
+      self.view.window?.rootViewController?.presentViewController(myAlert, animated: true, completion: nil)
+    
     }
+    
+    SVProgressHUD.dismiss()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    self.tableView.reloadData()
+    self.navigationController?.toolbarHidden = true
+  }
   
   override func setEditing(editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
