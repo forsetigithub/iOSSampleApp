@@ -446,7 +446,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
         var sqlstringlist:String = ""
         
-        let timestamp = self.dateFormatter.stringFromDate(NSDate())
+        var timestamp = self.dateFormatter.stringFromDate(NSDate())
         
         for data in list {
 
@@ -471,29 +471,58 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
         self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
           
-          self.client.disconnect()
+#if DEBUG
+  print("timestamp_before = \(timestamp)")
+  timestamp = self.dateFormatter.stringFromDate(NSDate(timeIntervalSinceNow: 1))
+  print("timestamp_after = \(timestamp)")
+#else
+#endif
+
+          let checksqlstring = "select * from T_Employee where EmployeeCode = '\((list.first?.EmployeeCode)!)' and TimeStamp = '\(timestamp)'"
           
-          try! self.realm.write({ () -> Void in
-            self.dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-            self.employeeeditdata.LastUploadDate = self.dateFormatter.stringFromDate(NSDate())
-          })
-          
-          SVProgressHUD.dismiss()
-          
-          let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
-          
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          print(checksqlstring)
+
+          self.client.execute(checksqlstring, completion: { (results : [AnyObject]!) -> Void in
             
-            self.navigationController?.popViewControllerAnimated(true)
+            SVProgressHUD.dismiss()
+            
+            if(results[0].count != 0){
+              self.client.disconnect()
+              
+              try! self.realm.write({ () -> Void in
+                self.dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+                self.employeeeditdata.LastUploadDate = self.dateFormatter.stringFromDate(NSDate())
+              })
+              
+             
+              
+              let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
+              
+              let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+                
+                self.navigationController?.popViewControllerAnimated(true)
+              })
+              
+              messageAlert.addAction(OKAction)
+              
+              self.presentViewController(messageAlert, animated: true, completion: nil)
+              
+              
+            }else{
+              
+              let messageAlert = UIAlertController(title: "送信エラー", message: "送信できませんでした。\n再度送信をしてください。", preferredStyle: UIAlertControllerStyle.Alert)
+              
+              let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+                
+              })
+              
+              messageAlert.addAction(OKAction)
+              self.presentViewController(messageAlert, animated: true, completion: nil)
+  
+            }
+            print("Disconnected")
           })
-          
-          messageAlert.addAction(OKAction)
-          
-          self.presentViewController(messageAlert, animated: true, completion: nil)
-          
-          print("Disconnected")
         })
-        
       }else{
         SVProgressHUD.dismiss()
         print("Error Connect")

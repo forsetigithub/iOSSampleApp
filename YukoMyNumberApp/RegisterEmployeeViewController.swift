@@ -184,10 +184,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   
   
   @IBAction func tapRegisterButton(sender: UIBarButtonItem) {
-    
-    //入力チェック
-#if DEBUG
-#else
+
     //必須入力チェック
     if(self.EmployeeCode.text?.isEmpty == true ||
       self.EmployeeFamilyName.text?.isEmpty == true ||
@@ -208,34 +205,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
         
         return
     }
-  
-#endif
-    
-    //データ登録
-    try! realm.write({ () -> Void in
-      let NewEmployeeData = EmployeeData()
-      NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
-      NewEmployeeData.FamilyName = self.EmployeeFamilyName.text!
-      NewEmployeeData.FirstName = self.EmployeeFirstName.text!
-      NewEmployeeData.FamilySeqNo = 0
-      NewEmployeeData.RSCode = "00"
-      
-      if let joineddate = self.JoinedDate{
-        NewEmployeeData.JoinedDate = joineddate
-      }
-      
-      NewEmployeeData.PassCode = self.PassCodeTextField.text!
-      NewEmployeeData.CreateDateTime = NSDate()
-      self.realm.add(NewEmployeeData)
-      
-#if DEBUG
-  
-      self.dismissViewControllerAnimated(true, completion: nil)
-#else
-      uploadData(NewEmployeeData)
-#endif
-      
-    })
+
+    registerEmployeeData()
+
   }
 
   @IBAction func tapCancelButton(sender: UIBarButtonItem) {
@@ -243,6 +215,34 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+  }
+  
+  func registerEmployeeData(){
+    //データ登録
+    let NewEmployeeData = EmployeeData()
+    NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
+    NewEmployeeData.FamilyName = self.EmployeeFamilyName.text!
+    NewEmployeeData.FirstName = self.EmployeeFirstName.text!
+    NewEmployeeData.FamilySeqNo = 0
+    NewEmployeeData.RSCode = "00"
+    
+    if let joineddate = self.JoinedDate{
+      NewEmployeeData.JoinedDate = joineddate
+    }
+    
+    NewEmployeeData.PassCode = self.PassCodeTextField.text!
+    NewEmployeeData.CreateDateTime = NSDate()
+    
+#if DEBUG
+    try! realm.write({ () -> Void in
+      realm.add(NewEmployeeData)
+      self.dismissViewControllerAnimated(true, completion: nil)
+    })
+
+#else
+    uploadData(NewEmployeeData)
+#endif
 
   }
   
@@ -262,45 +262,60 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           
           print("Connection Successed!")
           
-          let list = self.realm.objects(EmployeeData).filter("EmployeeCode = '\(uploaddata.EmployeeCode)'").sorted("FamilySeqNo")
-          
-          var sqlstringlist:String = ""
-          
           let dateformatter = NSDateFormatter()
           dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
           
           let timestamp = dateformatter.stringFromDate(NSDate())
           
-          for data in list {
-            
-            let sqlstring = "insert into T_Employee(" +
-              "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
-              ") values " +
-              "(NEWID()," +
-              "'\(data.EmployeeCode)'," +
-              "1," +
-              "'\(data.RSCode)'," +
-              "'\(data.FamilyName)'," +
-              "'\(data.FirstName)'," +
-              "'\(dateformatter.stringFromDate(data.JoinedDate))'," +
-              "'\(data.MyNumber)'," +
-              "'\(timestamp)'" +
-              ")"
-            
-            sqlstringlist = sqlstringlist + sqlstring
-          }
-          
-          print(sqlstringlist)
-          
-          self.client.execute(sqlstringlist, completion: { (results:[AnyObject]!) -> Void in
-            
-            self.client.disconnect()
-            print("Disconnected")
-            
-            SVProgressHUD.dismiss()
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
+          let sqlstring = "insert into T_Employee(" +
+            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
+            ") values " +
+            "(NEWID()," +
+            "'\(uploaddata.EmployeeCode)'," +
+            "1," +
+            "'\(uploaddata.RSCode)'," +
+            "'\(uploaddata.FamilyName)'," +
+            "'\(uploaddata.FirstName)'," +
+            "'\(dateformatter.stringFromDate(uploaddata.JoinedDate))'," +
+            "'\(uploaddata.MyNumber)'," +
+            "'\(timestamp)'" +
+            ")"
 
+          print(sqlstring)
+
+          self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
+            
+            let checksqlstring = "select * from T_Employee where EmployeeCode = '\(uploaddata.EmployeeCode)' and TimeStamp = '\(timestamp)'"
+            
+            print(checksqlstring)
+            
+            self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
+              
+              SVProgressHUD.dismiss()
+              
+              if(results[0].count != 0){
+                //データ登録
+                try! self.realm.write({ () -> Void in
+                  self.realm.add(uploaddata)
+                })
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+              }else{
+                
+                let messageAlert = UIAlertController(title: "登録エラー", message: "登録できませんでした。\n再度登録ボタンをタップしてください。", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+                  
+                })
+                
+                messageAlert.addAction(OKAction)
+                self.presentViewController(messageAlert, animated: true, completion: nil)
+              }
+              
+              self.client.disconnect()
+              print("Disconnected")
+            })
           })
           
         }else{

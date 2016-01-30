@@ -152,6 +152,34 @@ extension CheckNetworkConnect: SimplePingDelegate {
     //        println("received unexpected packet")
     
   }
+  
+  func isConnection()-> Bool{
+    var checkcounter = 0
+    var checkresult:Bool = false
+    let pingcheck = CheckNetworkConnect(host: YukoMyNumberAppProperties.sharedInstance.ServerInfo["IPAddress"]!)
+    
+    pingcheck.start()
+    
+    repeat{
+      NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+      
+      print("check.status = \(pingcheck.status)")
+      
+      if(pingcheck.status == Status.Success){
+        checkresult = true
+        pingcheck.stop()
+      }else{
+        checkcounter++
+      }
+      
+      if(checkcounter > YukoMyNumberAppProperties.sharedInstance.PingCheckCounter){
+        pingcheck.stop()
+      }
+      
+    }while(pingcheck.running)
+  
+    return checkresult
+  }
 
 }
 
