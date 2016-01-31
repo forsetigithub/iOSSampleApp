@@ -5,21 +5,33 @@
 	<key>LabelItems</key>
 	<dict>
 		<key>EmployeeCode</key>
-		<string>社員番号</string>
+		<string>EmployeeCode</string>
 		<key>EmployeeName</key>
-		<string>氏名</string>
+		<string>Name</string>
 		<key>EmployeeJoinedDate</key>
-		<string>入社年月日</string>
+		<string>JoinedDate</string>
 		<key>MyNumber</key>
-		<string>マイナンバー</string>
+		<string>MyNumber</string>
 		<key>PassCode</key>
-		<string>暗証番号</string>
+		<string>PassCode</string>
 		<key>Relation</key>
-		<string>続柄</string>
+		<string>Relation</string>
 		<key>FamilyName</key>
-		<string>姓</string>
+		<string>FamilyName</string>
 		<key>FirstName</key>
-		<string>名</string>
+		<string>FirstName</string>
+	</dict>
+	<key>SectionItems</key>
+	<dict>
+		<key>EditEmployee</key>
+		<dict>
+			<key>EmployeeInfo</key>
+			<string>本人情報</string>
+			<key>FamilyInfo</key>
+			<string>家族情報</string>
+			<key>SendInfo</key>
+			<string>送信情報</string>
+		</dict>
 	</dict>
 	<key>EmployeeCodeCharactersCount</key>
 	<integer>7</integer>
@@ -258,5 +270,7 @@
 			<string>登録できませんでした。\n再度登録ボタンをタップしてください。</string>
 		</dict>
 	</dict>
+	<key>LocaleIdentifier</key>
+	<string>en</string>
 </dict>
 </plist>

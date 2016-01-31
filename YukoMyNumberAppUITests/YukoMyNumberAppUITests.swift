@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import YukoMyNumberApp
 
 class YukoMyNumberAppUITests: XCTestCase {
   
@@ -47,74 +48,55 @@ class YukoMyNumberAppUITests: XCTestCase {
   
   }
   
-  
-  func testRegisterEmployee2(){
-    
-
-  }
-  
-  /* 
-  * 新規登録
-  */
+  /* 新規登録 ノーマル */
   func testRegisterEmployee(){
     
     let app = XCUIApplication()
-    let navigationBar = app.navigationBars["登録者一覧"]
-    navigationBar.buttons["追加"].tap()
+    app.navigationBars["RegisteredList"].buttons["Add"].tap()
     
-    let tablesQuery = app.tables
+    let tablesQuery2 = app.tables
+    let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
+    employeeCodeTextField.typeText("1000136")
     
+    let familynameTextField = tablesQuery2.textFields["FamilyName"]
+    familynameTextField.tap()
+    familynameTextField.typeText("Kimura")
     
-    //正常パターン
-    //let clearTextTextField = tablesQuery.textFields.containingType(.Button, identifier:"Clear text").element
+    let firstnameTextField = tablesQuery2.textFields["FirstName"]
+    firstnameTextField.tap()
+    firstnameTextField.typeText("Masanori")
     
-    let textField3 = tablesQuery.textFields["社員番号"]
-    textField3.typeText(testEmployeeCode)
+    let tablesQuery = tablesQuery2
+    tablesQuery.staticTexts["tap to select"].tap()
 
-    let textField = tablesQuery.textFields["姓"]
-    textField.tap()
-    textField.typeText(testEmployeeFamilyName)
-
-    let textField2 = tablesQuery.textFields["名"]
-    textField2.tap()
-    textField2.typeText(testEmployeeFirstName)
-    
-    tablesQuery.staticTexts["入社年月日"].tap()
     let dateformatter = NSDateFormatter()
-    dateformatter.dateFormat = "yyyy年"
+
+    dateformatter.dateFormat = "d"
+    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1")
     
-    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017年")
+    dateformatter.dateFormat = "MMMM"
+    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("April")
     
-    dateformatter.dateFormat = "M月"
-    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("4月")
+    dateformatter.dateFormat = "yyyy"
+    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
     
-    dateformatter.dateFormat = "d日"
-    tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1日")
-    
-    app.navigationBars["入社年月日"].buttons["新規登録"].tap()
-    
-    
-    let button = app.navigationBars["新規登録"].buttons["登録"]
-    button.tap()
+    app.navigationBars["NewEmployee"].buttons["Done"].tap()
     
   }
-  
-  
+
   
   /* 
   * 登録者削除
   */
   func testRegisterListDelete(){
-  
+    
     let app = XCUIApplication()
-    let navigationBar = app.navigationBars["登録者一覧"]
-    navigationBar.buttons["編集"].tap()
+    app.navigationBars["RegisteredList"].buttons["Edit"].tap()
     
     let tablesQuery = app.tables
-    tablesQuery.buttons.elementBoundByIndex(0).tap()
-    tablesQuery.buttons["削除"].tap()
-    navigationBar.buttons["完了"].tap()
-    
+    tablesQuery.buttons.elementBoundByIndex(2).tap()
+    tablesQuery.buttons["Delete"].tap()
+    app.navigationBars["RegisteredList"].buttons["Done"].tap()
   }
   
   

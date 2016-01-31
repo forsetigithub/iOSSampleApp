@@ -41,4 +41,6 @@ final class YukoMyNumberAppProperties {
   
   let DateFormatStringSeparetedJapanese:String = dict.objectForKey("DateFormatStringSeparetedJapanese") as! String
   let AlertMessages:[String:AnyObject] = dict.objectForKey("AlertMessages") as! [String:AnyObject]
+  let LocaleIdentifier:String = dict.objectForKey("LocaleIdentifier") as! String
+  let SectionItems:[String:AnyObject] = dict.objectForKey("SectionItems") as! [String:AnyObject]
 }

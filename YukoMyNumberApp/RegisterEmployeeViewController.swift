@@ -57,7 +57,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     formatter.dateFormat = Properties.DateFormatStringSeparetedJapanese
     self.InitialJoinedDateLabel = self.EmployeeJoinedDateLabel.text
-    self.JoinedDatePicker.locale = NSLocale(localeIdentifier: "Japanese")
+    self.JoinedDatePicker.locale = NSLocale(localeIdentifier: Properties.LocaleIdentifier)
     
     let tapgesture = UITapGestureRecognizer(target: self, action: "EmployeeJoinedDateLabel:")
     self.EmployeeJoinedDateLabel.addGestureRecognizer(tapgesture)

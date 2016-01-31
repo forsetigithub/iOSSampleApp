@@ -16,12 +16,24 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   let realm = try! Realm()
   let client:SQLClient = SQLClient()
   
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  
   // MARK: TableView定義
-  private let sectionTitles = ["本人情報","家族情報","送信情報"]
-  private let employeeItemLabels = [YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeCode"],
-                                    YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeName"],
-                                    YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeJoinedDate"],
-                                    YukoMyNumberAppProperties.sharedInstance.LabelItems["MyNumber"]]
+  private var sectionTitles:[String]{
+    get{
+      let items:[String:String] = Properties.SectionItems["EditEmployee"] as! [String:String]
+      return [items["EmployeeInfo"]!,items["FamilyInfo"]!,items["SendInfo"]!]
+    }
+  }
+
+  private var employeeItemLabels:[String]{
+    get{
+      return [Properties.LabelItems["EmployeeCode"]!,
+              Properties.LabelItems["EmployeeName"]!,
+              Properties.LabelItems["EmployeeJoinedDate"]!,
+              Properties.LabelItems["MyNumber"]!]
+    }
+  }
   
   private var employeeItemData:[String] = [String]()
   private var familyItemData:[EmployeeData] = [EmployeeData]()
@@ -78,7 +90,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   func showPassCodeAlert(){
     
-    let labelTitle = YukoMyNumberAppProperties.sharedInstance.LabelItems["PassCode"]
+    let labelTitle = Properties.LabelItems["PassCode"]
     
     let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle)入力", message: "\(labelTitle)(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
     
@@ -217,7 +229,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   func makeButtonInTableView(title:String,actionName action:Selector) -> UIButton{
     let makebtn = UIButton(type: UIButtonType.System)
     makebtn.setTitle(title, forState: UIControlState.Normal)
-    makebtn.titleLabel?.font = UIFont(name: "System", size: YukoMyNumberAppProperties.sharedInstance.ButtonInTableViewFontSize)
+    makebtn.titleLabel?.font = UIFont(name: "System", size: Properties.ButtonInTableViewFontSize)
     makebtn.addTarget(self, action: action , forControlEvents: UIControlEvents.TouchUpInside)
     makebtn.frame = CGRectMake(self.view.center.x - 100, 5, 200, 30)
 
@@ -435,7 +447,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    let info = YukoMyNumberAppProperties.sharedInstance.ServerInfo
+    let info = Properties.ServerInfo
     
     client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
       database: info["DataBaseName"]) { (success:Bool) -> Void in
@@ -589,11 +601,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       
       switch (self.tableView.indexPathForSelectedRow!.row){
         case 0:
-          dest.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeCode"]
+          dest.navigationItem.title = Properties.LabelItems["EmployeeCode"]
           dest.ModifyMode = ModifyEmployeeDataViewController.ModifyModeEnum.Employee
           break
         case 1:
-          dest.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeName"]
+          dest.navigationItem.title = Properties.LabelItems["EmployeeName"]
            dest.ModifyMode = ModifyEmployeeDataViewController.ModifyModeEnum.Name
           break
         default:

@@ -37,12 +37,13 @@ class RegisteredListViewController: UITableViewController {
     SVProgressHUD.show()
     
 #if DEBUG
+/*
   let alert = UIAlertController(title: "デバッグモード", message: "", preferredStyle: UIAlertControllerStyle.Alert)
   let okaction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
   alert.addAction(okaction)
   self.view.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-#endif
-    
+*/
+#else
     let connectioncheck = CheckNetworkConnect(host: Properties.ServerInfo["IPAddress"]!)
     
     if(!connectioncheck.isConnection()) {
@@ -60,7 +61,7 @@ class RegisteredListViewController: UITableViewController {
       self.view.window?.rootViewController?.presentViewController(myAlert, animated: true, completion: nil)
     
     }
-    
+#endif
     SVProgressHUD.dismiss()
   }
   
