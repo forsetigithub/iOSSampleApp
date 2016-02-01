@@ -12,7 +12,8 @@ import RealmSwift
 
 class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
-  let realm = try! Realm()
+  private let realm = try! Realm()
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
   
   var FamilyItemData:EmployeeData = EmployeeData()
   
@@ -20,19 +21,30 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   @IBOutlet weak var FirstNameTextField: UITextField!
   @IBOutlet weak var RelationNameLabel: UILabel!
   @IBOutlet weak var MyNumberGetStateLabel: UILabel!
+  @IBOutlet weak var RegsiterButton: UIButton!
+  @IBOutlet weak var DeleteFamilyButton: UIButton!
 
   
-  let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
+  var pickerItems:[String:String] = [String:String]()
   var pickerKeys:[String] = [String]()
   var pickerValues:[String] = [String]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["EditFamilyViewController"]
+    self.navigationItem.title = Properties.NavigationTitles["EditFamilyViewController"]
 
     FamilyNameTextField.delegate = self
     FirstNameTextField.delegate = self
+    pickerItems = Properties.RelationItems
     
+    self.FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
+    self.FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
+    
+    self.RegsiterButton.addTarget(self, action: "tapGetMyNumber:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.RegsiterButton.setTitle(Properties.ButtonTitles["RegisterMyNumber"], forState: UIControlState.Normal)
+    
+    self.DeleteFamilyButton.addTarget(self, action: "tapDeleteBtn:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.DeleteFamilyButton.setTitle(Properties.ButtonTitles["DeleteData"], forState: UIControlState.Normal)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -82,7 +94,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     
     switch (textField.tag) {
     case 1,2:
-      if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeNameCharactersCount){
+      if(str.characters.count > Properties.EmployeeNameCharactersCount){
         return false
       }
       break
@@ -112,8 +124,9 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   }
   
   @IBAction func tapDeleteBtn(sender: AnyObject) {
+    let alertProp = Properties.AlertMessages["DeleteExclamation"] as! [String:String]
     let deleteName = FamilyNameTextField.text! + "　" + FirstNameTextField.text!
-    let myAlert:UIAlertController = UIAlertController(title: "確認", message: "「\(deleteName) 」を削除します。\nよろしいですか？", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let myAlert:UIAlertController = UIAlertController(title: alertProp["Title"], message: "「\(deleteName) 」を\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.ActionSheet)
     
     let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       try! self.realm.write({ () -> Void in
@@ -124,7 +137,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
       })
     }
     
-    let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.Cancel) { (action:UIAlertAction) -> Void in
       
     }
   

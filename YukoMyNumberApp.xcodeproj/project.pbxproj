@@ -13,6 +13,7 @@
 		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
 		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
+		035289231C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035289221C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist */; };
 		03564DFB1C530CD800166397 /* ChangePassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */; };
 		0358DAC31C45D23F008F2FD0 /* ModifyRelationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */; };
 		035976C61C3F4283004AA479 /* YukoMyNumberApp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */; };
@@ -76,6 +77,7 @@
 		03313FE01C3DF006004D3F9F /* sybfront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sybfront.h; sourceTree = "<group>"; };
 		03313FE11C3DF006004D3F9F /* tds_sysdep_public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tds_sysdep_public.h; sourceTree = "<group>"; };
 		03313FE41C3DF032004D3F9F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		035289221C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YukoMyNumberAppTest.plist; sourceTree = "<group>"; };
 		03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePassCodeViewController.swift; sourceTree = "<group>"; };
 		0358DAC21C45D23F008F2FD0 /* ModifyRelationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationViewController.swift; sourceTree = "<group>"; };
 		035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YukoMyNumberApp.plist; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				0364F5161C3B46B000EA4A37 /* LaunchScreen.storyboard */,
 				0364F5191C3B46B000EA4A37 /* Info.plist */,
 				035976C51C3F4283004AA479 /* YukoMyNumberApp.plist */,
+				035289221C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist */,
 			);
 			path = YukoMyNumberApp;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035289231C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist in Resources */,
 				0364F5181C3B46B000EA4A37 /* LaunchScreen.storyboard in Resources */,
 				03D757B21C5B4B7B00E28C1F /* checkmark.png in Resources */,
 				0364F5151C3B46B000EA4A37 /* Assets.xcassets in Resources */,

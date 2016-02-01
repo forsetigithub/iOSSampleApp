@@ -17,8 +17,11 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   @IBOutlet weak var showMyNumberLabel: UILabel!
   @IBOutlet weak var subjectName: UILabel!
   @IBOutlet weak var showMyNumberSwitch: UISwitch!
+  @IBOutlet weak var registerButton: UIButton!
+  
   
   private let realm = try! Realm()
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
   
   var MyNumberEditData:EmployeeData = EmployeeData()
   
@@ -31,11 +34,15 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     self.MyNumberTextField.delegate = self
-    self.title = "\(YukoMyNumberAppProperties.sharedInstance.LabelItems["MyNumber"]!)\(YukoMyNumberAppProperties.sharedInstance.ButtonTitles["Register"])"
+    self.title = "\(Properties.LabelItems["MyNumber"]!)\(Properties.ButtonTitles["Register"]!)"
+    self.MyNumberTextField.placeholder = Properties.LabelItems["MyNumber"]
     
     self.subjectName.text = MyNumberEditData.FamilyName + "　" + MyNumberEditData.FirstName
     
     self.MyNumberTextField.addTarget(self, action: "reformatAsAddSpaceNumber:", forControlEvents: UIControlEvents.EditingChanged)
+    
+    self.registerButton.addTarget(self, action: "tapRegisterButton:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.registerButton.setTitle(Properties.ButtonTitles["Register"], forState: UIControlState.Normal)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -49,6 +56,8 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     changeShowMyNumberSwitch(showMyNumberSwitch)
     
     self.navigationController?.toolbarHidden = true
+    print(Properties.ButtonTitles["Register"]!)
+
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -89,7 +98,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     let NumberWithoutSpaces = textField.text?.stringByReplacingOccurrencesOfString(" ", withString: "")
     
-    if(NumberWithoutSpaces?.characters.count > (YukoMyNumberAppProperties.sharedInstance.MyNumberCharactersCount) as Int){
+    if(NumberWithoutSpaces?.characters.count > (Properties.MyNumberCharactersCount) as Int){
       textField.text = previousTextFieldContent
       textField.selectedTextRange = previousSelection
       return

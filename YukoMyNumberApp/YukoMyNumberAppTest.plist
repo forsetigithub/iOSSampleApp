@@ -2,66 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NavigationTitles</key>
-	<dict>
-		<key>RegisteredListViewController</key>
-		<string>従業員一覧</string>
-		<key>RegisterEmployeeViewController</key>
-		<string>新規登録</string>
-		<key>EditEmployeeViewController</key>
-		<string>登録者情報</string>
-		<key>ChangePassCodeViewController</key>
-		<string>暗証番号</string>
-		<key>RegisterFamilyViewController</key>
-		<string>家族を追加</string>
-		<key>EditFamilyViewController</key>
-		<string>家族情報を編集</string>
-	</dict>
 	<key>LabelItems</key>
 	<dict>
 		<key>EmployeeCode</key>
-		<string>従業員番号</string>
+		<string>EmployeeCode</string>
 		<key>EmployeeName</key>
-		<string>氏名</string>
+		<string>Name</string>
 		<key>EmployeeJoinedDate</key>
-		<string>入社年月日</string>
+		<string>JoinedDate</string>
 		<key>MyNumber</key>
-		<string>マイナンバー</string>
+		<string>MyNumber</string>
 		<key>PassCode</key>
-		<string>暗証番号</string>
-		<key>PassCodeBefore</key>
-		<string>変更前暗証番号を入力</string>
-		<key>PassCodeAfter</key>
-		<string>変更後暗証番号を入力</string>
-		<key>PassCodeReAfter</key>
-		<string>変更後暗証番号の再入力</string>
+		<string>PassCode</string>
 		<key>ReEnter</key>
-		<string>再入力</string>
+		<string>ReEnter</string>
+		<key>PassCodeBefore</key>
+		<string>PassCodeBefore</string>
+		<key>PassCodeAfter</key>
+		<string>PassCodeAfter</string>
+		<key>PassCodeReAfter</key>
+		<string>PassCodeReAfter</string>
 		<key>NumberOfDigits</key>
-		<string>桁</string>
+		<string>Digists</string>
 		<key>Relation</key>
-		<string>続柄</string>
+		<string>Relation</string>
 		<key>FamilyName</key>
-		<string>姓</string>
+		<string>FamilyName</string>
 		<key>FirstName</key>
-		<string>名</string>
-	</dict>
-	<key>ButtonTitles</key>
-	<dict>
-		<key>Register</key>
-		<string>登録</string>
-		<key>Modify</key>
-		<string>変更</string>
-		<key>AddNew</key>
-		<string>追加</string>
-		<key>Cancel</key>
-		<string>キャンセル</string>
-		<key>RegisterMyNumber</key>
-		<string>マイナンバーを登録</string>
-		<key>AddFamily</key>
-		<string>家族を追加</string>
-		<key>DeleteData</key>
-		<string>データを削除</string>
+		<string>FirstName</string>
 	</dict>
 	<key>SectionItems</key>
 	<dict>
@@ -73,81 +41,6 @@
 			<string>家族情報</string>
 			<key>SendInfo</key>
 			<string>送信情報</string>
-		</dict>
-	</dict>
-	<key>AlertMessages</key>
-	<dict>
-		<key>OK</key>
-		<string>OK</string>
-		<key>Cancel</key>
-		<string>キャンセル</string>
-		<key>InputPassCode</key>
-		<dict>
-			<key>Title</key>
-			<string>暗証番号</string>
-			<key>Message</key>
-			<string>暗証番号を入力してください</string>
-		</dict>
-		<key>InputPassCodeError</key>
-		<dict>
-			<key>Title</key>
-			<string>暗証番号入力エラー</string>
-			<key>Message</key>
-			<string>暗証番号が正しくありません。</string>
-		</dict>
-		<key>DeleteExclamation</key>
-		<dict>
-			<key>Title</key>
-			<string>確認</string>
-			<key>Message</key>
-			<string>削除します。
-よろしいですか？</string>
-		</dict>
-		<key>RequiredItemValidError</key>
-		<dict>
-			<key>Title</key>
-			<string>必須項目入力エラー</string>
-			<key>Message</key>
-			<string>入力されていない項目があります。</string>
-		</dict>
-		<key>UploadNotCompleteError</key>
-		<dict>
-			<key>Title</key>
-			<string>登録エラー</string>
-			<key>Message</key>
-			<string>登録できませんでした。
-再度登録ボタンをタップしてください。</string>
-		</dict>
-		<key>DoubleCheckError</key>
-		<dict>
-			<key>Title</key>
-			<string>重複エラー</string>
-			<key>Message</key>
-			<string>すでに登録されています。</string>
-		</dict>
-		<key>EditEmployeeActionSheet</key>
-		<dict>
-			<key>Title</key>
-			<string>メニューを選択してください</string>
-			<key>Message</key>
-			<string></string>
-			<key>SendData</key>
-			<dict>
-				<key>Title</key>
-				<string>データを送信</string>
-			</dict>
-		</dict>
-		<key>SendOK</key>
-		<dict>
-			<key>Title</key>
-			<string>送信完了</string>
-			<key>Message</key>
-			<string>送信しました</string>
-		</dict>
-		<key>SendError</key>
-		<dict>
-			<key>Title</key>
-			<string>送信エラー</string>
 		</dict>
 	</dict>
 	<key>EmployeeCodeCharactersCount</key>
@@ -334,13 +227,120 @@
 	</dict>
 	<key>PingCheckCounter</key>
 	<integer>10</integer>
+	<key>NavigationTitles</key>
+	<dict>
+		<key>RegisteredListViewController</key>
+		<string>RegisteredList</string>
+		<key>RegisterEmployeeViewController</key>
+		<string>NewEmployee</string>
+		<key>EditEmployeeViewController</key>
+		<string>EditEmployee</string>
+		<key>ChangePassCodeViewController</key>
+		<string>PassCode</string>
+		<key>RegisterFamilyViewController</key>
+		<string>NewFamily</string>
+		<key>EditFamilyViewController</key>
+		<string>EditFamily</string>
+	</dict>
+	<key>ButtonTitles</key>
+	<dict>
+		<key>Register</key>
+		<string>Done</string>
+		<key>Modify</key>
+		<string>Edit</string>
+		<key>AddNew</key>
+		<string>Add</string>
+		<key>Cancel</key>
+		<string>Cancel</string>
+		<key>RegisterMyNumber</key>
+		<string>RegisterMyNumber</string>
+		<key>AddFamily</key>
+		<string>AddFamily</string>
+		<key>DeleteData</key>
+		<string>DeleteData</string>
+	</dict>
 	<key>DateFormatStringJapanese</key>
 	<string>yyyy年MM月dd日</string>
 	<key>DateFormatStringSeparetedJapanese</key>
 	<string>yyyy年 MM月 dd日</string>
 	<key>JoinedDateLabelTapComment</key>
 	<string>tap to select</string>
+	<key>AlertMessages</key>
+	<dict>
+		<key>OK</key>
+		<string>OK</string>
+		<key>Cancel</key>
+		<string>Cancel</string>
+		<key>InputPassCode</key>
+		<dict>
+			<key>Title</key>
+			<string>InputPassCode</string>
+			<key>Message</key>
+			<string>InputPassCode</string>
+		</dict>
+		<key>InputPassCodeError</key>
+		<dict>
+			<key>Title</key>
+			<string>PassCodeError</string>
+			<key>Message</key>
+			<string>InputPassCodeInvalid</string>
+		</dict>
+		<key>DeleteExclamation</key>
+		<dict>
+			<key>Title</key>
+			<string>確認</string>
+			<key>Message</key>
+			<string>削除します。
+よろしいですか？</string>
+		</dict>
+		<key>RequiredItemValidError</key>
+		<dict>
+			<key>Title</key>
+			<string>必須項目入力エラー</string>
+			<key>Message</key>
+			<string>入力されていない項目があります。</string>
+		</dict>
+		<key>UploadNotCompleteError</key>
+		<dict>
+			<key>Title</key>
+			<string>登録エラー</string>
+			<key>Message</key>
+			<string>登録できませんでした。
+再度登録ボタンをタップしてください。</string>
+		</dict>
+		<key>DoubleCheckError</key>
+		<dict>
+			<key>Title</key>
+			<string>重複エラー</string>
+			<key>Message</key>
+			<string>すでに登録されています。</string>
+		</dict>
+		<key>EditEmployeeActionSheet</key>
+		<dict>
+			<key>Title</key>
+			<string>SelectMenu</string>
+			<key>Message</key>
+			<string></string>
+			<key>SendData</key>
+			<dict>
+				<key>Title</key>
+				<string>UploadData</string>
+			</dict>
+		</dict>
+		<key>SendOK</key>
+		<dict>
+			<key>Title</key>
+			<string>送信完了</string>
+			<key>Message</key>
+			<string>送信しました</string>
+		</dict>
+		<key>SendError</key>
+		<dict>
+			<key>Title</key>
+			<string>送信エラー</string>
+		</dict>
+	</dict>
 	<key>LocaleIdentifier</key>
-	<string>Japanese</string>
+	<string>en</string>
 </dict>
 </plist>

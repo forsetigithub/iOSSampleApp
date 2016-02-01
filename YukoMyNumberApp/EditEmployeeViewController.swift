@@ -67,7 +67,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       loadEmployeeData()
     }
     
-    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["EditEmployeeViewController"]
+    self.navigationItem.title = Properties.NavigationTitles["EditEmployeeViewController"]
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -90,14 +90,16 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   
   func showPassCodeAlert(){
     
-    let labelTitle = Properties.LabelItems["PassCode"]
+    let labelTitle:[String:String] = Properties.AlertMessages["InputPassCode"] as! [String:String]
     
-    let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle)入力", message: "\(labelTitle)(4桁)を入力してください", preferredStyle: UIAlertControllerStyle.Alert)
+    let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)(\(Properties.PassCodeCharactersCount)\(Properties.LabelItems["NumberOfDigits"]!))", preferredStyle: UIAlertControllerStyle.Alert)
     
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
       
       if(self.InputPassCode != self.employeeeditdata.PassCode){
-        let unmatchAlert = UIAlertController(title: "\(labelTitle)入力エラー", message: "\(labelTitle)が正しくありません。\n正しい\(labelTitle)を入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        let labelTitle:[String:String] = self.Properties.AlertMessages["InputPassCodeError"] as! [String:String]
+        
+        let unmatchAlert = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
         
         let unmatchOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) -> Void in
           self.navigationController?.popViewControllerAnimated(true)
@@ -119,7 +121,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       SVProgressHUD.dismiss()
     })
     
-    let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as! String, style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
       self.navigationController?.popViewControllerAnimated(true)
     })
     
@@ -203,14 +205,15 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     var tableButton:UIButton = UIButton()
     
+  
     switch section {
       case 0: //本人
-        tableButton = makeButtonInTableView("マイナンバーを登録",actionName: "getMyNumberBtn:")
+        tableButton = makeButtonInTableView(Properties.ButtonTitles["RegisterMyNumber"]!,actionName: "getMyNumberBtn:")
 
         break
     
       case 1: //家族情報
-        tableButton = makeButtonInTableView("家族を追加",actionName: "addFamilyBtn:")
+        tableButton = makeButtonInTableView(Properties.ButtonTitles["AddFamily"]!,actionName: "addFamilyBtn:")
 
         break
       
@@ -386,14 +389,17 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   */
   func tapUploadDataBarButtonItem(sender:UIButton){
     
-    let AlertView = UIAlertController(title: "メニューを選択してください", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let AlertProp = Properties.AlertMessages["EditEmployeeActionSheet"] as! [String:AnyObject]
+    let SendDataProp = AlertProp["SendData"] as! [String:String]
     
-    let SendData = UIAlertAction(title: "データを送信", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in
+    let AlertView = UIAlertController(title: AlertProp["Title"]as! String, message: AlertProp["Message"] as? String, preferredStyle: UIAlertControllerStyle.ActionSheet)
+    
+    let SendData = UIAlertAction(title: SendDataProp["Title"], style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in
       
       //本人・家族のマイナンバーが全て登録されているかをチェックし、未登録の場合はメッセージを表示
       let numbercheck = self.realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)' and MyNumber == ''")
       
-      let SendAlertView = UIAlertController(title: "データ送信", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+      let SendAlertView = UIAlertController(title: SendDataProp["Title"], message: "", preferredStyle: UIAlertControllerStyle.Alert)
       
       if(numbercheck.count == 0){
         
@@ -409,7 +415,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
       })
       
-      let CancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
+      let CancelAction = UIAlertAction(title: self.Properties.ButtonTitles["Cancel"], style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -419,16 +425,16 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       self.presentViewController(SendAlertView, animated: true, completion: nil)
     }
     
-    var title = "暗証番号を登録"
+    var title = "\(Properties.LabelItems["PassCode"]!)を登録"
     if(self.employeeeditdata.PassCode.characters.count != 0){
-      title = "暗証番号を変更"
+      title = "\(Properties.LabelItems["PassCode"]!)を変更"
     }
     
     let ChangePassword = UIAlertAction(title: title, style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
       self.performSegueWithIdentifier("showChangePassCode", sender: self)
     }
     
-    let AlertCancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: nil)
+    let AlertCancelAction = UIAlertAction(title: self.Properties.AlertMessages["Cancel"] as! String, style: UIAlertActionStyle.Cancel, handler: nil)
     
     AlertView.addAction(SendData)
     AlertView.addAction(ChangePassword)
@@ -495,6 +501,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
           let checksqlstring = "select * from T_Employee where EmployeeCode = '\((list.first?.EmployeeCode)!)' and TimeStamp = '\(timestamp)'"
           
           print(checksqlstring)
+          
+          var AlertProp = self.Properties.AlertMessages["SendOK"] as! [String:String]
 
           self.client.execute(checksqlstring, completion: { (results : [AnyObject]!) -> Void in
             
@@ -508,9 +516,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                 self.employeeeditdata.LastUploadDate = self.dateFormatter.stringFromDate(NSDate())
               })
               
-             
-              
-              let messageAlert = UIAlertController(title: "送信完了", message: "送信しました", preferredStyle: UIAlertControllerStyle.Alert)
+              let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertControllerStyle.Alert)
               
               let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
                 
@@ -521,10 +527,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
               
               self.presentViewController(messageAlert, animated: true, completion: nil)
               
-              
             }else{
-              
-              let messageAlert = UIAlertController(title: "送信エラー", message: "送信できませんでした。\n再度送信をしてください。", preferredStyle: UIAlertControllerStyle.Alert)
+              AlertProp = self.Properties.AlertMessages["SendError"] as! [String:String]
+
+              let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertControllerStyle.Alert)
               
               let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
                 
@@ -630,8 +636,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     }
     
     if(segue.identifier == "showChangePassCode"){
-      let dest = segue.destinationViewController as? ChangePassCodeViewController
-      dest?.EmployeeEditData = employeeeditdata
+      let dest = segue.destinationViewController as! ChangePassCodeViewController
+      dest.EmployeeEditData = self.employeeeditdata
     }
   }
 }

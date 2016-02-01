@@ -25,6 +25,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
   @IBOutlet weak var PassCodeAfter: UITextField!
   @IBOutlet weak var PassCodeAfterReEnter: UITextField!
   
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  
   private var InputPassCode:String?
   
   private var changePassCodeMode:CHANGEPASSCODEMODE?
@@ -37,9 +39,9 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     self.PassCodeAfter.delegate = self
     self.PassCodeAfterReEnter.delegate = self
     
-    let regstring = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["ButtonTitleRegister"]!
-    let modstring = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["ButtonTitleModify"]!
-    let titlestring  = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["ChangePassCodeViewController"]!
+    let regstring = Properties.ButtonTitles["Register"]!
+    let modstring = Properties.ButtonTitles["Modify"]!
+    let titlestring = Properties.NavigationTitles["ChangePassCodeViewController"]!
     
     var title = "\(titlestring)\(regstring)"
     
@@ -53,6 +55,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       changePassCodeMode = CHANGEPASSCODEMODE.MODIFY
     }
+    
     self.navigationItem.title = title
     let saveButtonItem = UIBarButtonItem(title: buttontitle, style: UIBarButtonItemStyle.Done, target: self, action: "tapSavePassCodeButton:")
     self.navigationItem.rightBarButtonItem = saveButtonItem
@@ -67,10 +70,13 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     self.navigationController?.toolbarHidden = true
     
     if(changePassCodeMode == CHANGEPASSCODEMODE.NEW){
-      self.PassCodeBefore.placeholder = "暗証番号(\(YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount)桁)"
-      self.PassCodeAfter.placeholder = "暗証番号(再入力)"
+      self.PassCodeBefore.placeholder = "\(Properties.LabelItems["PassCode"]!)(\(Properties.PassCodeCharactersCount)\(Properties.LabelItems["NumberOfDigits"]!))"
+      self.PassCodeAfter.placeholder = "\(Properties.LabelItems["PassCode"]!)(\(Properties.LabelItems["ReEnter"]!))"
       self.PassCodeAfterReEnter.hidden = true
-      
+    }else{
+      self.PassCodeBefore.placeholder = "\(Properties.LabelItems["PassCodeBefore"]!)"
+      self.PassCodeAfter.placeholder = "\(Properties.LabelItems["PassCodeAfter"]!)"
+      self.PassCodeAfterReEnter.placeholder = "\(Properties.LabelItems["PassCodeReAfter"]!)"
     }
   }
   
@@ -86,7 +92,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     //暗証番号の桁数しか入力できないようにする
 
     let str = textField.text! + string
-    if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.PassCodeCharactersCount){
+    if(str.characters.count > Properties.PassCodeCharactersCount){
       
       return false
     }
@@ -114,7 +120,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       if(self.PassCodeBefore.text != PassCodeAfter.text){
         
         //変更後パスワードと再入力の内容アンマッチエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "暗証番号が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "\(self.Properties.LabelItems["PassCode"])が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           
         })
@@ -176,7 +182,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       self.EmployeeEditData!.PassCode = self.PassCodeAfter.text!
       
-      let labeltitle = YukoMyNumberAppProperties.sharedInstance.LabelItems["PassCode"]
+      let labeltitle:String = (Properties.LabelItems["PassCode"]! as String)
       
       let myAlert = UIAlertController(title: "\(labeltitle)変更", message: "\(labeltitle)を変更しました", preferredStyle: UIAlertControllerStyle.Alert)
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,

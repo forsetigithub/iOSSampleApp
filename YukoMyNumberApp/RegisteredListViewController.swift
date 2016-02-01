@@ -139,6 +139,7 @@ class RegisteredListViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     
+    //データ削除
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     let delemployeecode = employee.EmployeeCode
     

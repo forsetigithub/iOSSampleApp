@@ -12,8 +12,8 @@ import RealmSwift
 
 class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegate {
   
-  
-  let realm = try! Realm()
+  private let realm = try! Realm()
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
   
   enum ModifyModeEnum{
     case Employee
@@ -34,6 +34,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     EmployeeCodeTextField.delegate = self
     FamilyNameTextField.delegate = self
     FirstNameTextField.delegate = self
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -45,7 +46,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     self.EmployeeCodeTextField.text = EmployeeEditData.EmployeeCode
     self.FamilyNameTextField.text = EmployeeEditData.FamilyName
     self.FirstNameTextField.text = EmployeeEditData.FirstName
-    
+
     if(ModifyMode == ModifyModeEnum.Employee){
       changeTextAttribute(FamilyNameTextField)
       changeTextAttribute(FirstNameTextField)
@@ -59,11 +60,15 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   
   override func viewWillDisappear(animated: Bool) {
     
-    try! realm.write({ () -> Void in
-      EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
-      EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
-      EmployeeEditData.FirstName = self.FirstNameTextField.text!
-    })
+    if(realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeCodeTextField.text!)'").count == 0){
+      try! realm.write({ () -> Void in
+        EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
+        EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
+        EmployeeEditData.FirstName = self.FirstNameTextField.text!
+      })
+
+    }
+
   }
   
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -73,8 +78,21 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     switch textField.tag{
       case 1:
         if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
+          
           return false
+        }else if(str.characters.count == YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
+          if(realm.objects(EmployeeData).filter("EmployeeCode = '\(str)' and EmployeeCode !='\(EmployeeEditData.EmployeeCode)'").count != 0){
+            
+            let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
+            
+            let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "「\(str)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            
+            myAlert.addAction(OKAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+          }
         }
+
         break
       case 2,3:
         if(str.characters.count > YukoMyNumberAppProperties.sharedInstance.EmployeeNameCharactersCount){
@@ -84,6 +102,11 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
       default:
         break
     }
+    
+    return true
+  }
+  
+  func textFieldShouldEndEditing(textField: UITextField) -> Bool {
     
     return true
   }

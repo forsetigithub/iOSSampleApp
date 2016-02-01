@@ -12,7 +12,8 @@ import RealmSwift
 class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
                                     UIPickerViewDelegate {
   
-  let realm = try! Realm()
+  private let realm = try! Realm()
+  private let Properties = YukoMyNumberAppProperties.sharedInstance
 
   private var employeeeditdata:EmployeeData = EmployeeData()
   
@@ -30,6 +31,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   @IBOutlet weak var RelationName: UILabel!
   @IBOutlet weak var RelationPickerCell: UITableViewCell!
   @IBOutlet weak var RelationPickerView: UIPickerView!
+  @IBOutlet weak var RegisterButton: UIButton!
   
   
   private let RelationPicker:RelationPickerViewController = RelationPickerViewController()
@@ -41,13 +43,17 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
 
     self.FamilyNameTextField.delegate = self
     self.FirstNameTextField.delegate = self
-  
     self.RelationPickerView.delegate = RelationPicker
     
-    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.NavigationTitles["RegisterFamilyViewController"]
+    self.navigationItem.title = Properties.NavigationTitles["RegisterFamilyViewController"]
+    self.FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
+    self.FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
     
     RelationPicker.selectedRSCode = RelationPicker.pickerKeys[0]
     self.RelationName.text = RelationPicker.selectedRSName
+    
+    self.RegisterButton.addTarget(self, action: "tapRegisterButton:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.RegisterButton.setTitle(Properties.ButtonTitles["Register"], forState: UIControlState.Normal)
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatePickerValue:", name: "updatePickerNotification", object: nil)
 
@@ -103,12 +109,16 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   
   @IBAction func tapRegisterButton(sender: AnyObject) {
     
+    var alertProp:[String:String] = [String:String]()
+    
     //必須項目チェック
-    if(self.FamilyNameTextField.text?.characters.count == 0 ||
-      self.FirstNameTextField.text?.characters.count == 0 ||
+    if(self.FamilyNameTextField.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
+      self.FirstNameTextField.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
       self.RelationName.text == RelationPicker.pickerValues[0]){
         
-        let myAlert = UIAlertController(title: "登録できません", message: "入力されていない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
+        alertProp = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
+        
+        let myAlert = UIAlertController(title: alertProp["Title"], message: alertProp["Message"], preferredStyle: UIAlertControllerStyle.Alert)
         
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           
@@ -126,11 +136,11 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     
     if(rscodecheck.count != 0){
       
-      let myAlert = UIAlertController(title: "登録できません", message: "「\(self.RelationName.text!)」はすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
+      alertProp = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
+      
+      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"])", preferredStyle: UIAlertControllerStyle.Alert)
       
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-        
-        
         
       })
       

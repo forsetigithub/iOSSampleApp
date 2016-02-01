@@ -9,13 +9,24 @@
 import Foundation
 
 final class YukoMyNumberAppProperties {
+  
+
+  
+
   static let sharedInstance = YukoMyNumberAppProperties()
   
   private init(){}
   
   static private var dict:NSDictionary{
     get{
-      let prop = NSBundle.mainBundle().pathForResource("YukoMyNumberApp", ofType: "plist")
+      var PlistFileName:String?
+      
+#if DEBUG
+  PlistFileName = "YukoMyNumberAppTest"
+#else
+  PlistFileName = "YukoMyNumberApp"
+#endif
+      let prop = NSBundle.mainBundle().pathForResource(PlistFileName, ofType: "plist")
       return NSDictionary(contentsOfFile: prop!)!
     }
   }
@@ -33,8 +44,6 @@ final class YukoMyNumberAppProperties {
   let PassCodeCharactersCount = (dict.objectForKey("PassCodeCharactersCount") as? Int)!
   let PingCheckCounter:Int = (dict.objectForKey("PingCheckCounter") as? Int)!
   let NavigationTitles:[String:String] = dict.objectForKey("NavigationTitles") as! [String:String]
-  //let ButtonTitleRegister:String = dict.objectForKey("ButtonTitleRegister") as! String
-  //let ButtonTitleModify:String = dict.objectForKey("ButtonTitleModify") as! String
   let ButtonTitles:[String:String] = dict.objectForKey("ButtonTitles") as! [String:String]
   let DateFormatStringJapanese:String = dict.objectForKey("DateFormatStringJapanese") as! String
   let JoinedDateLabelTapComment:String = dict.objectForKey("JoinedDateLabelTapComment") as! String

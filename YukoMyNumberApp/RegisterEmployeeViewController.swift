@@ -12,8 +12,8 @@ import SVProgressHUD
 
 class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate {
   
-  let realm = try! Realm()
-  let client:SQLClient = SQLClient()
+  private let realm = try! Realm()
+  private let client:SQLClient = SQLClient()
   
   private let Properties = YukoMyNumberAppProperties.sharedInstance
   
@@ -198,9 +198,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   @IBAction func tapRegisterButton(sender: UIBarButtonItem) {
 
     //必須入力チェック
-    if(self.EmployeeCode.text?.isEmpty == true ||
-      self.EmployeeFamilyName.text?.isEmpty == true ||
-      self.EmployeeFirstName.text?.isEmpty == true  ||
+    if(self.EmployeeCode.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
+      self.EmployeeFamilyName.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
+      self.EmployeeFirstName.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true  ||
       self.EmployeeJoinedDateLabel.text == self.InitialJoinedDateLabel ){
         
         let requiredvalid:[String:String] = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
@@ -208,7 +208,6 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
         let myAlert = UIAlertController(title: requiredvalid["Title"], message: requiredvalid["Message"], preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
           
-         
         })
         
         myAlert.addAction(OKAction)
@@ -233,6 +232,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   func registerEmployeeData(){
+    
     //データ登録
     let NewEmployeeData = EmployeeData()
     NewEmployeeData.EmployeeCode = self.EmployeeCode.text!
@@ -247,13 +247,24 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     NewEmployeeData.PassCode = self.PassCodeTextField.text!
     NewEmployeeData.CreateDateTime = NSDate()
+  
+  if(realm.objects(EmployeeData).filter("EmployeeCode = '\(NewEmployeeData.EmployeeCode)'").count != 0){
+    
+    let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
+    
+    let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した社員番号は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+    
+    myAlert.addAction(OKAction)
+    presentViewController(myAlert, animated: true, completion: nil)
+    return
+  }
     
 #if DEBUG
-    try! realm.write({ () -> Void in
-      realm.add(NewEmployeeData)
-      self.dismissViewControllerAnimated(true, completion: nil)
-    })
-
+  try! realm.write({ () -> Void in
+    realm.add(NewEmployeeData)
+    self.dismissViewControllerAnimated(true, completion: nil)
+  })
 #else
     uploadData(NewEmployeeData)
 #endif
