@@ -150,14 +150,6 @@
 			<string>送信エラー</string>
 		</dict>
 	</dict>
-	<key>EmployeeCodeCharactersCount</key>
-	<integer>7</integer>
-	<key>EmployeeNameCharactersCount</key>
-	<integer>10</integer>
-	<key>MyNumberCharactersCount</key>
-	<integer>12</integer>
-	<key>PassCodeCharactersCount</key>
-	<integer>4</integer>
 	<key>RelationItems</key>
 	<dict>
 		<key>-1</key>
@@ -311,6 +303,14 @@
 		<key>98</key>
 		<string>その他2</string>
 	</dict>
+	<key>EmployeeCodeCharactersCount</key>
+	<integer>7</integer>
+	<key>EmployeeNameCharactersCount</key>
+	<integer>10</integer>
+	<key>MyNumberCharactersCount</key>
+	<integer>12</integer>
+	<key>PassCodeCharactersCount</key>
+	<integer>4</integer>
 	<key>ButtonInTableViewFontType</key>
 	<string>System</string>
 	<key>ButtonInTableViewFontSize</key>
@@ -333,7 +333,7 @@
 		<string>YukoMN</string>
 	</dict>
 	<key>PingCheckCounter</key>
-	<integer>10</integer>
+	<integer>5</integer>
 	<key>DateFormatStringJapanese</key>
 	<string>yyyy年MM月dd日</string>
 	<key>DateFormatStringSeparetedJapanese</key>
@@ -342,5 +342,7 @@
 	<string>tap to select</string>
 	<key>LocaleIdentifier</key>
 	<string>Japanese</string>
+	<key>DeleteMonthSpan</key>
+	<integer>1</integer>
 </dict>
 </plist>

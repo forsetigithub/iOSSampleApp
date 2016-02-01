@@ -10,9 +10,6 @@ import Foundation
 
 final class YukoMyNumberAppProperties {
   
-
-  
-
   static let sharedInstance = YukoMyNumberAppProperties()
   
   private init(){}
@@ -52,4 +49,5 @@ final class YukoMyNumberAppProperties {
   let AlertMessages:[String:AnyObject] = dict.objectForKey("AlertMessages") as! [String:AnyObject]
   let LocaleIdentifier:String = dict.objectForKey("LocaleIdentifier") as! String
   let SectionItems:[String:AnyObject] = dict.objectForKey("SectionItems") as! [String:AnyObject]
+  let DeleteMonthSpan:Int = dict.objectForKey("DeleteMonthSpan") as! Int
 }

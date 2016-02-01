@@ -11,6 +11,7 @@ import Foundation
 let StatusChangedNotification = "status-changed-notification"
 let PingStoppedNotification = "ping-stopped-notification"
 let PingStartedNotification = "ping-started-notification"
+let PingSucessNotification = "ping-sucess-notification"
 enum Status: String {
   case Success = "OK"
   case Failure = "Failing"
@@ -29,6 +30,17 @@ class CheckNetworkConnect:NSObject{
   var interval: Double
   var numberOfSamples: Int
   var simplePing: SimplePing?
+  var canStartPinging = false
+  var checkCounter = 0
+  /*
+  private(set) var checkResult = false{
+    didSet{
+      if(checkResult){
+        NSNotificationCenter.defaultCenter().postNotificationName(PingSucessNotification, object: self)
+      }
+    }
+  }
+*/
   private var pingTimer: NSTimer?
   private var lastSequenceSent: UInt16?
   private var lastSentTime: NSDate?
@@ -107,10 +119,11 @@ class CheckNetworkConnect:NSObject{
     }
     running = false
     status = Status.NotRunning
+    
   }
   func sendPing() {
     if let pinger = simplePing {
-      print("ping to \(host)...");
+      print("ping to \(host) checkCounter = \(checkCounter) canStartPinging = \(canStartPinging)");
       pinger.sendPingWithData(nil)
     }
   }
@@ -119,6 +132,7 @@ extension CheckNetworkConnect: SimplePingDelegate {
   func simplePing(pinger: SimplePing!, didStartWithAddress address: NSData!) {
     print("did start")
     self.sendPing()
+    self.canStartPinging = true
     status = Status.Unknown
     pingTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: Selector("sendPing"), userInfo: nil, repeats: true)
   }
@@ -154,31 +168,32 @@ extension CheckNetworkConnect: SimplePingDelegate {
   }
   
   func isConnection()-> Bool{
-    var checkcounter = 0
-    var checkresult:Bool = false
-    let pingcheck = CheckNetworkConnect(host: YukoMyNumberAppProperties.sharedInstance.ServerInfo["IPAddress"]!)
+    var checkResult = false
     
-    pingcheck.start()
-    
+    self.start()
+   
     repeat{
+      
+      if(canStartPinging){
+
+        print("status = \(self.status) checkcounter = \(self.checkCounter) checkResult = \(checkResult)")
+        
+        if(self.status == Status.Success){
+          checkResult = true
+          self.stop()
+        }else{
+          self.checkCounter++
+        }
+        
+        if(self.checkCounter > YukoMyNumberAppProperties.sharedInstance.PingCheckCounter){
+          self.stop()
+        }
+      }
+
       NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
-      
-      print("check.status = \(pingcheck.status)")
-      
-      if(pingcheck.status == Status.Success){
-        checkresult = true
-        pingcheck.stop()
-      }else{
-        checkcounter++
-      }
-      
-      if(checkcounter > YukoMyNumberAppProperties.sharedInstance.PingCheckCounter){
-        pingcheck.stop()
-      }
-      
-    }while(pingcheck.running)
-  
-    return checkresult
+    }while(self.running)
+
+    return checkResult
   }
 
 }

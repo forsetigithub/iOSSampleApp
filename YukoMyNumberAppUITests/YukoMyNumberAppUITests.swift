@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import YukoMyNumberApp
 
 class YukoMyNumberAppUITests: XCTestCase {
   
@@ -106,7 +105,7 @@ class YukoMyNumberAppUITests: XCTestCase {
 
       let employeeCodeTextField = tablesQuery.textFields["社員番号"]
       employeeCodeTextField.typeText("1000136")
-      app.navigationBars["EmployeeCode"].buttons["\u{767b}\u{9332}\u{8005}\u{60c5}\u{5831}"].tap()
+      app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
       
       
     }

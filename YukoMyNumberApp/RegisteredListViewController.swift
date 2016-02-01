@@ -45,7 +45,7 @@ class RegisteredListViewController: UITableViewController {
 */
 #else
     let connectioncheck = CheckNetworkConnect(host: Properties.ServerInfo["IPAddress"]!)
-    
+  
     if(!connectioncheck.isConnection()) {
       self.navigationItem.rightBarButtonItem?.enabled = false
       self.navigationItem.leftBarButtonItem?.enabled = false
@@ -62,12 +62,17 @@ class RegisteredListViewController: UITableViewController {
     
     }
 #endif
+    
     SVProgressHUD.dismiss()
   }
   
   override func viewWillAppear(animated: Bool) {
+    
     self.tableView.reloadData()
     self.navigationController?.toolbarHidden = true
+    
+    deletePastData()
+    
   }
   
   override func setEditing(editing: Bool, animated: Bool) {
@@ -184,6 +189,34 @@ class RegisteredListViewController: UITableViewController {
     let textField = sender.object as! UITextField
     
     print(textField.text)
+  }
+  
+  // MARK: 過去データの自動削除
+  func deletePastData(){
+    
+    let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+    
+    let amonthago = calendar.dateByAddingUnit(NSCalendarUnit.Month, value: (-1) * (Properties.DeleteMonthSpan), toDate: NSDate(), options:NSCalendarOptions.MatchFirst)!
+    
+    print(amonthago)
+    
+    let dateformatter = NSDateFormatter()
+    dateformatter.dateFormat = "yyyyMMddHHmmss"
+    
+    
+    let alllist = realm.objects(EmployeeData)
+    var dellist:[EmployeeData] = [EmployeeData]()
+    
+    for rec in alllist{
+      if(Int(dateformatter.stringFromDate(rec.CreateDateTime)) < Int(dateformatter.stringFromDate(amonthago))){
+        print("\(rec.EmployeeCode) \(rec.CreateDateTime)")
+        dellist.append(rec)
+      }
+    }
+    
+    try! realm.write({ () -> Void in
+      realm.delete(dellist)
+    })
   }
 }
 

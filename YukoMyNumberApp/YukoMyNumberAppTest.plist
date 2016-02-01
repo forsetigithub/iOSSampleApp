@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NavigationTitles</key>
+	<dict>
+		<key>RegisteredListViewController</key>
+		<string>RegisteredList</string>
+		<key>RegisterEmployeeViewController</key>
+		<string>NewEmployee</string>
+		<key>EditEmployeeViewController</key>
+		<string>EditEmployee</string>
+		<key>ChangePassCodeViewController</key>
+		<string>PassCode</string>
+		<key>RegisterFamilyViewController</key>
+		<string>NewFamily</string>
+		<key>EditFamilyViewController</key>
+		<string>EditFamily</string>
+	</dict>
 	<key>LabelItems</key>
 	<dict>
 		<key>EmployeeCode</key>
@@ -31,6 +46,23 @@
 		<key>FirstName</key>
 		<string>FirstName</string>
 	</dict>
+	<key>ButtonTitles</key>
+	<dict>
+		<key>Register</key>
+		<string>Done</string>
+		<key>Modify</key>
+		<string>Edit</string>
+		<key>AddNew</key>
+		<string>Add</string>
+		<key>Cancel</key>
+		<string>Cancel</string>
+		<key>RegisterMyNumber</key>
+		<string>RegisterMyNumber</string>
+		<key>AddFamily</key>
+		<string>AddFamily</string>
+		<key>DeleteData</key>
+		<string>DeleteData</string>
+	</dict>
 	<key>SectionItems</key>
 	<dict>
 		<key>EditEmployee</key>
@@ -43,14 +75,81 @@
 			<string>送信情報</string>
 		</dict>
 	</dict>
-	<key>EmployeeCodeCharactersCount</key>
-	<integer>7</integer>
-	<key>EmployeeNameCharactersCount</key>
-	<integer>10</integer>
-	<key>MyNumberCharactersCount</key>
-	<integer>12</integer>
-	<key>PassCodeCharactersCount</key>
-	<integer>4</integer>
+	<key>AlertMessages</key>
+	<dict>
+		<key>OK</key>
+		<string>OK</string>
+		<key>Cancel</key>
+		<string>Cancel</string>
+		<key>InputPassCode</key>
+		<dict>
+			<key>Title</key>
+			<string>InputPassCode</string>
+			<key>Message</key>
+			<string>InputPassCode</string>
+		</dict>
+		<key>InputPassCodeError</key>
+		<dict>
+			<key>Title</key>
+			<string>PassCodeError</string>
+			<key>Message</key>
+			<string>InputPassCodeInvalid</string>
+		</dict>
+		<key>DeleteExclamation</key>
+		<dict>
+			<key>Title</key>
+			<string>確認</string>
+			<key>Message</key>
+			<string>削除します。
+よろしいですか？</string>
+		</dict>
+		<key>RequiredItemValidError</key>
+		<dict>
+			<key>Title</key>
+			<string>必須項目入力エラー</string>
+			<key>Message</key>
+			<string>入力されていない項目があります。</string>
+		</dict>
+		<key>UploadNotCompleteError</key>
+		<dict>
+			<key>Title</key>
+			<string>登録エラー</string>
+			<key>Message</key>
+			<string>登録できませんでした。
+再度登録ボタンをタップしてください。</string>
+		</dict>
+		<key>DoubleCheckError</key>
+		<dict>
+			<key>Title</key>
+			<string>重複エラー</string>
+			<key>Message</key>
+			<string>すでに登録されています。</string>
+		</dict>
+		<key>EditEmployeeActionSheet</key>
+		<dict>
+			<key>Title</key>
+			<string>SelectMenu</string>
+			<key>Message</key>
+			<string></string>
+			<key>SendData</key>
+			<dict>
+				<key>Title</key>
+				<string>UploadData</string>
+			</dict>
+		</dict>
+		<key>SendOK</key>
+		<dict>
+			<key>Title</key>
+			<string>送信完了</string>
+			<key>Message</key>
+			<string>送信しました</string>
+		</dict>
+		<key>SendError</key>
+		<dict>
+			<key>Title</key>
+			<string>送信エラー</string>
+		</dict>
+	</dict>
 	<key>RelationItems</key>
 	<dict>
 		<key>-1</key>
@@ -204,6 +303,14 @@
 		<key>98</key>
 		<string>その他2</string>
 	</dict>
+	<key>EmployeeCodeCharactersCount</key>
+	<integer>7</integer>
+	<key>EmployeeNameCharactersCount</key>
+	<integer>10</integer>
+	<key>MyNumberCharactersCount</key>
+	<integer>12</integer>
+	<key>PassCodeCharactersCount</key>
+	<integer>4</integer>
 	<key>ButtonInTableViewFontType</key>
 	<string>System</string>
 	<key>ButtonInTableViewFontSize</key>
@@ -227,120 +334,15 @@
 	</dict>
 	<key>PingCheckCounter</key>
 	<integer>10</integer>
-	<key>NavigationTitles</key>
-	<dict>
-		<key>RegisteredListViewController</key>
-		<string>RegisteredList</string>
-		<key>RegisterEmployeeViewController</key>
-		<string>NewEmployee</string>
-		<key>EditEmployeeViewController</key>
-		<string>EditEmployee</string>
-		<key>ChangePassCodeViewController</key>
-		<string>PassCode</string>
-		<key>RegisterFamilyViewController</key>
-		<string>NewFamily</string>
-		<key>EditFamilyViewController</key>
-		<string>EditFamily</string>
-	</dict>
-	<key>ButtonTitles</key>
-	<dict>
-		<key>Register</key>
-		<string>Done</string>
-		<key>Modify</key>
-		<string>Edit</string>
-		<key>AddNew</key>
-		<string>Add</string>
-		<key>Cancel</key>
-		<string>Cancel</string>
-		<key>RegisterMyNumber</key>
-		<string>RegisterMyNumber</string>
-		<key>AddFamily</key>
-		<string>AddFamily</string>
-		<key>DeleteData</key>
-		<string>DeleteData</string>
-	</dict>
 	<key>DateFormatStringJapanese</key>
 	<string>yyyy年MM月dd日</string>
 	<key>DateFormatStringSeparetedJapanese</key>
 	<string>yyyy年 MM月 dd日</string>
 	<key>JoinedDateLabelTapComment</key>
 	<string>tap to select</string>
-	<key>AlertMessages</key>
-	<dict>
-		<key>OK</key>
-		<string>OK</string>
-		<key>Cancel</key>
-		<string>Cancel</string>
-		<key>InputPassCode</key>
-		<dict>
-			<key>Title</key>
-			<string>InputPassCode</string>
-			<key>Message</key>
-			<string>InputPassCode</string>
-		</dict>
-		<key>InputPassCodeError</key>
-		<dict>
-			<key>Title</key>
-			<string>PassCodeError</string>
-			<key>Message</key>
-			<string>InputPassCodeInvalid</string>
-		</dict>
-		<key>DeleteExclamation</key>
-		<dict>
-			<key>Title</key>
-			<string>確認</string>
-			<key>Message</key>
-			<string>削除します。
-よろしいですか？</string>
-		</dict>
-		<key>RequiredItemValidError</key>
-		<dict>
-			<key>Title</key>
-			<string>必須項目入力エラー</string>
-			<key>Message</key>
-			<string>入力されていない項目があります。</string>
-		</dict>
-		<key>UploadNotCompleteError</key>
-		<dict>
-			<key>Title</key>
-			<string>登録エラー</string>
-			<key>Message</key>
-			<string>登録できませんでした。
-再度登録ボタンをタップしてください。</string>
-		</dict>
-		<key>DoubleCheckError</key>
-		<dict>
-			<key>Title</key>
-			<string>重複エラー</string>
-			<key>Message</key>
-			<string>すでに登録されています。</string>
-		</dict>
-		<key>EditEmployeeActionSheet</key>
-		<dict>
-			<key>Title</key>
-			<string>SelectMenu</string>
-			<key>Message</key>
-			<string></string>
-			<key>SendData</key>
-			<dict>
-				<key>Title</key>
-				<string>UploadData</string>
-			</dict>
-		</dict>
-		<key>SendOK</key>
-		<dict>
-			<key>Title</key>
-			<string>送信完了</string>
-			<key>Message</key>
-			<string>送信しました</string>
-		</dict>
-		<key>SendError</key>
-		<dict>
-			<key>Title</key>
-			<string>送信エラー</string>
-		</dict>
-	</dict>
 	<key>LocaleIdentifier</key>
 	<string>en</string>
+	<key>DeleteMonthSpan</key>
+	<integer>1</integer>
 </dict>
 </plist>
