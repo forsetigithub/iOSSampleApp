@@ -32,15 +32,7 @@ class CheckNetworkConnect:NSObject{
   var simplePing: SimplePing?
   var canStartPinging = false
   var checkCounter = 0
-  /*
-  private(set) var checkResult = false{
-    didSet{
-      if(checkResult){
-        NSNotificationCenter.defaultCenter().postNotificationName(PingSucessNotification, object: self)
-      }
-    }
-  }
-*/
+  
   private var pingTimer: NSTimer?
   private var lastSequenceSent: UInt16?
   private var lastSentTime: NSDate?
@@ -179,13 +171,15 @@ extension CheckNetworkConnect: SimplePingDelegate {
         print("status = \(self.status) checkcounter = \(self.checkCounter) checkResult = \(checkResult)")
         
         self.sendPing()
-        pingTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: Selector("sendPing"), userInfo: nil, repeats: true)
-
+        
         if(self.status == Status.Success){
           checkResult = true
           self.stop()
-        }else{
+        }else if(self.status == Status.Error){
+          self.stop()
+        }else {
           self.checkCounter++
+          print("checkCounter=\(checkCounter)")
         }
         
         if(self.checkCounter > YukoMyNumberAppProperties.sharedInstance.PingCheckCounter){
@@ -194,6 +188,7 @@ extension CheckNetworkConnect: SimplePingDelegate {
       }
 
       NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+      
     }while(self.running)
 
     return checkResult

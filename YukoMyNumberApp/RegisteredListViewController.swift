@@ -18,6 +18,7 @@ class RegisteredListViewController: UITableViewController {
   private let Properties = YukoMyNumberAppProperties.sharedInstance
   private let employeefilter = NSPredicate(format: "RSCode = '00'")
   
+  private var isConnectedFlg:Bool = false
   
   // MARK: - Table View
   override func viewDidLoad() {
@@ -43,10 +44,11 @@ class RegisteredListViewController: UITableViewController {
   alert.addAction(okaction)
   self.view.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
 */
-#else
+#endif
+  
     let connectioncheck = CheckNetworkConnect(host: Properties.ServerInfo["IPAddress"]!)
   
-    if(!connectioncheck.isConnection()) {
+    if(!self.isConnectedFlg && !connectioncheck.isConnection()) {
       self.navigationItem.rightBarButtonItem?.enabled = false
       self.navigationItem.leftBarButtonItem?.enabled = false
       self.tableView.userInteractionEnabled = false
@@ -60,8 +62,10 @@ class RegisteredListViewController: UITableViewController {
       
       self.view.window?.rootViewController?.presentViewController(myAlert, animated: true, completion: nil)
     
+    }else{
+      self.isConnectedFlg = true
     }
-#endif
+
     
     SVProgressHUD.dismiss()
   }
@@ -134,7 +138,7 @@ class RegisteredListViewController: UITableViewController {
       view = UITableViewHeaderFooterView(reuseIdentifier: "Header") as UITableViewHeaderFooterView
     }
     
-    view?.textLabel?.text = "※このアプリで登録した社員のみが表示されます\n※初回登録から1ヶ月経過した登録者は削除されます"
+    view?.textLabel?.text = "※このアプリで登録した従業員のみが表示されます\n※初回登録から1ヶ月経過した登録者は削除されます"
     return view
   }
   

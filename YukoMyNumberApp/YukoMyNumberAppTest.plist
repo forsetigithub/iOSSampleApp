@@ -324,16 +324,16 @@
 	<key>ServerInfo</key>
 	<dict>
 		<key>IPAddress</key>
-		<string>10.1.4.48</string>
+		<string>10.1.4.64</string>
 		<key>UserName</key>
-		<string>MNAdmin</string>
+		<string>sa</string>
 		<key>Password</key>
-		<string>6wtBs+aP</string>
+		<string>sa</string>
 		<key>DataBaseName</key>
-		<string>YukoMN</string>
+		<string>YukoMNTest</string>
 	</dict>
 	<key>PingCheckCounter</key>
-	<integer>10</integer>
+	<integer>20</integer>
 	<key>DateFormatStringJapanese</key>
 	<string>yyyy年MM月dd日</string>
 	<key>DateFormatStringSeparetedJapanese</key>

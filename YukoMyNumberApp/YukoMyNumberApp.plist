@@ -5,7 +5,7 @@
 	<key>NavigationTitles</key>
 	<dict>
 		<key>RegisteredListViewController</key>
-		<string>従業員一覧</string>
+		<string>登録者一覧</string>
 		<key>RegisterEmployeeViewController</key>
 		<string>新規登録</string>
 		<key>EditEmployeeViewController</key>
@@ -339,7 +339,7 @@
 	<key>DateFormatStringSeparetedJapanese</key>
 	<string>yyyy年 MM月 dd日</string>
 	<key>JoinedDateLabelTapComment</key>
-	<string>tap to select</string>
+	<string>タップして選択</string>
 	<key>LocaleIdentifier</key>
 	<string>Japanese</string>
 	<key>DeleteMonthSpan</key>

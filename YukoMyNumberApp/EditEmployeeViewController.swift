@@ -493,7 +493,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
           
 #if DEBUG
   print("timestamp_before = \(timestamp)")
-  timestamp = self.dateFormatter.stringFromDate(NSDate(timeIntervalSinceNow: 1))
+  //timestamp = self.dateFormatter.stringFromDate(NSDate(timeIntervalSinceNow: 1))
   print("timestamp_after = \(timestamp)")
 #else
 #endif
