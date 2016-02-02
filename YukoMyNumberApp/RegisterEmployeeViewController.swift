@@ -248,26 +248,19 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     NewEmployeeData.PassCode = self.PassCodeTextField.text!
     NewEmployeeData.CreateDateTime = NSDate()
   
-  if(realm.objects(EmployeeData).filter("EmployeeCode = '\(NewEmployeeData.EmployeeCode)'").count != 0){
+    if(realm.objects(EmployeeData).filter("EmployeeCode = '\(NewEmployeeData.EmployeeCode)'").count != 0){
+      
+      let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
+      
+      let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した社員番号は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+      
+      myAlert.addAction(OKAction)
+      presentViewController(myAlert, animated: true, completion: nil)
+      return
+    }
     
-    let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
-    
-    let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した社員番号は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-    
-    myAlert.addAction(OKAction)
-    presentViewController(myAlert, animated: true, completion: nil)
-    return
-  }
-    
-#if DEBUG
-  try! realm.write({ () -> Void in
-    realm.add(NewEmployeeData)
-    self.dismissViewControllerAnimated(true, completion: nil)
-  })
-#else
     uploadData(NewEmployeeData)
-#endif
 
   }
   
