@@ -119,22 +119,22 @@ class CheckNetworkConnect:NSObject{
     }
     running = false
     status = Status.NotRunning
-    
+    canStartPinging = false
   }
   func sendPing() {
     if let pinger = simplePing {
-      print("ping to \(host) checkCounter = \(checkCounter) canStartPinging = \(canStartPinging)");
-      pinger.sendPingWithData(nil)
+      if(canStartPinging){
+        print("ping to \(host) checkCounter = \(checkCounter) canStartPinging = \(canStartPinging)");
+        pinger.sendPingWithData(nil)
+      }
     }
   }
 }
 extension CheckNetworkConnect: SimplePingDelegate {
   func simplePing(pinger: SimplePing!, didStartWithAddress address: NSData!) {
     print("did start")
-    self.sendPing()
     self.canStartPinging = true
     status = Status.Unknown
-    pingTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: Selector("sendPing"), userInfo: nil, repeats: true)
   }
   func simplePing(pinger: SimplePing!, didFailWithError error: NSError!) {
     status = Status.Failure
@@ -178,6 +178,9 @@ extension CheckNetworkConnect: SimplePingDelegate {
 
         print("status = \(self.status) checkcounter = \(self.checkCounter) checkResult = \(checkResult)")
         
+        self.sendPing()
+        pingTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: Selector("sendPing"), userInfo: nil, repeats: true)
+
         if(self.status == Status.Success){
           checkResult = true
           self.stop()

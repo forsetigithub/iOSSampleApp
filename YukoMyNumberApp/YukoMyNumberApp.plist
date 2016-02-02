@@ -333,7 +333,7 @@
 		<string>YukoMN</string>
 	</dict>
 	<key>PingCheckCounter</key>
-	<integer>5</integer>
+	<integer>20</integer>
 	<key>DateFormatStringJapanese</key>
 	<string>yyyy年MM月dd日</string>
 	<key>DateFormatStringSeparetedJapanese</key>

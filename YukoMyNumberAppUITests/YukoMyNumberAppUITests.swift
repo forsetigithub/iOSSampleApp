@@ -63,7 +63,7 @@ class YukoMyNumberAppUITests: XCTestCase {
       let dateformatter = NSDateFormatter()
 
       dateformatter.dateFormat = "d"
-      //tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1")
+      tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1")
       
       dateformatter.dateFormat = "MMMM"
       tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("April")

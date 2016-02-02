@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>MN登録</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en_US</string>
+	<string>ja_JP</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
