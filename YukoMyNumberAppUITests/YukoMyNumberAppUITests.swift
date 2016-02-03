@@ -42,39 +42,81 @@ class YukoMyNumberAppUITests: XCTestCase {
     /* 新規登録 ノーマル */
     func testRegisterEmployee(){
       
-      let app = XCUIApplication()
-      app.navigationBars["RegisteredList"].buttons["Add"].tap()
+      for (var i = 1; i <= 2;i++) {
+        let app = XCUIApplication()
+        app.navigationBars["RegisteredList"].buttons["Add"].tap()
+        
+        let tablesQuery2 = app.tables
+        let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
+        employeeCodeTextField.typeText("100013\(i)")
+        
+        let familynameTextField = tablesQuery2.textFields["FamilyName"]
+        familynameTextField.tap()
+        familynameTextField.typeText("Kimura\(i)")
+        
+        let firstnameTextField = tablesQuery2.textFields["FirstName"]
+        firstnameTextField.tap()
+        firstnameTextField.typeText("Masanori")
+        
+        let tablesQuery = tablesQuery2
+        tablesQuery.staticTexts["tap to select"].tap()
+        
+        let dateformatter = NSDateFormatter()
+        
+        dateformatter.dateFormat = "d"
+        tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1")
+        
+        dateformatter.dateFormat = "MMMM"
+        tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("April")
+        
+        dateformatter.dateFormat = "yyyy"
+        tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
+        
+        app.navigationBars["NewEmployee"].buttons["Done"].tap()
+      }
       
-      let tablesQuery2 = app.tables
-      let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
-      employeeCodeTextField.typeText(testEmployeeCode)
-      
-      let familynameTextField = tablesQuery2.textFields["FamilyName"]
-      familynameTextField.tap()
-      familynameTextField.typeText("Kimura")
-      
-      let firstnameTextField = tablesQuery2.textFields["FirstName"]
-      firstnameTextField.tap()
-      firstnameTextField.typeText("Masanori")
-      
-      let tablesQuery = tablesQuery2
-      tablesQuery.staticTexts["tap to select"].tap()
 
-      let dateformatter = NSDateFormatter()
-
-      dateformatter.dateFormat = "d"
-      tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1")
-      
-      dateformatter.dateFormat = "MMMM"
-      tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("April")
-      
-      dateformatter.dateFormat = "yyyy"
-      tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
-      
-      app.navigationBars["NewEmployee"].buttons["Done"].tap()
       
     }
-
+  
+  /* 社員番号編集1 */
+  func testEmployeeCodeEdit(){
+    
+    let app = XCUIApplication()
+    let tablesQuery = app.tables
+    tablesQuery.staticTexts["Kimura1\u{3000}Masanori"].tap()
+    tablesQuery.staticTexts["1000131"].tap()
+    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.TextField).element.tap()
+    tablesQuery.buttons["\u{30c6}\u{30ad}\u{30b9}\u{30c8}\u{3092}\u{6d88}\u{53bb}"].tap()
+    
+    let tablesQuery2 = app.tables
+    let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
+    employeeCodeTextField.typeText("1000133")
+    
+    app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
+    
+  }
+  
+  /* 
+  * 社員番号編集2
+  */
+  func testEmployeeCodeEdit2(){
+    
+    let app = XCUIApplication()
+    let tablesQuery = app.tables
+    tablesQuery.staticTexts["Kimura1\u{3000}Masanori"].tap()
+    tablesQuery.staticTexts["1000133"].tap()
+    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.TextField).element.tap()
+    tablesQuery.buttons["\u{30c6}\u{30ad}\u{30b9}\u{30c8}\u{3092}\u{6d88}\u{53bb}"].tap()
+    
+    let tablesQuery2 = app.tables
+    let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
+    employeeCodeTextField.typeText("1000131")
+    
+    app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
+    
+  }
+  
   
     /*
     * 登録者削除
@@ -89,34 +131,13 @@ class YukoMyNumberAppUITests: XCTestCase {
       tablesQuery.buttons["Delete"].tap()
       app.navigationBars["RegisteredList"].buttons["Done"].tap()
     }
-    
-    func testEmployeeCodeEdit(){
+  
 
-      let app = XCUIApplication()
-      app.tables.childrenMatchingType(.Cell).elementBoundByIndex(0).tap()
-      
-      let tablesQuery = app.tables
-      tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).staticTexts[testEmployeeCode].tap()
-
-      tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.TextField).element.tap()
-      
-      let tablesQuery2 = tablesQuery
-      tablesQuery2.buttons["Clear text"].tap()
-
-      let employeeCodeTextField = tablesQuery.textFields["社員番号"]
-      employeeCodeTextField.typeText("1000136")
-      app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
-      
-      
-    }
   
   func testPassCode1(){
     // Failed to find matching element please file bug (bugreport.apple.com) and provide output from Console.app
     
-    
-    
-    
-    
+
   }
   
 }

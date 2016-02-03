@@ -35,6 +35,10 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     FamilyNameTextField.delegate = self
     FirstNameTextField.delegate = self
     
+    EmployeeCodeTextField.placeholder = Properties.LabelItems["EmployeeCode"]
+    FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
+    FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -60,8 +64,12 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   
   override func viewWillDisappear(animated: Bool) {
     
-    if(realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeCodeTextField.text!)'").count == 0){
-      try! realm.write({ () -> Void in
+    if(self.EmployeeCodeTextField.text?.isEmpty == false &&
+      self.FamilyNameTextField.text?.isEmpty == false &&
+      self.FirstNameTextField.text?.isEmpty == false &&
+      realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeCodeTextField.text!)'").count == 0){
+      
+        try! realm.write({ () -> Void in
         EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
         EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
         EmployeeEditData.FirstName = self.FirstNameTextField.text!
@@ -81,7 +89,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
           
           return false
         }else if(str.characters.count == YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
-          if(realm.objects(EmployeeData).filter("EmployeeCode = '\(str)' and EmployeeCode !='\(EmployeeEditData.EmployeeCode)'").count != 0){
+          if(realm.objects(EmployeeData).filter("EmployeeCode = '\(str)' and EmployeeCode !='\(self.EmployeeCodeTextField.text!)'").count != 0){
             
             let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
             
