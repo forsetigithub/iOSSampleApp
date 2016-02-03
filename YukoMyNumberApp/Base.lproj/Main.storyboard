@@ -919,6 +919,50 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="QuO-bc-14w">
+                                        <rect key="frame" x="0.0" y="319" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QuO-bc-14w" id="jEJ-xY-6yB">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="nAV-S0-Zbs">
+                                        <rect key="frame" x="0.0" y="363" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nAV-S0-Zbs" id="ebG-LI-6YF">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUt-YH-YtJ">
+                                                    <rect key="frame" x="200" y="0.0" width="200" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="yL4-Is-U8l"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="マイナンバーを削除する">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JUt-YH-YtJ" firstAttribute="centerY" secondItem="ebG-LI-6YF" secondAttribute="centerY" id="6a3-zB-Nmr"/>
+                                                <constraint firstItem="JUt-YH-YtJ" firstAttribute="top" secondItem="ebG-LI-6YF" secondAttribute="top" id="XOn-Op-gSN"/>
+                                                <constraint firstAttribute="bottom" secondItem="JUt-YH-YtJ" secondAttribute="bottom" id="ai7-2g-HYT"/>
+                                                <constraint firstItem="JUt-YH-YtJ" firstAttribute="centerX" secondItem="ebG-LI-6YF" secondAttribute="centerX" id="bJX-Af-eD2"/>
+                                                <constraint firstAttribute="bottom" secondItem="JUt-YH-YtJ" secondAttribute="bottom" id="bMz-Et-bcX"/>
+                                                <constraint firstItem="JUt-YH-YtJ" firstAttribute="centerY" secondItem="ebG-LI-6YF" secondAttribute="centerY" id="biz-jL-TaB"/>
+                                                <constraint firstItem="JUt-YH-YtJ" firstAttribute="top" secondItem="ebG-LI-6YF" secondAttribute="top" id="pXM-aW-76m"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="XOn-Op-gSN"/>
+                                                    <exclude reference="ai7-2g-HYT"/>
+                                                    <exclude reference="biz-jL-TaB"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -929,6 +973,7 @@
                     </tableView>
                     <connections>
                         <outlet property="MyNumberTextField" destination="gEK-Lz-Jz3" id="Ypp-B5-sTr"/>
+                        <outlet property="deleteMyNumberButton" destination="JUt-YH-YtJ" id="I5m-BB-iKQ"/>
                         <outlet property="registerButton" destination="5dd-zm-Txc" id="lXL-NX-Tk5"/>
                         <outlet property="showMyNumberLabel" destination="yha-RH-Gpz" id="K2H-Gp-ThI"/>
                         <outlet property="showMyNumberSwitch" destination="5Nw-q1-UGX" id="FKf-rl-CXJ"/>

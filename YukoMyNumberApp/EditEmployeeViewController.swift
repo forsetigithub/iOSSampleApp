@@ -324,19 +324,23 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
           switch subview.tag {
             case 1: //氏名
               label?.text =  familyitem.FamilyName + "　" + familyitem.FirstName
-
-              
               break
+
             case 2:
               label?.text?.removeAll()
       
               break
+
             case 3:
+              let imageview = (subview as? UIImageView)!
+              
               if(familyitem.MyNumberCheckDigitResult){
-                let imageview = (subview as? UIImageView)!
                 imageview.image = UIImage(named: "checkmark.png")
+              }else{
+                imageview.image = UIImage(named: "")
               }
               break
+            
             default:
               break
           }

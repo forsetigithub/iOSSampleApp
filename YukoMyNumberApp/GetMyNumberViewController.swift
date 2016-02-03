@@ -18,6 +18,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   @IBOutlet weak var subjectName: UILabel!
   @IBOutlet weak var showMyNumberSwitch: UISwitch!
   @IBOutlet weak var registerButton: UIButton!
+  @IBOutlet weak var deleteMyNumberButton: UIButton!
   
   
   private let realm = try! Realm()
@@ -43,6 +44,9 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     self.registerButton.addTarget(self, action: "tapRegisterButton:", forControlEvents: UIControlEvents.TouchUpInside)
     self.registerButton.setTitle(Properties.ButtonTitles["Register"], forState: UIControlState.Normal)
+    
+    self.deleteMyNumberButton.addTarget(self, action: "tapDeleteMyNumber:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.deleteMyNumberButton.setTitle(Properties.ButtonTitles["DeleteMyNumber"], forState: UIControlState.Normal)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -56,12 +60,13 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     changeShowMyNumberSwitch(showMyNumberSwitch)
     
     self.navigationController?.toolbarHidden = true
-    print(Properties.ButtonTitles["Register"]!)
 
   }
   
   override func viewDidAppear(animated: Bool) {
-    self.MyNumberTextField.becomeFirstResponder()
+    if(self.MyNumberTextField.text?.isEmpty == true){
+      self.MyNumberTextField.becomeFirstResponder()
+    }
   }
   
   override func didReceiveMemoryWarning() {
@@ -166,7 +171,6 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     //重複チェック
 #if DEBUG
 #else
-  
     let result = realm.objects(EmployeeData).filter("MyNumber = '\(inputMyNumber)'")
     if(result.count != 0){
       let myAlert = UIAlertController(title: "マイナンバー入力エラー", message: "入力したマイナンバーはすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
@@ -204,5 +208,26 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
         presentViewController(myAlert, animated: true, completion: nil)
       }
     }
+  }
+  
+  func tapDeleteMyNumber(sender:UIButton){
+    let deleteProp = Properties.AlertMessages["DeleteExclamation"] as! [String:String]
+    
+    let myAlert = UIAlertController(title: deleteProp["Title"], message:"\(Properties.LabelItems["MyNumber"]!)を\(deleteProp["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+      try! self.realm.write({ () -> Void in
+        self.MyNumberEditData.MyNumber = ""
+        
+        self.navigationController?.popViewControllerAnimated(true)
+      })
+    }
+    
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.Cancel, handler: nil)
+    
+    myAlert.addAction(OKAction)
+    myAlert.addAction(CancelAction)
+    
+    presentViewController(myAlert, animated: true, completion: nil)
+  
   }
 }

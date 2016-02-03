@@ -62,6 +62,8 @@
 		<string>家族を追加</string>
 		<key>DeleteData</key>
 		<string>データを削除</string>
+		<key>DeleteMyNumber</key>
+		<string>マイナンバーを削除</string>
 	</dict>
 	<key>SectionItems</key>
 	<dict>

@@ -62,6 +62,8 @@
 		<string>AddFamily</string>
 		<key>DeleteData</key>
 		<string>DeleteData</string>
+		<key>DeleteMyNumber</key>
+		<string>DeleteMyNumber</string>
 	</dict>
 	<key>SectionItems</key>
 	<dict>

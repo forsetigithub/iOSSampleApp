@@ -27,7 +27,11 @@ class EmployeeData : Object {
   dynamic var MyNumber = ""
   
   var MyNumberCheckDigitResult:Bool{
-    return self.MyNumber.isValidMyNumber()
+    if(!MyNumber.isEmpty){
+      return self.MyNumber.isValidMyNumber()
+    }else{
+      return false
+    }
   }
   
   dynamic var CreateDateTime = NSDate()
