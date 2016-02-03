@@ -138,7 +138,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       
       alertProp = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
       
-      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"])", preferredStyle: UIAlertControllerStyle.Alert)
+      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
       
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
         

@@ -151,7 +151,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     //チェックデジット
     if((inputMyNumber.isValidMyNumber()) == false){
       
-      let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に誤りがあります。", preferredStyle: UIAlertControllerStyle.Alert)
+      let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に\n誤りがあります。", preferredStyle: UIAlertControllerStyle.Alert)
       
       let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
         

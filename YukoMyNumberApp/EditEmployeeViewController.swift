@@ -471,7 +471,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         for data in list {
 
           let sqlstring = "insert into T_Employee(" +
-            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
+            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp,MNRegisterMode" +
             ") values " +
             "(NEWID()," +
             "'\(data.EmployeeCode)'," +
@@ -481,7 +481,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             "'\(data.FirstName)'," +
             "'\(self.dateFormatter.stringFromDate(data.JoinedDate))'," +
             "'\(data.MyNumber.stringByReplacingOccurrencesOfString(" ", withString: ""))'," +
-            "'\(timestamp)'" +
+            "'\(timestamp)'," +
+            "\(data.MNRegisterMode)" +
           ")"
 
           sqlstringlist = sqlstringlist + sqlstring

@@ -13,19 +13,24 @@ import RealmSwift
 class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   
   let realm = try! Realm()
+  let Properties = YukoMyNumberAppProperties.sharedInstance
   
   var FamilyItemData:EmployeeData = EmployeeData()
   
   @IBOutlet weak var RelationName: UILabel!
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
   
-  
   private let RelationPicker = RelationPickerViewController()
+  private var defaultRSCode:String{
+    get{
+      return self.FamilyItemData.RSCode
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["Relation"]
-    
+    self.navigationItem.title = Properties.LabelItems["Relation"]
+
     self.RelationNamesPickerView.delegate = RelationPicker
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatePickerValue:", name: "updatePickerNotification", object: nil)
@@ -44,11 +49,11 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   }
   
   override func viewWillDisappear(animated: Bool) {
-    super.viewWillDisappear(animated)
-    
-    try! realm.write({ () -> Void in
-      self.FamilyItemData.RSCode = self.RelationPicker.selectedRSCode
-    })
+    if(self.RelationPicker.selectedRSCode != defaultRSCode){
+      try! realm.write({ () -> Void in
+        self.FamilyItemData.RSCode = self.RelationPicker.selectedRSCode
+      })
+    }
   }
   
   override func didReceiveMemoryWarning() {
@@ -58,7 +63,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   //MARK: TableView
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    var height:CGFloat = YukoMyNumberAppProperties.sharedInstance.TableViewCellDefaultHeight
+    var height:CGFloat = Properties.TableViewCellDefaultHeight
     if(indexPath.row == 1){
       height = 150
     }
@@ -68,7 +73,22 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   
   func updatePickerValue(notification:NSNotification){
     if(notification.name == "updatePickerNotification"){
-      self.RelationName.text = self.RelationPicker.selectedRSName
+      if(self.RelationPicker.selectedRSCode != defaultRSCode){
+        if(realm.objects(EmployeeData).filter("EmployeeCode = '\(FamilyItemData.EmployeeCode)' and RSCode = '\(self.RelationPicker.selectedRSCode)'").count == 0){
+          
+          self.RelationName.text = self.RelationPicker.selectedRSName
+          
+        }else{
+          let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
+          let myAlert = UIAlertController(title: doubleerror["Title"], message:"「\(self.RelationPicker.selectedRSName!)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+          
+          myAlert.addAction(OKAction)
+          presentViewController(myAlert, animated: true, completion: nil)
+          
+          self.RelationPicker.selectedRSCode = FamilyItemData.RSCode
+        }
+      }
     }
   }
 

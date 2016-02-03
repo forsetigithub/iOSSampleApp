@@ -252,7 +252,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       
       let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
       
-      let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した社員番号は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+      let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した\(Properties.LabelItems["EmployeeCode"]!)は\n\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
       
       myAlert.addAction(OKAction)

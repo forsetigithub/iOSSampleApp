@@ -35,6 +35,8 @@ class EmployeeData : Object {
   dynamic var PassCode = ""
   dynamic var JoinedDate = NSDate()
   dynamic var LastUploadDate = ""
+  dynamic var MNRegisterMode = 1 //マイナンバー登録モード(1:手動 2:OCR)
+  //予備エリア
   dynamic var ReserveItem1 = ""
   dynamic var ReserveItem2 = ""
   dynamic var ReserveItem3 = ""
@@ -45,5 +47,15 @@ class EmployeeData : Object {
   dynamic var ReserveItem8 = ""
   dynamic var ReserveItem9 = ""
   dynamic var ReserveItem10 = ""
+  dynamic var ReserveItem11 = ""
+  dynamic var ReserveItem12 = ""
+  dynamic var ReserveItem13 = ""
+  dynamic var ReserveItem14 = ""
+  dynamic var ReserveItem15 = ""
+  dynamic var ReserveItem16 = ""
+  dynamic var ReserveItem17 = ""
+  dynamic var ReserveItem18 = ""
+  dynamic var ReserveItem19 = ""
+  dynamic var ReserveItem20 = ""
   
 }
