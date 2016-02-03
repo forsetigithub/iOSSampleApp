@@ -53,7 +53,7 @@ class RegisteredListViewController: UITableViewController {
       self.navigationItem.leftBarButtonItem?.enabled = false
       self.tableView.userInteractionEnabled = false
       
-      let myAlert = UIAlertController(title: "ネットワークに\n接続されていません", message: "ネットワークに接続されていないため\nこのアプリを開くことはできません", preferredStyle: UIAlertControllerStyle.Alert)
+      let myAlert = UIAlertController(title: "ネットワークに\n接続されていません", message: "ネットワークに接続されていないため\nこのアプリを使用することはできません", preferredStyle: UIAlertControllerStyle.Alert)
       let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
         
       })
