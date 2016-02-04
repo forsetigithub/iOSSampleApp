@@ -83,16 +83,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
           
           return false
         }else if(str.characters.count == YukoMyNumberAppProperties.sharedInstance.EmployeeCodeCharactersCount){
-          if(realm.objects(EmployeeData).filter("EmployeeCode = '\(str)' and EmployeeCode !='\(self.EmployeeCodeTextField.text!)'").count != 0){
-            
-            let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
-            
-            let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "「\(str)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            
-            myAlert.addAction(OKAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
-          }
+
         }
 
         break
@@ -144,53 +135,59 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     
     let info = Properties.ServerInfo
     
-    
     client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
       database: info["DataBaseName"]) { (success:Bool) -> Void in
      
       print("Connection Successed!")
       
       //変更したEmployeeCodeが使用済みでないかどうかのチェック
-      var checksqlstring = "select * from T_Employee where EmployeeCode = '\(self.EmployeeCodeTextField.text!)'"
-      
-      print(checksqlstring)
-      
+      let checksqlstring = "SELECT A0.EmployeeCode as A0_EmployeeCode,AffliationCode,AlreadyUsedFlg,B0.EmployeeCode as B0_EmployeeCode" +
+          " FROM T_EmployeeAffliationRelation as A0 left join T_Employee as B0 on " +
+          "A0.EmployeeCode = B0.EmployeeCode where A0.EmployeeCode= '\(self.EmployeeCodeTextField.text!)'"
+
       self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
+        
         if(results[0].count == 0){
-          //SQLサーバデータ更新
-          let dateformatter = NSDateFormatter()
-          dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
           
-          let timestamp = dateformatter.stringFromDate(NSDate())
+          self.putAlertMessage(self.Properties.AlertMessages["NotRegisteredEmployeeCodeError"])
           
-          var sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
-            "FamilyName = '\(self.FamilyNameTextField.text!)',FirstName = '\(self.FirstNameTextField.text!)' " +
-            "where EmployeeCode = '\(uploaddata.EmployeeCode)' and SeqNo ='\(self.EmployeeEditData.SQLServerSeqNo)';"
-
-
-          let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0 where EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)';"
-          let sqlstring3 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1 where EmployeeCode = '\(self.EmployeeCodeTextField.text!)';"
-
-          sqlstring = sqlstring + sqlstring2 + sqlstring3
-          
-print("update = \(sqlstring)")
-          
-          self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
-            
-            //Realm更新
-            try! self.realm.write({ () -> Void in
-              self.EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
-              self.EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
-              self.EmployeeEditData.FirstName = self.FirstNameTextField.text!
-            })
-            
-            self.client.disconnect()
-            SVProgressHUD.dismiss()
-            self.navigationController?.popViewControllerAnimated(true)
-          })
         }else{
-          self.client.disconnect()
-          SVProgressHUD.dismiss()
+          if((results[0][0]["AlreadyUsedFlg"] as! NSString).intValue == 1){
+            
+            self.putAlertMessage(self.Properties.AlertMessages["DoubleCheckError"])
+            
+          }else{
+            //SQLサーバデータ更新
+            let dateformatter = NSDateFormatter()
+            dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            let timestamp = dateformatter.stringFromDate(NSDate())
+            
+            var sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
+              "FamilyName = '\(self.FamilyNameTextField.text!)',FirstName = '\(self.FirstNameTextField.text!)' " +
+              "where EmployeeCode = '\(uploaddata.EmployeeCode)' and SeqNo ='\(self.EmployeeEditData.SQLServerSeqNo)';"
+            
+            let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0 where EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)';"
+            let sqlstring3 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1 where EmployeeCode = '\(self.EmployeeCodeTextField.text!)';"
+            
+            sqlstring = sqlstring + sqlstring2 + sqlstring3
+            
+            print("update = \(sqlstring)")
+            
+            self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
+              
+              //Realm更新
+              try! self.realm.write({ () -> Void in
+                self.EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
+                self.EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
+                self.EmployeeEditData.FirstName = self.FirstNameTextField.text!
+              })
+              
+              self.client.disconnect()
+              SVProgressHUD.dismiss()
+              self.navigationController?.popViewControllerAnimated(true)
+            })
+          }
         }
       })
     }
@@ -198,5 +195,19 @@ print("update = \(sqlstring)")
 
   func error(error: String!, code: Int32, severity: Int32) {
     print("error=\(error) code = \(code) serverity = \(severity)")
+  }
+  
+  func putAlertMessage(alertProp:AnyObject!){
+    let alertProp = alertProp as! [String:String]
+    
+    SVProgressHUD.dismiss()
+    
+    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertControllerStyle.Alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+      
+    })
+    
+    myAlert.addAction(OKAction)
+    self.presentViewController(myAlert, animated: true, completion: nil)
   }
 }

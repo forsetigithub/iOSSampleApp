@@ -121,7 +121,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       SVProgressHUD.dismiss()
     })
     
-    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as! String, style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
       self.navigationController?.popViewControllerAnimated(true)
     })
     
@@ -396,7 +396,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     let AlertProp = Properties.AlertMessages["EditEmployeeActionSheet"] as! [String:AnyObject]
     let SendDataProp = AlertProp["SendData"] as! [String:String]
     
-    let AlertView = UIAlertController(title: AlertProp["Title"]as! String, message: AlertProp["Message"] as? String, preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let AlertView = UIAlertController(title: AlertProp["Title"]as? String, message: AlertProp["Message"] as? String, preferredStyle: UIAlertControllerStyle.ActionSheet)
     
     let SendData = UIAlertAction(title: SendDataProp["Title"], style: UIAlertActionStyle.Destructive) { (action:UIAlertAction) -> Void in
       
@@ -438,7 +438,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       self.performSegueWithIdentifier("showChangePassCode", sender: self)
     }
     
-    let AlertCancelAction = UIAlertAction(title: self.Properties.AlertMessages["Cancel"] as! String, style: UIAlertActionStyle.Cancel, handler: nil)
+    let AlertCancelAction = UIAlertAction(title: self.Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.Cancel, handler: nil)
     
     AlertView.addAction(SendData)
     AlertView.addAction(ChangePassword)

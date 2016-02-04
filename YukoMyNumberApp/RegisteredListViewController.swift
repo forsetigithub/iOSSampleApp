@@ -27,7 +27,9 @@ class RegisteredListViewController: UITableViewController {
     self.navigationItem.title = Properties.NavigationTitles["RegisteredListViewController"]
     self.navigationItem.leftBarButtonItem = editButtonItem()
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["AddNew"], style: UIBarButtonItemStyle.Plain, target: self, action: "tapAddNewButton:")
+    
     let infobutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "tapVersionInfo:")
+    
     self.toolbarItems = [infobutton]
     self.navigationController?.toolbarHidden = false
   }

@@ -80,6 +80,10 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     }
   }
   
+  override func viewDidAppear(animated: Bool) {
+    self.PassCodeBefore.becomeFirstResponder()
+  }
+  
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if(changePassCodeMode == CHANGEPASSCODEMODE.NEW){
       return 2
@@ -181,6 +185,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     try! realm.write({ () -> Void in
       
       self.EmployeeEditData!.PassCode = self.PassCodeAfter.text!
+      
+      self.resignFirstResponder()
       
       let labeltitle:String = (Properties.LabelItems["PassCode"]! as String)
       

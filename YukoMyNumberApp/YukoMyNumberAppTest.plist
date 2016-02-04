@@ -127,6 +127,13 @@
 			<key>Message</key>
 			<string>すでに登録されています。</string>
 		</dict>
+		<key>NotRegisteredEmployeeCodeError</key>
+		<dict>
+			<key>Title</key>
+			<string>この従業員番号は使用できません</string>
+			<key>Message</key>
+			<string>この従業員番号は本アプリで使用可能な従業員番号ではありません</string>
+		</dict>
 		<key>EditEmployeeActionSheet</key>
 		<dict>
 			<key>Title</key>

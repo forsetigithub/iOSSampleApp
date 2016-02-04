@@ -73,12 +73,8 @@ class YukoMyNumberAppUITests: XCTestCase {
         tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
         
         app.navigationBars["NewEmployee"].buttons["Done"].tap()
-
         
       }
-      
-
-      
     }
   
   /* 社員番号編集1 */
@@ -87,13 +83,13 @@ class YukoMyNumberAppUITests: XCTestCase {
     let app = XCUIApplication()
     let tablesQuery = app.tables
     tablesQuery.staticTexts["Kimura1\u{3000}Masanori"].tap()
-    tablesQuery.staticTexts["1000131"].tap()
+    tablesQuery.staticTexts["1000133"].tap()
     tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.TextField).element.tap()
     tablesQuery.buttons["\u{30c6}\u{30ad}\u{30b9}\u{30c8}\u{3092}\u{6d88}\u{53bb}"].tap()
     
     let tablesQuery2 = app.tables
     let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
-    employeeCodeTextField.typeText("1000133")
+    employeeCodeTextField.typeText("1000132")
     
     //app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
     app.navigationBars["EmployeeCode"].buttons["Edit"].tap()
