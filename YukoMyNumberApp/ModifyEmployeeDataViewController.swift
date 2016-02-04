@@ -163,11 +163,17 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
           
           let timestamp = dateformatter.stringFromDate(NSDate())
           
-          let sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
+          var sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
             "FamilyName = '\(self.FamilyNameTextField.text!)',FirstName = '\(self.FirstNameTextField.text!)' " +
-            "where EmployeeCode = '\(uploaddata.EmployeeCode)' and SeqNo ='\(self.EmployeeEditData.SQLServerSeqNo)'"
+            "where EmployeeCode = '\(uploaddata.EmployeeCode)' and SeqNo ='\(self.EmployeeEditData.SQLServerSeqNo)';"
 
-          print("update = \(sqlstring)")
+
+          let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0 where EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)';"
+          let sqlstring3 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1 where EmployeeCode = '\(self.EmployeeCodeTextField.text!)';"
+
+          sqlstring = sqlstring + sqlstring2 + sqlstring3
+          
+print("update = \(sqlstring)")
           
           self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
             
@@ -189,74 +195,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
       })
     }
   }
- /*
-          print("Connection Successed!")
-          
-          //変更したEmployeeCodeが使用済みでないかどうかのチェック
-            var checksqlstring = "select * from T_Employee where EmployeeCode = '\(self.EmployeeCodeTextField.text!)'"
-            
-            print(checksqlstring)
-            
-            self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
-              
-              if(results[0].count == 0){
-                //SQLサーバデータ更新
-                let dateformatter = NSDateFormatter()
-                dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                
-                let timestamp = dateformatter.stringFromDate(NSDate())
-                
-                //let sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
-                //  "FamilyName = '\(self.FamilyNameTextField.text!)',FirstName = '\(self.FirstNameTextField.text!)' where EmployeeCode = '\(uploaddata.EmployeeCode)'"
-                
-                let sqlstring  = "insert into T_Employee(SeqNo,EmployeeCode,FamilyName,FirstName) values(NEWID(),'\(self.EmployeeCodeTextField.text!)','\(self.FamilyNameTextField.text!)','\(self.FirstNameTextField.text!)')"
-                
-print("update = \(sqlstring)")
-                
-                self.client.execute(sqlstring, completion: { (results1:[AnyObject]!) -> Void in
-                  
-                  checksqlstring = "select * from T_Employee where EmployeeCode = '\(self.EmployeeCodeTextField.text!)' and FamilyName = '\(self.FamilyNameTextField.text!)' and " +
-                  "FirstName = '\(self.FirstNameTextField.text!)'"
-                  
-print("checksqlstring = \(checksqlstring)")
-                  
-                  self.client.execute(checksqlstring,completion:{(results2:[AnyObject]!) -> Void in
-                    if(results2[0].count != 0){
-                      
-                      //Realm更新
-                      try! self.realm.write({ () -> Void in
-                        self.EmployeeEditData.EmployeeCode = self.EmployeeCodeTextField.text!
-                        self.EmployeeEditData.FamilyName = self.FamilyNameTextField.text!
-                        self.EmployeeEditData.FirstName = self.FirstNameTextField.text!
-                      })
-                      
-                      SVProgressHUD.dismiss()
-                    }
-                  })
-                })
-              }else{
-                
-                let uploaderror:[String:String] = self.Properties.AlertMessages["UploadNotCompleteError"] as! [String:String]
-                let messageAlert = UIAlertController(title: uploaderror["Title"], message: uploaderror["Message"], preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
-                  
-                })
-                
-                messageAlert.addAction(OKAction)
-                self.presentViewController(messageAlert, animated: true, completion: nil)
-              }
-              
-              self.client.disconnect()
-              print("Disconnected")
-              
-              SVProgressHUD.dismiss()
-            })
 
-        }
-    }
-  }
- */
   func error(error: String!, code: Int32, severity: Int32) {
     print("error=\(error) code = \(code) serverity = \(severity)")
   }

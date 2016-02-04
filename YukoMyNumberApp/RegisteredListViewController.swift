@@ -27,6 +27,9 @@ class RegisteredListViewController: UITableViewController {
     self.navigationItem.title = Properties.NavigationTitles["RegisteredListViewController"]
     self.navigationItem.leftBarButtonItem = editButtonItem()
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["AddNew"], style: UIBarButtonItemStyle.Plain, target: self, action: "tapAddNewButton:")
+    let infobutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "tapVersionInfo:")
+    self.toolbarItems = [infobutton]
+    self.navigationController?.toolbarHidden = false
   }
 
   override func viewWillLayoutSubviews() {
@@ -73,7 +76,6 @@ class RegisteredListViewController: UITableViewController {
   override func viewWillAppear(animated: Bool) {
     
     self.tableView.reloadData()
-    self.navigationController?.toolbarHidden = true
     
     deletePastData()
     
@@ -221,6 +223,15 @@ class RegisteredListViewController: UITableViewController {
     try! realm.write({ () -> Void in
       realm.delete(dellist)
     })
+  }
+  
+  func tapVersionInfo(sender:UIBarButtonItem){
+    let version:AnyObject! = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
+    let myAlert = UIAlertController(title: "MN登録\nVer.\(version)", message: "YUKO BEX Inc. All Rights Reserved.", preferredStyle: UIAlertControllerStyle.Alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler:nil)
+    
+    myAlert.addAction(OKAction)
+    presentViewController(myAlert, animated: true, completion: nil)
   }
 }
 

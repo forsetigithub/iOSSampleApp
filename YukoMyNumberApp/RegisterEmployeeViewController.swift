@@ -287,59 +287,80 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           
           let timestamp = dateformatter.stringFromDate(NSDate())
           
-          let sqlstring = "insert into T_Employee(" +
-            "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
-            ") values " +
-            "(NEWID()," +
-            "'\(uploaddata.EmployeeCode)'," +
-            "1," +
-            "'\(uploaddata.RSCode)'," +
-            "'\(uploaddata.FamilyName)'," +
-            "'\(uploaddata.FirstName)'," +
-            "'\(dateformatter.stringFromDate(uploaddata.JoinedDate))'," +
-            "'\(uploaddata.MyNumber)'," +
-            "'\(timestamp)'" +
-            ")"
-
-          print(sqlstring)
-
-          self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
-            
-            let checksqlstring = "select * from T_Employee where EmployeeCode = '\(uploaddata.EmployeeCode)' and TimeStamp = '\(timestamp)'"
-            
-            print(checksqlstring)
-            
-            self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
-              
-              SVProgressHUD.dismiss()
-              
-              if(results[0].count != 0){
-                //データ登録
-                try! self.realm.write({ () -> Void in
-                  uploaddata.SQLServerSeqNo = results[0][0]["SeqNo"] as! String
-                  self.realm.add(uploaddata)
-                })
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
-                
-              }else{
-                
-                let uploaderror:[String:String] = self.Properties.AlertMessages["UploadNotCompleteError"] as! [String:String]
-                let messageAlert = UIAlertController(title: uploaderror["Title"], message: uploaderror["Message"], preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
-                  
-                })
-                
-                messageAlert.addAction(OKAction)
-                self.presentViewController(messageAlert, animated: true, completion: nil)
-              }
-              
-              self.client.disconnect()
-              print("Disconnected")
-            })
-          })
+          var checksqlstring = "select A0.EmployeeCode,B0.AlreadyUsedFlg from T_Employee as A0 left join T_EmployeeAffliationRelation as B0 " +
+                              "on A0.EmployeeCode = B0.EmployeeCode where A0.EmployeeCode= '\(uploaddata.EmployeeCode)' and B0.AlreadyUsedFlg = 1"
           
+          self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
+            
+            if(results[0].count == 0){
+              var sqlstring = "insert into T_Employee(" +
+                "SeqNo,EmployeeCode,RecKindNo,RelationCode,FamilyName,FirstName,JoinedDate,MyNumber,TimeStamp" +
+                ") values " +
+                "(NEWID()," +
+                "'\(uploaddata.EmployeeCode)'," +
+                "1," +
+                "'\(uploaddata.RSCode)'," +
+                "'\(uploaddata.FamilyName)'," +
+                "'\(uploaddata.FirstName)'," +
+                "'\(dateformatter.stringFromDate(uploaddata.JoinedDate))'," +
+                "'\(uploaddata.MyNumber)'," +
+                "'\(timestamp)'" +
+              ");"
+              
+              let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1 where EmployeeCode = '\(uploaddata.EmployeeCode)'"
+              
+              sqlstring = sqlstring + sqlstring2
+              
+              print(sqlstring)
+              
+              self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
+                
+                checksqlstring = "select * from T_Employee where EmployeeCode = '\(uploaddata.EmployeeCode)' and TimeStamp = '\(timestamp)'"
+                
+                print(checksqlstring)
+                
+                self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
+                  
+                  if(results[0].count != 0){
+                    //データ登録
+                    try! self.realm.write({ () -> Void in
+                      uploaddata.SQLServerSeqNo = results[0][0]["SeqNo"] as! String
+                      self.realm.add(uploaddata)
+                    })
+                    
+                    SVProgressHUD.dismiss()
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                  }else{
+                    
+                    let uploaderror:[String:String] = self.Properties.AlertMessages["UploadNotCompleteError"] as! [String:String]
+                    let messageAlert = UIAlertController(title: uploaderror["Title"], message:"入力した\(self.Properties.LabelItems["EmployeeCode"])は\(uploaderror["Message"])" , preferredStyle: UIAlertControllerStyle.Alert)
+                    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+                      
+                    })
+                    
+                    messageAlert.addAction(OKAction)
+                    self.presentViewController(messageAlert, animated: true, completion: nil)
+                  }
+                  
+                  self.client.disconnect()
+                  print("Disconnected")
+                })
+              })
+            }else{
+              let alertProp = self.Properties.AlertMessages["DoubleCheckError"] as! [String:String]
+            
+              let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertControllerStyle.Alert)
+              let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+                
+              })
+              
+              myAlert.addAction(OKAction)
+              self.presentViewController(myAlert, animated: true, completion: nil)
+            }
+          })
+    
         }else{
           SVProgressHUD.dismiss()
           print("Error Connect")
