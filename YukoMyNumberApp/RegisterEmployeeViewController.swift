@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import SVProgressHUD
 
-class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate {
+class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate,SQLClientDelegate {
   
   private let realm = try! Realm()
   private let client:SQLClient = SQLClient()
@@ -39,6 +39,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    client.delegate = self
     
     EmployeeCode.delegate = self
     EmployeeFamilyName.delegate = self
@@ -314,6 +316,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
               if(results[0].count != 0){
                 //データ登録
                 try! self.realm.write({ () -> Void in
+                  uploaddata.SQLServerSeqNo = results[0][0]["SeqNo"] as! String
                   self.realm.add(uploaddata)
                 })
                 
@@ -343,5 +346,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           return
         }
     }
+  }
+  
+  func error(error: String!, code: Int32, severity: Int32) {
+    print("error = \(error),code = \(code),severity = \(severity)")
   }
 }

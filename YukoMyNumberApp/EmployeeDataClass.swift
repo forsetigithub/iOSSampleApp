@@ -40,6 +40,7 @@ class EmployeeData : Object {
   dynamic var JoinedDate = NSDate()
   dynamic var LastUploadDate = ""
   dynamic var MNRegisterMode = 1 //マイナンバー登録モード(1:手動 2:OCR)
+  dynamic var SQLServerSeqNo = ""
   //予備エリア
   dynamic var ReserveItem1 = ""
   dynamic var ReserveItem2 = ""

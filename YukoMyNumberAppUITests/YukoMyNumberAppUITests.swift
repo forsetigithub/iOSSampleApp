@@ -73,6 +73,8 @@ class YukoMyNumberAppUITests: XCTestCase {
         tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
         
         app.navigationBars["NewEmployee"].buttons["Done"].tap()
+
+        
       }
       
 
@@ -93,8 +95,8 @@ class YukoMyNumberAppUITests: XCTestCase {
     let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
     employeeCodeTextField.typeText("1000133")
     
-    app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
-    
+    //app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
+    app.navigationBars["EmployeeCode"].buttons["Edit"].tap()
   }
   
   /* 
@@ -113,8 +115,8 @@ class YukoMyNumberAppUITests: XCTestCase {
     let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
     employeeCodeTextField.typeText("1000131")
     
-    app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
-    
+    //app.navigationBars["EmployeeCode"].buttons["EditEmployee"].tap()
+    app.navigationBars["EmployeeCode"].buttons["Edit"].tap()
   }
   
   

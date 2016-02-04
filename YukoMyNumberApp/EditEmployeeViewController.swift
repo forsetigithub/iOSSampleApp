@@ -514,12 +514,13 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             SVProgressHUD.dismiss()
             
             if(results[0].count != 0){
-              self.client.disconnect()
               
               try! self.realm.write({ () -> Void in
                 self.dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
                 self.employeeeditdata.LastUploadDate = self.dateFormatter.stringFromDate(NSDate())
               })
+              
+              self.client.disconnect()
               
               let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertControllerStyle.Alert)
               
