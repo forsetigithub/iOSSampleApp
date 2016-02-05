@@ -272,7 +272,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
                   "'\(timestamp)'" +
                 ");"
                 
-                let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1 where EmployeeCode = '\(uploaddata.EmployeeCode)'"
+                let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1,MyNumberRegistedFlg = 0 where EmployeeCode = '\(uploaddata.EmployeeCode)'"
                 
                 sqlstring = sqlstring + sqlstring2
                 

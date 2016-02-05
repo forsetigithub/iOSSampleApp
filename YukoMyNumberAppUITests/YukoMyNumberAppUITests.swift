@@ -42,7 +42,8 @@ class YukoMyNumberAppUITests: XCTestCase {
     /* 新規登録 ノーマル */
     func testRegisterEmployee(){
       
-      for (var i = 1; i <= 2;i++) {
+      
+      for (var i = 6; i <= 8;i++) {
         let app = XCUIApplication()
         app.navigationBars["RegisteredList"].buttons["Add"].tap()
         
@@ -115,6 +116,31 @@ class YukoMyNumberAppUITests: XCTestCase {
     app.navigationBars["EmployeeCode"].buttons["Edit"].tap()
   }
   
+  func testAddFaimily(){
+    
+    let app = XCUIApplication()
+    let tablesQuery = app.tables
+    tablesQuery.staticTexts["Kimura1\u{3000}Masanori"].tap()
+    tablesQuery.buttons["AddFamily"].tap()
+    
+    let tablesQuery2 = app.tables
+    let familynameTextField = tablesQuery2.textFields["FamilyName"]
+    familynameTextField.tap()
+    familynameTextField.typeText("kimura")
+
+    let firstnameTextField = tablesQuery2.textFields["FirstName"]
+    firstnameTextField.tap()
+    firstnameTextField.typeText("shiro")
+    
+    
+    //let budget = NSPredicate(format: "label BEGINSWITH 'SelectRelation'")
+    
+    //let budgetPicker = app.pickerWheels.elementMatchingPredicate(budget)
+    app.pickerWheels["SelectRelation,-1"].adjustToPickerWheelValue("Son4")
+    
+    tablesQuery2.buttons["Done"].tap()
+    
+  }
   
     /*
     * 登録者削除

@@ -164,19 +164,19 @@
 	<key>RelationItems</key>
 	<dict>
 		<key>-1</key>
-		<string>続柄を選択</string>
+		<string>SelectRelation</string>
 		<key>01</key>
-		<string>夫</string>
+		<string>Husband</string>
 		<key>02</key>
-		<string>妻</string>
+		<string>Wife</string>
 		<key>11</key>
-		<string>長男</string>
+		<string>Son1</string>
 		<key>12</key>
-		<string>次男</string>
+		<string>Son2</string>
 		<key>13</key>
-		<string>三男</string>
+		<string>Son3</string>
 		<key>14</key>
-		<string>四男</string>
+		<string>Son4</string>
 		<key>15</key>
 		<string>五男</string>
 		<key>16</key>
