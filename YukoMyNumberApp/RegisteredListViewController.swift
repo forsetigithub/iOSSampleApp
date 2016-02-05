@@ -157,6 +157,36 @@ class RegisteredListViewController: UITableViewController {
       
       tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
     })
+    
+    
+    //SQLServerの更新
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { () -> Void in
+      
+      let client = SQLClient()
+      let info = self.Properties.ServerInfo
+      
+      client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
+        database: info["DataBaseName"]) { (success:Bool) -> Void in
+          if(success){
+            let selsql = "select * from T_Employee where EmployeeCode = '\(delemployeecode)'"
+            
+            client.execute(selsql, completion: { (results:[AnyObject]!) -> Void in
+              /* データ送信するまでは、同一の従業員番号はテーブル中に１つしかない。
+                 少なくともマイナンバーは登録していないためこの従業員番号は使用可能と判定する。
+              */
+              if(results[0].count == 1){
+                let updatesql = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0,MyNumberRegistedFlg = 0 where EmployeeCode = '\(delemployeecode)'"
+                
+                client.execute(updatesql, completion: { (results:[AnyObject]!) -> Void in
+                  
+                })
+              }
+            })
+          
+          }
+      }
+
+    //}
 
   }
   

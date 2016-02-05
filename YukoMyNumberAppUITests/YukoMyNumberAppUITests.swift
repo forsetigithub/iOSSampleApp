@@ -42,8 +42,7 @@ class YukoMyNumberAppUITests: XCTestCase {
     /* 新規登録 ノーマル */
     func testRegisterEmployee(){
       
-      
-      for (var i = 6; i <= 8;i++) {
+      for (var i = 1; i <= 2;i++) {
         let app = XCUIApplication()
         app.navigationBars["RegisteredList"].buttons["Add"].tap()
         
