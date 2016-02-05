@@ -165,7 +165,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
             
             var sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
               "FamilyName = '\(self.FamilyNameTextField.text!)',FirstName = '\(self.FirstNameTextField.text!)' " +
-              "where EmployeeCode = '\(uploaddata.EmployeeCode)' and SeqNo ='\(self.EmployeeEditData.SQLServerSeqNo)';"
+              "where EmployeeCode = '\(uploaddata.EmployeeCode)';"
             
             let sqlstring2 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0 where EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)';"
             let sqlstring3 = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 1 where EmployeeCode = '\(self.EmployeeCodeTextField.text!)';"

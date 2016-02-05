@@ -120,7 +120,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
         
         let myAlert = UIAlertController(title: alertProp["Title"], message: alertProp["Message"], preferredStyle: UIAlertControllerStyle.Alert)
         
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -140,7 +140,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       
       let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
       
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -162,7 +162,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       
       family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
         ascending: true).first?.FamilySeqNo)! + 1
-      
+            
       realm.add(family)
       
       self.navigationController?.popViewControllerAnimated(true)

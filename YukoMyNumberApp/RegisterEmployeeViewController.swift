@@ -24,16 +24,11 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   @IBOutlet weak var EmployeeJoinedDateLabel: UILabel!
   
   @IBOutlet weak var JoinedDatePicker: UIDatePicker!
-  @IBOutlet weak var PassCodeTextField: UITextField!
-  @IBOutlet weak var RePassCodeTextField: UITextField!
-  
-  
+
   var JoinedDate:NSDate?
   let formatter = NSDateFormatter()
   
-  private var InputPassCode:String? //暗証番号(初回)
   private var InitialJoinedDateLabel:String!
-  
   private var JoinedDateTappedFlag:Bool = false
   
   override func viewDidLoad() {
@@ -45,8 +40,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     EmployeeCode.delegate = self
     EmployeeFamilyName.delegate = self
     EmployeeFirstName.delegate = self
-    PassCodeTextField.delegate = self
-    RePassCodeTextField.delegate = self
+
     
     self.navigationItem.title = Properties.NavigationTitles["RegisterEmployeeViewController"]
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Register"], style: UIBarButtonItemStyle.Done, target: self, action: "tapRegisterButton:")
@@ -64,6 +58,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     let tapgesture = UITapGestureRecognizer(target: self, action: "EmployeeJoinedDateLabel:")
     self.EmployeeJoinedDateLabel.addGestureRecognizer(tapgesture)
     self.EmployeeJoinedDateLabel.text = Properties.JoinedDateLabelTapComment
+    
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -102,21 +97,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
 
   func textFieldDidEndEditing(textField: UITextField) {
-  
-    if((textField.tag == 4 || textField.tag == 5) &&
-      textField.text?.characters.count != 0 && textField.text?.characters.count != Properties.PassCodeCharactersCount){
-    
-        let myAlert = UIAlertController(title: "", message: "暗証番号は\(Properties.PassCodeCharactersCount)桁で入力してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-          textField.text?.removeAll()
-          textField.becomeFirstResponder()
-          
-        })
-        
-        myAlert.addAction(OKAction)
-        presentViewController(myAlert, animated: true, completion: nil)
-    }
+
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -141,32 +122,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           return false
         }
         break
-        
-      //暗証番号の桁数しか入力できないようにする
-      case 4,5:
-
-        if(str.characters.count > Properties.PassCodeCharactersCount){
-          
-          return false
-          
-        }else if(textField.tag == 2 && str.characters.count ==
-          Properties.PassCodeCharactersCount && str != self.InputPassCode){
-            
-            let myAlert = UIAlertController(title: "エラー", message: "入力した暗証番号が一致していません！", preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-              textField.text?.removeAll()
-            })
-            
-            myAlert.addAction(OKAction)
-            
-            presentViewController(myAlert, animated: true, completion: nil)
-            
-        }else{
-          if(textField.tag == 1){
-            self.InputPassCode = str
-          }
-        }
-        break
+      
       default:
         break
     }
@@ -208,7 +164,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
         let requiredvalid:[String:String] = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
         
         let myAlert = UIAlertController(title: requiredvalid["Title"], message: requiredvalid["Message"], preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -247,7 +203,6 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       NewEmployeeData.JoinedDate = joineddate
     }
     
-    NewEmployeeData.PassCode = self.PassCodeTextField.text!
     NewEmployeeData.CreateDateTime = NSDate()
   
     if(realm.objects(EmployeeData).filter("EmployeeCode = '\(NewEmployeeData.EmployeeCode)'").count != 0){
@@ -255,7 +210,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
       
       let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した\(Properties.LabelItems["EmployeeCode"]!)は\n\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
       
       myAlert.addAction(OKAction)
       presentViewController(myAlert, animated: true, completion: nil)

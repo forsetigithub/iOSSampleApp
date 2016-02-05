@@ -123,9 +123,11 @@
 		<key>NotRegisteredEmployeeCodeError</key>
 		<dict>
 			<key>Title</key>
-			<string>この従業員番号は使用できません</string>
+			<string>この従業員番号は
+使用できません</string>
 			<key>Message</key>
-			<string>この従業員番号は本アプリで使用可能な従業員番号ではありません</string>
+			<string>この従業員番号は本アプリで使用可能な
+従業員番号ではありません</string>
 		</dict>
 		<key>DoubleCheckError</key>
 		<dict>
@@ -353,5 +355,7 @@
 	<string>Japanese</string>
 	<key>DeleteMonthSpan</key>
 	<integer>1</integer>
+	<key>ToolBarFixedSpaceSize</key>
+	<integer>27</integer>
 </dict>
 </plist>

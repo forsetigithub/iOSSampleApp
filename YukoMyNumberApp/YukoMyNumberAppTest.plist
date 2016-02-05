@@ -130,9 +130,11 @@
 		<key>NotRegisteredEmployeeCodeError</key>
 		<dict>
 			<key>Title</key>
-			<string>この従業員番号は使用できません</string>
+			<string>この従業員番号は
+使用できません</string>
 			<key>Message</key>
-			<string>この従業員番号は本アプリで使用可能な従業員番号ではありません</string>
+			<string>この従業員番号は本アプリで使用可能な
+従業員番号ではありません</string>
 		</dict>
 		<key>EditEmployeeActionSheet</key>
 		<dict>
@@ -333,7 +335,7 @@
 	<key>ServerInfo</key>
 	<dict>
 		<key>IPAddress</key>
-		<string>192.168.186.148</string>
+		<string>192.168.186.152</string>
 		<key>UserName</key>
 		<string>sa</string>
 		<key>Password</key>
@@ -353,5 +355,7 @@
 	<string>en</string>
 	<key>DeleteMonthSpan</key>
 	<integer>1</integer>
+	<key>ToolBarFixedSpaceSize</key>
+	<integer>27</integer>
 </dict>
 </plist>

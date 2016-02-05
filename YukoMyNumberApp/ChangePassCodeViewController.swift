@@ -112,7 +112,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
           //必須入力エラー
           let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
             
           })
           myAlert.addAction(OKAction)
@@ -125,7 +125,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
         
         //変更後パスワードと再入力の内容アンマッチエラー
         let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "\(self.Properties.LabelItems["PassCode"])が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
 
@@ -143,7 +143,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
           //必須入力エラー
           let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
             
           })
           myAlert.addAction(OKAction)
@@ -156,7 +156,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       if(PassCodeAfter.text != PassCodeAfterReEnter.text){
         //変更後パスワードと再入力の内容アンマッチエラー
         let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更後の暗証番号が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -170,7 +170,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       if(self.PassCodeBefore.text == self.PassCodeAfter.text){
         //変更前後が同じエラー
         let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更前後の暗証番号が同じです。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         

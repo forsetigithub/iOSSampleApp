@@ -80,7 +80,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
     
-    toolbarSpace.width = self.view.bounds.size.width / 2 - 27
+    toolbarSpace.width = self.view.bounds.size.width / 2 - Properties.ToolBarFixedSpaceSize
     
     
     self.toolbarItems = [toolbarSpace,uploadDataBarButtonItem]
@@ -101,7 +101,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
         let unmatchAlert = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
         
-        let unmatchOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) -> Void in
+        let unmatchOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: {(action:UIAlertAction) -> Void in
           self.navigationController?.popViewControllerAnimated(true)
         })
         

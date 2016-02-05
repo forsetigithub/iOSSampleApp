@@ -81,7 +81,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
         }else{
           let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
           let myAlert = UIAlertController(title: doubleerror["Title"], message:"「\(self.RelationPicker.selectedRSName!)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
           
           myAlert.addAction(OKAction)
           presentViewController(myAlert, animated: true, completion: nil)

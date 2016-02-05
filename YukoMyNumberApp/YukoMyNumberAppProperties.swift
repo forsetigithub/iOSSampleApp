@@ -44,10 +44,10 @@ final class YukoMyNumberAppProperties {
   let ButtonTitles:[String:String] = dict.objectForKey("ButtonTitles") as! [String:String]
   let DateFormatStringJapanese:String = dict.objectForKey("DateFormatStringJapanese") as! String
   let JoinedDateLabelTapComment:String = dict.objectForKey("JoinedDateLabelTapComment") as! String
-  
   let DateFormatStringSeparetedJapanese:String = dict.objectForKey("DateFormatStringSeparetedJapanese") as! String
   let AlertMessages:[String:AnyObject] = dict.objectForKey("AlertMessages") as! [String:AnyObject]
   let LocaleIdentifier:String = dict.objectForKey("LocaleIdentifier") as! String
   let SectionItems:[String:AnyObject] = dict.objectForKey("SectionItems") as! [String:AnyObject]
   let DeleteMonthSpan:Int = dict.objectForKey("DeleteMonthSpan") as! Int
+  let ToolBarFixedSpaceSize:CGFloat = dict.objectForKey("ToolBarFixedSpaceSize") as! CGFloat
 }

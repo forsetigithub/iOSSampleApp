@@ -30,7 +30,9 @@ class RegisteredListViewController: UITableViewController {
     
     let infobutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "tapVersionInfo:")
     
-    self.toolbarItems = [infobutton]
+    let barspace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+    barspace.width = self.view.bounds.size.width / 2 - Properties.ToolBarFixedSpaceSize
+    self.toolbarItems = [barspace,infobutton]
     self.navigationController?.toolbarHidden = false
   }
 
@@ -41,15 +43,6 @@ class RegisteredListViewController: UITableViewController {
   override func viewDidAppear(animated: Bool) {
   
     SVProgressHUD.show()
-    
-#if DEBUG
-/*
-  let alert = UIAlertController(title: "デバッグモード", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-  let okaction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-  alert.addAction(okaction)
-  self.view.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-*/
-#endif
   
     let connectioncheck = CheckNetworkConnect(host: Properties.ServerInfo["IPAddress"]!)
   
@@ -59,7 +52,7 @@ class RegisteredListViewController: UITableViewController {
       self.tableView.userInteractionEnabled = false
       
       let myAlert = UIAlertController(title: "ネットワークに\n接続されていません", message: "ネットワークに接続されていないため\nこのアプリを使用することはできません", preferredStyle: UIAlertControllerStyle.Alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -229,7 +222,7 @@ class RegisteredListViewController: UITableViewController {
   
   func tapVersionInfo(sender:UIBarButtonItem){
     let version:AnyObject! = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
-    let myAlert = UIAlertController(title: "MN登録\nVer.\(version)", message: "YUKO BEX Inc. All Rights Reserved.", preferredStyle: UIAlertControllerStyle.Alert)
+    let myAlert = UIAlertController(title: "MN登録\nVer.\(version)", message: "YUKO BEX Inc. All Rights Reserved.", preferredStyle: UIAlertControllerStyle.ActionSheet)
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler:nil)
     
     myAlert.addAction(OKAction)

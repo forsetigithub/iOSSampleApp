@@ -158,7 +158,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
       
       let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に\n誤りがあります。", preferredStyle: UIAlertControllerStyle.Alert)
       
-      let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+      let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -174,7 +174,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     let result = realm.objects(EmployeeData).filter("MyNumber = '\(inputMyNumber)'")
     if(result.count != 0){
       let myAlert = UIAlertController(title: "マイナンバー入力エラー", message: "入力したマイナンバーはすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
       
       myAlert.addAction(OKAction)
       
@@ -197,8 +197,8 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
       }else{
         let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄がすでに登録されているため、マイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.Alert)
         
-        let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
-          
+        let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+
           self.MyNumberTextField.resignFirstResponder()
           
         })
