@@ -169,8 +169,6 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     }
     
     //重複チェック
-#if DEBUG
-#else
     let result = realm.objects(EmployeeData).filter("MyNumber = '\(inputMyNumber)'")
     if(result.count != 0){
       let myAlert = UIAlertController(title: "マイナンバー入力エラー", message: "入力したマイナンバーはすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
@@ -181,7 +179,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
       presentViewController(myAlert,animated: true,completion: nil)
       return
     }
-#endif
+
 
     try! realm.write { () -> Void in
       
