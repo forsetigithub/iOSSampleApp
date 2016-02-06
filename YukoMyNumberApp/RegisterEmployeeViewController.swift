@@ -242,7 +242,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
           
           let timestamp = dateformatter.stringFromDate(NSDate())
           
-          var checksqlstring = "SELECT A0.EmployeeCode as A0_EmployeeCode,AffliationCode,AlreadyUsedFlg,B0.EmployeeCode as B0_EmployeeCode" +
+          var checksqlstring = "SELECT A0.EmployeeCode as A0_EmployeeCode,AffliationCode,AlreadyUsedFlg,MyNumberRegistedFlg,B0.EmployeeCode as B0_EmployeeCode" +
                               " FROM T_EmployeeAffliationRelation as A0 left join T_Employee as B0 on " +
                               "A0.EmployeeCode = B0.EmployeeCode where A0.EmployeeCode= '\(uploaddata.EmployeeCode)'"
           
@@ -253,7 +253,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
               self.putAlertMessage(self.Properties.AlertMessages["NotRegisteredEmployeeCodeError"])
 
             }else{
-              if((results[0][0]["AlreadyUsedFlg"] as! NSString).intValue == 1){
+              if((results[0][0]["AlreadyUsedFlg"] as! NSString).intValue == 1 &&
+                (results[0][0]["MyNumberRegistedFlg"] as! NSString).intValue == 0){
                 
                 self.putAlertMessage(self.Properties.AlertMessages["DoubleCheckError"])
 

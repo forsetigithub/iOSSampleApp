@@ -42,21 +42,21 @@ class YukoMyNumberAppUITests: XCTestCase {
     /* 新規登録 ノーマル */
     func testRegisterEmployee(){
       
-      for (var i = 1; i <= 2;i++) {
+      //for (var i = 1; i <= 2;i++) {
         let app = XCUIApplication()
         app.navigationBars["RegisteredList"].buttons["Add"].tap()
         
         let tablesQuery2 = app.tables
         let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
-        employeeCodeTextField.typeText("100013\(i)")
+        employeeCodeTextField.typeText("1004054")
         
         let familynameTextField = tablesQuery2.textFields["FamilyName"]
         familynameTextField.tap()
-        familynameTextField.typeText("Kimura\(i)")
+        familynameTextField.typeText("福間")
         
         let firstnameTextField = tablesQuery2.textFields["FirstName"]
         firstnameTextField.tap()
-        firstnameTextField.typeText("Masanori")
+        firstnameTextField.typeText("太郎")
         
         let tablesQuery = tablesQuery2
         tablesQuery.staticTexts["tap to select"].tap()
@@ -74,7 +74,7 @@ class YukoMyNumberAppUITests: XCTestCase {
         
         app.navigationBars["NewEmployee"].buttons["Done"].tap()
         
-      }
+      //}
     }
   
   /* 社員番号編集1 */
