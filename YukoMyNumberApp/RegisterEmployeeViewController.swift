@@ -159,7 +159,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     if(self.EmployeeCode.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
       self.EmployeeFamilyName.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
       self.EmployeeFirstName.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true  ||
-      self.EmployeeJoinedDateLabel.text == self.InitialJoinedDateLabel ){
+      self.EmployeeJoinedDateLabel.text == Properties.JoinedDateLabelTapComment ){
         
         let requiredvalid:[String:String] = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
         

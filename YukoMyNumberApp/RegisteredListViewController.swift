@@ -145,48 +145,72 @@ class RegisteredListViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     
+    SVProgressHUD.show()
+    
     //データ削除
     let employee = self.realm.objects(EmployeeData).filter(employeefilter)[indexPath.row]
     let delemployeecode = employee.EmployeeCode
     
-    try! realm.write({ () -> Void in
-      realm.delete(employee)
-      
-      let families = self.realm.objects(EmployeeData).filter("EmployeeCode='\(delemployeecode)'")
-      realm.delete(families)
-      
-      tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
-    })
-    
-    
-    //SQLServerの更新
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { () -> Void in
-      
+    /* データ送信する前に削除した場合、同一の従業員番号はSQLServerのT_Employeeテーブル中に１つしかない。
+      その場合はこの従業員番号は使用可能と判定する  。
+    */
+    if(employee.LastUploadDate.isEmpty){
+      //SQLServerの更新
       let client = SQLClient()
       let info = self.Properties.ServerInfo
       
       client.connect(info["IPAddress"], username: info["UserName"], password: info["Password"],
         database: info["DataBaseName"]) { (success:Bool) -> Void in
           if(success){
-            let selsql = "select * from T_Employee where EmployeeCode = '\(delemployeecode)'"
-            
+            let selsql = "select * from T_Employee where EmployeeCode = '\(delemployeecode)' and " +
+            "FamilyName = '\(employee.FamilyName)' and FirstName = '\(employee.FirstName)'"
+#if DEBUG
+  print("selsql = \(selsql)")
+#endif
+           
             client.execute(selsql, completion: { (results:[AnyObject]!) -> Void in
-              /* データ送信するまでは、同一の従業員番号はテーブル中に１つしかない。
-                 少なくともマイナンバーは登録していないためこの従業員番号は使用可能と判定する。
-              */
+
               if(results[0].count == 1){
-                let updatesql = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0,MyNumberRegistedFlg = 0 where EmployeeCode = '\(delemployeecode)'"
+                var updatesql = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0,MyNumberRegistedFlg = 0 where EmployeeCode = '\(delemployeecode)';"
+                updatesql = updatesql + "update T_Employee set DelFlg = 1 where EmployeeCode = '\(delemployeecode)' and SeqNo = '\(employee.SQLServerSeqNo)';"
+#if DEBUG
+   print("updatesql = \(updatesql)")
+#endif
+               
                 
                 client.execute(updatesql, completion: { (results:[AnyObject]!) -> Void in
+                  try! self.realm.write({ () -> Void in
+                    self.realm.delete(employee)
+                    
+                    let families = self.realm.objects(EmployeeData).filter("EmployeeCode='\(delemployeecode)'")
+                    self.realm.delete(families)
+                    
+                    self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                  })
                   
+                  SVProgressHUD.dismiss()
                 })
+              }else{
+                
               }
             })
-          
+            
           }
       }
-
-    //}
+      
+    }else{
+      try! self.realm.write({ () -> Void in
+        self.realm.delete(employee)
+        
+        let families = self.realm.objects(EmployeeData).filter("EmployeeCode='\(delemployeecode)'")
+        self.realm.delete(families)
+        
+        self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+      })
+      SVProgressHUD.dismiss()
+    
+    }
+    
 
   }
   

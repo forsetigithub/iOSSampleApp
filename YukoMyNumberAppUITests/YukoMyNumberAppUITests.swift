@@ -52,12 +52,12 @@ class YukoMyNumberAppUITests: XCTestCase {
         
         let familynameTextField = tablesQuery2.textFields["FamilyName"]
         familynameTextField.tap()
-        familynameTextField.typeText("福岡")
+        familynameTextField.typeText("国分")
         
         let firstnameTextField = tablesQuery2.textFields["FirstName"]
         firstnameTextField.tap()
-        firstnameTextField.typeText("太郎")
-        
+        firstnameTextField.typeText("次郎")
+
         let tablesQuery = tablesQuery2
         tablesQuery.staticTexts["tap to select"].tap()
         
@@ -71,7 +71,7 @@ class YukoMyNumberAppUITests: XCTestCase {
         
         dateformatter.dateFormat = "yyyy"
         tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
-        
+ 
         app.navigationBars["NewEmployee"].buttons["Done"].tap()
         
       //}
@@ -147,12 +147,12 @@ class YukoMyNumberAppUITests: XCTestCase {
     func testRegisterListDelete(){
       
       let app = XCUIApplication()
-      app.navigationBars["RegisteredList"].buttons["Edit"].tap()
+      app.navigationBars["RegisteredList"].buttons["編集"].tap()
       
       let tablesQuery = app.tables
       tablesQuery.buttons.elementBoundByIndex(0).tap()
-      tablesQuery.buttons["Delete"].tap()
-      app.navigationBars["RegisteredList"].buttons["Done"].tap()
+      tablesQuery.buttons["削除"].tap()
+      app.navigationBars["RegisteredList"].buttons["完了"].tap()
     }
   
 
