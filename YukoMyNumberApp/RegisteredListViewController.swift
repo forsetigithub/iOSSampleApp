@@ -152,7 +152,7 @@ class RegisteredListViewController: UITableViewController {
     let delemployeecode = employee.EmployeeCode
     
     /* データ送信する前に削除した場合、同一の従業員番号はSQLServerのT_Employeeテーブル中に１つしかない。
-      その場合はこの従業員番号は使用可能と判定する  。
+      その場合はこの従業員番号は使用可能と判定する。
     */
     if(employee.LastUploadDate.isEmpty){
       //SQLServerの更新
@@ -163,22 +163,25 @@ class RegisteredListViewController: UITableViewController {
         database: info["DataBaseName"]) { (success:Bool) -> Void in
           if(success){
             let selsql = "select * from T_Employee where EmployeeCode = '\(delemployeecode)' and " +
-            "FamilyName = '\(employee.FamilyName)' and FirstName = '\(employee.FirstName)'"
+            "FamilyName = '\(employee.FamilyName)' and FirstName = '\(employee.FirstName)' and DelFlg = 0"
 #if DEBUG
   print("selsql = \(selsql)")
 #endif
-           
+            
             client.execute(selsql, completion: { (results:[AnyObject]!) -> Void in
-
+              
               if(results[0].count == 1){
                 var updatesql = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0,MyNumberRegistedFlg = 0 where EmployeeCode = '\(delemployeecode)';"
                 updatesql = updatesql + "update T_Employee set DelFlg = 1 where EmployeeCode = '\(delemployeecode)' and SeqNo = '\(employee.SQLServerSeqNo)';"
 #if DEBUG
-   print("updatesql = \(updatesql)")
+  print("updatesql = \(updatesql)")
 #endif
-               
+                
                 
                 client.execute(updatesql, completion: { (results:[AnyObject]!) -> Void in
+                  
+                  client.disconnect()
+                  
                   try! self.realm.write({ () -> Void in
                     self.realm.delete(employee)
                     
@@ -188,16 +191,26 @@ class RegisteredListViewController: UITableViewController {
                     self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
                   })
                   
+                  
                   SVProgressHUD.dismiss()
                 })
               }else{
+                client.disconnect()
                 
-              }
-            })
-            
-          }
+                try! self.realm.write({ () -> Void in
+                  self.realm.delete(employee)
+                  
+                  let families = self.realm.objects(EmployeeData).filter("EmployeeCode='\(delemployeecode)'")
+                  self.realm.delete(families)
+                  
+                  self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                })
+              
+                SVProgressHUD.dismiss()
+            }
+          })
+        }
       }
-      
     }else{
       try! self.realm.write({ () -> Void in
         self.realm.delete(employee)
@@ -207,11 +220,9 @@ class RegisteredListViewController: UITableViewController {
         
         self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
       })
+      
       SVProgressHUD.dismiss()
-    
     }
-    
-
   }
   
   override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {

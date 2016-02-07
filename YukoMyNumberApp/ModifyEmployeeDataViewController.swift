@@ -153,7 +153,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
           
         }else{
           if((results[0][0]["AlreadyUsedFlg"] as! NSString).intValue == 1 &&
-            (results[0][0]["MyNumberRegistedFlg"] as! NSString).intValue == 0){
+            (results[0][0]["MyNumberRegistedFlg"] as! NSString).intValue == 1){
             
             self.putAlertMessage(self.Properties.AlertMessages["DoubleCheckError"])
             
