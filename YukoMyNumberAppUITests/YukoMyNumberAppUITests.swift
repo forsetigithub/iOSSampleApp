@@ -48,7 +48,7 @@ class YukoMyNumberAppUITests: XCTestCase {
         
         let tablesQuery2 = app.tables
         let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
-        employeeCodeTextField.typeText("1004055")
+        employeeCodeTextField.typeText("1000136")
         
         let familynameTextField = tablesQuery2.textFields["FamilyName"]
         familynameTextField.tap()

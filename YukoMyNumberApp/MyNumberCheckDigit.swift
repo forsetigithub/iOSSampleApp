@@ -9,23 +9,37 @@
 import Foundation
 extension String {
   func isValidMyNumber() -> Bool {
-    let numbers = self.characters.flatMap { (character) -> Int? in
-      return Int(String(character))
-    }
-    guard numbers.count == 12 else {
+    // 桁数チェック
+    let numbers = self.stringByReplacingOccurrencesOfString(" ", withString: "")
+    let length = numbers.utf8.count
+    if length != 12 {
       return false
     }
-    var sum = 0
-    for index in 1 ... 11 {
-      let p = numbers[11 - index]
-      let q: Int
-      if 1 ... 6 ~= index {
-        q = index + 1
-      } else {
-        q = index - 5
-      }
-      sum += p * q
+    
+    // 正規表現を使って数字のみかどうかチェック
+    let exp = try! NSRegularExpression(pattern: "^[0-9]+$", options: [])
+    if exp.matchesInString(numbers, options: [], range: NSMakeRange(0, length)).count == 0 {
+      return false
     }
-    return 11 - sum % 11 == numbers[11]
+    
+    // 扱いやすいように一旦Stringを１文字ずつ分割
+    var characters = numbers.characters.map{ String($0) }
+    // チェックデジットをcharactersからpop
+    // pop後はcharactersの中身は12->11個になります。
+    let checkDigit = Int(characters.removeLast())!
+    
+    // 検査用数字の計算
+    var pq = 0
+    
+    for (index, num) in characters.reverse().enumerate() {
+      let n = index + 1
+      let p = Int(num)!
+      let q = (n >= 7) ? n - 5 : n + 1
+      pq += p * q
+    }
+    
+    // 検査
+    let remainder = pq % 11
+    return (remainder <= 1) ? (checkDigit == 0) : (checkDigit == (11 - remainder))
   }
 }
