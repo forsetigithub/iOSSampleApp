@@ -171,7 +171,8 @@ class RegisteredListViewController: UITableViewController {
             client.execute(selsql, completion: { (results:[AnyObject]!) -> Void in
               
               if(results[0].count == 1){
-                var updatesql = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0,MyNumberRegistedFlg = 0 where EmployeeCode = '\(delemployeecode)';"
+
+                var updatesql = "update T_EmployeeAffliationRelation set AlreadyUsedFlg = 0 where EmployeeCode = '\(delemployeecode)';"
                 updatesql = updatesql + "update T_Employee set DelFlg = 1 where EmployeeCode = '\(delemployeecode)' and SeqNo = '\(employee.SQLServerSeqNo)';"
 #if DEBUG
   print("updatesql = \(updatesql)")

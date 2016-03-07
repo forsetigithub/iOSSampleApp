@@ -48,15 +48,15 @@ class YukoMyNumberAppUITests: XCTestCase {
         
         let tablesQuery2 = app.tables
         let employeeCodeTextField = tablesQuery2.textFields["EmployeeCode"]
-        employeeCodeTextField.typeText("1000136")
+        employeeCodeTextField.typeText("1004054")
         
         let familynameTextField = tablesQuery2.textFields["FamilyName"]
         familynameTextField.tap()
-        familynameTextField.typeText("国分")
+        familynameTextField.typeText("てすと")
         
         let firstnameTextField = tablesQuery2.textFields["FirstName"]
         firstnameTextField.tap()
-        firstnameTextField.typeText("次郎")
+        firstnameTextField.typeText("太郎")
 
         let tablesQuery = tablesQuery2
         tablesQuery.staticTexts["tap to select"].tap()
