@@ -135,6 +135,8 @@ class RegisteredListViewController: UITableViewController {
       view = UITableViewHeaderFooterView(reuseIdentifier: "Header") as UITableViewHeaderFooterView
     }
     
+    view?.textLabel?.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+    view?.textLabel?.numberOfLines = 2
     view?.textLabel?.text = "※このアプリで登録した従業員のみが表示されます\n※初回登録から1ヶ月経過した登録者は削除されます"
     return view
   }
