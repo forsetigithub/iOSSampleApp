@@ -12,9 +12,9 @@ final class YukoMyNumberAppProperties {
   
   static let sharedInstance = YukoMyNumberAppProperties()
   
-  private init(){}
+  fileprivate init(){}
   
-  static private var dict:NSDictionary{
+  static fileprivate var dict:NSDictionary{
     get{
       var PlistFileName:String?
       
@@ -23,31 +23,31 @@ final class YukoMyNumberAppProperties {
 #else
   PlistFileName = "YukoMyNumberApp"
 #endif
-      let prop = NSBundle.mainBundle().pathForResource(PlistFileName, ofType: "plist")
+      let prop = Bundle.main.path(forResource: PlistFileName, ofType: "plist")
       return NSDictionary(contentsOfFile: prop!)!
     }
   }
   
-  let LabelItems:[String:String] = dict.objectForKey("LabelItems") as! [String:String]
-  let MyNumberCharactersCount:Int = (dict.objectForKey("MyNumberCharactersCount") as? Int)!
-  let EmployeeCodeCharactersCount:Int = (dict.objectForKey("EmployeeCodeCharactersCount") as? Int)!
-  let EmployeeNameCharactersCount:Int = (dict.objectForKey("EmployeeNameCharactersCount") as? Int)!
-  let RelationItems:[String:String] = dict.objectForKey("RelationItems") as! [String:String]
-  let TableViewCellDefaultHeight:CGFloat = (dict.objectForKey("TableViewCellDefaultHeight") as? CGFloat)!
-  let ServerInfo:[String:String] = dict.objectForKey("ServerInfo") as! [String:String]
-  let ButtonInTableViewFontSize = (dict.objectForKey("ButtonInTableViewFontSize") as? CGFloat)!
-  let AppDefaultFontSize = (dict.objectForKey("AppDefaultFontSize") as? CGFloat)!
-  let PickerLabelFontSize = (dict.objectForKey("PickerLabelFontSize") as? CGFloat)!
-  let PassCodeCharactersCount = (dict.objectForKey("PassCodeCharactersCount") as? Int)!
-  let PingCheckCounter:Int = (dict.objectForKey("PingCheckCounter") as? Int)!
-  let NavigationTitles:[String:String] = dict.objectForKey("NavigationTitles") as! [String:String]
-  let ButtonTitles:[String:String] = dict.objectForKey("ButtonTitles") as! [String:String]
-  let DateFormatStringJapanese:String = dict.objectForKey("DateFormatStringJapanese") as! String
-  let JoinedDateLabelTapComment:String = dict.objectForKey("JoinedDateLabelTapComment") as! String
-  let DateFormatStringSeparetedJapanese:String = dict.objectForKey("DateFormatStringSeparetedJapanese") as! String
-  let AlertMessages:[String:AnyObject] = dict.objectForKey("AlertMessages") as! [String:AnyObject]
-  let LocaleIdentifier:String = dict.objectForKey("LocaleIdentifier") as! String
-  let SectionItems:[String:AnyObject] = dict.objectForKey("SectionItems") as! [String:AnyObject]
-  let DeleteMonthSpan:Int = dict.objectForKey("DeleteMonthSpan") as! Int
-  let ToolBarFixedSpaceSize:CGFloat = dict.objectForKey("ToolBarFixedSpaceSize") as! CGFloat
+  let LabelItems:[String:String] = dict.object(forKey: "LabelItems") as! [String:String]
+  let MyNumberCharactersCount:Int = (dict.object(forKey: "MyNumberCharactersCount") as? Int)!
+  let EmployeeCodeCharactersCount:Int = (dict.object(forKey: "EmployeeCodeCharactersCount") as? Int)!
+  let EmployeeNameCharactersCount:Int = (dict.object(forKey: "EmployeeNameCharactersCount") as? Int)!
+  let RelationItems:[String:String] = dict.object(forKey: "RelationItems") as! [String:String]
+  let TableViewCellDefaultHeight:CGFloat = (dict.object(forKey: "TableViewCellDefaultHeight") as? CGFloat)!
+  let ServerInfo:[String:String] = dict.object(forKey: "ServerInfo") as! [String:String]
+  let ButtonInTableViewFontSize = (dict.object(forKey: "ButtonInTableViewFontSize") as? CGFloat)!
+  let AppDefaultFontSize = (dict.object(forKey: "AppDefaultFontSize") as? CGFloat)!
+  let PickerLabelFontSize = (dict.object(forKey: "PickerLabelFontSize") as? CGFloat)!
+  let PassCodeCharactersCount = (dict.object(forKey: "PassCodeCharactersCount") as? Int)!
+  let PingCheckCounter:Int = (dict.object(forKey: "PingCheckCounter") as? Int)!
+  let NavigationTitles:[String:String] = dict.object(forKey: "NavigationTitles") as! [String:String]
+  let ButtonTitles:[String:String] = dict.object(forKey: "ButtonTitles") as! [String:String]
+  let DateFormatStringJapanese:String = dict.object(forKey: "DateFormatStringJapanese") as! String
+  let JoinedDateLabelTapComment:String = dict.object(forKey: "JoinedDateLabelTapComment") as! String
+  let DateFormatStringSeparetedJapanese:String = dict.object(forKey: "DateFormatStringSeparetedJapanese") as! String
+  let AlertMessages:[String:AnyObject] = dict.object(forKey: "AlertMessages") as! [String:AnyObject]
+  let LocaleIdentifier:String = dict.object(forKey: "LocaleIdentifier") as! String
+  let SectionItems:[String:AnyObject] = dict.object(forKey: "SectionItems") as! [String:AnyObject]
+  let DeleteMonthSpan:Int = dict.object(forKey: "DeleteMonthSpan") as! Int
+  let ToolBarFixedSpaceSize:CGFloat = dict.object(forKey: "ToolBarFixedSpaceSize") as! CGFloat
 }
