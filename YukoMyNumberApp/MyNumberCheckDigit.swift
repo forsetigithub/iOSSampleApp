@@ -10,7 +10,7 @@ import Foundation
 extension String {
   func isValidMyNumber() -> Bool {
     // 桁数チェック
-    let numbers = self.stringByReplacingOccurrencesOfString(" ", withString: "")
+    let numbers = self.replacingOccurrences(of: " ", with: "")
     let length = numbers.utf8.count
     if length != 12 {
       return false
@@ -18,7 +18,7 @@ extension String {
     
     // 正規表現を使って数字のみかどうかチェック
     let exp = try! NSRegularExpression(pattern: "^[0-9]+$", options: [])
-    if exp.matchesInString(numbers, options: [], range: NSMakeRange(0, length)).count == 0 {
+    if exp.matches(in: numbers, options: [], range: NSMakeRange(0, length)).count == 0 {
       return false
     }
     
@@ -31,7 +31,7 @@ extension String {
     // 検査用数字の計算
     var pq = 0
     
-    for (index, num) in characters.reverse().enumerate() {
+    for (index, num) in characters.reversed().enumerated() {
       let n = index + 1
       let p = Int(num)!
       let q = (n >= 7) ? n - 5 : n + 1
