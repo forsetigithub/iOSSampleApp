@@ -13,14 +13,14 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
   
   var RelationPickerView:UIPickerView?
 
-  private let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
+  fileprivate let pickerItems:[String:String] = YukoMyNumberAppProperties.sharedInstance.RelationItems
   
   var pickerKeys:[String] = [String]()
   var pickerValues:[String] = [String]()
   
   var selectedPickerRow:Int = 0
   
-  private var selectedrscode:String?
+  fileprivate var selectedrscode:String?
   var selectedRSCode:String{
     set{
       selectedrscode = newValue
@@ -37,7 +37,7 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
     super.init()
     
     RelationPickerView = UIPickerView()
-    pickerKeys = Array(pickerItems.keys).sort()
+    pickerKeys = Array(pickerItems.keys).sorted()
     
     for pikcerkey in pickerKeys {
       for (key,val) in pickerItems{
@@ -52,37 +52,37 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
   }
 
   //MARK: UIPickerView
-  @objc func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+  @objc func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
   
-  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+  func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
     
     let pickerLabel = UILabel()
     
-    pickerLabel.font = UIFont.systemFontOfSize(YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize)
+    pickerLabel.font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize)
     pickerLabel.text = pickerValues[row]
-    pickerLabel.textAlignment = NSTextAlignment.Center
+    pickerLabel.textAlignment = NSTextAlignment.center
     
     return pickerLabel
   }
   
-  @objc func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+  @objc func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return pickerItems.count
   }
   
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     
     return pickerValues[row] as String
   }
  
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     
     if(row != 0){
       selectedPickerRow = row
       selectedRSCode = pickerKeys[row]
       
-      NSNotificationCenter.defaultCenter().postNotificationName("updatePickerNotification", object: nil)
+      NotificationCenter.default.post(name: Notification.Name(rawValue: "updatePickerNotification"), object: nil)
     }
   }
 }
