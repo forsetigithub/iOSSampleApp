@@ -20,8 +20,8 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   @IBOutlet weak var RelationName: UILabel!
   @IBOutlet weak var RelationNamesPickerView: UIPickerView!
   
-  private let RelationPicker = RelationPickerViewController()
-  private var defaultRSCode:String{
+  fileprivate let RelationPicker = RelationPickerViewController()
+  fileprivate var defaultRSCode:String{
     get{
       return self.FamilyItemData.RSCode
     }
@@ -33,22 +33,22 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
 
     self.RelationNamesPickerView.delegate = RelationPicker
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatePickerValue:", name: "updatePickerNotification", object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(ModifyRelationViewController.updatePickerValue(_:)), name: NSNotification.Name(rawValue: "updatePickerNotification"), object: nil)
     
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     
     self.RelationName.text = FamilyItemData.RSName
     self.RelationPicker.selectedRSCode = FamilyItemData.RSCode
     
-    let row = RelationPicker.pickerKeys.indexOf(RelationPicker.selectedRSCode)
+    let row = RelationPicker.pickerKeys.index(of: RelationPicker.selectedRSCode)
     self.RelationNamesPickerView!.selectRow(row!, inComponent: 0, animated: true)
     
-    self.navigationController?.toolbarHidden = true
+    self.navigationController?.isToolbarHidden = true
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     if(self.RelationPicker.selectedRSCode != defaultRSCode){
       try! realm.write({ () -> Void in
         self.FamilyItemData.RSCode = self.RelationPicker.selectedRSCode
@@ -62,7 +62,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
   
   //MARK: TableView
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     var height:CGFloat = Properties.TableViewCellDefaultHeight
     if(indexPath.row == 1){
       height = 150
@@ -71,20 +71,20 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
     return height
   }
   
-  func updatePickerValue(notification:NSNotification){
-    if(notification.name == "updatePickerNotification"){
+  func updatePickerValue(_ notification:Foundation.Notification){
+    if((notification.name as AnyObject) as! String == "updatePickerNotification"){
       if(self.RelationPicker.selectedRSCode != defaultRSCode){
-        if(realm.objects(EmployeeData).filter("EmployeeCode = '\(FamilyItemData.EmployeeCode)' and RSCode = '\(self.RelationPicker.selectedRSCode)'").count == 0){
+        if(realm.objects(EmployeeData.self).filter("EmployeeCode = '\(FamilyItemData.EmployeeCode)' and RSCode = '\(self.RelationPicker.selectedRSCode)'").count == 0){
           
           self.RelationName.text = self.RelationPicker.selectedRSName
           
         }else{
           let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
-          let myAlert = UIAlertController(title: doubleerror["Title"], message:"「\(self.RelationPicker.selectedRSName!)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+          let myAlert = UIAlertController(title: doubleerror["Title"], message:"「\(self.RelationPicker.selectedRSName!)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil)
           
           myAlert.addAction(OKAction)
-          presentViewController(myAlert, animated: true, completion: nil)
+          present(myAlert, animated: true, completion: nil)
           
           self.RelationPicker.selectedRSCode = FamilyItemData.RSCode
         }
