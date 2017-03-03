@@ -12,8 +12,8 @@ import RealmSwift
 
 class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   
-  private let realm = try! Realm()
-  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  fileprivate let realm = try! Realm()
+  fileprivate let Properties = YukoMyNumberAppProperties.sharedInstance
   
   var FamilyItemData:EmployeeData = EmployeeData()
   
@@ -40,14 +40,14 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     self.FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
     self.FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
     
-    self.RegsiterButton.addTarget(self, action: "tapGetMyNumber:", forControlEvents: UIControlEvents.TouchUpInside)
-    self.RegsiterButton.setTitle(Properties.ButtonTitles["RegisterMyNumber"], forState: UIControlState.Normal)
+    self.RegsiterButton.addTarget(self, action: #selector(EditFamilyViewController.tapGetMyNumber(_:)), for: UIControlEvents.touchUpInside)
+    self.RegsiterButton.setTitle(Properties.ButtonTitles["RegisterMyNumber"], for: UIControlState())
     
-    self.DeleteFamilyButton.addTarget(self, action: "tapDeleteBtn:", forControlEvents: UIControlEvents.TouchUpInside)
-    self.DeleteFamilyButton.setTitle(Properties.ButtonTitles["DeleteData"], forState: UIControlState.Normal)
+    self.DeleteFamilyButton.addTarget(self, action: #selector(EditFamilyViewController.tapDeleteBtn(_:)), for: UIControlEvents.touchUpInside)
+    self.DeleteFamilyButton.setTitle(Properties.ButtonTitles["DeleteData"], for: UIControlState())
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
 
     FamilyNameTextField.text = self.FamilyItemData.FamilyName
     FirstNameTextField.text = self.FamilyItemData.FirstName
@@ -55,13 +55,13 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     
     if(FamilyItemData.MyNumberCheckDigitResult){
       MyNumberGetStateLabel.text = "取得済"
-      MyNumberGetStateLabel.textColor = UIColor.lightGrayColor()
+      MyNumberGetStateLabel.textColor = UIColor.lightGray
     }else{
       MyNumberGetStateLabel.text = "未取得"
-      MyNumberGetStateLabel.textColor = UIColor.redColor()
+      MyNumberGetStateLabel.textColor = UIColor.red
     }
     
-    self.navigationController?.toolbarHidden = true
+    self.navigationController?.isToolbarHidden = true
   }
   
   
@@ -69,10 +69,10 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     super.didReceiveMemoryWarning()
   }
   
-  override func viewDidDisappear(animated: Bool) {
+  override func viewDidDisappear(_ animated: Bool) {
 
   }
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     try! realm.write({ () -> Void in
       FamilyItemData.FamilyName = FamilyNameTextField.text!
       FamilyItemData.FirstName =  FirstNameTextField.text!
@@ -80,15 +80,15 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     })
   }
   
-  func tapSaveButton(sender:UIBarButtonItem){
+  func tapSaveButton(_ sender:UIBarButtonItem){
 
   }
   
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     return textField.resignFirstResponder()
   }
   
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     let str = textField.text! + string
     
@@ -105,45 +105,45 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     return true
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if(segue.identifier == "showModifyRelation"){
-      let dest = segue.destinationViewController as! ModifyRelationViewController
+      let dest = segue.destination as! ModifyRelationViewController
       dest.FamilyItemData = self.FamilyItemData
     }
     
     if(segue.identifier == "showGetFamilyMyNumber"){
       
-      let dest = segue.destinationViewController as! GetMyNumberViewController
+      let dest = segue.destination as! GetMyNumberViewController
       
       dest.MyNumberEditData = self.FamilyItemData
     }
   }
   
-  @IBAction func tapGetMyNumber(sender: UIButton) {
-    performSegueWithIdentifier("showGetFamilyMyNumber", sender: self)
+  @IBAction func tapGetMyNumber(_ sender: UIButton) {
+    performSegue(withIdentifier: "showGetFamilyMyNumber", sender: self)
   }
   
-  @IBAction func tapDeleteBtn(sender: AnyObject) {
+  @IBAction func tapDeleteBtn(_ sender: AnyObject) {
     let alertProp = Properties.AlertMessages["DeleteExclamation"] as! [String:String]
     let deleteName = FamilyNameTextField.text! + "　" + FirstNameTextField.text!
-    let myAlert:UIAlertController = UIAlertController(title: alertProp["Title"], message: "「\(deleteName) 」を\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let myAlert:UIAlertController = UIAlertController(title: alertProp["Title"], message: "「\(deleteName) 」を\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.actionSheet)
     
-    let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+    let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action:UIAlertAction) -> Void in
       try! self.realm.write({ () -> Void in
         
         self.FamilyItemData.DeleteFlag = true
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
       })
     }
     
-    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.Cancel) { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.cancel) { (action:UIAlertAction) -> Void in
       
     }
   
     myAlert.addAction(OkAction)
     myAlert.addAction(CancelAction)
     
-    presentViewController(myAlert, animated: true, completion: nil)
+    present(myAlert, animated: true, completion: nil)
   }
 }
