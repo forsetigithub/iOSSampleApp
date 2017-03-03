@@ -7,6 +7,19 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 let StatusChangedNotification = "status-changed-notification"
 let PingStoppedNotification = "ping-stopped-notification"
@@ -33,15 +46,15 @@ class CheckNetworkConnect:NSObject{
   var canStartPinging = false
   var checkCounter = 0
   
-  private var pingTimer: NSTimer?
-  private var lastSequenceSent: UInt16?
-  private var lastSentTime: NSDate?
+  fileprivate var pingTimer: Timer?
+  fileprivate var lastSequenceSent: UInt16?
+  fileprivate var lastSentTime: Date?
   var lagTimes = [Double?]()
-  private var lastLag: Double? {
+  fileprivate var lastLag: Double? {
     didSet {
       lagTimes.append(lastLag)
       if lagTimes.count > numberOfSamples {
-        lagTimes.removeRange(0..<(lagTimes.count - numberOfSamples))
+        lagTimes.removeSubrange(0..<(lagTimes.count - numberOfSamples))
       }
     }
   }
@@ -67,18 +80,18 @@ class CheckNetworkConnect:NSObject{
     let dropOuts = lagTimes.filter { $0 == nil }.count
     return Double(dropOuts) / Double(lagTimes.count)
   }
-  private(set) var running = false {
+  fileprivate(set) var running = false {
     didSet {
       if running {
-        NSNotificationCenter.defaultCenter().postNotificationName(PingStartedNotification, object: self)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: PingStartedNotification), object: self)
       } else {
-        NSNotificationCenter.defaultCenter().postNotificationName(PingStoppedNotification, object: self)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: PingStoppedNotification), object: self)
       }
     }
   }
-  private(set) var status = Status.Unknown {
+  fileprivate(set) var status = Status.Unknown {
     didSet {
-      NSNotificationCenter.defaultCenter().postNotificationName(StatusChangedNotification, object: self)
+      NotificationCenter.default.post(name: Notification.Name(rawValue: StatusChangedNotification), object: self)
     }
   }
   init(host: String = DefaultHost, interval: Double = DefaultInterval, numberOfSamples: Int = DefaultNumberOfSamples) {
@@ -117,44 +130,44 @@ class CheckNetworkConnect:NSObject{
     if let pinger = simplePing {
       if(canStartPinging){
         print("ping to \(host) checkCounter = \(checkCounter) canStartPinging = \(canStartPinging)");
-        pinger.sendPingWithData(nil)
+        pinger.send(with: nil)
       }
     }
   }
 }
 extension CheckNetworkConnect: SimplePingDelegate {
-  func simplePing(pinger: SimplePing!, didStartWithAddress address: NSData!) {
+  func simplePing(_ pinger: SimplePing!, didStartWithAddress address: Data!) {
     print("did start")
     self.canStartPinging = true
     status = Status.Unknown
   }
-  func simplePing(pinger: SimplePing!, didFailWithError error: NSError!) {
+  func simplePing(_ pinger: SimplePing!, didFailWithError error: Error!) {
     status = Status.Failure
     print("failed with error: \(error)")
   }
-  func simplePing(pinger: SimplePing!, didSendPacket packet: NSData!, withSequenceNumber sequenceNumber:UInt16) {
+  func simplePing(_ pinger: SimplePing!, didSendPacket packet: Data!, withSequenceNumber sequenceNumber:UInt16) {
     let seqNo = CFSwapInt16BigToHost(sequenceNumber)
     lastSequenceSent = seqNo
-    lastSentTime = NSDate()
+    lastSentTime = Date()
   }
-  func simplePing(pinger: SimplePing!, didFailToSendPacket packet: NSData!, error: NSError!) {
+  func simplePing(_ pinger: SimplePing!, didFailToSendPacket packet: Data!, error: Error!) {
     status = Status.Error
     print("failed to send packet")
   }
-  func simplePing(pinger: SimplePing!, didReceivePingResponsePacket packet: NSData!) {
+  func simplePing(_ pinger: SimplePing!, didReceivePingResponsePacket packet: Data!) {
     status = Status.Success
-    let seqNo = CFSwapInt16BigToHost(SimplePing.icmpInPacket(packet).memory.sequenceNumber)
+    let seqNo = CFSwapInt16BigToHost(SimplePing.icmp(inPacket: packet).pointee.sequenceNumber)
     if seqNo < lastSequenceSent {
       print("out of order")
     } else {
       if let lastTime = lastSentTime {
-        lastLag = NSDate().timeIntervalSinceDate(lastTime) * 1_000
+        lastLag = Date().timeIntervalSince(lastTime) * 1_000
         print("pong \(seqNo) - lag \(lastLag)")
         print("running average: \(averageLag)")
       }
     }
   }
-  func simplePing(pinger: SimplePing!, didReceiveUnexpectedPacket packet: NSData!) {
+  func simplePing(_ pinger: SimplePing!, didReceiveUnexpectedPacket packet: Data!) {
     //        println("received unexpected packet")
     
   }
@@ -178,7 +191,7 @@ extension CheckNetworkConnect: SimplePingDelegate {
         }else if(self.status == Status.Error){
           self.stop()
         }else {
-          self.checkCounter++
+          self.checkCounter += 1
           print("checkCounter=\(checkCounter)")
         }
         
@@ -187,7 +200,7 @@ extension CheckNetworkConnect: SimplePingDelegate {
         }
       }
 
-      NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+      RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: Date.distantFuture)
       
     }while(self.running)
 
