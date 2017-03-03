@@ -13,17 +13,17 @@ import SVProgressHUD
 
 class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegate,SQLClientDelegate{
   
-  private let client = SQLClient()
-  private let realm = try! Realm()
-  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  fileprivate let client = SQLClient()
+  fileprivate let realm = try! Realm()
+  fileprivate let Properties = YukoMyNumberAppProperties.sharedInstance
   
   enum ModifyModeEnum{
-    case Employee
-    case Name
+    case employee
+    case name
   }
   
   var EmployeeEditData:EmployeeData = EmployeeData()
-  var ModifyMode:ModifyModeEnum = ModifyModeEnum.Employee
+  var ModifyMode:ModifyModeEnum = ModifyModeEnum.employee
   
   @IBOutlet weak var EmployeeCodeTextField: UITextField!
   @IBOutlet weak var FamilyNameTextField: UITextField!
@@ -43,20 +43,20 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
     FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Modify"], style: UIBarButtonItemStyle.Done, target: self, action: "tapModifyButton:")
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Modify"], style: UIBarButtonItemStyle.done, target: self, action: #selector(ModifyEmployeeDataViewController.tapModifyButton(_:)))
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     
     self.EmployeeCodeTextField.text = EmployeeEditData.EmployeeCode
     self.FamilyNameTextField.text = EmployeeEditData.FamilyName
     self.FirstNameTextField.text = EmployeeEditData.FirstName
 
-    if(ModifyMode == ModifyModeEnum.Employee){
+    if(ModifyMode == ModifyModeEnum.employee){
       changeTextAttribute(FamilyNameTextField)
       changeTextAttribute(FirstNameTextField)
 
@@ -64,16 +64,16 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
       changeTextAttribute(EmployeeCodeTextField)
     }
     
-    self.navigationController?.toolbarHidden = true
+    self.navigationController?.isToolbarHidden = true
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     
 
 
   }
   
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     let str = textField.text! + string
     
@@ -99,21 +99,21 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     return true
   }
   
-  func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
     
     return true
   }
   
-  func changeTextAttribute(textField:UITextField){
+  func changeTextAttribute(_ textField:UITextField){
     if let cell = textField.superview?.superview as? UITableViewCell{
-      cell.userInteractionEnabled = false
+      cell.isUserInteractionEnabled = false
     }
     
-    textField.enabled = false
-    textField.textColor = UIColor.lightGrayColor()
+    textField.isEnabled = false
+    textField.textColor = UIColor.lightGray
   }
   
-  func tapModifyButton(sender:UIBarButtonItem){
+  func tapModifyButton(_ sender:UIBarButtonItem){
     if(self.EmployeeCodeTextField.text?.isEmpty == false &&
       self.FamilyNameTextField.text?.isEmpty == false &&
       self.FirstNameTextField.text?.isEmpty == false &&
@@ -129,7 +129,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
   /* 
   * SQLサーバのデータチェックおよび更新
   */
-  func modifySQLServerData(uploaddata:EmployeeData){
+  func modifySQLServerData(_ uploaddata:EmployeeData){
     
     SVProgressHUD.show()
     
@@ -145,24 +145,26 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
           " FROM T_EmployeeAffliationRelation as A0 left join T_Employee as B0 on " +
           "A0.EmployeeCode = B0.EmployeeCode where A0.EmployeeCode= '\(self.EmployeeCodeTextField.text!)'"
 
-      self.client.execute(checksqlstring, completion: { (results:[AnyObject]!) -> Void in
+      self.client.execute(checksqlstring, completion: { (results:[Any]?) -> Void in
         
-        if(results[0].count == 0){
+        if((results?[0] as AnyObject).count == 0){
           
           self.putAlertMessage(self.Properties.AlertMessages["NotRegisteredEmployeeCodeError"])
           
         }else{
-          if((results[0][0]["AlreadyUsedFlg"] as! NSString).intValue == 1 &&
-            (results[0][0]["MyNumberRegistedFlg"] as! NSString).intValue == 1){
+          let selectedData = (results?[0] as! NSArray)[0] as AnyObject
+            
+          if((selectedData["AlreadyUsedFlg"] as! NSString).intValue == 1 &&
+            (selectedData["MyNumberRegistedFlg"] as! NSString).intValue == 1){
             
             self.putAlertMessage(self.Properties.AlertMessages["DoubleCheckError"])
             
           }else{
             //SQLサーバデータ更新
-            let dateformatter = NSDateFormatter()
+            let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             
-            let timestamp = dateformatter.stringFromDate(NSDate())
+            _ = dateformatter.string(from: Date())
             
             var sqlstring = "update T_Employee Set EmployeeCode = '\(self.EmployeeCodeTextField.text!)', " +
               "FamilyName = '\(self.FamilyNameTextField.text!)',FirstName = '\(self.FirstNameTextField.text!)' " +
@@ -175,7 +177,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
             
             print("update = \(sqlstring)")
             
-            self.client.execute(sqlstring, completion: { (results:[AnyObject]!) -> Void in
+            self.client.execute(sqlstring, completion: { (results:[Any]?) -> Void in
               
               //Realm更新
               try! self.realm.write({ () -> Void in
@@ -186,7 +188,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
               
               self.client.disconnect()
               SVProgressHUD.dismiss()
-              self.navigationController?.popViewControllerAnimated(true)
+              self.navigationController?.popViewController(animated: true)
             })
           }
         }
@@ -194,21 +196,21 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     }
   }
 
-  func error(error: String!, code: Int32, severity: Int32) {
+  func error(_ error: String!, code: Int32, severity: Int32) {
     print("error=\(error) code = \(code) serverity = \(severity)")
   }
   
-  func putAlertMessage(alertProp:AnyObject!){
+  func putAlertMessage(_ alertProp:AnyObject!){
     let alertProp = alertProp as! [String:String]
     
     SVProgressHUD.dismiss()
     
-    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertControllerStyle.Alert)
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertControllerStyle.alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
       
     })
     
     myAlert.addAction(OKAction)
-    self.presentViewController(myAlert, animated: true, completion: nil)
+    self.present(myAlert, animated: true, completion: nil)
   }
 }
