@@ -34,10 +34,10 @@ class EmployeeData : Object {
     }
   }
   
-  dynamic var CreateDateTime = NSDate()
+  dynamic var CreateDateTime = Date()
   dynamic var DeleteFlag = false
   dynamic var PassCode = ""
-  dynamic var JoinedDate = NSDate()
+  dynamic var JoinedDate = Date()
   dynamic var LastUploadDate = ""
   dynamic var MNRegisterMode = 1 //マイナンバー登録モード(1:手動 2:OCR)
   dynamic var SQLServerSeqNo = ""
