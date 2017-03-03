@@ -110,13 +110,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="社員番号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="e91-A4-RIW">
-                                                    <rect key="frame" x="20" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="20" y="0.0" width="225" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="e91-A4-RIW" secondAttribute="trailing" constant="30" id="IjR-L1-RfJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="e91-A4-RIW" secondAttribute="trailing" constant="130" id="IjR-L1-RfJ"/>
                                                 <constraint firstItem="e91-A4-RIW" firstAttribute="centerY" secondItem="FRp-He-acc" secondAttribute="centerY" id="NTy-er-PhO"/>
                                                 <constraint firstItem="e91-A4-RIW" firstAttribute="leading" secondItem="FRp-He-acc" secondAttribute="leading" constant="20" id="fNC-j5-CdQ"/>
                                                 <constraint firstItem="e91-A4-RIW" firstAttribute="top" secondItem="FRp-He-acc" secondAttribute="top" id="qVF-Kl-mbZ"/>
@@ -136,14 +136,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="姓" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qH2-mz-yzV">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="43"/>
+                                                    <rect key="frame" x="20" y="0.0" width="255" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qH2-mz-yzV" firstAttribute="centerY" secondItem="zz6-eq-5kS" secondAttribute="centerY" id="fDN-zF-qbD"/>
-                                                <constraint firstAttribute="trailing" secondItem="qH2-mz-yzV" secondAttribute="trailing" id="ffg-9l-hX2"/>
+                                                <constraint firstAttribute="trailing" secondItem="qH2-mz-yzV" secondAttribute="trailing" constant="100" id="ffg-9l-hX2"/>
                                                 <constraint firstItem="qH2-mz-yzV" firstAttribute="top" secondItem="zz6-eq-5kS" secondAttribute="top" id="o2f-L9-8fr"/>
                                                 <constraint firstItem="qH2-mz-yzV" firstAttribute="leading" secondItem="zz6-eq-5kS" secondAttribute="leading" constant="20" id="sai-ju-Eun"/>
                                                 <constraint firstAttribute="bottom" secondItem="qH2-mz-yzV" secondAttribute="bottom" id="y3J-l2-90T"/>
@@ -158,7 +158,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="icP-M7-zlg">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="43"/>
+                                                    <rect key="frame" x="20" y="0.0" width="255" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
@@ -166,7 +166,7 @@
                                             <constraints>
                                                 <constraint firstItem="icP-M7-zlg" firstAttribute="centerY" secondItem="7Ah-aJ-pUB" secondAttribute="centerY" id="8ty-86-Hzw"/>
                                                 <constraint firstItem="icP-M7-zlg" firstAttribute="top" secondItem="7Ah-aJ-pUB" secondAttribute="top" id="KRX-B8-Ocn"/>
-                                                <constraint firstAttribute="trailing" secondItem="icP-M7-zlg" secondAttribute="trailing" id="UMg-lb-5jK"/>
+                                                <constraint firstAttribute="trailing" secondItem="icP-M7-zlg" secondAttribute="trailing" constant="100" id="UMg-lb-5jK"/>
                                                 <constraint firstAttribute="bottom" secondItem="icP-M7-zlg" secondAttribute="bottom" id="eZ4-9f-Xbe"/>
                                                 <constraint firstItem="icP-M7-zlg" firstAttribute="leading" secondItem="7Ah-aJ-pUB" secondAttribute="leading" constant="20" id="yL5-TI-jvO"/>
                                             </constraints>
@@ -591,7 +591,7 @@
                                         <rect key="frame" x="0.0" y="327" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pfe-VK-jyZ" id="9nq-9E-jUp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -661,7 +661,7 @@
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ngq-KM-L1D" id="lLl-Wq-juF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="続柄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvg-R2-7i8">
@@ -689,7 +689,7 @@
                                         <rect key="frame" x="0.0" y="79" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="94e-Z4-PL2" id="FUr-RQ-S6b">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Es-AL-mlk">
@@ -800,7 +800,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Nw-q1-UGX">
-                                                    <rect key="frame" x="326" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="316" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="changeShowMyNumberSwitch:" destination="jW7-Y3-kfK" eventType="valueChanged" id="YN9-Ew-JAp"/>
                                                     </connections>
@@ -816,7 +816,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="5Nw-q1-UGX" secondAttribute="trailing" id="5qx-7y-gZb"/>
+                                                <constraint firstAttribute="trailing" secondItem="5Nw-q1-UGX" secondAttribute="trailing" constant="10" id="5qx-7y-gZb"/>
                                                 <constraint firstItem="Tig-aw-erv" firstAttribute="leading" secondItem="NSA-N2-8xp" secondAttribute="leading" constant="20" id="8nj-SM-Iwu"/>
                                                 <constraint firstItem="5Nw-q1-UGX" firstAttribute="centerY" secondItem="NSA-N2-8xp" secondAttribute="centerY" id="Mh8-vK-wYO"/>
                                                 <constraint firstItem="Tig-aw-erv" firstAttribute="centerY" secondItem="5Nw-q1-UGX" secondAttribute="centerY" id="Z1e-oy-gom"/>
@@ -1040,7 +1040,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="姓" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uN1-Un-6dr">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="255" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
@@ -1048,7 +1048,7 @@
                                             <constraints>
                                                 <constraint firstItem="uN1-Un-6dr" firstAttribute="centerY" secondItem="2hx-Ft-YQB" secondAttribute="centerY" id="4nH-7e-p2D"/>
                                                 <constraint firstItem="uN1-Un-6dr" firstAttribute="leading" secondItem="2hx-Ft-YQB" secondAttribute="leading" constant="20" id="D7I-E0-8hF"/>
-                                                <constraint firstAttribute="trailing" secondItem="uN1-Un-6dr" secondAttribute="trailing" id="Eic-RY-vM7"/>
+                                                <constraint firstAttribute="trailing" secondItem="uN1-Un-6dr" secondAttribute="trailing" constant="100" id="Eic-RY-vM7"/>
                                                 <constraint firstItem="uN1-Un-6dr" firstAttribute="top" secondItem="2hx-Ft-YQB" secondAttribute="top" id="a6x-QI-iK0"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1061,14 +1061,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ixd-ED-0lT">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="255" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ixd-ED-0lT" firstAttribute="leading" secondItem="3XY-6G-qVW" secondAttribute="leading" constant="20" id="QHZ-e4-0x8"/>
-                                                <constraint firstAttribute="trailing" secondItem="ixd-ED-0lT" secondAttribute="trailing" id="SPn-dw-lwp"/>
+                                                <constraint firstAttribute="trailing" secondItem="ixd-ED-0lT" secondAttribute="trailing" constant="100" id="SPn-dw-lwp"/>
                                                 <constraint firstItem="ixd-ED-0lT" firstAttribute="centerY" secondItem="3XY-6G-qVW" secondAttribute="centerY" id="dNt-tQ-JQr"/>
                                                 <constraint firstItem="ixd-ED-0lT" firstAttribute="top" secondItem="3XY-6G-qVW" secondAttribute="top" id="kJe-YE-vVX"/>
                                             </constraints>
@@ -1123,7 +1123,7 @@
                                         <rect key="frame" x="0.0" y="211" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nO7-6J-akn" id="X8T-42-Zhw">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1208,7 +1208,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="社員番号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L4h-Xo-S5u">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="43"/>
+                                                    <rect key="frame" x="20" y="0.0" width="225" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
@@ -1218,7 +1218,7 @@
                                                 <constraint firstItem="L4h-Xo-S5u" firstAttribute="top" secondItem="tJt-A8-5le" secondAttribute="top" id="8Yd-iI-L45"/>
                                                 <constraint firstItem="L4h-Xo-S5u" firstAttribute="leading" secondItem="tJt-A8-5le" secondAttribute="leading" constant="20" id="A9I-9z-4kc"/>
                                                 <constraint firstAttribute="bottom" secondItem="L4h-Xo-S5u" secondAttribute="bottom" id="SPe-Eq-lyb"/>
-                                                <constraint firstAttribute="trailing" secondItem="L4h-Xo-S5u" secondAttribute="trailing" id="s7Q-MJ-iGW"/>
+                                                <constraint firstAttribute="trailing" secondItem="L4h-Xo-S5u" secondAttribute="trailing" constant="130" id="s7Q-MJ-iGW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1234,7 +1234,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="姓" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZAi-kD-7kt">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="255" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
@@ -1242,7 +1242,7 @@
                                             <constraints>
                                                 <constraint firstItem="ZAi-kD-7kt" firstAttribute="top" secondItem="4ER-MV-Hhd" secondAttribute="top" id="22y-fH-V89"/>
                                                 <constraint firstItem="ZAi-kD-7kt" firstAttribute="leading" secondItem="4ER-MV-Hhd" secondAttribute="leading" constant="20" id="6sb-uG-eZh"/>
-                                                <constraint firstAttribute="trailing" secondItem="ZAi-kD-7kt" secondAttribute="trailing" id="Alx-EB-8S2"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZAi-kD-7kt" secondAttribute="trailing" constant="100" id="Alx-EB-8S2"/>
                                                 <constraint firstItem="ZAi-kD-7kt" firstAttribute="centerY" secondItem="4ER-MV-Hhd" secondAttribute="centerY" id="epV-kI-n3j"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1255,7 +1255,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kZR-p9-FQm">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="255" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
@@ -1264,7 +1264,7 @@
                                                 <constraint firstItem="kZR-p9-FQm" firstAttribute="top" secondItem="Qag-5h-EDU" secondAttribute="top" id="JcQ-Ma-0sw"/>
                                                 <constraint firstItem="kZR-p9-FQm" firstAttribute="centerY" secondItem="Qag-5h-EDU" secondAttribute="centerY" id="Kiq-XE-au3"/>
                                                 <constraint firstItem="kZR-p9-FQm" firstAttribute="leading" secondItem="Qag-5h-EDU" secondAttribute="leading" constant="20" id="Ovq-Wu-GzP"/>
-                                                <constraint firstAttribute="trailing" secondItem="kZR-p9-FQm" secondAttribute="trailing" id="eq0-BM-5pD"/>
+                                                <constraint firstAttribute="trailing" secondItem="kZR-p9-FQm" secondAttribute="trailing" constant="100" id="eq0-BM-5pD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

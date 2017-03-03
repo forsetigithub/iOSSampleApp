@@ -10,10 +10,10 @@ import XCTest
 
 class YukoMyNumberAppUITests: XCTestCase {
   
-  private let testEmployeeCode:String = "1000136"
-  private let testEmployeeFamilyName = "木村"
-  private let testEmployeeFirstName = "正徳"
-  private let testPassCode = "1234"
+  fileprivate let testEmployeeCode:String = "1000136"
+  fileprivate let testEmployeeFamilyName = "木村"
+  fileprivate let testEmployeeFirstName = "正徳"
+  fileprivate let testPassCode = "1234"
   
     override func setUp() {
         super.setUp()
@@ -61,16 +61,16 @@ class YukoMyNumberAppUITests: XCTestCase {
         let tablesQuery = tablesQuery2
         tablesQuery.staticTexts["tap to select"].tap()
         
-        let dateformatter = NSDateFormatter()
+        let dateformatter = DateFormatter()
         
         dateformatter.dateFormat = "d"
-        tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("1")
+        tablesQuery.pickerWheels[dateformatter.string(from: Date())].adjust(toPickerWheelValue: "1")
         
         dateformatter.dateFormat = "MMMM"
-        tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("April")
+        tablesQuery.pickerWheels[dateformatter.string(from: Date())].adjust(toPickerWheelValue: "April")
         
         dateformatter.dateFormat = "yyyy"
-        tablesQuery.pickerWheels[dateformatter.stringFromDate(NSDate())].adjustToPickerWheelValue("2017")
+        tablesQuery.pickerWheels[dateformatter.string(from: Date())].adjust(toPickerWheelValue: "2017")
  
         app.navigationBars["NewEmployee"].buttons["Done"].tap()
         
@@ -84,7 +84,7 @@ class YukoMyNumberAppUITests: XCTestCase {
     let tablesQuery = app.tables
     tablesQuery.staticTexts["Kimura1\u{3000}Masanori"].tap()
     tablesQuery.staticTexts["1000133"].tap()
-    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.TextField).element.tap()
+    tablesQuery.children(matching: .cell).element(boundBy: 0).children(matching: .textField).element.tap()
     tablesQuery.buttons["\u{30c6}\u{30ad}\u{30b9}\u{30c8}\u{3092}\u{6d88}\u{53bb}"].tap()
     
     let tablesQuery2 = app.tables
@@ -104,7 +104,7 @@ class YukoMyNumberAppUITests: XCTestCase {
     let tablesQuery = app.tables
     tablesQuery.staticTexts["Kimura1\u{3000}Masanori"].tap()
     tablesQuery.staticTexts["1000133"].tap()
-    tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.TextField).element.tap()
+    tablesQuery.children(matching: .cell).element(boundBy: 0).children(matching: .textField).element.tap()
     tablesQuery.buttons["\u{30c6}\u{30ad}\u{30b9}\u{30c8}\u{3092}\u{6d88}\u{53bb}"].tap()
     
     let tablesQuery2 = app.tables
@@ -135,7 +135,7 @@ class YukoMyNumberAppUITests: XCTestCase {
     //let budget = NSPredicate(format: "label BEGINSWITH 'SelectRelation'")
     
     //let budgetPicker = app.pickerWheels.elementMatchingPredicate(budget)
-    app.pickerWheels["SelectRelation,-1"].adjustToPickerWheelValue("Son4")
+    app.pickerWheels["SelectRelation,-1"].adjust(toPickerWheelValue: "Son4")
     
     tablesQuery2.buttons["Done"].tap()
     
@@ -150,7 +150,7 @@ class YukoMyNumberAppUITests: XCTestCase {
       app.navigationBars["RegisteredList"].buttons["編集"].tap()
       
       let tablesQuery = app.tables
-      tablesQuery.buttons.elementBoundByIndex(0).tap()
+      tablesQuery.buttons.element(boundBy: 0).tap()
       tablesQuery.buttons["削除"].tap()
       app.navigationBars["RegisteredList"].buttons["完了"].tap()
     }

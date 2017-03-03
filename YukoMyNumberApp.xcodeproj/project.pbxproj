@@ -747,7 +747,7 @@
 				0364F5311C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		0364F5321C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberApp" */ = {
 			isa = XCConfigurationList;
@@ -756,7 +756,7 @@
 				0364F5341C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		0364F5351C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberAppTests" */ = {
 			isa = XCConfigurationList;
@@ -765,7 +765,7 @@
 				0364F5371C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		0364F5381C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -774,7 +774,7 @@
 				0364F53A1C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
