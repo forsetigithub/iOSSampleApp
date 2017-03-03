@@ -10,6 +10,30 @@ import Foundation
 import UIKit
 import RealmSwift
 import SVProgressHUD
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   
@@ -21,13 +45,13 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   @IBOutlet weak var deleteMyNumberButton: UIButton!
   
   
-  private let realm = try! Realm()
-  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  fileprivate let realm = try! Realm()
+  fileprivate let Properties = YukoMyNumberAppProperties.sharedInstance
   
   var MyNumberEditData:EmployeeData = EmployeeData()
   
-  private var previousTextFieldContent:String?
-  private var previousSelection:UITextRange?
+  fileprivate var previousTextFieldContent:String?
+  fileprivate var previousSelection:UITextRange?
 
   // MARK: - Table View
   
@@ -40,30 +64,30 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     
     self.subjectName.text = MyNumberEditData.FamilyName + "　" + MyNumberEditData.FirstName
     
-    self.MyNumberTextField.addTarget(self, action: "reformatAsAddSpaceNumber:", forControlEvents: UIControlEvents.EditingChanged)
+    self.MyNumberTextField.addTarget(self, action: #selector(GetMyNumberViewController.reformatAsAddSpaceNumber(_:)), for: UIControlEvents.editingChanged)
     
-    self.registerButton.addTarget(self, action: "tapRegisterButton:", forControlEvents: UIControlEvents.TouchUpInside)
-    self.registerButton.setTitle(Properties.ButtonTitles["Register"], forState: UIControlState.Normal)
+    self.registerButton.addTarget(self, action: #selector(GetMyNumberViewController.tapRegisterButton(_:)), for: UIControlEvents.touchUpInside)
+    self.registerButton.setTitle(Properties.ButtonTitles["Register"], for: UIControlState())
     
-    self.deleteMyNumberButton.addTarget(self, action: "tapDeleteMyNumber:", forControlEvents: UIControlEvents.TouchUpInside)
-    self.deleteMyNumberButton.setTitle(Properties.ButtonTitles["DeleteMyNumber"], forState: UIControlState.Normal)
+    self.deleteMyNumberButton.addTarget(self, action: #selector(GetMyNumberViewController.tapDeleteMyNumber(_:)), for: UIControlEvents.touchUpInside)
+    self.deleteMyNumberButton.setTitle(Properties.ButtonTitles["DeleteMyNumber"], for: UIControlState())
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     if(MyNumberEditData.MyNumberCheckDigitResult){
-      self.showMyNumberSwitch.on = false
+      self.showMyNumberSwitch.isOn = false
     }else{
-      self.showMyNumberSwitch.on = true
+      self.showMyNumberSwitch.isOn = true
     }
     
     self.MyNumberTextField.text = MyNumberEditData.MyNumber
     changeShowMyNumberSwitch(showMyNumberSwitch)
     
-    self.navigationController?.toolbarHidden = true
+    self.navigationController?.isToolbarHidden = true
 
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     if(self.MyNumberTextField.text?.isEmpty == true){
       self.MyNumberTextField.becomeFirstResponder()
     }
@@ -74,7 +98,7 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     // Dispose of any resources that can be recreated.
   }
   
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     self.previousTextFieldContent = textField.text
     self.previousSelection = textField.selectedTextRange
@@ -83,12 +107,12 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
 
   }
   
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
     return true
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
   
 
   }
@@ -97,11 +121,11 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
   /* 
   * 番号4桁ごとにスペースを挿入する
   */
-  func reformatAsAddSpaceNumber(textField:UITextField){
+  func reformatAsAddSpaceNumber(_ textField:UITextField){
 
-    var targetCursorPosition = textField.offsetFromPosition(textField.beginningOfDocument, toPosition: (textField.selectedTextRange?.start)!)
+    var targetCursorPosition = textField.offset(from: textField.beginningOfDocument, to: (textField.selectedTextRange?.start)!)
     
-    let NumberWithoutSpaces = textField.text?.stringByReplacingOccurrencesOfString(" ", withString: "")
+    let NumberWithoutSpaces = textField.text?.replacingOccurrences(of: " ", with: "")
     
     if(NumberWithoutSpaces?.characters.count > (Properties.MyNumberCharactersCount) as Int){
       textField.text = previousTextFieldContent
@@ -112,90 +136,90 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
     let NumberWithSpaces = insertSpacesEveryFourDigitsIntoString(NumberWithoutSpaces!, CursorPosition: &targetCursorPosition)
     textField.text = NumberWithSpaces
     
-    let targetPosition = textField.positionFromPosition(textField.beginningOfDocument, inDirection: UITextLayoutDirection.Right,offset: targetCursorPosition)
-    textField.selectedTextRange = textField.textRangeFromPosition(targetPosition!, toPosition: targetPosition!)
+    let targetPosition = textField.position(from: textField.beginningOfDocument, in: UITextLayoutDirection.right,offset: targetCursorPosition)
+    textField.selectedTextRange = textField.textRange(from: targetPosition!, to: targetPosition!)
   }
   
-  private func insertSpacesEveryFourDigitsIntoString(string:String,inout CursorPosition cursorPosition:Int) -> String{
+  fileprivate func insertSpacesEveryFourDigitsIntoString(_ string:String,CursorPosition cursorPosition:inout Int) -> String{
     
     var stringWithAddedSpaces:String = ""
     let cursorPositionInSpacelessString = cursorPosition
     
-    for (var i = 0; i < string.characters.count;i++){
+    for i in 0 ..< string.characters.count {
       if((i > 0) && ((i % 4) == 0)){
         stringWithAddedSpaces = stringWithAddedSpaces + " "
         if(i < cursorPositionInSpacelessString){
-          cursorPosition++
+          cursorPosition += 1
         }
       }
       let range = NSRange(location: i, length: 1)
-      stringWithAddedSpaces = stringWithAddedSpaces + ((string as NSString).substringWithRange(range))
+      stringWithAddedSpaces = stringWithAddedSpaces + ((string as NSString).substring(with: range))
     }
     
     return stringWithAddedSpaces
   }
   
-  @IBAction func changeShowMyNumberSwitch(sender: UISwitch) {
+  @IBAction func changeShowMyNumberSwitch(_ sender: UISwitch) {
     
     self.MyNumberTextField.resignFirstResponder()
     
-    if(sender.on){
+    if(sender.isOn){
       self.showMyNumberLabel.text = "表示"
-      self.MyNumberTextField.secureTextEntry = false
+      self.MyNumberTextField.isSecureTextEntry = false
     }else{
       self.showMyNumberLabel.text = "非表示"
-      self.MyNumberTextField.secureTextEntry = true
+      self.MyNumberTextField.isSecureTextEntry = true
     }
   
   }
 
-  @IBAction func tapRegisterButton(sender: UIButton) {
+  @IBAction func tapRegisterButton(_ sender: UIButton) {
     
     let inputMyNumber:String = self.MyNumberTextField.text!
     
     //チェックデジット
     if((inputMyNumber.isValidMyNumber()) == false){
       
-      let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に\n誤りがあります。", preferredStyle: UIAlertControllerStyle.Alert)
+      let myAlert:UIAlertController = UIAlertController(title: "マイナンバー入力エラー", message: "マイナンバーが未入力もしくは入力に\n誤りがあります。", preferredStyle: UIAlertControllerStyle.alert)
       
-      let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+      let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
       myAlert.addAction(OKAction)
-      presentViewController(myAlert, animated: true, completion: nil)
+      present(myAlert, animated: true, completion: nil)
       return
     
     }
     
     //重複チェック
-    let result = realm.objects(EmployeeData).filter("MyNumber = '\(inputMyNumber)'")
+    let result = realm.objects(EmployeeData.self).filter("MyNumber = '\(inputMyNumber)'")
     if(result.count != 0){
-      let myAlert = UIAlertController(title: "マイナンバー入力エラー", message: "入力したマイナンバーはすでに登録されています。", preferredStyle: UIAlertControllerStyle.Alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+      let myAlert = UIAlertController(title: "マイナンバー入力エラー", message: "入力したマイナンバーはすでに登録されています。", preferredStyle: UIAlertControllerStyle.alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil)
       
       myAlert.addAction(OKAction)
       
-      presentViewController(myAlert,animated: true,completion: nil)
+      present(myAlert,animated: true,completion: nil)
       return
     }
 
 
     try! realm.write { () -> Void in
       
-      let result = realm.objects(EmployeeData).filter("EmployeeCode = '\(MyNumberEditData.EmployeeCode)'" +
+      let result = realm.objects(EmployeeData.self).filter("EmployeeCode = '\(MyNumberEditData.EmployeeCode)'" +
         " and RSCode = '\(MyNumberEditData.RSCode)'")
 
       if(result.count == 1){
         
         result[0].MyNumber = self.MyNumberTextField.text!
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
       }else{
-        let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄がすでに登録されているため、マイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert:UIAlertController = UIAlertController(title: "エラー", message: "同じ続柄がすでに登録されているため、マイナンバーを登録できません！", preferredStyle: UIAlertControllerStyle.alert)
         
-        let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+        let OKAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
 
           self.MyNumberTextField.resignFirstResponder()
           
@@ -203,29 +227,29 @@ class GetMyNumberViewController : UITableViewController,UITextFieldDelegate{
         
         myAlert.addAction(OKAction)
         
-        presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
       }
     }
   }
   
-  func tapDeleteMyNumber(sender:UIButton){
+  func tapDeleteMyNumber(_ sender:UIButton){
     let deleteProp = Properties.AlertMessages["DeleteExclamation"] as! [String:String]
     
-    let myAlert = UIAlertController(title: deleteProp["Title"], message:"\(Properties.LabelItems["MyNumber"]!)を\(deleteProp["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
+    let myAlert = UIAlertController(title: deleteProp["Title"], message:"\(Properties.LabelItems["MyNumber"]!)を\(deleteProp["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action:UIAlertAction) -> Void in
       try! self.realm.write({ () -> Void in
         self.MyNumberEditData.MyNumber = ""
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
       })
     }
     
-    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.Cancel, handler: nil)
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.cancel, handler: nil)
     
     myAlert.addAction(OKAction)
     myAlert.addAction(CancelAction)
     
-    presentViewController(myAlert, animated: true, completion: nil)
+    present(myAlert, animated: true, completion: nil)
   
   }
 }
