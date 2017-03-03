@@ -11,26 +11,26 @@ import UIKit
 import RealmSwift
 
 enum CHANGEPASSCODEMODE{
-  case NEW
-  case MODIFY
+  case new
+  case modify
 }
 
 class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
 
   var EmployeeEditData:EmployeeData?
   
-  private let realm = try! Realm()
+  fileprivate let realm = try! Realm()
   
   @IBOutlet weak var PassCodeBefore: UITextField!
   @IBOutlet weak var PassCodeAfter: UITextField!
   @IBOutlet weak var PassCodeAfterReEnter: UITextField!
   
-  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  fileprivate let Properties = YukoMyNumberAppProperties.sharedInstance
   
-  private var InputPassCode:String?
+  fileprivate var InputPassCode:String?
   
-  private var changePassCodeMode:CHANGEPASSCODEMODE?
-  private var buttontitle:String!
+  fileprivate var changePassCodeMode:CHANGEPASSCODEMODE?
+  fileprivate var buttontitle:String!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,17 +47,17 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     
     buttontitle = regstring
     
-    changePassCodeMode = CHANGEPASSCODEMODE.NEW
+    changePassCodeMode = CHANGEPASSCODEMODE.new
     
     if(EmployeeEditData?.PassCode.characters.count != 0){
       title = "\(titlestring)\(modstring)"
       buttontitle = modstring
       
-      changePassCodeMode = CHANGEPASSCODEMODE.MODIFY
+      changePassCodeMode = CHANGEPASSCODEMODE.modify
     }
     
     self.navigationItem.title = title
-    let saveButtonItem = UIBarButtonItem(title: buttontitle, style: UIBarButtonItemStyle.Done, target: self, action: "tapSavePassCodeButton:")
+    let saveButtonItem = UIBarButtonItem(title: buttontitle, style: UIBarButtonItemStyle.done, target: self, action: #selector(ChangePassCodeViewController.tapSavePassCodeButton(_:)))
     self.navigationItem.rightBarButtonItem = saveButtonItem
     
   }
@@ -66,13 +66,13 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     super.didReceiveMemoryWarning()
   }
   
-  override func viewWillAppear(animated: Bool) {
-    self.navigationController?.toolbarHidden = true
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.isToolbarHidden = true
     
-    if(changePassCodeMode == CHANGEPASSCODEMODE.NEW){
+    if(changePassCodeMode == CHANGEPASSCODEMODE.new){
       self.PassCodeBefore.placeholder = "\(Properties.LabelItems["PassCode"]!)(\(Properties.PassCodeCharactersCount)\(Properties.LabelItems["NumberOfDigits"]!))"
       self.PassCodeAfter.placeholder = "\(Properties.LabelItems["PassCode"]!)(\(Properties.LabelItems["ReEnter"]!))"
-      self.PassCodeAfterReEnter.hidden = true
+      self.PassCodeAfterReEnter.isHidden = true
     }else{
       self.PassCodeBefore.placeholder = "\(Properties.LabelItems["PassCodeBefore"]!)"
       self.PassCodeAfter.placeholder = "\(Properties.LabelItems["PassCodeAfter"]!)"
@@ -80,19 +80,19 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     }
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     self.PassCodeBefore.becomeFirstResponder()
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if(changePassCodeMode == CHANGEPASSCODEMODE.NEW){
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if(changePassCodeMode == CHANGEPASSCODEMODE.new){
       return 2
     }else{
       return 3
     }
   }
   
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     //暗証番号の桁数しか入力できないようにする
 
     let str = textField.text! + string
@@ -104,34 +104,34 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     return true
   }
   
-  func tapSavePassCodeButton(sender:UIBarButtonItem){
+  func tapSavePassCodeButton(_ sender:UIBarButtonItem){
     
-    if(self.changePassCodeMode == CHANGEPASSCODEMODE.NEW){
+    if(self.changePassCodeMode == CHANGEPASSCODEMODE.new){
       if(self.PassCodeBefore.text?.isEmpty == true ||
         self.PassCodeAfter.text?.isEmpty == true){
       
           //必須入力エラー
-          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
             
           })
           myAlert.addAction(OKAction)
           
-          presentViewController(myAlert, animated: true, completion: nil)
+          present(myAlert, animated: true, completion: nil)
           
           return
       }
       if(self.PassCodeBefore.text != PassCodeAfter.text){
         
         //変更後パスワードと再入力の内容アンマッチエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "\(self.Properties.LabelItems["PassCode"])が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "\(self.Properties.LabelItems["PassCode"])が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
 
         myAlert.addAction(OKAction)
         
-        presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
         
         return
       }
@@ -142,41 +142,41 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
         self.PassCodeAfterReEnter.text?.isEmpty == true){
       
           //必須入力エラー
-          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.Alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
             
           })
           myAlert.addAction(OKAction)
           
-          presentViewController(myAlert, animated: true, completion: nil)
+          present(myAlert, animated: true, completion: nil)
           
           return
       }
       
       if(PassCodeAfter.text != PassCodeAfterReEnter.text){
         //変更後パスワードと再入力の内容アンマッチエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更後の暗証番号が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更後の暗証番号が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
         myAlert.addAction(OKAction)
         
-        presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
         
         return
       }
       
       if(self.PassCodeBefore.text == self.PassCodeAfter.text){
         //変更前後が同じエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更前後の暗証番号が同じです。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更前後の暗証番号が同じです。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
         myAlert.addAction(OKAction)
         
-        presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
         return
       }
     }
@@ -190,15 +190,15 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       let labeltitle:String = (Properties.LabelItems["PassCode"]! as String)
       
-      let myAlert = UIAlertController(title: "\(labeltitle)変更", message: "\(labeltitle)を変更しました", preferredStyle: UIAlertControllerStyle.Alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,
+      let myAlert = UIAlertController(title: "\(labeltitle)変更", message: "\(labeltitle)を変更しました", preferredStyle: UIAlertControllerStyle.alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default,
         handler: { (action:UIAlertAction) -> Void in
       
-          self.navigationController?.popViewControllerAnimated(true)
+          self.navigationController?.popViewController(animated: true)
       })
       
       myAlert.addAction(OKAction)
-      self.presentViewController(myAlert, animated: true, completion: nil)
+      self.present(myAlert, animated: true, completion: nil)
     })
     
   }
