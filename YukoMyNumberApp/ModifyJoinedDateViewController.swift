@@ -19,26 +19,26 @@ class ModifyJoinedDateViewController:UITableViewController{
   @IBOutlet weak var myDatePicker: UIDatePicker!
   @IBOutlet weak var joinedDateLabel: UILabel!
   
-  private var tapJoinedDateLabelFlag:Bool = false
-  private var formatter:NSDateFormatter = NSDateFormatter()
+  fileprivate var tapJoinedDateLabelFlag:Bool = false
+  fileprivate var formatter:DateFormatter = DateFormatter()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.navigationItem.title = YukoMyNumberAppProperties.sharedInstance.LabelItems["EmployeeJoinedDate"]
     
-    self.joinedDateLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapJoinedDateLabel:"))
+    self.joinedDateLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ModifyJoinedDateViewController.tapJoinedDateLabel(_:))))
     
     self.formatter.dateFormat = YukoMyNumberAppProperties.sharedInstance.DateFormatStringJapanese
   }
   
-  override func viewWillAppear(animated: Bool) {
-    self.myDatePicker.date = EmployeeEditData!.JoinedDate
+  override func viewWillAppear(_ animated: Bool) {
+    self.myDatePicker.date = EmployeeEditData!.JoinedDate as Date
 
-    self.joinedDateLabel.text = formatter.stringFromDate((self.EmployeeEditData?.JoinedDate)!)
+    self.joinedDateLabel.text = formatter.string(from: (self.EmployeeEditData?.JoinedDate)! as Date)
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
     try! realm.write({ () -> Void in
@@ -50,7 +50,7 @@ class ModifyJoinedDateViewController:UITableViewController{
     super.didReceiveMemoryWarning()
   }
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     var height = YukoMyNumberAppProperties.sharedInstance.TableViewCellDefaultHeight
     
@@ -65,21 +65,21 @@ class ModifyJoinedDateViewController:UITableViewController{
     return height
   }
   
-  func tapJoinedDateLabel(sender:UILabel){
+  func tapJoinedDateLabel(_ sender:UILabel){
     
     self.tapJoinedDateLabelFlag = !(self.tapJoinedDateLabelFlag)
     
     if(self.tapJoinedDateLabelFlag){
-      self.joinedDateLabel.textColor = UIColor.blueColor()
+      self.joinedDateLabel.textColor = UIColor.blue
     }else{
-      self.joinedDateLabel.textColor = UIColor.blackColor()
+      self.joinedDateLabel.textColor = UIColor.black
     }
     
     self.tableView.reloadData()
   }
   
-  @IBAction func changeDatePicker(sender: UIDatePicker) {
-    self.joinedDateLabel.text =  self.formatter.stringFromDate(sender.date)
+  @IBAction func changeDatePicker(_ sender: UIDatePicker) {
+    self.joinedDateLabel.text =  self.formatter.string(from: sender.date)
     
     self.tableView.reloadData()
   
