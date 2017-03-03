@@ -12,10 +12,10 @@ import RealmSwift
 class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
                                     UIPickerViewDelegate {
   
-  private let realm = try! Realm()
-  private let Properties = YukoMyNumberAppProperties.sharedInstance
+  fileprivate let realm = try! Realm()
+  fileprivate let Properties = YukoMyNumberAppProperties.sharedInstance
 
-  private var employeeeditdata:EmployeeData = EmployeeData()
+  fileprivate var employeeeditdata:EmployeeData = EmployeeData()
   
   var EmployeeEditData:EmployeeData {
     set(newValue){
@@ -34,7 +34,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   @IBOutlet weak var RegisterButton: UIButton!
   
   
-  private let RelationPicker:RelationPickerViewController = RelationPickerViewController()
+  fileprivate let RelationPicker:RelationPickerViewController = RelationPickerViewController()
   
   // MARK: - Table View
   override func viewDidLoad() {
@@ -52,15 +52,15 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     RelationPicker.selectedRSCode = RelationPicker.pickerKeys[0]
     self.RelationName.text = RelationPicker.selectedRSName
     
-    self.RegisterButton.addTarget(self, action: "tapRegisterButton:", forControlEvents: UIControlEvents.TouchUpInside)
-    self.RegisterButton.setTitle(Properties.ButtonTitles["Register"], forState: UIControlState.Normal)
+    self.RegisterButton.addTarget(self, action: #selector(RegisterFamilyViewController.tapRegisterButton(_:)), for: UIControlEvents.touchUpInside)
+    self.RegisterButton.setTitle(Properties.ButtonTitles["Register"], for: UIControlState())
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatePickerValue:", name: "updatePickerNotification", object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(RegisterFamilyViewController.updatePickerValue(_:)), name: NSNotification.Name(rawValue: "updatePickerNotification"), object: nil)
 
   }
   
-  override func viewWillAppear(animated: Bool) {
-    self.navigationController?.toolbarHidden = true
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.isToolbarHidden = true
   }
   
   override func didReceiveMemoryWarning() {
@@ -68,11 +68,11 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     // Dispose of any resources that can be recreated.
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     self.FamilyNameTextField.becomeFirstResponder()
   }
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     var height:CGFloat = YukoMyNumberAppProperties.sharedInstance.TableViewCellDefaultHeight
     if(indexPath.row == 3){
       height =  150
@@ -81,15 +81,15 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     return height
   }
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
   }
   
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     return textField.resignFirstResponder()
   }
   
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     let str = textField.text! + string
     
@@ -107,46 +107,46 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
   }
   
   
-  @IBAction func tapRegisterButton(sender: AnyObject) {
+  @IBAction func tapRegisterButton(_ sender: AnyObject) {
     
     var alertProp:[String:String] = [String:String]()
     
     //必須項目チェック
-    if(self.FamilyNameTextField.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
-      self.FirstNameTextField.text?.stringByReplacingOccurrencesOfString(" ", withString: "").isEmpty == true ||
+    if(self.FamilyNameTextField.text?.replacingOccurrences(of: " ", with: "").isEmpty == true ||
+      self.FirstNameTextField.text?.replacingOccurrences(of: " ", with: "").isEmpty == true ||
       self.RelationName.text == RelationPicker.pickerValues[0]){
         
         alertProp = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
         
-        let myAlert = UIAlertController(title: alertProp["Title"], message: alertProp["Message"], preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: alertProp["Title"], message: alertProp["Message"], preferredStyle: UIAlertControllerStyle.alert)
         
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
         myAlert.addAction(OKAction)
         
-        presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
         
         return
     }
     
     //続柄重複エラーチェック
-    let rscodecheck = realm.objects(EmployeeData).filter("EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)' and RSCode = '\(RelationPicker.selectedRSCode)'")
+    let rscodecheck = realm.objects(EmployeeData.self).filter("EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)' and RSCode = '\(RelationPicker.selectedRSCode)'")
     
     if(rscodecheck.count != 0){
       
       alertProp = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
       
-      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
       
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction) -> Void in
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
       myAlert.addAction(OKAction)
       
-      presentViewController(myAlert, animated: true, completion: nil)
+      present(myAlert, animated: true, completion: nil)
     
       return
       
@@ -160,19 +160,19 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       family.EmployeeCode = employeeeditdata.EmployeeCode
       family.JoinedDate = employeeeditdata.JoinedDate
       
-      family.FamilySeqNo = (realm.objects(EmployeeData).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted("FamilySeqNo",
+      family.FamilySeqNo = (realm.objects(EmployeeData.self).filter("EmployeeCode = '\(family.EmployeeCode)'").sorted(byKeyPath: "FamilySeqNo",
         ascending: true).first?.FamilySeqNo)! + 1
             
       realm.add(family)
       
-      self.navigationController?.popViewControllerAnimated(true)
+      self.navigationController?.popViewController(animated: true)
       
     })
     
   }
 
-  func updatePickerValue(notification:NSNotification?){
-    if(notification?.name == "updatePickerNotification"){
+  func updatePickerValue(_ notification:Foundation.Notification?){
+    if((notification?.name as AnyObject) as! String == "updatePickerNotification"){
       self.RelationName.text = RelationPicker.pickerValues[RelationPicker.selectedPickerRow]
     }
   }
