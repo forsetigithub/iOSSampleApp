@@ -38,7 +38,7 @@
 		03E5E25B1C3CA95900292ACE /* RegisterEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */; };
 		03E5E25D1C3CB4F600292ACE /* EmployeeDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */; };
 		03F6318D1C40D9BD0083F33F /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */; };
-		E95412BD01010B5A66EF5B3C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F4A60FAF985F630A287FEA /* Pods.framework */; };
+		CA9CE32467A51CC99DB8DA77 /* Pods_YukoMyNumberApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F3231C18E81DBF41721D4B /* Pods_YukoMyNumberApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,9 +108,10 @@
 		03E5E25A1C3CA95900292ACE /* RegisterEmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmployeeViewController.swift; sourceTree = "<group>"; };
 		03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeDataClass.swift; sourceTree = "<group>"; };
 		03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
-		9D6BCA32ABDBA21829B2BC19 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		09F3231C18E81DBF41721D4B /* Pods_YukoMyNumberApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YukoMyNumberApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13236349A609AFDC02ADBBAB /* Pods-YukoMyNumberApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YukoMyNumberApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp.debug.xcconfig"; sourceTree = "<group>"; };
+		36A62B0A1513EA88E48025DD /* Pods-YukoMyNumberApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YukoMyNumberApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp.release.xcconfig"; sourceTree = "<group>"; };
 		D0F4A60FAF985F630A287FEA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F08FFD70C8053BE19AD8EFAF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +122,8 @@
 				0379DE031C5B8C2A0006F936 /* CFNetwork.framework in Frameworks */,
 				03C4E3951C5ADFBC003427BE /* SystemConfiguration.framework in Frameworks */,
 				03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */,
-				E95412BD01010B5A66EF5B3C /* Pods.framework in Frameworks */,
 				03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */,
+				CA9CE32467A51CC99DB8DA77 /* Pods_YukoMyNumberApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,8 +172,8 @@
 				0364F5211C3B46B000EA4A37 /* YukoMyNumberAppTests */,
 				0364F52C1C3B46B000EA4A37 /* YukoMyNumberAppUITests */,
 				0364F50B1C3B46B000EA4A37 /* Products */,
-				B40961C1992C88F1B0A0307F /* Pods */,
 				64DB7440FF872EC04C1D8E19 /* Frameworks */,
+				0590837699EC3DC4B7C37A15 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,6 +254,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0590837699EC3DC4B7C37A15 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				13236349A609AFDC02ADBBAB /* Pods-YukoMyNumberApp.debug.xcconfig */,
+				36A62B0A1513EA88E48025DD /* Pods-YukoMyNumberApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		64DB7440FF872EC04C1D8E19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,17 +270,9 @@
 				03C4E3941C5ADFBC003427BE /* SystemConfiguration.framework */,
 				03313FE41C3DF032004D3F9F /* libiconv.tbd */,
 				D0F4A60FAF985F630A287FEA /* Pods.framework */,
+				09F3231C18E81DBF41721D4B /* Pods_YukoMyNumberApp.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B40961C1992C88F1B0A0307F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9D6BCA32ABDBA21829B2BC19 /* Pods.debug.xcconfig */,
-				F08FFD70C8053BE19AD8EFAF /* Pods.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,12 +282,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0364F5321C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberApp" */;
 			buildPhases = (
-				28FEDE9CEFC1589D60EDCA37 /* Check Pods Manifest.lock */,
+				F02DF538142C61A74182915B /* [CP] Check Pods Manifest.lock */,
 				0364F5061C3B46B000EA4A37 /* Sources */,
 				0364F5071C3B46B000EA4A37 /* Frameworks */,
 				0364F5081C3B46B000EA4A37 /* Resources */,
-				FD347003BDE093A30DFEB094 /* Embed Pods Frameworks */,
-				F98E340E078CEE98BBE9CC16 /* Copy Pods Resources */,
+				84A728A484D2A08723EFCB89 /* [CP] Embed Pods Frameworks */,
+				8A5733C43D2758661FF12CD8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,12 +341,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = yukobex;
 				TargetAttributes = {
 					0364F5091C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DQEAJH9KE5;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -353,10 +356,12 @@
 					};
 					0364F51D1C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 0364F5091C3B46B000EA4A37;
 					};
 					0364F5281C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 0364F5091C3B46B000EA4A37;
 					};
 				};
@@ -413,49 +418,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		28FEDE9CEFC1589D60EDCA37 /* Check Pods Manifest.lock */ = {
+		84A728A484D2A08723EFCB89 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F98E340E078CEE98BBE9CC16 /* Copy Pods Resources */ = {
+		8A5733C43D2758661FF12CD8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FD347003BDE093A30DFEB094 /* Embed Pods Frameworks */ = {
+		F02DF538142C61A74182915B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -550,8 +555,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -574,7 +581,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -597,8 +604,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -615,10 +624,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -626,15 +636,17 @@
 		};
 		0364F5331C3B46B000EA4A37 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D6BCA32ABDBA21829B2BC19 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 13236349A609AFDC02ADBBAB /* Pods-YukoMyNumberApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DQEAJH9KE5;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = YukoMyNumberApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/YukoMyNumberApp/SQLClient";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
@@ -643,21 +655,24 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$PRODUCT_NAME-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		0364F5341C3B46B000EA4A37 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F08FFD70C8053BE19AD8EFAF /* Pods.release.xcconfig */;
+			baseConfigurationReference = 36A62B0A1513EA88E48025DD /* Pods-YukoMyNumberApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DQEAJH9KE5;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = YukoMyNumberApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/YukoMyNumberApp/SQLClient";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.yuko-group.YukoMyNumberApp";
@@ -665,6 +680,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$PRODUCT_NAME-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -677,6 +693,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YukoMyNumberApp.app/YukoMyNumberApp";
 			};
 			name = Debug;
@@ -689,6 +706,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YukoMyNumberApp.app/YukoMyNumberApp";
 			};
 			name = Release;
@@ -700,6 +718,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = YukoMyNumberApp;
 				USES_XCTRUNNER = YES;
 			};
@@ -712,6 +731,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = YukoMyNumberApp;
 				USES_XCTRUNNER = YES;
 			};
@@ -727,7 +747,7 @@
 				0364F5311C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		0364F5321C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberApp" */ = {
 			isa = XCConfigurationList;
@@ -736,7 +756,7 @@
 				0364F5341C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		0364F5351C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberAppTests" */ = {
 			isa = XCConfigurationList;
@@ -745,7 +765,7 @@
 				0364F5371C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		0364F5381C3B46B000EA4A37 /* Build configuration list for PBXNativeTarget "YukoMyNumberAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -754,7 +774,7 @@
 				0364F53A1C3B46B000EA4A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
