@@ -16,13 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   let realm = try! Realm()
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
 
-    UILabel.appearance().font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
+    UILabel.appearance().font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize!)
     
-    UITextField.appearance().font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize)
+    UITextField.appearance().font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.AppDefaultFontSize!)
     
     
     

@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SVProgressHUD
+import SQLClient
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -39,11 +40,11 @@ class RegisteredListViewController: UITableViewController {
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.title = Properties.NavigationTitles["RegisteredListViewController"]
     self.navigationItem.leftBarButtonItem = editButtonItem
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["AddNew"], style: UIBarButtonItemStyle.plain, target: self, action: #selector(RegisteredListViewController.tapAddNewButton(_:)))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["AddNew"], style: UIBarButtonItem.Style.plain, target: self, action: #selector(RegisteredListViewController.tapAddNewButton(_:)))
     
-    let infobutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(RegisteredListViewController.tapVersionInfo(_:)))
+    let infobutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(RegisteredListViewController.tapVersionInfo(_:)))
     
-    let barspace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+    let barspace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
     barspace.width = self.view.bounds.size.width / 2 - Properties.ToolBarFixedSpaceSize
     self.toolbarItems = [barspace,infobutton]
     self.navigationController?.isToolbarHidden = false
@@ -64,8 +65,8 @@ class RegisteredListViewController: UITableViewController {
       self.navigationItem.leftBarButtonItem?.isEnabled = false
       self.tableView.isUserInteractionEnabled = false
       
-      let myAlert = UIAlertController(title: "ネットワークに\n接続されていません", message: "ネットワークに接続されていないため\nこのアプリを使用することはできません", preferredStyle: UIAlertControllerStyle.alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+      let myAlert = UIAlertController(title: "ネットワークに\n接続されていません", message: "ネットワークに接続されていないため\nこのアプリを使用することはできません", preferredStyle: UIAlertController.Style.alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -158,7 +159,7 @@ class RegisteredListViewController: UITableViewController {
     return true
   }
   
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     
     SVProgressHUD.show()
     
@@ -204,7 +205,7 @@ class RegisteredListViewController: UITableViewController {
                     let families = self.realm.objects(EmployeeData.self).filter("EmployeeCode='\(delemployeecode)'")
                     self.realm.delete(families)
                     
-                    self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableViewRowAnimation.fade)
+                    self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableView.RowAnimation.fade)
                   })
                   
                   
@@ -219,7 +220,7 @@ class RegisteredListViewController: UITableViewController {
                   let families = self.realm.objects(EmployeeData.self).filter("EmployeeCode='\(delemployeecode)'")
                   self.realm.delete(families)
                   
-                  self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableViewRowAnimation.fade)
+                  self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableView.RowAnimation.fade)
                 })
               
                 SVProgressHUD.dismiss()
@@ -234,7 +235,7 @@ class RegisteredListViewController: UITableViewController {
         let families = self.realm.objects(EmployeeData.self).filter("EmployeeCode='\(delemployeecode)'")
         self.realm.delete(families)
         
-        self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableViewRowAnimation.fade)
+        self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableView.RowAnimation.fade)
       })
       
       SVProgressHUD.dismiss()
@@ -301,10 +302,10 @@ class RegisteredListViewController: UITableViewController {
     })
   }
   
-  func tapVersionInfo(_ sender:UIBarButtonItem){
+  @objc func tapVersionInfo(_ sender:UIBarButtonItem){
     let version:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    let myAlert = UIAlertController(title: "MN登録\nVer.\(version)", message: "YUKO BEX Inc. All Rights Reserved.", preferredStyle: UIAlertControllerStyle.actionSheet)
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler:nil)
+    let myAlert = UIAlertController(title: "MN登録\nVer.\(version)", message: "YUKO BEX Inc. All Rights Reserved.", preferredStyle: UIAlertController.Style.actionSheet)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default,handler:nil)
     
     myAlert.addAction(OKAction)
     present(myAlert, animated: true, completion: nil)

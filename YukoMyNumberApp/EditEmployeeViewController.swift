@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import Foundation
 import SVProgressHUD
+import SQLClient
 
 class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
 
@@ -76,9 +77,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       loadEmployeeData()
     }
     
-    let uploadDataBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(EditEmployeeViewController.tapUploadDataBarButtonItem(_:)))
+    let uploadDataBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(EditEmployeeViewController.tapUploadDataBarButtonItem(_:)))
     
-    let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: self, action: nil)
+    let toolbarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: self, action: nil)
     
     toolbarSpace.width = self.view.bounds.size.width / 2 - Properties.ToolBarFixedSpaceSize
     
@@ -92,16 +93,16 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     
     let labelTitle:[String:String] = Properties.AlertMessages["InputPassCode"] as! [String:String]
     
-    let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)(\(Properties.PassCodeCharactersCount)\(Properties.LabelItems["NumberOfDigits"]!))", preferredStyle: UIAlertControllerStyle.alert)
+    let myAlert:UIAlertController = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)(\(Properties.PassCodeCharactersCount)\(Properties.LabelItems["NumberOfDigits"]!))", preferredStyle: UIAlertController.Style.alert)
     
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action:UIAlertAction) -> Void in
       
       if(self.InputPassCode != self.employeeeditdata.PassCode){
         let labelTitle:[String:String] = self.Properties.AlertMessages["InputPassCodeError"] as! [String:String]
         
-        let unmatchAlert = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
+        let unmatchAlert = UIAlertController(title: "\(labelTitle["Title"]!)", message: "\(labelTitle["Message"]!)", preferredStyle: UIAlertController.Style.alert)
         
-        let unmatchOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: {(action:UIAlertAction) -> Void in
+        let unmatchOK = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: {(action:UIAlertAction) -> Void in
           self.navigationController?.popViewController(animated: true)
         })
         
@@ -121,7 +122,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       SVProgressHUD.dismiss()
     })
     
-    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.cancel, handler: { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertAction.Style.cancel, handler: { (action:UIAlertAction) -> Void in
       self.navigationController?.popViewController(animated: true)
     })
     
@@ -131,7 +132,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       textField.keyboardType = UIKeyboardType.numberPad
       let myNotificationCenter = NotificationCenter.default
       
-      myNotificationCenter.addObserver(self, selector: #selector(EditEmployeeViewController.changeTextField(_:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+      myNotificationCenter.addObserver(self, selector: #selector(EditEmployeeViewController.changeTextField(_:)), name: UITextField.textDidChangeNotification, object: nil)
     })
     
     myAlert.addAction(OKAction)
@@ -143,7 +144,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   /*
   textFieldに変更が会った時に通知されるメソッド.
   */
-  internal func changeTextField (_ sender: Foundation.Notification) {
+  @objc internal func changeTextField (_ sender: Foundation.Notification) {
     let textField = sender.object as! UITextField
     
     self.InputPassCode = textField.text
@@ -230,10 +231,10 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     テーブルに表示させるボタンを作成する
   */
   func makeButtonInTableView(_ title:String,actionName action:Selector) -> UIButton{
-    let makebtn = UIButton(type: UIButtonType.system)
-    makebtn.setTitle(title, for: UIControlState())
+    let makebtn = UIButton(type: UIButton.ButtonType.system)
+    makebtn.setTitle(title, for: UIControl.State())
     makebtn.titleLabel?.font = UIFont(name: "System", size: Properties.ButtonInTableViewFontSize)
-    makebtn.addTarget(self, action: action , for: UIControlEvents.touchUpInside)
+    makebtn.addTarget(self, action: action , for: UIControl.Event.touchUpInside)
     makebtn.frame = CGRect(x: self.view.center.x - 100, y: 5, width: 200, height: 30)
 
     return makebtn
@@ -268,7 +269,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
     
-    cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     
     switch indexPath.section {
       case 0:  //本人
@@ -288,7 +289,7 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
                 //マイナンバー取得状況
                 case 3:
                   
-                  cell.accessoryType = UITableViewCellAccessoryType.none
+                  cell.accessoryType = UITableViewCell.AccessoryType.none
                   cell.isUserInteractionEnabled = false
                   
                   if(self.employeeeditdata.MyNumberCheckDigitResult){
@@ -348,8 +349,8 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         
         break
       case 2: //送信状況
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.accessoryType = UITableViewCellAccessoryType.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.accessoryType = UITableViewCell.AccessoryType.none
         
         for subview in cell.contentView.subviews{
           let label = subview as? UILabel
@@ -380,30 +381,30 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
     return cell
   }
   
-  func getMyNumberBtn(_ sender:UIButton){
+  @objc func getMyNumberBtn(_ sender:UIButton){
     performSegue(withIdentifier: "showGetMyNumber", sender: self)
   }
   
-  func addFamilyBtn(_ sender:UIButton){
+  @objc func addFamilyBtn(_ sender:UIButton){
     performSegue(withIdentifier: "showAddNewFamily", sender: self)
   }
   
   /* 
   * UIToolbarのActionボタン押下時
   */
-  func tapUploadDataBarButtonItem(_ sender:UIButton){
+  @objc func tapUploadDataBarButtonItem(_ sender:UIButton){
     
     let AlertProp = Properties.AlertMessages["EditEmployeeActionSheet"] as! [String:AnyObject]
     let SendDataProp = AlertProp["SendData"] as! [String:String]
     
-    let AlertView = UIAlertController(title: AlertProp["Title"]as? String, message: AlertProp["Message"] as? String, preferredStyle: UIAlertControllerStyle.actionSheet)
+    let AlertView = UIAlertController(title: AlertProp["Title"]as? String, message: AlertProp["Message"] as? String, preferredStyle: UIAlertController.Style.actionSheet)
     
-    let SendData = UIAlertAction(title: SendDataProp["Title"], style: UIAlertActionStyle.destructive) { (action:UIAlertAction) -> Void in
+    let SendData = UIAlertAction(title: SendDataProp["Title"], style: UIAlertAction.Style.destructive) { (action:UIAlertAction) -> Void in
       
       //本人・家族のマイナンバーが全て登録されているかをチェックし、未登録の場合はメッセージを表示
       let numbercheck = self.realm.objects(EmployeeData.self).filter("EmployeeCode = '\(self.EmployeeEditData.EmployeeCode)' and MyNumber == ''")
       
-      let SendAlertView = UIAlertController(title: SendDataProp["Title"], message: "", preferredStyle: UIAlertControllerStyle.alert)
+      let SendAlertView = UIAlertController(title: SendDataProp["Title"], message: "", preferredStyle: UIAlertController.Style.alert)
       
       if(numbercheck.count == 0){
         
@@ -413,13 +414,13 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
         SendAlertView.message = "未登録のマイナンバーがあります。\n送信してもよろしいですか？"
       }
       
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action:UIAlertAction) -> Void in
         
         self.uploadData(self.employeeeditdata)
         
       })
       
-      let CancelAction = UIAlertAction(title: self.Properties.ButtonTitles["Cancel"], style: UIAlertActionStyle.cancel, handler: { (action:UIAlertAction) -> Void in
+      let CancelAction = UIAlertAction(title: self.Properties.ButtonTitles["Cancel"], style: UIAlertAction.Style.cancel, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -434,11 +435,11 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
       title = "\(Properties.LabelItems["PassCode"]!)を変更"
     }
     
-    let ChangePassword = UIAlertAction(title: title, style: UIAlertActionStyle.default) { (action:UIAlertAction) -> Void in
+    let ChangePassword = UIAlertAction(title: title, style: UIAlertAction.Style.default) { (action:UIAlertAction) -> Void in
       self.performSegue(withIdentifier: "showChangePassCode", sender: self)
     }
     
-    let AlertCancelAction = UIAlertAction(title: self.Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.cancel, handler: nil)
+    let AlertCancelAction = UIAlertAction(title: self.Properties.AlertMessages["Cancel"] as? String, style: UIAlertAction.Style.cancel, handler: nil)
     
     AlertView.addAction(SendData)
     AlertView.addAction(ChangePassword)
@@ -522,9 +523,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
               
               self.client.disconnect()
               
-              let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertControllerStyle.alert)
+              let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertController.Style.alert)
               
-              let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
+              let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action:UIAlertAction) -> Void in
                 
                 self.navigationController?.popViewController(animated: true)
               })
@@ -536,9 +537,9 @@ class EditEmployeeViewController:UITableViewController,SQLClientDelegate{
             }else{
               AlertProp = self.Properties.AlertMessages["SendError"] as! [String:String]
 
-              let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertControllerStyle.alert)
+              let messageAlert = UIAlertController(title:AlertProp["Title"]! , message: AlertProp["Message"]!, preferredStyle: UIAlertController.Style.alert)
               
-              let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+              let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
                 
               })
               

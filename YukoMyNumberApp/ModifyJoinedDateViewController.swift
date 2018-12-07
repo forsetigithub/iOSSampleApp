@@ -65,7 +65,7 @@ class ModifyJoinedDateViewController:UITableViewController{
     return height
   }
   
-  func tapJoinedDateLabel(_ sender:UILabel){
+  @objc func tapJoinedDateLabel(_ sender:UILabel){
     
     self.tapJoinedDateLabelFlag = !(self.tapJoinedDateLabelFlag)
     

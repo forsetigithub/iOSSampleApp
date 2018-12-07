@@ -10,8 +10,6 @@
 		0318EF1C1C5C78100076D0E6 /* RelationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0318EF1B1C5C78100076D0E6 /* RelationPickerViewController.swift */; };
 		032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */; };
 		03282CDE1C4DFF5A002C4042 /* MyNumberCheckDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */; };
-		03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FD81C3DF006004D3F9F /* libfreetds.a */; };
-		03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03313FDB1C3DF006004D3F9F /* SQLClient.m */; };
 		03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03313FE41C3DF032004D3F9F /* libiconv.tbd */; };
 		035289231C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035289221C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist */; };
 		03564DFB1C530CD800166397 /* ChangePassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */; };
@@ -62,20 +60,6 @@
 		0318EF1B1C5C78100076D0E6 /* RelationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationPickerViewController.swift; sourceTree = "<group>"; };
 		032692941C447870004787B3 /* ModifyEmployeeDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyEmployeeDataViewController.swift; sourceTree = "<group>"; };
 		03282CDD1C4DFF5A002C4042 /* MyNumberCheckDigit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNumberCheckDigit.swift; sourceTree = "<group>"; };
-		03313FD41C3DF006004D3F9F /* bkpublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bkpublic.h; sourceTree = "<group>"; };
-		03313FD51C3DF006004D3F9F /* cspublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cspublic.h; sourceTree = "<group>"; };
-		03313FD61C3DF006004D3F9F /* cstypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cstypes.h; sourceTree = "<group>"; };
-		03313FD71C3DF006004D3F9F /* ctpublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ctpublic.h; sourceTree = "<group>"; };
-		03313FD81C3DF006004D3F9F /* libfreetds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreetds.a; sourceTree = "<group>"; };
-		03313FD91C3DF006004D3F9F /* odbcss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = odbcss.h; sourceTree = "<group>"; };
-		03313FDA1C3DF006004D3F9F /* SQLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLClient.h; sourceTree = "<group>"; };
-		03313FDB1C3DF006004D3F9F /* SQLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLClient.m; sourceTree = "<group>"; };
-		03313FDC1C3DF006004D3F9F /* sqldb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqldb.h; sourceTree = "<group>"; };
-		03313FDD1C3DF006004D3F9F /* sqlfront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlfront.h; sourceTree = "<group>"; };
-		03313FDE1C3DF006004D3F9F /* sybdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sybdb.h; sourceTree = "<group>"; };
-		03313FDF1C3DF006004D3F9F /* syberror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syberror.h; sourceTree = "<group>"; };
-		03313FE01C3DF006004D3F9F /* sybfront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sybfront.h; sourceTree = "<group>"; };
-		03313FE11C3DF006004D3F9F /* tds_sysdep_public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tds_sysdep_public.h; sourceTree = "<group>"; };
 		03313FE41C3DF032004D3F9F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		035289221C5EFA6E00A84B5D /* YukoMyNumberAppTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YukoMyNumberAppTest.plist; sourceTree = "<group>"; };
 		03564DFA1C530CD800166397 /* ChangePassCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePassCodeViewController.swift; sourceTree = "<group>"; };
@@ -109,8 +93,8 @@
 		03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeDataClass.swift; sourceTree = "<group>"; };
 		03F6318C1C40D9BD0083F33F /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		09F3231C18E81DBF41721D4B /* Pods_YukoMyNumberApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YukoMyNumberApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		13236349A609AFDC02ADBBAB /* Pods-YukoMyNumberApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YukoMyNumberApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp.debug.xcconfig"; sourceTree = "<group>"; };
-		36A62B0A1513EA88E48025DD /* Pods-YukoMyNumberApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YukoMyNumberApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp.release.xcconfig"; sourceTree = "<group>"; };
+		8B23E7356EB92CF940B8375C /* Pods-YukoMyNumberApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YukoMyNumberApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B739907B8DDB9700C4F23F84 /* Pods-YukoMyNumberApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YukoMyNumberApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp.release.xcconfig"; sourceTree = "<group>"; };
 		D0F4A60FAF985F630A287FEA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -122,7 +106,6 @@
 				0379DE031C5B8C2A0006F936 /* CFNetwork.framework in Frameworks */,
 				03C4E3951C5ADFBC003427BE /* SystemConfiguration.framework in Frameworks */,
 				03313FE51C3DF032004D3F9F /* libiconv.tbd in Frameworks */,
-				03313FE21C3DF006004D3F9F /* libfreetds.a in Frameworks */,
 				CA9CE32467A51CC99DB8DA77 /* Pods_YukoMyNumberApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,27 +127,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03313FD31C3DF006004D3F9F /* SQLClient */ = {
-			isa = PBXGroup;
-			children = (
-				03313FD41C3DF006004D3F9F /* bkpublic.h */,
-				03313FD51C3DF006004D3F9F /* cspublic.h */,
-				03313FD61C3DF006004D3F9F /* cstypes.h */,
-				03313FD71C3DF006004D3F9F /* ctpublic.h */,
-				03313FD81C3DF006004D3F9F /* libfreetds.a */,
-				03313FD91C3DF006004D3F9F /* odbcss.h */,
-				03313FDA1C3DF006004D3F9F /* SQLClient.h */,
-				03313FDB1C3DF006004D3F9F /* SQLClient.m */,
-				03313FDC1C3DF006004D3F9F /* sqldb.h */,
-				03313FDD1C3DF006004D3F9F /* sqlfront.h */,
-				03313FDE1C3DF006004D3F9F /* sybdb.h */,
-				03313FDF1C3DF006004D3F9F /* syberror.h */,
-				03313FE01C3DF006004D3F9F /* sybfront.h */,
-				03313FE11C3DF006004D3F9F /* tds_sysdep_public.h */,
-			);
-			path = SQLClient;
-			sourceTree = "<group>";
-		};
 		0364F5011C3B46B000EA4A37 = {
 			isa = PBXGroup;
 			children = (
@@ -192,7 +154,6 @@
 			children = (
 				0379DDFE1C5B8A670006F936 /* SimplePing */,
 				03D757AF1C5B4B5000E28C1F /* Resources */,
-				03313FD31C3DF006004D3F9F /* SQLClient */,
 				0364F50D1C3B46B000EA4A37 /* AppDelegate.swift */,
 				03E5E25C1C3CB4F600292ACE /* EmployeeDataClass.swift */,
 				0364F50F1C3B46B000EA4A37 /* RegisteredListViewController.swift */,
@@ -257,8 +218,8 @@
 		0590837699EC3DC4B7C37A15 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				13236349A609AFDC02ADBBAB /* Pods-YukoMyNumberApp.debug.xcconfig */,
-				36A62B0A1513EA88E48025DD /* Pods-YukoMyNumberApp.release.xcconfig */,
+				8B23E7356EB92CF940B8375C /* Pods-YukoMyNumberApp.debug.xcconfig */,
+				B739907B8DDB9700C4F23F84 /* Pods-YukoMyNumberApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -287,7 +248,6 @@
 				0364F5071C3B46B000EA4A37 /* Frameworks */,
 				0364F5081C3B46B000EA4A37 /* Resources */,
 				84A728A484D2A08723EFCB89 /* [CP] Embed Pods Frameworks */,
-				8A5733C43D2758661FF12CD8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -347,7 +307,7 @@
 					0364F5091C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DQEAJH9KE5;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -356,12 +316,12 @@
 					};
 					0364F51D1C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 						TestTargetID = 0364F5091C3B46B000EA4A37;
 					};
 					0364F5281C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 						TestTargetID = 0364F5091C3B46B000EA4A37;
 					};
 				};
@@ -424,28 +384,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLClient/SQLClient.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8A5733C43D2758661FF12CD8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F02DF538142C61A74182915B /* [CP] Check Pods Manifest.lock */ = {
@@ -454,13 +408,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YukoMyNumberApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -486,7 +443,6 @@
 				03CF96F21C3B64E7004E11F0 /* EditEmployeeViewController.swift in Sources */,
 				039966BA1C4F25E300494B17 /* ModifyJoinedDateViewController.swift in Sources */,
 				032692951C447870004787B3 /* ModifyEmployeeDataViewController.swift in Sources */,
-				03313FE31C3DF006004D3F9F /* SQLClient.m in Sources */,
 				035976CA1C3F59E3004AA479 /* GetMyNumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,9 +537,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PODS_ROOT = "${SRCROOT}/Pods";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -624,8 +581,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PODS_ROOT = "${SRCROOT}/Pods";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -636,7 +594,7 @@
 		};
 		0364F5331C3B46B000EA4A37 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13236349A609AFDC02ADBBAB /* Pods-YukoMyNumberApp.debug.xcconfig */;
+			baseConfigurationReference = 8B23E7356EB92CF940B8375C /* Pods-YukoMyNumberApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -646,7 +604,7 @@
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = YukoMyNumberApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/YukoMyNumberApp/SQLClient";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
@@ -655,14 +613,15 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$PRODUCT_NAME-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		0364F5341C3B46B000EA4A37 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36A62B0A1513EA88E48025DD /* Pods-YukoMyNumberApp.release.xcconfig */;
+			baseConfigurationReference = B739907B8DDB9700C4F23F84 /* Pods-YukoMyNumberApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -672,7 +631,7 @@
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = YukoMyNumberApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/YukoMyNumberApp/SQLClient";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.yuko-group.YukoMyNumberApp";
@@ -680,7 +639,8 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$PRODUCT_NAME-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -693,7 +653,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YukoMyNumberApp.app/YukoMyNumberApp";
 			};
 			name = Debug;
@@ -706,7 +667,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YukoMyNumberApp.app/YukoMyNumberApp";
 			};
 			name = Release;
@@ -718,7 +680,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = YukoMyNumberApp;
 				USES_XCTRUNNER = YES;
 			};
@@ -731,7 +694,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yuko-group.co.jp.YukoMyNumberAppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = YukoMyNumberApp;
 				USES_XCTRUNNER = YES;
 			};

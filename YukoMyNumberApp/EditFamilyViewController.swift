@@ -40,11 +40,11 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
     self.FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
     self.FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
     
-    self.RegsiterButton.addTarget(self, action: #selector(EditFamilyViewController.tapGetMyNumber(_:)), for: UIControlEvents.touchUpInside)
-    self.RegsiterButton.setTitle(Properties.ButtonTitles["RegisterMyNumber"], for: UIControlState())
+    self.RegsiterButton.addTarget(self, action: #selector(EditFamilyViewController.tapGetMyNumber(_:)), for: UIControl.Event.touchUpInside)
+    self.RegsiterButton.setTitle(Properties.ButtonTitles["RegisterMyNumber"], for: UIControl.State())
     
-    self.DeleteFamilyButton.addTarget(self, action: #selector(EditFamilyViewController.tapDeleteBtn(_:)), for: UIControlEvents.touchUpInside)
-    self.DeleteFamilyButton.setTitle(Properties.ButtonTitles["DeleteData"], for: UIControlState())
+    self.DeleteFamilyButton.addTarget(self, action: #selector(EditFamilyViewController.tapDeleteBtn(_:)), for: UIControl.Event.touchUpInside)
+    self.DeleteFamilyButton.setTitle(Properties.ButtonTitles["DeleteData"], for: UIControl.State())
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -126,9 +126,9 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
   @IBAction func tapDeleteBtn(_ sender: AnyObject) {
     let alertProp = Properties.AlertMessages["DeleteExclamation"] as! [String:String]
     let deleteName = FamilyNameTextField.text! + "　" + FirstNameTextField.text!
-    let myAlert:UIAlertController = UIAlertController(title: alertProp["Title"], message: "「\(deleteName) 」を\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.actionSheet)
+    let myAlert:UIAlertController = UIAlertController(title: alertProp["Title"], message: "「\(deleteName) 」を\(alertProp["Message"]!)", preferredStyle: UIAlertController.Style.actionSheet)
     
-    let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action:UIAlertAction) -> Void in
+    let OkAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action:UIAlertAction) -> Void in
       try! self.realm.write({ () -> Void in
         
         self.FamilyItemData.DeleteFlag = true
@@ -137,7 +137,7 @@ class EditFamilyViewController:UITableViewController,UITextFieldDelegate {
       })
     }
     
-    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertActionStyle.cancel) { (action:UIAlertAction) -> Void in
+    let CancelAction = UIAlertAction(title: Properties.AlertMessages["Cancel"] as? String, style: UIAlertAction.Style.cancel) { (action:UIAlertAction) -> Void in
       
     }
   

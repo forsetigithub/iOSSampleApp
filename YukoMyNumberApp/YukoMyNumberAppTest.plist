@@ -335,7 +335,7 @@
 	<key>ServerInfo</key>
 	<dict>
 		<key>IPAddress</key>
-		<string>192.168.186.162</string>
+		<string>172.16.11.225</string>
 		<key>UserName</key>
 		<string>sa</string>
 		<key>Password</key>

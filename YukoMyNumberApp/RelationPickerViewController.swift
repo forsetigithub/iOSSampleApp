@@ -60,7 +60,7 @@ class RelationPickerViewController:NSObject,UIPickerViewDelegate,UIPickerViewDat
     
     let pickerLabel = UILabel()
     
-    pickerLabel.font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize)
+    pickerLabel.font = UIFont.systemFont(ofSize: YukoMyNumberAppProperties.sharedInstance.PickerLabelFontSize!)
     pickerLabel.text = pickerValues[row]
     pickerLabel.textAlignment = NSTextAlignment.center
     

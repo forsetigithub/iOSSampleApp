@@ -136,16 +136,16 @@ class CheckNetworkConnect:NSObject{
   }
 }
 extension CheckNetworkConnect: SimplePingDelegate {
-  func simplePing(_ pinger: SimplePing!, didStartWithAddress address: Data!) {
+    func simplePing(_ pinger: SimplePing, didStartWithAddress address: Data) {
     print("did start")
     self.canStartPinging = true
     status = Status.Unknown
   }
-  func simplePing(_ pinger: SimplePing!, didFailWithError error: Error!) {
+    func simplePing(_ pinger: SimplePing, didFailWithError error: Error) {
     status = Status.Failure
     print("failed with error: \(error)")
   }
-  func simplePing(_ pinger: SimplePing!, didSendPacket packet: Data!, withSequenceNumber sequenceNumber:UInt16) {
+    @objc(simplePing:didSendPacket:sequenceNumber:) func simplePing(_ pinger: SimplePing, didSendPacket packet: Data, sequenceNumber:UInt16) {
     let seqNo = CFSwapInt16BigToHost(sequenceNumber)
     lastSequenceSent = seqNo
     lastSentTime = Date()
@@ -154,9 +154,11 @@ extension CheckNetworkConnect: SimplePingDelegate {
     status = Status.Error
     print("failed to send packet")
   }
+  
+/*
   func simplePing(_ pinger: SimplePing!, didReceivePingResponsePacket packet: Data!) {
     status = Status.Success
-    let seqNo = CFSwapInt16BigToHost(SimplePing.icmp(inPacket: packet).pointee.sequenceNumber)
+    let seqNo = CFSwapInt16BigToHost(SimplePing.(inPacket: packet).pointee.sequenceNumber)
     if seqNo < lastSequenceSent {
       print("out of order")
     } else {
@@ -167,7 +169,12 @@ extension CheckNetworkConnect: SimplePingDelegate {
       }
     }
   }
-  func simplePing(_ pinger: SimplePing!, didReceiveUnexpectedPacket packet: Data!) {
+ */
+  func simplePing(_ pinger: SimplePing, didReceivePingResponsePacket packet: Data, sequenceNumber: UInt16) {
+    status = Status.Success
+  }
+    
+    func simplePing(_ pinger: SimplePing, didReceiveUnexpectedPacket packet: Data) {
     //        println("received unexpected packet")
     
   }
@@ -200,7 +207,7 @@ extension CheckNetworkConnect: SimplePingDelegate {
         }
       }
 
-      RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: Date.distantFuture)
+      RunLoop.current.run(mode: RunLoop.Mode.default, before: Date.distantFuture)
       
     }while(self.running)
 

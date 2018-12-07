@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SVProgressHUD
+import SQLClient
 
 class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate,SQLClientDelegate {
   
@@ -44,9 +45,9 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     self.navigationItem.title = Properties.NavigationTitles["RegisterEmployeeViewController"]
 
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Register"], style: UIBarButtonItemStyle.done, target: self, action:#selector(self.tapRegisterButton(sender:)))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Register"], style: UIBarButtonItem.Style.done, target: self, action:#selector(self.tapRegisterButton(sender:)))
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Cancel"], style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.tapCancelButton(sender:)))
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Cancel"], style: UIBarButtonItem.Style.plain, target: self, action:#selector(self.tapCancelButton(sender:)))
     
     self.EmployeeCode.placeholder = Properties.LabelItems["EmployeeCode"]
     self.EmployeeFamilyName.placeholder = Properties.LabelItems["FamilyName"]
@@ -134,7 +135,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     return true
   }
   
-  func tapEmployeeJoinedDateLabel(sender: UITapGestureRecognizer) {
+  @objc func tapEmployeeJoinedDateLabel(sender: UITapGestureRecognizer) {
     self.JoinedDateTappedFlag = !(self.JoinedDateTappedFlag)
     
     if(self.JoinedDateTappedFlag == true){
@@ -157,7 +158,7 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
   }
   
   
-  internal func tapRegisterButton(sender: UIBarButtonItem) {
+  @objc internal func tapRegisterButton(sender: UIBarButtonItem) {
 
     //必須入力チェック
     if(self.EmployeeCode.text?.replacingOccurrences(of: " ", with: "").isEmpty == true ||
@@ -167,8 +168,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
         
         let requiredvalid:[String:String] = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
         
-        let myAlert = UIAlertController(title: requiredvalid["Title"], message: requiredvalid["Message"], preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: requiredvalid["Title"], message: requiredvalid["Message"], preferredStyle: UIAlertController.Style.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -213,8 +214,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
       
       let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
       
-      let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した\(Properties.LabelItems["EmployeeCode"]!)は\n\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil)
+      let myAlert = UIAlertController(title: doubleerror["Title"]!, message: "入力した\(Properties.LabelItems["EmployeeCode"]!)は\n\(doubleerror["Message"]!)", preferredStyle: UIAlertController.Style.alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: nil)
       
       myAlert.addAction(OKAction)
       present(myAlert, animated: true, completion: nil)
@@ -307,8 +308,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
                     }else{
                       
                       let uploaderror:[String:String] = self.Properties.AlertMessages["UploadNotCompleteError"] as! [String:String]
-                      let messageAlert = UIAlertController(title: uploaderror["Title"], message:"入力した\(self.Properties.LabelItems["EmployeeCode"])は\(uploaderror["Message"])" , preferredStyle: UIAlertControllerStyle.alert)
-                      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+                      let messageAlert = UIAlertController(title: uploaderror["Title"], message:"入力した\(self.Properties.LabelItems["EmployeeCode"])は\(uploaderror["Message"])" , preferredStyle: UIAlertController.Style.alert)
+                      let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
                         
                       })
                       
@@ -343,8 +344,8 @@ class RegisterEmployeeViewController : UITableViewController,UITextFieldDelegate
     
     SVProgressHUD.dismiss()
     
-    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertControllerStyle.alert)
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertController.Style.alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
       
     })
     

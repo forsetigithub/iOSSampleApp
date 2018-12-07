@@ -57,7 +57,7 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     }
     
     self.navigationItem.title = title
-    let saveButtonItem = UIBarButtonItem(title: buttontitle, style: UIBarButtonItemStyle.done, target: self, action: #selector(ChangePassCodeViewController.tapSavePassCodeButton(_:)))
+    let saveButtonItem = UIBarButtonItem(title: buttontitle, style: UIBarButtonItem.Style.done, target: self, action: #selector(ChangePassCodeViewController.tapSavePassCodeButton(_:)))
     self.navigationItem.rightBarButtonItem = saveButtonItem
     
   }
@@ -104,15 +104,15 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
     return true
   }
   
-  func tapSavePassCodeButton(_ sender:UIBarButtonItem){
+  @objc func tapSavePassCodeButton(_ sender:UIBarButtonItem){
     
     if(self.changePassCodeMode == CHANGEPASSCODEMODE.new){
       if(self.PassCodeBefore.text?.isEmpty == true ||
         self.PassCodeAfter.text?.isEmpty == true){
       
           //必須入力エラー
-          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertController.Style.alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
             
           })
           myAlert.addAction(OKAction)
@@ -124,8 +124,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       if(self.PassCodeBefore.text != PassCodeAfter.text){
         
         //変更後パスワードと再入力の内容アンマッチエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "\(self.Properties.LabelItems["PassCode"])が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: "\(self.buttontitle)", message: "\(self.Properties.LabelItems["PassCode"])が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertController.Style.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
 
@@ -142,8 +142,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
         self.PassCodeAfterReEnter.text?.isEmpty == true){
       
           //必須入力エラー
-          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertControllerStyle.alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+          let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "入力していない項目があります。", preferredStyle: UIAlertController.Style.alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
             
           })
           myAlert.addAction(OKAction)
@@ -155,8 +155,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       if(PassCodeAfter.text != PassCodeAfterReEnter.text){
         //変更後パスワードと再入力の内容アンマッチエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更後の暗証番号が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更後の暗証番号が一致していません。\n登録内容を確認してください。", preferredStyle: UIAlertController.Style.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -169,8 +169,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       if(self.PassCodeBefore.text == self.PassCodeAfter.text){
         //変更前後が同じエラー
-        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更前後の暗証番号が同じです。\n登録内容を確認してください。", preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+        let myAlert = UIAlertController(title: "\(self.buttontitle)できませんでした", message: "変更前後の暗証番号が同じです。\n登録内容を確認してください。", preferredStyle: UIAlertController.Style.alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -190,8 +190,8 @@ class ChangePassCodeViewController:UITableViewController,UITextFieldDelegate{
       
       let labeltitle:String = (Properties.LabelItems["PassCode"]! as String)
       
-      let myAlert = UIAlertController(title: "\(labeltitle)変更", message: "\(labeltitle)を変更しました", preferredStyle: UIAlertControllerStyle.alert)
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default,
+      let myAlert = UIAlertController(title: "\(labeltitle)変更", message: "\(labeltitle)を変更しました", preferredStyle: UIAlertController.Style.alert)
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default,
         handler: { (action:UIAlertAction) -> Void in
       
           self.navigationController?.popViewController(animated: true)

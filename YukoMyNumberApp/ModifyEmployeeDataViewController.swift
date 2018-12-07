@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 import SVProgressHUD
+import SQLClient
 
 class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegate,SQLClientDelegate{
   
@@ -43,7 +44,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     FamilyNameTextField.placeholder = Properties.LabelItems["FamilyName"]
     FirstNameTextField.placeholder = Properties.LabelItems["FirstName"]
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Modify"], style: UIBarButtonItemStyle.done, target: self, action: #selector(ModifyEmployeeDataViewController.tapModifyButton(_:)))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: Properties.ButtonTitles["Modify"], style: UIBarButtonItem.Style.done, target: self, action: #selector(ModifyEmployeeDataViewController.tapModifyButton(_:)))
   }
   
   override func didReceiveMemoryWarning() {
@@ -113,7 +114,7 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     textField.textColor = UIColor.lightGray
   }
   
-  func tapModifyButton(_ sender:UIBarButtonItem){
+  @objc func tapModifyButton(_ sender:UIBarButtonItem){
     if(self.EmployeeCodeTextField.text?.isEmpty == false &&
       self.FamilyNameTextField.text?.isEmpty == false &&
       self.FirstNameTextField.text?.isEmpty == false &&
@@ -205,8 +206,8 @@ class ModifyEmployeeDataViewController: UITableViewController,UITextFieldDelegat
     
     SVProgressHUD.dismiss()
     
-    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertControllerStyle.alert)
-    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+    let myAlert = UIAlertController(title: alertProp["Title"]!, message: alertProp["Message"]!, preferredStyle: UIAlertController.Style.alert)
+    let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
       
     })
     

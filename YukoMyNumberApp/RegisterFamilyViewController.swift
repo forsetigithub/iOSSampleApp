@@ -52,8 +52,8 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     RelationPicker.selectedRSCode = RelationPicker.pickerKeys[0]
     self.RelationName.text = RelationPicker.selectedRSName
     
-    self.RegisterButton.addTarget(self, action: #selector(RegisterFamilyViewController.tapRegisterButton(_:)), for: UIControlEvents.touchUpInside)
-    self.RegisterButton.setTitle(Properties.ButtonTitles["Register"], for: UIControlState())
+    self.RegisterButton.addTarget(self, action: #selector(RegisterFamilyViewController.tapRegisterButton(_:)), for: UIControl.Event.touchUpInside)
+    self.RegisterButton.setTitle(Properties.ButtonTitles["Register"], for: UIControl.State())
     
     NotificationCenter.default.addObserver(self, selector: #selector(RegisterFamilyViewController.updatePickerValue(_:)), name: NSNotification.Name(rawValue: "updatePickerNotification"), object: nil)
 
@@ -118,9 +118,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
         
         alertProp = Properties.AlertMessages["RequiredItemValidError"] as! [String:String]
         
-        let myAlert = UIAlertController(title: alertProp["Title"], message: alertProp["Message"], preferredStyle: UIAlertControllerStyle.alert)
+        let myAlert = UIAlertController(title: alertProp["Title"], message: alertProp["Message"], preferredStyle: UIAlertController.Style.alert)
         
-        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
           
         })
         
@@ -138,9 +138,9 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
       
       alertProp = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
       
-      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
+      let myAlert = UIAlertController(title: alertProp["Title"], message: "「\(self.RelationName.text!)」は\(alertProp["Message"]!)", preferredStyle: UIAlertController.Style.alert)
       
-      let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: { (action:UIAlertAction) -> Void in
+      let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { (action:UIAlertAction) -> Void in
         
       })
       
@@ -171,7 +171,7 @@ class RegisterFamilyViewController : UITableViewController,UITextFieldDelegate,
     
   }
 
-  func updatePickerValue(_ notification:Foundation.Notification?){
+  @objc func updatePickerValue(_ notification:Foundation.Notification?){
     if((notification?.name as AnyObject) as! String == "updatePickerNotification"){
       self.RelationName.text = RelationPicker.pickerValues[RelationPicker.selectedPickerRow]
     }

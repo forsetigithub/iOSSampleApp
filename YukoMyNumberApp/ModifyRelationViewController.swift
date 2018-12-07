@@ -71,7 +71,7 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
     return height
   }
   
-  func updatePickerValue(_ notification:Foundation.Notification){
+  @objc func updatePickerValue(_ notification:Foundation.Notification){
     if((notification.name as AnyObject) as! String == "updatePickerNotification"){
       if(self.RelationPicker.selectedRSCode != defaultRSCode){
         if(realm.objects(EmployeeData.self).filter("EmployeeCode = '\(FamilyItemData.EmployeeCode)' and RSCode = '\(self.RelationPicker.selectedRSCode)'").count == 0){
@@ -80,8 +80,8 @@ class ModifyRelationViewController : UITableViewController,UIPickerViewDelegate{
           
         }else{
           let doubleerror:[String:String] = Properties.AlertMessages["DoubleCheckError"] as! [String:String]
-          let myAlert = UIAlertController(title: doubleerror["Title"], message:"「\(self.RelationPicker.selectedRSName!)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertControllerStyle.alert)
-          let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil)
+          let myAlert = UIAlertController(title: doubleerror["Title"], message:"「\(self.RelationPicker.selectedRSName!)」は\(doubleerror["Message"]!)", preferredStyle: UIAlertController.Style.alert)
+          let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: nil)
           
           myAlert.addAction(OKAction)
           present(myAlert, animated: true, completion: nil)

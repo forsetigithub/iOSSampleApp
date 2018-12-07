@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class YukoMyNumberAppProperties {
   
@@ -35,9 +36,9 @@ final class YukoMyNumberAppProperties {
   let RelationItems:[String:String] = dict.object(forKey: "RelationItems") as! [String:String]
   let TableViewCellDefaultHeight:CGFloat = (dict.object(forKey: "TableViewCellDefaultHeight") as? CGFloat)!
   let ServerInfo:[String:String] = dict.object(forKey: "ServerInfo") as! [String:String]
-  let ButtonInTableViewFontSize = (dict.object(forKey: "ButtonInTableViewFontSize") as? CGFloat)!
-  let AppDefaultFontSize = (dict.object(forKey: "AppDefaultFontSize") as? CGFloat)!
-  let PickerLabelFontSize = (dict.object(forKey: "PickerLabelFontSize") as? CGFloat)!
+  let ButtonInTableViewFontSize:CGFloat = (dict.object(forKey: "ButtonInTableViewFontSize") as? CGFloat)!
+  let AppDefaultFontSize = (dict.object(forKey: "AppDefaultFontSize") as? CGFloat)
+  let PickerLabelFontSize = (dict.object(forKey: "PickerLabelFontSize") as? CGFloat)
   let PassCodeCharactersCount = (dict.object(forKey: "PassCodeCharactersCount") as? Int)!
   let PingCheckCounter:Int = (dict.object(forKey: "PingCheckCounter") as? Int)!
   let NavigationTitles:[String:String] = dict.object(forKey: "NavigationTitles") as! [String:String]

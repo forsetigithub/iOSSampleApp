@@ -13,18 +13,18 @@ import RealmSwift
 ** 従業員情報を保存する形式を定義するクラス(Realm) **
 **********************************************/
 class EmployeeData : Object {
-  dynamic var EmployeeCode = ""
-  dynamic var RecKindNo = 0
-  dynamic var FamilySeqNo = 0
-  dynamic var FamilyName = ""
-  dynamic var FirstName = ""
-  dynamic var RSCode = ""
+  @objc dynamic var EmployeeCode = ""
+  @objc dynamic var RecKindNo = 0
+  @objc dynamic var FamilySeqNo = 0
+  @objc dynamic var FamilyName = ""
+  @objc dynamic var FirstName = ""
+  @objc dynamic var RSCode = ""
   
   var RSName:String{
     return YukoMyNumberAppProperties.sharedInstance.RelationItems[self.RSCode]!
   }
   
-  dynamic var MyNumber = ""
+  @objc dynamic var MyNumber = ""
   
   var MyNumberCheckDigitResult:Bool{
     if(!MyNumber.isEmpty){
@@ -34,33 +34,33 @@ class EmployeeData : Object {
     }
   }
   
-  dynamic var CreateDateTime = Date()
-  dynamic var DeleteFlag = false
-  dynamic var PassCode = ""
-  dynamic var JoinedDate = Date()
-  dynamic var LastUploadDate = ""
-  dynamic var MNRegisterMode = 1 //マイナンバー登録モード(1:手動 2:OCR)
-  dynamic var SQLServerSeqNo = ""
+  @objc dynamic var CreateDateTime = Date()
+  @objc dynamic var DeleteFlag = false
+  @objc dynamic var PassCode = ""
+  @objc dynamic var JoinedDate = Date()
+  @objc dynamic var LastUploadDate = ""
+  @objc dynamic var MNRegisterMode = 1 //マイナンバー登録モード(1:手動 2:OCR)
+  @objc dynamic var SQLServerSeqNo = ""
   //予備エリア
-  dynamic var ReserveItem1 = ""
-  dynamic var ReserveItem2 = ""
-  dynamic var ReserveItem3 = ""
-  dynamic var ReserveItem4 = ""
-  dynamic var ReserveItem5 = ""
-  dynamic var ReserveItem6 = ""
-  dynamic var ReserveItem7 = ""
-  dynamic var ReserveItem8 = ""
-  dynamic var ReserveItem9 = ""
-  dynamic var ReserveItem10 = ""
-  dynamic var ReserveItem11 = ""
-  dynamic var ReserveItem12 = ""
-  dynamic var ReserveItem13 = ""
-  dynamic var ReserveItem14 = ""
-  dynamic var ReserveItem15 = ""
-  dynamic var ReserveItem16 = ""
-  dynamic var ReserveItem17 = ""
-  dynamic var ReserveItem18 = ""
-  dynamic var ReserveItem19 = ""
-  dynamic var ReserveItem20 = ""
+  @objc dynamic var ReserveItem1 = ""
+  @objc dynamic var ReserveItem2 = ""
+  @objc dynamic var ReserveItem3 = ""
+  @objc dynamic var ReserveItem4 = ""
+  @objc dynamic var ReserveItem5 = ""
+  @objc dynamic var ReserveItem6 = ""
+  @objc dynamic var ReserveItem7 = ""
+  @objc dynamic var ReserveItem8 = ""
+  @objc dynamic var ReserveItem9 = ""
+  @objc dynamic var ReserveItem10 = ""
+  @objc dynamic var ReserveItem11 = ""
+  @objc dynamic var ReserveItem12 = ""
+  @objc dynamic var ReserveItem13 = ""
+  @objc dynamic var ReserveItem14 = ""
+  @objc dynamic var ReserveItem15 = ""
+  @objc dynamic var ReserveItem16 = ""
+  @objc dynamic var ReserveItem17 = ""
+  @objc dynamic var ReserveItem18 = ""
+  @objc dynamic var ReserveItem19 = ""
+  @objc dynamic var ReserveItem20 = ""
   
 }
