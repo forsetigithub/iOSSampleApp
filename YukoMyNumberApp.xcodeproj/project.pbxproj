@@ -306,7 +306,6 @@
 				TargetAttributes = {
 					0364F5091C3B46B000EA4A37 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = DQEAJH9KE5;
 						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -331,6 +330,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -384,7 +384,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLClient/SQLClient.framework",
@@ -399,7 +399,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YukoMyNumberApp/Pods-YukoMyNumberApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F02DF538142C61A74182915B /* [CP] Check Pods Manifest.lock */ = {
@@ -596,11 +596,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B23E7356EB92CF940B8375C /* Pods-YukoMyNumberApp.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DQEAJH9KE5;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = YukoMyNumberApp/Info.plist;
@@ -623,11 +622,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B739907B8DDB9700C4F23F84 /* Pods-YukoMyNumberApp.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DQEAJH9KE5;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = YukoMyNumberApp/Info.plist;
